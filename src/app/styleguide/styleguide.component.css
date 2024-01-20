@@ -1,0 +1,128 @@
+#sg_color_main {
+    display: flex;
+    flex-direction: row;
+    font-size: 0.6rem;
+    width: fit-content;
+    margin: 0.2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.SG_wireframe_div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #E8E8DE;
+}
+
+.SG_h3 {
+    display: grid;
+    text-align: center;
+    background-color: #C1D2CC;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+    margin: 0;
+    width: 100%;
+}
+
+.SG_wfrm_img {
+    width: 65%;
+    height: auto;
+    margin: 0.5rem;
+    padding: 0;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, .75);
+}
+
+.SG_wfrm_img_desk {
+    width: 95%;
+    height: auto;
+    margin: 0.5rem;
+    padding: 0;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, .75);
+}
+
+#sg_color_1, #sg_color_2, #sg_color_3, #sg_color_4, #sg_color_5, #sg_color_6 {
+    margin: 0.25rem;
+    border-radius: 25%;
+    text-align: center;
+}
+
+#sg_color_1 {
+    background-color: #85857B;
+    padding: 0.5rem;
+}
+
+#sg_color_2 {
+    background-color: #CBCCC4;
+    padding: 0.5rem;
+}
+
+#sg_color_3 {
+    background-color: #BBC9CA;
+    padding: 0.5rem;
+}
+
+#sg_color_4 {
+    background-color: #C1D2CC;
+    padding: 0.5rem;
+}
+
+#sg_color_5 {
+    background-color: #E8E8DE;
+    padding: 0.5rem;
+}
+
+#sg_color_6 {
+    background-color: #D3D1C4;
+    padding: 0.5rem;
+}
+
+/* SG FONTS */
+
+.SG_font_div {
+    text-align: center;
+}
+
+.SG_font_1 {
+    font-family: 'Bolin Gerii', serif;
+}
+
+.SG_font_2 {
+    font-family: 'Aguero Serif Free', serif;
+}
+
+.SG_font_3 {
+    font-family: 'Aguero Serif Free', serif;
+    font-style: italic;
+
+}
+
+.SG_font_4 {
+    font-family: 'CHELON', serif;
+}
+
+.SG_font_5 {
+    font-family: 'CHELON', serif;
+    font-style: italic;
+}
+
+.SG_font_6 {
+    font-family: 'Troye Free Sans', serif;
+}
+
+.SG_font_7 {
+    font-family: 'Troye Free Script', serif;
+}
+
+.SG_font_8 {
+    font-family: 'Troye Free Serif', serif;
+}
+
+.SG_font_9 {
+    font-family: 'NewYork', serif;
+}
+
+.SG_font_10 {
+    font-family: 'Roxie Rossa', serif;
+}
