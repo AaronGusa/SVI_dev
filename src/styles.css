@@ -1,1 +1,111 @@
 /* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+
+/* FONTS */
+@fontface {
+    font-family: 'Bolin Gerii';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Bolin Gerii'), url('./assets/fonts/Bolin Gerii.ttf') format('truetype');
+}
+
+@fontface {
+    font-family: 'Aguero Serif Free';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Aguero Serif Free'), url('./assets/fonts/Aguero Serif.ttf') format('truetype');
+}
+
+@fontface {
+    font-family: 'Aguero Serif Free';
+    font-style: italic;
+    font-weight: normal;
+    src: local('Aguero Serif Free'), url('./assets/fonts/Aguero Serif Italic.ttf') format('truetype');
+}
+
+
+@fontface {
+    font-family: 'CHELON';
+    font-style: normal;
+    font-weight: normal;
+    src: local('CHELON'), url('./assets/fonts/CHELON.ttf') format('truetype');
+}
+
+@fontface {
+    font-family: 'CHELON';
+    font-style: italic;
+    font-weight: normal;
+    src: local('CHELON'), url('./assets/fonts/CHELON ITALIC.ttf') format('truetype');
+}
+
+@fontface {
+    font-family: 'Troye Free Sans';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Troye Free Sans'), url('./assets/fonts/Troye Sans Free.ttf') format('truetype');
+}
+
+@fontface {
+    font-family: 'Troye Free Script';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Troye Free Script'), url('./assets/fonts/Troye Script Free.ttf') format('truetype');
+}
+
+@fontface {
+    font-family: 'Troye Free Serif';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Troye Free Serif'), url('./assets/fonts/Troye Serif Free.ttf') format('truetype');
+}
+
+@fontface {
+    font-family: 'NewYork';
+    font-style: normal;
+    font-weight: normal;
+    src: local('NewYork'), url('./assets/fonts/NewYork.otf') format('opentype');
+}
+
+@fontface {
+    font-family: 'Roxie Rossa';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Roxie Rossa'), url('./assets/fonts/Roxie Rossa.ttf') format('truetype');
+}
+
+
+
+/* CSS */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+}
+
+html {
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    background-color: #85857b;
+    position: relative;
+    
+    height: 100px;
+    width: 100%;
+    overflow: hidden;
+
+}
+
+img {
+    margin: 0;
+    padding: 0;
+}
+
+hr {
+    width: 100%;
+}
