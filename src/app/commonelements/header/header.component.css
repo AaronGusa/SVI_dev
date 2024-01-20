@@ -1,0 +1,26 @@
+header {
+    background-color: #D3D1C4;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 0;
+    padding: 0;
+}
+
+.header_logo {
+    background-color: black;
+    border-radius: 50%;
+    color: white;
+    width: 5rem;
+    text-align: center;
+    padding: 1rem;
+    margin: .5rem;
+}
+
+.spacer_nuetral {
+    width: 5rem;
+}
+
+#header_StellaVi {
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+}
