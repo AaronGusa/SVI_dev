@@ -1,0 +1,9 @@
+footer {
+    background-color: #85857b;
+    position: relative;
+    
+    height: 100px;
+    width: 100%;
+    overflow: hidden;
+
+}
