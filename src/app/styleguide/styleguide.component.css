@@ -27,8 +27,9 @@
 }
 
 .SG_wfrm_img {
-    width: 65%;
+    width: auto;
     height: auto;
+    max-height: 958px;
     margin: 0.5rem;
     padding: 0;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, .75);
