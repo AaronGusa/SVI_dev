@@ -1,0 +1,55 @@
+.featured {
+    width: 100%;
+    height: 100%;
+    grid-column: span 2;
+    grid-row: 1;
+    /* border-bottom: 2px solid black; */
+    margin: 0;
+    padding: 2rem;
+    overflow: hidden;
+  }
+
+  .underclass {
+    z-index: 0;
+    position: absolute;
+  }
+
+  .fImage1 {
+    margin: 0;
+    padding: 0;
+    height: 650px;
+    width: auto;
+    border-radius: 15px;
+    position: absolute;
+    
+    z-index: 0;
+  }
+
+  .fImage2 {
+    margin: 0;
+    padding: 0;
+    width: 473px;
+    height: 352px;
+    border-radius: 15px;
+    position: relative;
+    left: 9rem;
+    top: 6rem;
+    z-index: 2;
+  }
+
+  .fImage3 {
+    margin: 0;
+    padding: 0;
+    width: 540px;
+    height: 376px;
+    border-radius: 15px;
+
+    position: absolute;
+    z-index: 1;
+    visibility: hidden;
+  }
+
+  .overlord {
+    z-index: 101;
+    position: relative;
+  }
