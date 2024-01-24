@@ -138,14 +138,23 @@ padding: .5rem;
     flex-direction: row;
     flex-wrap: wrap;
     overflow: hidden;
+    background-color: #C1D2CC;
 }
 
 .UTC_userPic {
     width: 100%;
     height: auto;
+    border-radius: 0 0 25% 25%;
+    box-shadow: 2px 2px 15px rgba(24, 24, 24, 0.75);
 }
 
 .UTC_text {
     margin: 0;
-    padding: 1rem;
+    padding: 0 0 0 0.5rem;
+}
+
+.UTC_testimony {
+    width: 100%;
+    background-color: #E8E8DE;
+    padding: 1rem 0;
 }
