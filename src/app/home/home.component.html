@@ -1,16 +1,62 @@
 
 <div class="featured">
     <!-- <div class="underclass"> -->
-        <!-- <img class="fImage1" src="./assets/images/stocks/shrunk/agustin-fernandez-Znyjl9pbaUs-unsplash.webp" alt="">
-        <img class="fImage2" src="./assets/images/stocks/shrunk/andrea-donato-MGt5tcLebds-unsplash.webp" alt="">
-        <img class="fImage3" src="./assets/images/stocks/shrunk/raphael-lovaski-pxax5WuM7eY-unsplash.webp" alt=""> -->
+         <!-- <img class="fImage1" src="./assets/images/stocks/shrunk/agustin-fernandez-Znyjl9pbaUs-unsplash.webp" alt=""> -->
+       <img class="fImage2" src="./assets/images/stocks/shrunk/andrea-donato-MGt5tcLebds-unsplash.webp" alt="">
+        <!-- <img class="fImage3" src="./assets/images/stocks/shrunk/raphael-lovaski-pxax5WuM7eY-unsplash.webp" alt=""> -->
     <!-- </div> -->
 </div>
-<!-- <div class="overlord">
-    <img class="fImage4 logo" src="./assets/images/Logo1.2.png" alt="">
-</div> -->
+<div class="overlord">
+    <h1>Eye Catching Blurb</h1>
+    <p>3 second explanation of what the site is targeting client users and professionals</p>
+</div>
 
 <div>
     <h1>Featured Professional</h1>
     <p>This section will have a randomized professional from across all categories with a rating of 4 of 5 stars and above.</p>
+    <div class="FBC_featuredBusCard">
+        <div class="FBC_column1">
+            <img class="FBC_profile_pic" src="https://www.pngfind.com/pngs/m/610-6104451_image-placeholder-png-user-profile-placeholder-image-png.png" alt="profile pic placeholder">
+            <div class="FBC_star_container">
+                <img class="FBC_star" src="../../assets/images/stocks/star.webp" alt="star pic">
+                <img class="FBC_star" src="../../assets/images/stocks/star.webp" alt="star pic">
+                <img class="FBC_star" src="../../assets/images/stocks/star.webp" alt="star pic">
+                <img class="FBC_star" src="../../assets/images/stocks/star.webp" alt="star pic">
+                <img class="FBC_star" src="../../assets/images/stocks/star.webp" alt="star pic">
+            </div>
+        </div>
+        <div class="FBC_column2">
+            <h1>[Business Name]</h1>
+            <h2>[Main Service]</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+     </p>
+        </div>
+    </div>
+</div>
+<div>
+    <h1>Customer Testomonials</h1>
+    <p>This section will host testimonials from users about Stella Vi</p>
+    <div class="UTC_userTestimonialCont" > 
+        <ul class="UTC_userLoop">
+            @for (test of SV_testimonies; track test.username) {
+            <li class="UTC_userCard">
+                <img class="UTC_userPic" src={{test.userpic}} alt="user image">
+                <div class="UTC_text">
+                    <h2>{{test.username}} says:</h2>
+                    <p>{{test.testimony}}</p>
+                </div>
+            </li>
+            }
+        </ul>
+        <!-- <div class="UTC_row1">
+            <img class="UTC_profile_pic" src="" alt="profile pic placeholder">
+            {{test.userpic}}
+        </div>
+        <div class="UTC_row2">
+            <h1>[Business Name]</h1>
+            <h2>[Main Service]</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+     </p>
+        </div> -->
+    </div>
 </div>
