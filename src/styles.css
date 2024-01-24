@@ -72,8 +72,13 @@
     font-weight: normal;
     src: local('Roxie Rossa'), url('./assets/fonts/Roxie Rossa.ttf') format('truetype');
 }
+h1, h2, h3, h4 {
+    font-family: "NewYork", serif;
+}
 
-
+p {
+    font-family: "Troye Free Sans", serif;
+}
 
 /* CSS */
 html, body {
