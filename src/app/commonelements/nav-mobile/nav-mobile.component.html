@@ -1,5 +1,6 @@
-<div class="circle show-menu">☰</div>
-<div class="menu">
+
+@if (mmobToggle) {
+<!-- <div class="menu">
   <ul>
     <li><a routerLink="/home">Home</a></li>
     <li><a routerLink="/home">About</a></li>
@@ -8,3 +9,32 @@
     <li><a routerLink="/home">Sign Up</a></li>
   </ul>
 </div>
+} 
+@else { -->
+  <button class="menu" mat-icon-button [matMenuTriggerFor]="menu" aria-label="menu">
+    <mat-icon>list</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu" >
+    <button mat-menu-item>
+      <mat-icon>home</mat-icon>
+      <span><a routerLink="/home">Home</a></span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>search</mat-icon>
+      <span><a routerLink="/home">Find</a></span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>fingerprint</mat-icon>
+      <span><a routerLink="/home">Login</a></span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>phonelink_setup</mat-icon>
+      <span><a routerLink="/home">Sign Up</a></span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>file_copy</mat-icon>
+      <span><a routerLink="/home">About</a></span>
+    </button>
+  </mat-menu>
+}
+<!-- <div class="circle show-menu" (click)="toggler()">☰</div> -->

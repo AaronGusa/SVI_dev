@@ -1,0 +1,84 @@
+@media (min-width: 600px) {
+    
+    .spacer_nuetral {
+        visibility: hidden;
+    }
+}
+
+a {
+    font-style: normal;
+    text-decoration: none;
+    color: black;
+}
+
+header {
+    background-color: #D3D1C4;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+}
+
+.header_logo {
+    background-color: black;
+    border-radius: 50%;
+    color: white;
+    width: 5rem;
+    text-align: center;
+    padding: 1rem;
+    margin: .5rem;
+}
+
+.spacer_nuetral {
+    width: 5rem;
+}
+
+#header_StellaVi {
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+
+/* 
+mat-toolbar{
+    position:fixed;
+    top:0;
+    z-index: 10;
+    margin:0 0 1rem 0;
+    padding:1rem;
+    @media screen and (max-width: 600px) {
+        visibility: hidden;
+      }
+} */
+
+mat-sidenav-container {
+    height:100%;
+}
+
+/* // Move the content down so that it won't be hidden by the toolbar */
+mat-sidenav {
+    padding-top: 3.5rem;
+    background-color: #D3D1C4;
+    @media screen and (min-width: 600px) {
+      padding-top: 4rem;
+    }
+
+    .entry{
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding:0.75rem;
+    }
+  }
+
+/* // Move the content down so that it won't be hidden by the toolbar */
+mat-sidenav-content{
+    padding-top: 3.5rem;
+    @media screen and (min-width: 600px) {
+        padding-top: 4rem;
+    }
+}
+
+/* .expanded {
+    width: 250px;   
+} */
