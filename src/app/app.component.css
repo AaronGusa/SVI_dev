@@ -16,6 +16,7 @@ header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     margin: 0;
     padding: 0;
 }
@@ -35,6 +36,9 @@ header {
 }
 
 #header_StellaVi {
+    margin: 0;
+    padding: 0;
+    font-size: 2rem;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
 }
 
@@ -51,16 +55,21 @@ mat-toolbar{
       }
 } */
 
+.hambStack {
+    font-size: 2rem;
+    padding: 0 1.75rem 0 0 ;
+}
+
 mat-sidenav-container {
-    height:100%;
+    /* height:100%; */
 }
 
 /* // Move the content down so that it won't be hidden by the toolbar */
 mat-sidenav {
-    padding-top: 3.5rem;
+    /* padding-top: 3.5rem; */
     background-color: #D3D1C4;
     @media screen and (min-width: 600px) {
-      padding-top: 4rem;
+      /* padding-top: 4rem; */
     }
 
     .entry{
@@ -73,12 +82,51 @@ mat-sidenav {
 
 /* // Move the content down so that it won't be hidden by the toolbar */
 mat-sidenav-content{
-    padding-top: 3.5rem;
+    /* padding-top: 3.5rem; */
     @media screen and (min-width: 600px) {
-        padding-top: 4rem;
+        /* padding-top: 4rem; */
     }
 }
 
 /* .expanded {
     width: 250px;   
 } */
+
+/* a {
+    display: flex;
+    flex-direction: row;
+  
+    align-items: center;
+    justify-content: flex-start;
+  
+    gap: 8px;
+  
+    min-width: 200px;
+  
+    padding: 16px;
+  
+    box-sizing: border-box;
+  
+    text-decoration: none;
+    color: #000;
+    border-radius: 4px;
+  
+    transition: background-color 75ms ease-out;
+  
+    /* // change overflowing text to ellipsis */
+    .text-container {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  
+    &:hover {
+      background-color: #deebff;
+    }
+  
+    &.active {
+      background-color: #c1daff;
+      font-weight: bold;
+      color: rgb(36, 82, 231);
+    }
+  

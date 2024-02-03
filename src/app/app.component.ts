@@ -52,9 +52,9 @@ export class AppComponent {
 }
 
   toggleMenuBoy() {
-    console.log('Function Runs')
-    console.log("isMobile: " + this.isMobile)
-    console.log("isCollapsed: " + this.isCollapsed)
+    // console.log('Function Runs')
+    // console.log("isMobile: " + this.isMobile)
+    // console.log("isCollapsed: " + this.isCollapsed)
 
 
     if(this.isMobile){
