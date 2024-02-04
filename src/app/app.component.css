@@ -42,7 +42,27 @@ header {
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
 }
 
+.scroll-icons-container {
+    background-color: #D3D1C4;
 
+    position: fixed;
+    top: 164px; /* Adjust as needed based on your design */
+    right: 0; /* Adjust as needed based on your design */
+    z-index: 1000; /* Ensure it's above other content */
+}
+
+.bobbing {
+    animation: bobbing 1s infinite alternate ease-in-out;
+}
+
+@keyframes bobbing {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(5px); /* Adjust the bobbing distance */
+    }
+}
 /* 
 mat-toolbar{
     position:fixed;
@@ -67,7 +87,6 @@ mat-sidenav-container {
 /* // Move the content down so that it won't be hidden by the toolbar */
 mat-sidenav {
     /* padding-top: 3.5rem; */
-    background-color: #D3D1C4;
     @media screen and (min-width: 600px) {
       /* padding-top: 4rem; */
     }

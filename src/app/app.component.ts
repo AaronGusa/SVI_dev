@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './commonelements/header/header.component';
@@ -38,6 +38,8 @@ export class AppComponent {
   sidenav!: MatSidenav;
   isMobile= true;
   isCollapsed = true;
+  isBobbing: boolean = false;
+
 
   constructor(private observer: BreakpointObserver) {}
 
@@ -67,6 +69,11 @@ export class AppComponent {
 
   testButton() {
     console.log('a tag clicked')
+  }
+
+  @HostListener('window:scroll', [])
+  onScroll() {
+    this.isBobbing = window.scrollY > 0;
   }
 
 }
