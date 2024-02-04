@@ -1,0 +1,1476 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Stella Vi",
+    "description": "MidWare & Backend",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/services/": {
+      "get": {
+        "tags": [
+          "Service Categories"
+        ],
+        "description": "Get all Categories ordered by category ids",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/services/category/{id}": {
+      "get": {
+        "tags": [
+          "Service Categories"
+        ],
+        "description": "Get category by Object id",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/services/catid/{cat_id}": {
+      "get": {
+        "tags": [
+          "Service Categories"
+        ],
+        "description": "Get category by category ids",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cat_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/services/services": {
+      "get": {
+        "tags": [
+          "Service Categories"
+        ],
+        "description": "Get all services ordered by category ids",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/services/service/{id}": {
+      "get": {
+        "tags": [
+          "Service Categories"
+        ],
+        "description": "Get all services ordered by category ids",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/services/servid/{s_id}": {
+      "get": {
+        "tags": [
+          "Service Categories"
+        ],
+        "description": "Get all services ordered by category ids",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "s_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/services/catserv/{cat_id}": {
+      "get": {
+        "tags": [
+          "Service Categories"
+        ],
+        "description": "Get all services ordered by category ids",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cat_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/services/newCat": {
+      "post": {
+        "tags": [
+          "Service Categories"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "New Category",
+            "in": "body",
+            "schema": {
+              "required": [
+                "category"
+              ],
+              "properties": {
+                "cat_id": {
+                  "type": "number",
+                  "example": 999
+                },
+                "cat": {
+                  "type": "string",
+                  "example": "Testing Category Placeholder"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "412": {
+            "description": "Precondition Failed"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/services/newServ": {
+      "post": {
+        "tags": [
+          "Service Categories"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "New Service",
+            "in": "body",
+            "schema": {
+              "required": [
+                "service"
+              ],
+              "properties": {
+                "s_id": {
+                  "type": "number",
+                  "example": 999
+                },
+                "s_name": {
+                  "type": "string",
+                  "example": "Testing Service Placeholder"
+                },
+                "cat_id": {
+                  "type": "number",
+                  "example": 999
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/services/upserve/{id}": {
+      "put": {
+        "tags": [
+          "Service Categories"
+        ],
+        "description": "Update services of a selected category",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Category ID"
+          },
+          {
+            "name": "serviceToAdd",
+            "in": "query",
+            "description": "Service to Add",
+            "required": true,
+            "type": "array"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/services/upcat/{id}": {
+      "put": {
+        "tags": [
+          "Service Categories"
+        ],
+        "description": "Update Category name of a selected category",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Category ID"
+          },
+          {
+            "name": "cat_name",
+            "in": "query",
+            "description": "Service to Add",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/services/{id}": {
+      "delete": {
+        "tags": [
+          "Service Categories"
+        ],
+        "description": "Delete with Category _IDs",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "_ID for the Category"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/services/cat/{cat_id}/{serviceId}": {
+      "delete": {
+        "tags": [
+          "Service Categories"
+        ],
+        "description": "Delete a specific service from a category id",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "cat_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Category ID"
+          },
+          {
+            "name": "serviceId",
+            "in": "path",
+            "required": true,
+            "type": "number",
+            "description": "Service ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/businesses/": {
+      "get": {
+        "tags": [
+          "Businesses"
+        ],
+        "description": "Get all businesses",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Businesses"
+        ],
+        "description": "Create a new business",
+        "parameters": [
+          {
+            "name": "New Business",
+            "in": "body",
+            "schema": {
+              "required": [
+                "business"
+              ],
+              "properties": {
+                "b_id": {
+                  "type": "string",
+                  "example": "23-0007"
+                },
+                "b_name": {
+                  "type": "string",
+                  "example": "TEST BUSINESS"
+                },
+                "b_discipline": {
+                  "type": "string",
+                  "example": "TEST DISCIPLINE"
+                },
+                "u_id": {
+                  "type": "integer",
+                  "example": 1009
+                },
+                "b_street": {
+                  "type": "string",
+                  "example": "9999 S 9999 W"
+                },
+                "b_city": {
+                  "type": "string",
+                  "example": "Salt Lake City"
+                },
+                "b_state": {
+                  "type": "string",
+                  "example": "UT"
+                },
+                "b_zip": {
+                  "type": "string",
+                  "example": "99999"
+                },
+                "b_phone": {
+                  "type": "string",
+                  "example": "555-555-5555"
+                },
+                "b_email": {
+                  "type": "string",
+                  "format": "email",
+                  "example": "test@testMail.com"
+                },
+                "b_website": {
+                  "type": "string",
+                  "example": "www.TEST.test"
+                },
+                "b_rating": {
+                  "type": "number",
+                  "example": 2.5
+                },
+                "b_active": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "b_services": {
+                  "type": "array",
+                  "example": [
+                    1,
+                    2,
+                    3
+                  ]
+                },
+                "created": {
+                  "type": "date",
+                  "example": "2023-07-26T12:34:56.789Z"
+                },
+                "updated": {
+                  "type": "date",
+                  "example": "2023-07-26T14:34:56.789Z"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "412": {
+            "description": "Precondition Failed"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/businesses/zip/{zip}": {
+      "get": {
+        "tags": [
+          "Businesses"
+        ],
+        "description": "Get all businesses",
+        "parameters": [
+          {
+            "name": "zip",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/businesses/buso/{oid}": {
+      "get": {
+        "tags": [
+          "Businesses"
+        ],
+        "description": "Get Business by _ID",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "oid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/businesses/bus/{bus_id}": {
+      "get": {
+        "tags": [
+          "Businesses"
+        ],
+        "description": "Get Business by Business ID",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "bus_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/businesses/{id}": {
+      "put": {
+        "tags": [
+          "Businesses"
+        ],
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "New Business",
+            "in": "body",
+            "schema": {
+              "required": [
+                "business"
+              ],
+              "properties": {
+                "b_id": {
+                  "type": "string",
+                  "example": "23-0007"
+                },
+                "b_name": {
+                  "type": "string",
+                  "example": "TEST BUSINESS"
+                },
+                "b_discipline": {
+                  "type": "string",
+                  "example": "TEST DISCIPLINE"
+                },
+                "u_id": {
+                  "type": "integer",
+                  "example": 1009
+                },
+                "b_street": {
+                  "type": "string",
+                  "example": "9999 S 9999 W"
+                },
+                "b_city": {
+                  "type": "string",
+                  "example": "Salt Lake City"
+                },
+                "b_state": {
+                  "type": "string",
+                  "example": "UT"
+                },
+                "b_zip": {
+                  "type": "string",
+                  "example": "99999"
+                },
+                "b_phone": {
+                  "type": "string",
+                  "example": "555-555-5555"
+                },
+                "b_email": {
+                  "type": "string",
+                  "format": "email",
+                  "example": "test@testMail.com"
+                },
+                "b_website": {
+                  "type": "string",
+                  "example": "www.TEST.test"
+                },
+                "b_rating": {
+                  "type": "number",
+                  "example": 2.5
+                },
+                "b_active": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "b_services": {
+                  "type": "array",
+                  "example": [
+                    1,
+                    2,
+                    3
+                  ]
+                },
+                "created": {
+                  "type": "date",
+                  "example": "2023-07-26T12:34:56.789Z"
+                },
+                "updated": {
+                  "type": "date"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Businesses"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/reviews/": {
+      "get": {
+        "tags": [
+          "Reviews"
+        ],
+        "description": "Get all reviews",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/reviews/all": {
+      "get": {
+        "tags": [
+          "Reviews"
+        ],
+        "description": "Get all reviews",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/reviews/id/{b_id}": {
+      "get": {
+        "tags": [
+          "Reviews"
+        ],
+        "description": "Get a specific business",
+        "parameters": [
+          {
+            "name": "b_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "New Review",
+            "in": "body",
+            "schema": {
+              "required": [
+                "review"
+              ],
+              "properties": {
+                "b_id": {
+                  "type": "string",
+                  "example": "23-0007"
+                },
+                "r_id": {
+                  "type": "integer",
+                  "example": "99999"
+                },
+                "u_id": {
+                  "type": "integer",
+                  "example": "1005"
+                },
+                "cat_id": {
+                  "type": "string",
+                  "example": "003"
+                },
+                "s_id": {
+                  "type": "string",
+                  "example": "003-001"
+                },
+                "revDate": {
+                  "type": "date",
+                  "example": "2023-05-21T09:15:00.000Z"
+                },
+                "rating": {
+                  "type": "integer",
+                  "example": "4"
+                },
+                "rev_content": {
+                  "type": "string",
+                  "example": "Great job! I would definitely come back!"
+                },
+                "active_review": {
+                  "type": "boolean",
+                  "example": "true"
+                }
+              }
+            }
+          },
+          {
+            "name": "Update Review",
+            "in": "body",
+            "schema": {
+              "required": [
+                "review"
+              ],
+              "properties": {
+                "b_id": {
+                  "type": "string",
+                  "example": "23-0007"
+                },
+                "u_id": {
+                  "type": "integer",
+                  "example": "1005"
+                },
+                "cat_id": {
+                  "type": "string",
+                  "example": "003"
+                },
+                "s_id": {
+                  "type": "string",
+                  "example": "003-001"
+                },
+                "revDate": {
+                  "type": "date",
+                  "example": "2023-05-21T09:15:00.000Z"
+                },
+                "rating": {
+                  "type": "integer",
+                  "example": "4"
+                },
+                "rev_content": {
+                  "type": "string",
+                  "example": "Great job! I would definitely come back!"
+                },
+                "active_review": {
+                  "type": "boolean",
+                  "example": "true"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/reviews/newrev": {
+      "post": {
+        "tags": [
+          "Reviews"
+        ],
+        "description": "Post new review",
+        "parameters": [
+          {
+            "name": "New Review",
+            "in": "body",
+            "schema": {
+              "required": [
+                "review"
+              ],
+              "properties": {
+                "b_id": {
+                  "type": "string",
+                  "example": "23-0007"
+                },
+                "r_id": {
+                  "type": "integer",
+                  "example": "99999"
+                },
+                "u_id": {
+                  "type": "integer",
+                  "example": "1005"
+                },
+                "cat_id": {
+                  "type": "string",
+                  "example": "003"
+                },
+                "s_id": {
+                  "type": "string",
+                  "example": "003-001"
+                },
+                "revDate": {
+                  "type": "date",
+                  "example": "2023-05-21T09:15:00.000Z"
+                },
+                "rating": {
+                  "type": "integer",
+                  "example": "4"
+                },
+                "rev_content": {
+                  "type": "string",
+                  "example": "Great job! I would definitely come back!"
+                },
+                "active_review": {
+                  "type": "boolean",
+                  "example": "true"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/reviews/putrev/{r_id}": {
+      "put": {
+        "tags": [
+          "Reviews"
+        ],
+        "description": "Update new review",
+        "parameters": [
+          {
+            "name": "r_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Update Review",
+            "in": "body",
+            "schema": {
+              "required": [
+                "review"
+              ],
+              "properties": {
+                "b_id": {
+                  "type": "string",
+                  "example": "23-0007"
+                },
+                "u_id": {
+                  "type": "integer",
+                  "example": "1005"
+                },
+                "cat_id": {
+                  "type": "string",
+                  "example": "003"
+                },
+                "s_id": {
+                  "type": "string",
+                  "example": "003-001"
+                },
+                "revDate": {
+                  "type": "date",
+                  "example": "2023-05-21T09:15:00.000Z"
+                },
+                "rating": {
+                  "type": "integer",
+                  "example": "4"
+                },
+                "rev_content": {
+                  "type": "string",
+                  "example": "Great job! I would definitely come back!"
+                },
+                "active_review": {
+                  "type": "boolean",
+                  "example": "true"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/reviews/delete/{r_id}": {
+      "put": {
+        "tags": [
+          "Reviews"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "r_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/reviews/restore/{r_id}": {
+      "put": {
+        "tags": [
+          "Reviews"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "r_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/users/": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Get all users.",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Add a user to the DB.",
+        "parameters": [
+          {
+            "name": "New User",
+            "in": "body",
+            "schema": {
+              "required": [
+                "user"
+              ],
+              "properties": {
+                "u_id": {
+                  "type": "string",
+                  "example": "9999"
+                },
+                "u_phone": {
+                  "type": "string",
+                  "example": "234-567-8901"
+                },
+                "u_email": {
+                  "type": "string",
+                  "format": "email",
+                  "example": "jane.doe@example.com"
+                },
+                "u_street": {
+                  "type": "string",
+                  "example": "456 Oak St"
+                },
+                "u_city": {
+                  "type": "string",
+                  "example": "Anytown"
+                },
+                "u_state": {
+                  "type": "string",
+                  "example": "Utah"
+                },
+                "u_country": {
+                  "type": "string",
+                  "example": "USA"
+                },
+                "u_zip": {
+                  "type": "string",
+                  "example": "12345"
+                },
+                "u_username": {
+                  "type": "string",
+                  "example": "janedoe"
+                },
+                "u_fname": {
+                  "type": "string",
+                  "example": "Jane"
+                },
+                "u_lname": {
+                  "type": "string",
+                  "example": "Doe"
+                },
+                "u_priv": {
+                  "type": "integer",
+                  "example": 1
+                },
+                "hashedPassword": {
+                  "type": "string",
+                  "example": "$2b$10$7amvPbc/8kUss3bkoKpFb.E5iC68v34lP5Fe0l7zX2gr/kLEiIq92"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "412": {
+            "description": "Precondition Failed"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Get a user by ObjectId.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Delete user by _id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/users/user/{u_id}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Get user by user id.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "u_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/users/ufl/{u_fname}/{u_lname}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Get user by user name.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "u_fname",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "u_lname",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/users/uname/{u_username}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Get user by username.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "u_username",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/users/userup/{id}": {
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Update user by _id. Example _id: 647e47575b7c06e663694215",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "New User",
+            "in": "body",
+            "schema": {
+              "required": [
+                "user"
+              ],
+              "properties": {
+                "u_id": {
+                  "type": "integer",
+                  "example": "1001"
+                },
+                "u_phone": {
+                  "type": "string",
+                  "example": "123-456-7890"
+                },
+                "u_email": {
+                  "type": "string",
+                  "format": "email",
+                  "example": "john.doe@example.com"
+                },
+                "u_street": {
+                  "type": "string",
+                  "example": "123 Main St"
+                },
+                "u_city": {
+                  "type": "string",
+                  "example": "Towntown"
+                },
+                "u_state": {
+                  "type": "string",
+                  "example": "Utah"
+                },
+                "u_country": {
+                  "type": "string",
+                  "example": "USA"
+                },
+                "u_zip": {
+                  "type": "string",
+                  "example": "12345"
+                },
+                "u_username": {
+                  "type": "string",
+                  "example": "johndoe"
+                },
+                "u_fname": {
+                  "type": "string",
+                  "example": "John"
+                },
+                "u_lname": {
+                  "type": "string",
+                  "example": "Doe"
+                },
+                "u_priv": {
+                  "type": "integer",
+                  "example": "3"
+                },
+                "hashedPassword": {
+                  "type": "string",
+                  "example": "$2b$10$7amvPbc/8kUss3bkoKpFb.E5iC68v34lP5Fe0l7zX2gr/kLEiIq92"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "412": {
+            "description": "Precondition Failed"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/users/login": {
+      "post": {
+        "description": "",
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    }
+  }
+}

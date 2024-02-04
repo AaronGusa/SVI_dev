@@ -6,10 +6,11 @@ const dotenv = require('dotenv');
 const debug = require('debug')("node-angular");
 const db = require('./db/connect');
 const bodyParse = require('body-parser');
-// const r_hub = require('./backend/routes/routeHub');
+const r_hub = require('./routes/routeHub');
+
 //SWAGGER
-// const swaggerUi = require('swagger-ui-express');
-// const swagDoc = require('./swagger.json');
+const swaggerUi = require('swagger-ui-express');
+const swagDoc = require('./swagger.json');
 
 
 //security
@@ -35,7 +36,7 @@ app
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     next();
   })
-//   .use('/', r_hub);
+  .use('/', r_hub);
 
 // const server = http.createServer(app);
 

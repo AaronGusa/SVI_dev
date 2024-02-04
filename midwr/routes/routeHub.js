@@ -6,6 +6,7 @@ indx_r.use('/services', require('./service'));
 indx_r.use('/businesses', require('./business'));
 indx_r.use('/reviews', require('./review'));
 indx_r.use('/users', require('./user'));
+indx_r.use('/api', require('./swag'))
 
 
 indx_r.use('/', 
