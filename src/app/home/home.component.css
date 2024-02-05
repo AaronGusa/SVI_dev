@@ -121,10 +121,10 @@ padding: .5rem;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    /* justify-content: space-around;*/
-    margin: 0;
+    justify-content: space-around;
+    /* margin: 0;
     padding: 0; 
-    width: 300px;
+    width: 300px;  */
 }
 
 .UTC_userCard {
