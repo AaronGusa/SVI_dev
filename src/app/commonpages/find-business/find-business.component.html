@@ -1,1 +1,80 @@
-<p>find-business works!</p>
+<app-loading *ngIf="loading"></app-loading>
+
+<div *ngIf="!loading">
+  <div *ngIf="zipFieldSelected">
+    <app-zip-search
+      [zip]="zipList"
+      (zipSelected)="applyFilters({ zip: $event })"
+      (click)="onSearchSelected()"
+    ></app-zip-search> 
+    
+      
+  </div>
+  <div>
+  <ng-container>
+    <ng-container *ngIf="cityFieldSelected">
+      <app-city-search
+        [cities]="cityList"
+        (citySelected)="applyFilters({ city: $event })"
+        (click)="onSearchSelected()"
+      ></app-city-search>
+      
+        </ng-container>
+  </ng-container>
+
+  <app-service-search
+    [categories]="categories"
+    (servicesSelected)="applyFilters({ selectedServices: $event })"
+  ></app-service-search>
+  </div>
+  
+
+  <div >
+    <app-refine-search-menu
+    [list2Sort]="businessListFiltered"
+    (filterByNameChange)="applyFilterByName($event)"
+    (ratingFilterChange)="applyRatingFilter($event)"
+    (showActiveOnlyChange)="applyShowActiveOnly($event)"
+  >
+  </app-refine-search-menu>
+
+    <p>{{ businessListFiltered.length }} Businesses Found</p>
+   
+  <div *ngFor="let b of businessListFiltered">
+    <mat-accordion>
+      <mat-expansion-panel style="display: flex; flex-direction:column; justify-content: space-between;">
+        <mat-expansion-panel-header >
+          <h1>{{ b.b_name }}</h1>
+          <p>Rating: {{ b.b_rating }}</p>
+        </mat-expansion-panel-header>
+        <mat-panel-description>
+          
+        </mat-panel-description>
+        <mat-panel-content>
+          <div>
+            <p>{{ b.b_phone }}</p>
+            <p>{{ b.b_email }}</p>
+            <p>{{ b.b_website }}</p>
+            <div>
+                {{ b.b_services }}
+            </div>
+            <div>
+              <h3>Address</h3>
+              <p>{{ b.b_street }}</p>
+              <p>{{ b.b_city }}</p>
+              <p>{{ b.b_state }}</p>
+              <p>{{ b.b_zip }}</p>
+            </div>
+            <button mat-raised ><a routerLink="/business-profile/{{b.b_id}}">Go to Business Page</a></button>
+          </div>
+        </mat-panel-content>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <br>
+    <br>
+  </div>
+</div>
+<div *ngIf="selectedZip && businessListFiltered.length === 0">
+  <h2>No businesses found in {{ zip }}</h2>
+</div>
+</div>
