@@ -1,0 +1,20 @@
+<!-- <div *ngIf="isLoading"> -->
+    @if (isLoading){
+        <app-loading></app-loading> }
+<!-- </div> -->
+<!-- <div *ngIf="!isLoading"> -->
+@if (!isLoading) {    
+    <mat-tab-group dynamicHeight>
+        <mat-tab label="{{businessSelect.b_name}} Profile">
+            <h1>Welcome to {{businessSelect.b_name}}</h1>
+            <app-business-profile-user></app-business-profile-user>
+        </mat-tab>
+        <mat-tab label="Our Work">
+            <app-business-profile-images></app-business-profile-images>
+        </mat-tab>
+        <mat-tab label="Reviews">
+            <h2>Here's' what people are saying about {{businessSelect.b_name}}</h2>
+        </mat-tab>
+    </mat-tab-group>
+}
+<!-- </div> -->

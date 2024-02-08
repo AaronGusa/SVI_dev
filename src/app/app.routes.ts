@@ -5,6 +5,7 @@ import { AboutComponent } from './commonpages/about/about.component';
 import { LoginComponent } from './commonpages/login/login.component';
 import { SignupUserComponent } from './commonpages/signup-user/signup-user.component';
 import { FindBusinessComponent } from './commonpages/find-business/find-business.component';
+import { BusinessProfileComponent } from './searchfind/business-profile/business-profile.component';
 
 export const routes: Routes = [
     {path: '', component: StyleguideComponent},
@@ -13,7 +14,8 @@ export const routes: Routes = [
     {path: 'about', component: AboutComponent},
     {path: 'login', component: LoginComponent},
     {path: 'signup', component: SignupUserComponent},
-    {path: 'find-business', component: FindBusinessComponent}
+    {path: 'find-business', component: FindBusinessComponent},
+    {path: 'business-profile/:b_id', component: BusinessProfileComponent}
 ];
 
 // @NgModule({

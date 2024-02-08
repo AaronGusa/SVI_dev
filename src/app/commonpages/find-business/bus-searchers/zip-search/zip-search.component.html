@@ -5,20 +5,22 @@
           Search by Zipcode
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <mat-form-field>
+      <mat-form-field >
         <mat-label>Enter Zipcode</mat-label>
         <input matInput
+            (formControl)="myControl"
             [matAutocomplete]="auto"
-            [formControl]="myControl" 
             (click)="onZipSelected($event.target.value)"
             (input)= "onZipSelected($event.target.value)"
-            
+            placeholder="Enter Zipcode"
         >
         <mat-autocomplete #auto (optionSelected)="onOptionSelected($event)">
-            <mat-option *ngFor="let zip of zipListFiltered" [value]="zip" >
+            @for (zip of zipListFiltered; track $index) {
+              <mat-option [value]="zip">
                 {{ zip }}
-            </mat-option>
-        </mat-autocomplete>
+              </mat-option>
+            }
+          </mat-autocomplete>
     </mat-form-field>
   </mat-expansion-panel>
   

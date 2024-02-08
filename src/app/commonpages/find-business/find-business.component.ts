@@ -1,29 +1,35 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { LoadingComponent } from '../../features/loading/loading.component';
 import { ZipSearchComponent } from './bus-searchers/zip-search/zip-search.component';
 import { ServiceSearchComponent } from './bus-searchers/service-search/service-search.component';
 import { CitySearchComponent } from './bus-searchers/city-search/city-search.component';
-import { BusinessService } from '../../app-services/business.service';
-import { ServiceService } from '../../app-services/service.service';
+import { BusinessService, ServiceService } from '../../app-services';
 import { Business } from '../../models/business.model';
 import { Service } from '../../models/service.model';
 import { Category } from '../../models/category.model';
+import { RefineSearchMenuComponent } from '../../features/refine-search-menu/refine-search-menu.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatExpansionModule } from '@angular/material/expansion';
+
 
 
 @Component({
   selector: 'app-find-business',
   standalone: true,
-  imports: [LoadingComponent, 
+  imports: [ReactiveFormsModule,
+            LoadingComponent, 
             CitySearchComponent, 
             ServiceSearchComponent, 
-            ZipSearchComponent],
+            ZipSearchComponent,
+            RefineSearchMenuComponent,
+            MatExpansionModule  
+          ],
   templateUrl: './find-business.component.html',
   styleUrl: './find-business.component.css'
 })
 export class FindBusinessComponent {
-  @ViewChild('auto') auto: MatAutocompleteModule;
+  @ViewChild('auto') auto!: MatAutocompleteModule;
   myControl = new FormControl('');
 
   loading: Boolean = true;
@@ -52,6 +58,8 @@ export class FindBusinessComponent {
   sortRating: number = 0;
   sortActiveOnly: boolean = false;
 
+  
+
   constructor(
     private businessService: BusinessService,
     private serviceService: ServiceService,
@@ -62,6 +70,7 @@ export class FindBusinessComponent {
     this.createZipList();
     this.createCityList();
     this.businessListFiltered = this.businesses;
+    console.log(this.businessListFiltered)
   }
 
   onInput() {
@@ -72,9 +81,13 @@ export class FindBusinessComponent {
     try {
       const fetchedBusinesses = await this.businessService.fetchBusinesses().toPromise();
       const fetchedCategories = await this.serviceService.fetchCategories().toPromise();
+      console.log(this.businesses)
 
       if (fetchedBusinesses !== undefined) {
         this.businesses = fetchedBusinesses;
+      } else {
+        [{"_id":"64cac0ceeef1b2bf990b661d","b_id":"23-0001","b_name":"Mock-tastic Nails","b_discipline":{"$numberInt":"2"},"b_street":"1234 N 5678 W","b_city":"Salt Lake City","b_state":"UT","b_zip":"84101","b_phone":"801-555-1111","b_email":"mocktasticnails@example.com","b_website":"www.mocktasticnails.com","b_services":[{"$numberInt":"1001"},{"$numberInt":"1002"},{"$numberInt":"1003"}],"b_rating":{"$numberDouble":"4.2"},"b_active":true,"u_id":{"$numberInt":"1001"},"created":"2023-08-01T12:00:00.000Z"}
+        ]
       }
 
       if (fetchedCategories !== undefined) {

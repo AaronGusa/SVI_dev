@@ -8,7 +8,7 @@ import { Service } from '../models/service.model';
 })
 export class ServiceService {
   private categoryUrl = 'https://stellavibe.onrender.com/services';
-  //private serviceUrl = 'https://stellavibe.onrender.com/services/services';
+  private serviceUrl = 'https://stellavibe.onrender.com/services/services';
 
   categories: Category[] = [];
   services: Service[] = [];

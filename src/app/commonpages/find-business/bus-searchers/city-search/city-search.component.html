@@ -1,1 +1,29 @@
-<p>city-search works!</p>
+<mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Search by City
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-form-field>
+        <input matInput
+               [matAutocomplete]="auto"
+               (formControl)="myControl" 
+               (click)="onCitySelected($event)"
+               (input)= "onCitySelected($event)"
+               placeholder="Enter City"
+        >
+        <mat-autocomplete #auto (optionSelected)="onOptionSelected($event)">
+            
+        @for (city of cityListFiltered; track $index) {    
+            <mat-option [value]="city" >
+                🍃{{ city }}
+            </mat-option>
+        }
+
+        </mat-autocomplete>
+    </mat-form-field>
+      
+  </mat-expansion-panel>
+  
+  </mat-accordion>

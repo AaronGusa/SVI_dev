@@ -1,35 +1,42 @@
-<app-loading *ngIf="loading"></app-loading>
+@if (loading) {
+    <app-loading></app-loading>
+}
 
-<div *ngIf="!loading">
-  <div *ngIf="zipFieldSelected">
-    <app-zip-search
-      [zip]="zipList"
-      (zipSelected)="applyFilters({ zip: $event })"
-      (click)="onSearchSelected()"
-    ></app-zip-search> 
-    
-      
-  </div>
-  <div>
-  <ng-container>
-    <ng-container *ngIf="cityFieldSelected">
-      <app-city-search
-        [cities]="cityList"
-        (citySelected)="applyFilters({ city: $event })"
-        (click)="onSearchSelected()"
-      ></app-city-search>
-      
-        </ng-container>
-  </ng-container>
+@if (!loading) {
 
-  <app-service-search
+    @if (zipFieldSelected) { 
+        <div>
+            <app-zip-search
+            [zip]="zipList"
+            (zipSelected)="applyFilters({ zip: $event, city: '', selectedServices: [] })"
+            (click)="onSearchSelected()"
+            ></app-zip-search> 
+            
+            
+        </div>
+    } 
+    <ng-container>
+        @if (cityFieldSelected) { 
+            <ng-container >
+                <app-city-search
+                    [cities]="cityList"
+                    (citySelected)="applyFilters({ zip: '', city: $event, selectedServices: selectedServices})"
+                    (click)="onSearchSelected()"
+                ></app-city-search>
+        
+            </ng-container>
+        } 
+    </ng-container> 
+
+    <div>
+   <app-service-search
     [categories]="categories"
-    (servicesSelected)="applyFilters({ selectedServices: $event })"
+    (servicesSelected)="applyFilters({ zip: zipSelect, city: citySelect, selectedServices: $event })"
   ></app-service-search>
   </div>
-  
+}  
 
-  <div >
+  <!--<div >
     <app-refine-search-menu
     [list2Sort]="businessListFiltered"
     (filterByNameChange)="applyFilterByName($event)"
@@ -50,7 +57,7 @@
         <mat-panel-description>
           
         </mat-panel-description>
-        <mat-panel-content>
+        <div>
           <div>
             <p>{{ b.b_phone }}</p>
             <p>{{ b.b_email }}</p>
@@ -65,16 +72,17 @@
               <p>{{ b.b_state }}</p>
               <p>{{ b.b_zip }}</p>
             </div>
-            <button mat-raised ><a routerLink="/business-profile/{{b.b_id}}">Go to Business Page</a></button>
+            <button mat-raised ><a routerLink="/business-profile/">Go to Business Page</a></button>
           </div>
-        </mat-panel-content>
+        </div>
       </mat-expansion-panel>
     </mat-accordion>
     <br>
     <br>
   </div>
 </div>
-<div *ngIf="selectedZip && businessListFiltered.length === 0">
-  <h2>No businesses found in {{ zip }}</h2>
-</div>
-</div>
+@if (selectedZip && businessListFiltered.length === 0) {  
+    <h2>No businesses found in database</h2>
+}
+</div> -->
+
