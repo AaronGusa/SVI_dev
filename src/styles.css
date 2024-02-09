@@ -138,6 +138,7 @@ header {
     height: 164px;
 }
 
+
 .header_logo {
     background-color: black;
     border-radius: 50%;
@@ -305,4 +306,6 @@ footer {
 .content2 {
     /* border: 8px solid black; */
     min-height: calc(100vh - 80px - 164px);
+    margin: 0;
+    padding: 1rem;
 }

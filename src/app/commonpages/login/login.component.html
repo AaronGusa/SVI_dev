@@ -1,4 +1,4 @@
-<div>
+<!-- <div class="content-view">
     <h1>Login</h1>
 </div>
 <form class="example-form">
@@ -14,4 +14,51 @@
         <mat-error>Email is <strong>required</strong></mat-error>
       }
     </mat-form-field>
-  </form>
+    <mat-form-field>
+        <mat-label>Enter your password</mat-label>
+        <input matInput matNativeControl [type]="password" name="logPass">
+        <button  matSuffix 
+        (click)="hidePass = !hidePass" 
+        [attr.aria-label]="'hidePass password'" 
+        [attr.aria-pressed]="hidePass">
+        <mat-icon>{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+      <br>
+    <button mat-raised-button type="submit"> Login </button>
+</form>
+<p>or</p>
+<button mat-raised-button>Sign Up</button> -->
+
+<mat-card>
+    @if (isLoading) {
+        <!-- <mat-spinner mode="indeterminate" ></mat-spinner> -->
+        <app-loading></app-loading>
+    }
+
+    @if (!isLoading) {
+        <div>
+            <mat-card-header>Login</mat-card-header>
+            <mat-card-content>
+                <form (submit)="tbd" >
+                    <mat-form-field>
+                        <mat-label>E-mail</mat-label>
+                        <input matInput type="email">
+                        <mat-error *ngIf="">Please enter a valid email address.</mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Password</mat-label>
+                        <input type="password" matInput>
+                    </mat-form-field>
+                </form>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-raised-button (click)="isLoading = !isLoading">Login</button>
+            </mat-card-actions>
+            <mat-card-footer>
+                <p>Don't have an account?</p>
+                <a routerLink="/signup">Sign Up!</a>
+            </mat-card-footer>
+        </div>   
+    } 
+</mat-card>
