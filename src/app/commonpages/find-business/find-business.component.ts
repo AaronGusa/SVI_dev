@@ -67,10 +67,10 @@ export class FindBusinessComponent {
 
   async ngOnInit() {
     await this.fetchData();
-    this.createZipList();
-    this.createCityList();
+    console.log(this.businesses);
+      console.log(this.categories);
     this.businessListFiltered = this.businesses;
-    console.log(this.businessListFiltered)
+    //console.log(this.businessListFiltered)
   }
 
   onInput() {
@@ -81,7 +81,8 @@ export class FindBusinessComponent {
     try {
       const fetchedBusinesses = await this.businessService.fetchBusinesses().toPromise();
       const fetchedCategories = await this.serviceService.fetchCategories().toPromise();
-      console.log(this.businesses)
+      console.log(this.businesses);
+      console.log(this.categories);
 
       if (fetchedBusinesses !== undefined) {
         this.businesses = fetchedBusinesses;
@@ -93,8 +94,15 @@ export class FindBusinessComponent {
       if (fetchedCategories !== undefined) {
         this.categories = fetchedCategories;
       }
-
-      this.loading = false;
+      this.createZipList();
+      this.createCityList();
+      if (this.zipList.length >= 1 && this.cityList.length >= 1) {
+        console.log('Ziplist line 99');
+        console.log(this.zipList);
+        console.log('CityList Line 101');
+        console.log(this.cityList);
+        this.loading = false;
+      }
     } catch (error) {
       console.error('Error fetching data:', error);
     }

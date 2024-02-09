@@ -22,8 +22,7 @@ export class ServiceSearchComponent {
   panelOpenState: boolean = false;
 
   ngOnInit(): void {
-    console.log('CATEGORIES')
-    console.log(this.categories)
+    
     this.sortCategories();
   }
 

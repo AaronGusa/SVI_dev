@@ -5,14 +5,13 @@
           Search by Zipcode
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <mat-form-field >
+      <mat-form-field>
         <mat-label>Enter Zipcode</mat-label>
         <input matInput
             (formControl)="myControl"
             [matAutocomplete]="auto"
             (click)="onZipSelected($event.target.value)"
             (input)= "onZipSelected($event.target.value)"
-            placeholder="Enter Zipcode"
         >
         <mat-autocomplete #auto (optionSelected)="onOptionSelected($event)">
             @for (zip of zipListFiltered; track $index) {

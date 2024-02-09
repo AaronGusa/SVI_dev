@@ -8,7 +8,7 @@
         <div>
             <app-zip-search
             [zip]="zipList"
-            (zipSelected)="applyFilters({ zip: $event, city: '', selectedServices: [] })"
+            (zipSelected)="applyFilters({ zip: $event })"
             (click)="onSearchSelected()"
             ></app-zip-search> 
             
@@ -20,7 +20,7 @@
             <ng-container >
                 <app-city-search
                     [cities]="cityList"
-                    (citySelected)="applyFilters({ zip: '', city: $event, selectedServices: selectedServices})"
+                    (citySelected)="applyFilters({ city: $event })"
                     (click)="onSearchSelected()"
                 ></app-city-search>
         
@@ -28,12 +28,14 @@
         } 
     </ng-container> 
 
-    <div>
-   <app-service-search
-    [categories]="categories"
-    (servicesSelected)="applyFilters({ zip: zipSelect, city: citySelect, selectedServices: $event })"
-  ></app-service-search>
-  </div>
+    @if (categories.length > 0) {
+        <div>
+            <app-service-search
+                [categories]="categories"
+                (servicesSelected)="applyFilters({ selectedServices: $event })"
+            ></app-service-search>
+        </div>
+    }
 }  
 
   <!--<div >
