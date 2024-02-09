@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle'; 
 import { MatIcon } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
@@ -19,7 +19,7 @@ import { MatInputModule } from '@angular/material/input';
   templateUrl: './refine-search-menu.component.html',
   styleUrl: './refine-search-menu.component.css'
 })
-export class RefineSearchMenuComponent implements OnInit{
+export class RefineSearchMenuComponent implements AfterViewInit {
   @Input() list2Sort!: any[];
   @Output() filterByNameChange: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() ratingFilterChange: EventEmitter<number> = new EventEmitter<number>();
@@ -28,12 +28,19 @@ export class RefineSearchMenuComponent implements OnInit{
   noSearch: boolean = true;
   sortName: boolean = false; //starts false to initiate OnInit with function onFilterByNameChange
   sortRating: number = 0;
-  sortActiveOnly: boolean = true; 
+  sortActiveOnly: boolean = false; //starts false to initiate OnInit with function sortActiveOnly
   
   ngOnInit(): void {
     this.onFilterByNameChange();
-
   }
+
+  ngAfterViewInit(): void {
+    // Use setTimeout to defer the execution of the function until after the current change detection cycle
+    setTimeout(() => {
+      this.onShowActiveOnlyChange();
+    });
+  }
+  
 
   onFilterByNameChange() {
     this.sortName = !this.sortName; //sortName boolean switch 

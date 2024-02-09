@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { LoadingComponent } from '../../features/loading/loading.component';
 import { ZipSearchComponent } from './bus-searchers/zip-search/zip-search.component';
@@ -28,7 +28,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
   templateUrl: './find-business.component.html',
   styleUrl: './find-business.component.css'
 })
-export class FindBusinessComponent implements OnInit {
+export class FindBusinessComponent implements OnInit, AfterViewInit {
   @ViewChild('auto') auto!: MatAutocompleteModule;
   myControl = new FormControl('');
 
@@ -69,6 +69,10 @@ export class FindBusinessComponent implements OnInit {
     await this.fetchData();
     this.businessListFiltered = this.businesses;
     //console.log(this.businessListFiltered)
+  }
+
+  ngAfterViewInit() {
+    this.businessListFiltered = this.businesses;
   }
 
   onInput() {

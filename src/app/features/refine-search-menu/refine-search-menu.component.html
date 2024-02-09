@@ -16,7 +16,7 @@
 </mat-form-field>
 <br>
 
-<mat-slide-toggle class="slide_toggle" (change)="onShowActiveOnlyChange()" [checked]="sortActiveOnly">See Active Business Only</mat-slide-toggle>
-<br>
-<br>
-<mat-slide-toggle class="slide_toggle" (change)="onFilterByNameChange()" [checked]="sortName">Sort by Name</mat-slide-toggle>   
+<div class="toggle_div">
+  <mat-slide-toggle class="slide_toggle" (change)="onFilterByNameChange()" [checked]="sortName">Sort by Name</mat-slide-toggle>   
+  <mat-slide-toggle class="slide_toggle" (change)="onShowActiveOnlyChange()" [checked]="sortActiveOnly">See Active Business Only</mat-slide-toggle>
+</div>
