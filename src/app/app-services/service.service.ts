@@ -7,7 +7,7 @@ import { Service } from '../models/service.model';
   providedIn: 'root'
 })
 export class ServiceService {
-  private categoryUrl = 'https://stellavibe.onrender.com/services';
+  private categoryUrl = 'https://stellavibe.onrender.com/services/services';
   private serviceUrl = 'https://stellavibe.onrender.com/services/services';
 
   categories: Category[] = [];
@@ -21,7 +21,9 @@ export class ServiceService {
     return this.http.get<Category[]>(this.categoryUrl);
   };
 
-
+  fetchServices() {
+    return this.http.get<Service[]>(this.serviceUrl)
+  };
   
 
 

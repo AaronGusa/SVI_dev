@@ -11,7 +11,7 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
   templateUrl: './service-search.component.html',
   styleUrl: './service-search.component.css'
 })
-export class ServiceSearchComponent {
+export class ServiceSearchComponent implements OnInit {
   @Input() categories: any[] = [];
   @Output() servicesSelected: EventEmitter<number[]> = new EventEmitter<number[]>();
 
@@ -21,22 +21,42 @@ export class ServiceSearchComponent {
   showBusinessForm: boolean = false;
   panelOpenState: boolean = false;
 
-  ngOnInit(): void {
-    
+  async ngOnInit() {
+    console.log('Service-search Line 25')
+    console.log(this.categories);
     this.sortCategories();
   }
 
   sortCategories() {
-    this.categories.sort((a, b) => {const catA = a.cat.toUpperCase(); // Convert to uppercase for case-insensitive sorting
-    const catB = b.cat.toUpperCase();
+    this.categories.sort((a, b) => {
+      if (a && a.cat && b && b.cat) {
+        const catA = a.cat.toUpperCase();
+        const catB = b.cat.toUpperCase();
   
-    if (catA < catB) {
-      return -1; // catA comes before catB
-    }
-    if (catA > catB) {
-      return 1; // catA comes after catB
-    }
-      return 0; // catA and catB are equal
+        if (catA < catB) {
+          return -1;
+        }
+        if (catA > catB) {
+          return 1;
+        }
+        return 0;
+      } else {
+        // Handle case where 'cat' property is undefined
+        return 0; // No sorting needed
+      }
+      // if (a && a.cat && b && b.cat) {
+      //   const catA = a.cat.toUpperCase(); // Convert to uppercase for case-insensitive sorting
+      //   const catB = b.cat.toUpperCase();
+      
+      //   if (catA < catB) {
+      //     return -1; // catA comes before catB
+      //   }
+      //   if (catA > catB) {
+      //     return 1; // catA comes after catB
+      //   }
+      //     return 0; // catA and catB are equal
+      // }
+      
     });
   };
 

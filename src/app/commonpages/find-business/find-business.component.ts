@@ -28,7 +28,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
   templateUrl: './find-business.component.html',
   styleUrl: './find-business.component.css'
 })
-export class FindBusinessComponent {
+export class FindBusinessComponent implements OnInit {
   @ViewChild('auto') auto!: MatAutocompleteModule;
   myControl = new FormControl('');
 
@@ -67,8 +67,6 @@ export class FindBusinessComponent {
 
   async ngOnInit() {
     await this.fetchData();
-    console.log(this.businesses);
-      console.log(this.categories);
     this.businessListFiltered = this.businesses;
     //console.log(this.businessListFiltered)
   }
@@ -81,28 +79,30 @@ export class FindBusinessComponent {
     try {
       const fetchedBusinesses = await this.businessService.fetchBusinesses().toPromise();
       const fetchedCategories = await this.serviceService.fetchCategories().toPromise();
-      console.log(this.businesses);
-      console.log(this.categories);
+      
 
       if (fetchedBusinesses !== undefined) {
         this.businesses = fetchedBusinesses;
-      } else {
-        [{"_id":"64cac0ceeef1b2bf990b661d","b_id":"23-0001","b_name":"Mock-tastic Nails","b_discipline":{"$numberInt":"2"},"b_street":"1234 N 5678 W","b_city":"Salt Lake City","b_state":"UT","b_zip":"84101","b_phone":"801-555-1111","b_email":"mocktasticnails@example.com","b_website":"www.mocktasticnails.com","b_services":[{"$numberInt":"1001"},{"$numberInt":"1002"},{"$numberInt":"1003"}],"b_rating":{"$numberDouble":"4.2"},"b_active":true,"u_id":{"$numberInt":"1001"},"created":"2023-08-01T12:00:00.000Z"}
-        ]
-      }
+      }; 
 
       if (fetchedCategories !== undefined) {
         this.categories = fetchedCategories;
-      }
+      };
+
       this.createZipList();
       this.createCityList();
+      
       if (this.zipList.length >= 1 && this.cityList.length >= 1) {
-        console.log('Ziplist line 99');
-        console.log(this.zipList);
-        console.log('CityList Line 101');
-        console.log(this.cityList);
+        // console.log('Ziplist line 99');
+        // console.log(this.zipList);
+        // console.log('CityList Line 101');
+        // console.log(this.cityList);
         this.loading = false;
       }
+      
+      console.log(this.businesses);
+      console.log(this.categories);
+    
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -166,7 +166,7 @@ export class FindBusinessComponent {
     this.selectedServices = filters.selectedServices;
 
     
-    console.log(filters.selectedServices);
+    //console.log(filters.selectedServices);
 
     this.handleCombinedFilters();
   }
