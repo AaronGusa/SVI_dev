@@ -100,8 +100,8 @@ export class FindBusinessComponent implements OnInit {
         this.loading = false;
       }
       
-      console.log(this.businesses);
-      console.log(this.categories);
+      //console.log(this.businesses);
+      //console.log(this.categories);
     
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -140,9 +140,10 @@ export class FindBusinessComponent implements OnInit {
           business.b_services.includes(serviceId)
         )
         );
-    } else {
-      console.log('No services found');
-    }
+    } 
+    // else {
+    //   console.log('No services found');
+    // }
      // Call the new sorting and filtering function
      this.handleSortingAndFiltering();
 
@@ -216,6 +217,7 @@ export class FindBusinessComponent implements OnInit {
   
   applyRatingFilter(value: number) {
     this.sortRating = value;
+    console.log('Entered sortRatingFilter CONFIRMED')
     this.handleCombinedFilters();
   }
   

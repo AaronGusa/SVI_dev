@@ -22,8 +22,8 @@ export class ServiceSearchComponent implements OnInit {
   panelOpenState: boolean = false;
 
   async ngOnInit() {
-    console.log('Service-search Line 25')
-    console.log(this.categories);
+    //console.log('Service-search Line 25')
+    //console.log(this.categories);
     this.sortCategories();
   }
 
@@ -56,7 +56,7 @@ export class ServiceSearchComponent implements OnInit {
       //   }
       //     return 0; // catA and catB are equal
       // }
-      
+
     });
   };
 
