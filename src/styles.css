@@ -85,7 +85,9 @@ html, body {
     margin: 0;
     padding: 0;
     width: 100%;
+    height: 100%;
     min-height:auto;
+    position: relative;
 }
 
 html {
@@ -93,8 +95,11 @@ html {
 }
 
 body {
+    height: 100%;
     display: flex;
     flex-direction: column;
+    margin: 0; 
+    font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 
@@ -108,9 +113,196 @@ hr {
     width: 100%;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-.slide_toggle {
+@media (min-width: 600px) {
     
+    .spacer_nuetral {
+        visibility: hidden;
+    }
+}
+
+a {
+    font-style: normal;
+    text-decoration: none;
+    color: black;
+}
+
+header {
+    background-color: #D3D1C4;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    height: 164px;
+}
+
+.header_logo {
+    background-color: black;
+    border-radius: 50%;
+    color: white;
+    width: 5rem;
+    text-align: center;
+    padding: 1rem;
+    margin: .5rem;
+}
+
+.spacer_nuetral {
+    width: 5rem;
+}
+
+#header_StellaVi {
+    margin: 0;
+    padding: 0;
+    font-size: 2rem;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+.scroll-icons-container {
+    background-color: #D3D1C4;
+
+    position: fixed;
+    top: 164px; /* Adjust as needed based on your design */
+    right: 0; /* Adjust as needed based on your design */
+    z-index: 1000; /* Ensure it's above other content */
+}
+
+.bobbing {
+    animation: bobbing 1s infinite alternate ease-in-out;
+}
+
+@keyframes bobbing {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(5px); /* Adjust the bobbing distance */
+    }
+}
+/* 
+mat-toolbar{
+    position:fixed;
+    top:0;
+    z-index: 10;
+    margin:0 0 1rem 0;
+    padding:1rem;
+    @media screen and (max-width: 600px) {
+        visibility: hidden;
+      }
+} */
+
+.hambStack {
+    font-size: 2rem;
+    padding: 0 1.75rem 0 0 ;
+}
+
+mat-sidenav-container {
+    height: calc(100vh - (headerHeight/4));
+}
+
+/* // Move the content down so that it won't be hidden by the toolbar */
+mat-sidenav {
+    /* padding-top: 3.5rem; */
+    @media screen and (min-width: 600px) {
+      /* padding-top: 4rem; */
+    }
+
+    .entry{
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding:0.75rem;
+    }
+  }
+
+/* // Move the content down so that it won't be hidden by the toolbar */
+mat-sidenav-content{
+    /* padding-top: 3.5rem; */
+    @media screen and (min-width: 600px) {
+        /* padding-top: 4rem; */
+    }
+}
+
+/* .expanded {
+    width: 250px;   
+} */
+
+/* a {
+    display: flex;
+    flex-direction: row;
+  
+    align-items: center;
+    justify-content: flex-start;
+  
+    gap: 8px;
+  
+    min-width: 200px;
+  
+    padding: 16px;
+  
+    box-sizing: border-box;
+  
+    text-decoration: none;
+    color: #000;
+    border-radius: 4px;
+  
+    transition: background-color 75ms ease-out;
+  
+    /* // change overflowing text to ellipsis */
+    .text-container {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  
+    &:hover {
+      background-color: #deebff;
+    }
+  
+    &.active {
+      background-color: #c1daff;
+      font-weight: bold;
+      color: rgb(36, 82, 231);
+    }
+  
+
+.content {
+     min-height: calc(100vh - (headerHeight + footerHeight));  /*Ensure content fills viewport height */
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    flex: 1; /* Grow to fill remaining space */
+}
+
+
+
+footer {
+    position: relative; /* Position relative to parent container */
+    bottom: 0; /* Stick to bottom of parent container */
+    background-color: #85857b;
+    height: 80px;
+    color: white;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-size: small;
+    box-sizing: border-box;
+}
+
+
+.footer_text {
+    margin: 0;
+    padding: 0 0 0 0.5rem;
+}
+
+.content {
+    background-color: red;
+}
+
+.content2 {
+    /* border: 8px solid black; */
+    min-height: calc(100vh - 80px - 164px);
 }
