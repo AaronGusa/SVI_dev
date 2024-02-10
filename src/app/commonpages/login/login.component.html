@@ -1,7 +1,7 @@
 <div class="content-view">
     <h1>Login</h1>
 </div>
-<form class="example-form" #signForm>
+<!-- <form class="example-form" #signForm>
     <mat-form-field class="example-full-width">
       <mat-label>Email</mat-label>
       <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
@@ -14,6 +14,7 @@
         <mat-error>Email is <strong>required</strong></mat-error>
       }
     </mat-form-field>
+    |
     <mat-form-field>
         <mat-label>Enter your password</mat-label>
         <input matInput matNativeControl type="password" name="logPass">
@@ -31,7 +32,7 @@
         <h2>❌</h2>
       }
     <button mat-raised-button for="signForm" type="submit" minlength="8" [disabled]="!signForm.valid"> Login </button>
-</form>
+</form> -->
 <p>or</p>
 <button mat-raised-button>Sign Up</button>
 <br>
@@ -47,19 +48,36 @@
         <div>
             <mat-card-header>Login</mat-card-header>
             <mat-card-content>
-                <form #logForm (submit)="tbd" >
+                <form #logForm="ngForm" (ngSubmit)="onSubmit(logForm)">
                     <mat-form-field>
-                        <mat-label>E-mail</mat-label>
-                        <input matInput email type="email" required >
+                        <mat-label for="email">E-mail</mat-label>
+                        <input matInput 
+                                type="email"
+                                id="email"
+                                class="form-control"
+                                ngModel
+                                name="email"
+                                required
+                                email
+                        >
                         <mat-error>Please enter a valid email address.</mat-error>
                     </mat-form-field>
+                    |
                     <mat-form-field>
-                        <mat-label>Password</mat-label>
-                        <input type="password" matInput required minlength="6">
+                        <mat-label for="password">Password</mat-label>
+                        <input matInput
+                                type="password"
+                                id="password"
+                                class="form-control"
+                                ngModel
+                                name="password"
+                                required
+                                minlength="8"
+                        >
                     </mat-form-field>
-                </form>
-            </mat-card-content>
-            @if (signForm.valid) {
+                
+            
+            @if (logForm.valid) {
                 <h2>✅</h2>
               } @else {
                 <h2>❌</h2>
@@ -70,10 +88,57 @@
                         [disabled]="!logForm.valid"
                 >Login</button>
             </mat-card-actions>
+        </form>
+    </mat-card-content>
             <mat-card-footer>
+            
                 <p>Don't have an account?</p>
                 <a routerLink="/signup">Sign Up!</a>
             </mat-card-footer>
         </div>   
     } 
 </mat-card><!--  -->
+
+<!-- <div class="row">
+    <div class="col-xs-12 col-md-6 col-md-offset-3">
+      <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
+        <div class="form-group">
+          <label for="email">E-Mail</label>
+          <input
+            type="email"
+            id="email"
+            class="form-control"
+            ngModel
+            name="email"
+            required
+            email
+          />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            class="form-control"
+            ngModel
+            name="password"
+            required
+            minlength="6"
+          />
+        </div>
+        <div>
+          <button
+            class="btn btn-primary"
+            type="submit"
+            [disabled]="!authForm.valid"
+          >
+            {{ isLoginMode ? 'Login' : 'Sign Up' }}
+          </button>
+          |
+          <button class="btn btn-primary" (click)="onSwitchMode()" type="button">
+            Switch to {{ isLoginMode ? 'Sign Up' : 'Login' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div> -->
