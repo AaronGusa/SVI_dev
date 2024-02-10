@@ -65,6 +65,9 @@ img {
 hr {
     width: 100%;
 }
+.menu {
+    z-index: 100000;
+}
 
 .spacer_nuetral {
     display: none;
