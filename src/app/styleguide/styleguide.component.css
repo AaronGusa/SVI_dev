@@ -86,44 +86,15 @@
 }
 
 .SG_font_1 {
-    font-family: 'Bolin Gerii', serif;
+    font-family: 'Chapaza', serif;
 }
 
 .SG_font_2 {
-    font-family: 'Aguero Serif Free', serif;
+    font-family: 'ChapazaItalic', serif;
 }
 
 .SG_font_3 {
-    font-family: 'Aguero Serif Free', serif;
-    font-style: italic;
-
+    font-family: 'Roboto', serif;
+    font-weight: lighter;
 }
 
-.SG_font_4 {
-    font-family: 'CHELON', serif;
-}
-
-.SG_font_5 {
-    font-family: 'CHELON', serif;
-    font-style: italic;
-}
-
-.SG_font_6 {
-    font-family: 'Troye Free Sans', serif;
-}
-
-.SG_font_7 {
-    font-family: 'Troye Free Script', serif;
-}
-
-.SG_font_8 {
-    font-family: 'Troye Free Serif', serif;
-}
-
-.SG_font_9 {
-    font-family: 'NewYork', serif;
-}
-
-.SG_font_10 {
-    font-family: 'Roxie Rossa', serif;
-}

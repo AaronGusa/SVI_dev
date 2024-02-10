@@ -3,75 +3,20 @@
 
 /* FONTS */
 @fontface {
-    font-family: 'Bolin Gerii';
+    font-family: 'Chapaza';
     font-style: normal;
     font-weight: normal;
-    src: local('Bolin Gerii'), url('./assets/fonts/Bolin Gerii.ttf') format('truetype');
+    src: local('Chapaza'), url('./assets/fonts/Chapaza.ttf') format('truetype');
 }
 
 @fontface {
-    font-family: 'Aguero Serif Free';
+    font-family: 'ChapazaItalic';
     font-style: normal;
     font-weight: normal;
-    src: local('Aguero Serif Free'), url('./assets/fonts/Aguero Serif.ttf') format('truetype');
-}
-
-@fontface {
-    font-family: 'Aguero Serif Free';
-    font-style: italic;
-    font-weight: normal;
-    src: local('Aguero Serif Free'), url('./assets/fonts/Aguero Serif Italic.ttf') format('truetype');
+    src: local('Chapaza Italic'), url('./assets/fonts/ChapazaItalic.ttf') format('truetype');
 }
 
 
-@fontface {
-    font-family: 'CHELON';
-    font-style: normal;
-    font-weight: normal;
-    src: local('CHELON'), url('./assets/fonts/CHELON.ttf') format('truetype');
-}
-
-@fontface {
-    font-family: 'CHELON';
-    font-style: italic;
-    font-weight: normal;
-    src: local('CHELON'), url('./assets/fonts/CHELON ITALIC.ttf') format('truetype');
-}
-
-@fontface {
-    font-family: 'Troye Free Sans';
-    font-style: normal;
-    font-weight: normal;
-    src: local('Troye Free Sans'), url('./assets/fonts/Troye Sans Free.ttf') format('truetype');
-}
-
-@fontface {
-    font-family: 'Troye Free Script';
-    font-style: normal;
-    font-weight: normal;
-    src: local('Troye Free Script'), url('./assets/fonts/Troye Script Free.ttf') format('truetype');
-}
-
-@fontface {
-    font-family: 'Troye Free Serif';
-    font-style: normal;
-    font-weight: normal;
-    src: local('Troye Free Serif'), url('./assets/fonts/Troye Serif Free.ttf') format('truetype');
-}
-
-@fontface {
-    font-family: 'NewYork';
-    font-style: normal;
-    font-weight: normal;
-    src: local('NewYork'), url('./assets/fonts/NewYork.otf') format('opentype');
-}
-
-@fontface {
-    font-family: 'Roxie Rossa';
-    font-style: normal;
-    font-weight: normal;
-    src: local('Roxie Rossa'), url('./assets/fonts/Roxie Rossa.ttf') format('truetype');
-}
 h1, h2, h3, h4 {
     font-family: "NewYork", serif;
 }
@@ -308,4 +253,8 @@ footer {
     min-height: calc(100vh - 80px - 164px);
     margin: 0;
     padding: 1rem;
+}
+
+.mat-mdc-progress-spinner {
+    --mdc-circular-progress-active-indicator-color: #c8a95f;
 }
