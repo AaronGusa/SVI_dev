@@ -16,13 +16,21 @@
     src: local('Chapaza Italic'), url('./assets/fonts/ChapazaItalic.ttf') format('truetype');
 }
 
+:root {
+    --primary-color: #9DADA6; /* Primary color */
+    --primary-color2: #CC8B6A;
+    --secondary-color: #DBC1B2; /* Secondary color */
+    --secondary-color2: #B98B4F;
+    --tertiary-color: #9D4E40; /* Tertiary color */
+}
+
 
 h1, h2, h3, h4 {
-    font-family: "NewYork", serif;
+    font-family: "Chapaza", serif;
 }
 
 p {
-    font-family: "Troye Free Sans", serif;
+    font-family: Roboto, serif;
 }
 
 /* CSS */
@@ -44,7 +52,7 @@ body {
     display: flex;
     flex-direction: column;
     margin: 0; 
-    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-family: Roboto, sans-serif;
 }
 
 
@@ -214,7 +222,7 @@ mat-sidenav-content{
   
 
 .content {
-     min-height: calc(100vh - (headerHeight + footerHeight));  /*Ensure content fills viewport height */
+    min-height: calc(100vh - (headerHeight + footerHeight));  /*Ensure content fills viewport height */
     display: flex;
     flex-direction: column;
 }
@@ -256,5 +264,5 @@ footer {
 }
 
 .mat-mdc-progress-spinner {
-    --mdc-circular-progress-active-indicator-color: #c8a95f;
+    --mdc-circular-progress-active-indicator-color: var(--primary-color2);
 }

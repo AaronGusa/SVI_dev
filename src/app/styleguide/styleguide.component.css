@@ -44,33 +44,40 @@
 }
 
 #sg_color_1, #sg_color_2, #sg_color_3, #sg_color_4, #sg_color_5, #sg_color_6 {
+    display: flex;
+    flex-direction: column;
     margin: 0.25rem;
     border-radius: 25%;
     text-align: center;
+    width: 90px;
+    height: 90px;
+    justify-content: center;
+    font-size: .75rem;
+    box-shadow: 2px 2px 5px #353535;
 }
 
 #sg_color_1 {
-    background-color: #85857B;
+    background-color: #9DADA6;
     padding: 0.5rem;
 }
 
 #sg_color_2 {
-    background-color: #CBCCC4;
+    background-color: #CC8B6A;
     padding: 0.5rem;
 }
 
 #sg_color_3 {
-    background-color: #BBC9CA;
+    background-color: #DBC1B2;
     padding: 0.5rem;
 }
 
 #sg_color_4 {
-    background-color: #C1D2CC;
+    background-color: #B98B4F;
     padding: 0.5rem;
 }
 
 #sg_color_5 {
-    background-color: #E8E8DE;
+    background-color: #9D4E40;
     padding: 0.5rem;
 }
 
