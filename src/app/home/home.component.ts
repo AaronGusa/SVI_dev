@@ -21,7 +21,7 @@ export class HomeComponent {
     userpic: "https://yt3.googleusercontent.com/ytc/AIf8zZT_yxWb7R751Kf_hcRcvtFidRJ2cYFQeGUfmDUm=s160-c-k-c0x00ffffff-no-rj",
     testimony: "I slept through another meeting!"},
     {username: "Other Trav",
-    userpic: "https://media.licdn.com/dms/image/C5603AQFimJG433p-Tw/profile-displayphoto-shrink_200_200/0/1617823598439?e=2147483647&v=beta&t=H2ONlcHQBfnwHLBrcPwwgKqwYz5Jli75nCdMnZcnkyo",
+    userpic: "https://media.licdn.com/dms/image/D5603AQEuNH-aNo6F7w/profile-displayphoto-shrink_200_200/0/1707261040582?e=2147483647&v=beta&t=S8Qff8mGKEl5gPuLxLAqn_vG0tpKW57tnP7BGXDv6Aw",
     testimony: "STALLA VAY MY GUY!"},
   ];
 

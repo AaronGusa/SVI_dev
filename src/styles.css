@@ -66,11 +66,32 @@ hr {
     width: 100%;
 }
 
+.spacer_nuetral {
+    display: none;
+}
+
+#logo_submark {
+    display:none;
+}
+
+#logo_full {
+    width: 250px;
+}
+
+#header_StellaVi {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 @media (min-width: 600px) {
     
     .spacer_nuetral {
         visibility: hidden;
+    }
+
+    #logo_submark {
+        visibility: visible;
     }
 }
 
@@ -81,7 +102,7 @@ a {
 }
 
 header {
-    background-color: #D3D1C4;
+    background-color: var(--primary-color);
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -92,14 +113,11 @@ header {
 }
 
 
-.header_logo {
-    background-color: black;
-    border-radius: 50%;
-    color: white;
-    width: 5rem;
-    text-align: center;
-    padding: 1rem;
+.logo_main {
     margin: .5rem;
+    width: 150px;
+    background-color: rgba(255, 255, 255, 0.85);
+    border-radius: 25px 25px;
 }
 
 .spacer_nuetral {
@@ -114,7 +132,7 @@ header {
 }
 
 .scroll-icons-container {
-    background-color: #D3D1C4;
+    background-color: var(--primary-color);
 
     position: fixed;
     top: 164px; /* Adjust as needed based on your design */
@@ -204,22 +222,22 @@ mat-sidenav-content{
     transition: background-color 75ms ease-out;
   
     /* // change overflowing text to ellipsis */
-    .text-container {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-  
-    &:hover {
-      background-color: #deebff;
-    }
-  
-    &.active {
-      background-color: #c1daff;
-      font-weight: bold;
-      color: rgb(36, 82, 231);
-    }
-  
+.text-container {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+&:hover {
+    background-color: #deebff;
+}
+
+&.active {
+    background-color: #c1daff;
+    font-weight: bold;
+    color: rgb(36, 82, 231);
+}
+
 
 .content {
     min-height: calc(100vh - (headerHeight + footerHeight));  /*Ensure content fills viewport height */
@@ -231,12 +249,16 @@ mat-sidenav-content{
     flex: 1; /* Grow to fill remaining space */
 }
 
-
+.spinner_cont {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 footer {
     position: relative; /* Position relative to parent container */
     bottom: 0; /* Stick to bottom of parent container */
-    background-color: #85857b;
+    background-color: var(--primary-color2);
     height: 80px;
     color: white;
     width: 100%;
