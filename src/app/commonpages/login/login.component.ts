@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { LoadingComponent } from '../../features/loading/loading.component';
 import { RouterLink } from '@angular/router';
+import { AuthService } from '../../app-services/authenticate.service';
 
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -40,6 +41,8 @@ export class LoginComponent {
   isLoading: Boolean = false;
   tbd: any = '';
 
+  constructor (private auth: AuthService) {}
+
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
 
   matcher = new MyErrorStateMatcher();
@@ -52,6 +55,7 @@ export class LoginComponent {
 
   onSubmit(form: NgForm) {
     console.log(form.value);
+    this.auth.login(form.value.email, form.value.password);
     form.reset();
   }
 }
