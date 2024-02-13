@@ -1,0 +1,37 @@
+<h2>{{u_name}}</h2>
+<h3>User: {{u_priv}}</h3>
+<br>
+<ul class="dash-side-menu-ul">
+        <li>User</li>
+        <li><a href="">Profile</a></li>
+        <li><a href="">Appointments</a></li>
+        <li><a href="">Reviews</a></li>
+    </ul>
+
+@if (u_priv === buslvl) {
+    <ul class="dash-side-menu-ul">
+        <li>Business</li>
+        <li><a href="">Profile</a></li>
+        <li><a href="">Appointments</a></li>
+        <li><a href="">Reviews</a></li>
+        <li><a href="">Stats</a></li>
+        
+    </ul>
+} @else if (u_priv === admin) {
+    
+    <ul class="dash-side-menu-ul">
+        <li>Business</li>
+        <li><a href="">Profile</a></li>
+        <li><a href="">Appointments</a></li>
+        <li><a href="">Reviews</a></li>
+        <li><a href="">Stats</a></li>
+    </ul>
+    <ul class="dash-side-menu-ul">
+        <li>Admin</li>
+        <li><a href="">Users</a></li>
+        <li><a href="">Businesses</a></li>
+        <li><a >Reviews</a></li>
+
+
+    </ul>
+}

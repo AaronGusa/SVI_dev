@@ -199,6 +199,8 @@ mat-sidenav-content{
     }
 }
 
+
+
 /* .expanded {
     width: 250px;   
 } */
@@ -281,11 +283,14 @@ footer {
     background-color: red;
 }
 
-.content2 {
+#content2 {
     /* border: 8px solid black; */
+    display: flex;
     min-height: calc(100vh - 80px - 164px);
     margin: 0;
-    padding: 1rem;
+    padding: 0;
+    object-fit: cover;
+
 }
 
 .mat-mdc-progress-spinner {

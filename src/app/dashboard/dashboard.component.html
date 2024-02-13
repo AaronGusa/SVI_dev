@@ -1,1 +1,45 @@
-<p>dashboard works!</p>
+<!-- 
+<mat-drawer-container class="dashboard_cont" [hasBackdrop]="hasBackdrop.value">
+    <mat-drawer #drawer [mode]="mode.value">Hi {{u_name}}</mat-drawer>
+    @if (u_priv === usrlvl) {
+        
+        <a href="">Profile</a>
+        <a href="">Appointments</a>
+        <a href="">Reviews</a>
+    }
+    <mat-drawer-content class="dashboard_drawer_cont" >
+      <mat-form-field>
+        <mat-label>Sidenav mode</mat-label>
+        <mat-select #mode value="side">
+          <mat-option value="side">Side</mat-option>
+          <mat-option value="over">Over</mat-option>
+          <mat-option value="push">Push</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Has backdrop</mat-label>
+        <mat-select #hasBackdrop>
+          <mat-option>Unset</mat-option>
+          <mat-option [value]="true">True</mat-option>
+          <mat-option [value]="false">False</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-raised-button (click)="drawer.toggle()">Toggle drawer</button>
+    </mat-drawer-content>
+  </mat-drawer-container> -->
+
+<div class="dashboard_cont">
+    <div class="dash_side_menu">
+        <app-dash-side-menu
+            [u_priv] = "u_priv"
+            [usrlvl] = "usrlvl"
+            [buslvl] = "buslvl"
+            [admin] = "admin"
+            [u_name] = "u_name"
+        ></app-dash-side-menu>
+    </div>
+    <div class="dash_content">
+        <h1>User Profile</h1>
+        <!-- This is where the side menu selection will go -->
+    </div>
+</div>
