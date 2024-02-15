@@ -10,9 +10,10 @@ interface AuthResponseData{
 export class AuthService {
     private loggedIn = false;
     passwordHash: string = "";
-    tempEmailValue: string = "stellavi.dev@outlook.com"; 
-    // tempPassValue = Stellavi24
-    tempPassValue: string = "6833d0884cbdf610e27c2826acd316fd046cf9613a13fa38f39da6e8516da9e44aa944b4b2aee0dfa345623bc6e94b23c2b5ca053c9f4dd95ca1fee1e226e458";
+    private tempEmailValue: string = "stellavi.dev@outlook.com"; 
+    private tempPassValue = "Stellavi24";
+    private tempPassHashed: string = "";
+    //tempPassValue: string = "6833d0884cbdf610e27c2826acd316fd046cf9613a13fa38f39da6e8516da9e44aa944b4b2aee0dfa345623bc6e94b23c2b5ca053c9f4dd95ca1fee1e226e458";
     tempToken: string = '';
     tempPackage: any[] = [];
 
@@ -21,6 +22,7 @@ export class AuthService {
 
     async login(email: string, password: string) {
         try {
+            this.tempPassHashed = await this.hashPassword(this.tempPassValue);
             this.passwordHash = await this.hashPassword(password);
             
             console.log(this.passwordHash);
@@ -33,7 +35,7 @@ export class AuthService {
             console.error('Error hashing password:', error);
         }
 
-        if (email === this.tempEmailValue && this.passwordHash === this.tempPassValue) {
+        if (email === this.tempEmailValue && this.passwordHash === this.tempPassHashed) {
             console.log('Email and Password Pass')
             
             console.log(this.tempPackage);
