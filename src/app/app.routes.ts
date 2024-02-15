@@ -20,6 +20,8 @@ import { DaUsersComponent } from './dashboard/dash-admin/da-users/da-users.compo
 import { DaBusinessesComponent } from './dashboard/dash-admin/da-businesses/da-businesses.component';
 import { DaReviewsComponent } from './dashboard/dash-admin/da-reviews/da-reviews.component';
 import { DaStatsComponent } from './dashboard/dash-admin/da-stats/da-stats.component';
+import { DashAdminComponent } from './dashboard/dash-admin/dash-admin.component';
+import { DashBusComponent } from './dashboard/dash-bus/dash-bus.component';
 
 
 export const routes: Routes = [
@@ -39,13 +41,13 @@ export const routes: Routes = [
             {path: 'reviews', component: DuReviewsComponent},
 
         ]},
-        {path: 'business', component: DashUserComponent, children: [    
+        {path: 'business', component: DashBusComponent, children: [    
             {path: 'profile', component: DbProfileComponent},
             {path: 'appointments', component: DbAppointmentsComponent},
             {path: 'reviews', component: DbReviewsComponent},
             {path: 'stats', component: DbStatsComponent}
         ]},
-        {path: 'admin', component: DashUserComponent, children: [    
+        {path: 'admin', component: DashAdminComponent, children: [    
             {path: 'users', component: DaUsersComponent},
             {path: 'business', component: DaBusinessesComponent},
             {path: 'reviews', component: DaReviewsComponent},
