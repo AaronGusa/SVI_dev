@@ -103,12 +103,19 @@ a {
     text-decoration: none;
     color: black;
     transition: all;
-    padding: .25rem;
+    padding: 0.5rem;
+    margin: .5rem;
+    border-radius: 50%;
 }
 a:hover {
     background-color: var(--secondary-color2);
-    transition-duration: .5s;
-    border-radius: 15%;
+    transition-duration: 1s;
+    border-radius: 0%;
+}
+
+li {
+    padding: .5rem;
+    overflow: visible;
 }
 
 header {
@@ -356,6 +363,8 @@ DASHBOARD ----------------------------------------------------------------------
 .DashCurrentName{
 }
 
-.subButton {
-    background-color: #9D4E40;
+
+#subButton {
+    background-color: var(--secondary-color2);
+    color: white;
 }
