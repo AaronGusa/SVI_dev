@@ -304,3 +304,58 @@ footer {
 .mat-mdc-progress-spinner {
     --mdc-circular-progress-active-indicator-color: var(--primary-color2);
 }
+
+/* 
+DASHBOARD ----------------------------------------------------------------------------------------
+
+*/
+
+.DashCurrentContainer {
+
+}
+
+.DashCurrentCard {
+    
+}
+
+.DashCurrentHeader {
+ 
+}
+
+.DashCurrentTitle {
+
+}
+
+.DashCurrentSubtitle {
+
+}
+
+.DashCurrentImage {
+    width: 12rem;
+    border-radius: 15%;
+    grid-row: 1/5;
+    
+}
+
+#DashCurrentContent {
+    display: flex;
+    flex-direction: row;
+    /* grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr; */
+    flex-wrap: wrap;
+}
+
+.DashCurrentImageCont {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.DashCurrentName{
+}
+
+.subButton {
+    background-color: #9D4E40;
+}

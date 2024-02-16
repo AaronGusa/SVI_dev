@@ -1,13 +1,90 @@
- <form class="Du_Prof_Form">
-    <mat-form-field>
-        <label for="first-name">First Name: </label>
-        <input id="first-name" type="text" formControlName="firstName">
-        
-        <label for="last-name">Last Name: </label>
-        <input id="last-name" type="text" formControlName="lastName">
-    </mat-form-field>
+ <div class="DashCurrentContainer">
     
-      
-</form> 
+@if (!updateCheck) {
+    <mat-card class="DashCurrentCard">
+        <mat-card-header class="DashCurrentHeader">
+            <mat-card-title class="DashCurrentTitle">Profile Information  </mat-card-title>
+            <mat-card-subtitle class="DashCurrentSubtitle">Current</mat-card-subtitle>
+            
+            <label class="DashCurrentPriv">{{user[0].u_priv}}</label>
+        </mat-card-header>
+        <mat-card-content id="DashCurrentContent">
+            <div class="DashCurrentImageCont">
+                <img class="DashCurrentImage" src="https://i.pinimg.com/originals/f8/c6/b7/f8c6b794fda3fe6a49c868a230bea49a.jpg" alt="Keanu Reeves">
+            </div>
+            <div class="DashCurrentUserInfo">
+                <h2>User Information</h2>
+                <p class="DashCurrentName">Name:    {{user[0].u_fname}} {{user[0].u_lname}}</p>
+                <p class="DashCurrentName">Email:    {{user[0].u_email}}</p>
+                <p class="DashCurrentName">Username:    {{user[0].u_username}}</p>
+            </div>
+            <hr>    
+            <div class="DashCurrentUserAddress">
+                <h2>Address</h2>
+                <p class="DashCurrentAddress">{{user[0].u_street}}</p>
+                <p class="DashCurrentAddress"> {{user[0].u_city}}, {{user[0].u_state}}</p>
+                <p class="DashCurrentAddress"> {{user[0].u_zip}}</p>
 
- <!--  -->
+            </div>
+
+        </mat-card-content>
+        <mat-card-footer>
+            <button mat-raised-button (click)="updateSwitch()">Update</button>
+        </mat-card-footer>
+    </mat-card>
+} @else {
+    <mat-card>
+        <form class="Du_Prof_Form" [formGroup]="profileForm">
+            <mat-form-field>
+                <label for="first-name">First Name: </label>
+                <input matInput id="first-name" name="first-name" type="text" formControlName="firstName">
+              </mat-form-field>
+              
+              <mat-form-field>
+                <label for="last-name">Last Name: </label>
+                <input matInput id="last-name" name="last-name" type="text" formControlName="lastName">
+              </mat-form-field>
+              
+              <mat-form-field>
+                <label for="u-email">Email: </label>
+                <input matInput id="u-email" name="u-email" type="email" formControlName="u_email">
+              </mat-form-field>
+              
+              <mat-form-field>
+                <label for="u-username">Username: </label>
+                <input matInput id="u-username" name="u-username" type="text" formControlName="u_username">
+              </mat-form-field>
+              
+              <mat-form-field>
+                <label for="u-street">Street: </label>
+                <input matInput id="u-street" name="u-street" type="text" formControlName="u_street">
+              </mat-form-field>
+              
+              <mat-form-field>
+                <label for="u-city">City: </label>
+                <input matInput id="u-city" name="u-city" type="text" formControlName="u_city">
+              </mat-form-field>
+              
+              <mat-form-field>
+                <label for="u-state">State: </label>
+                <input matInput id="u-state" name="u-state" type="text" formControlName="u_state">
+              </mat-form-field>
+              
+              <mat-form-field>
+                <label for="u-zip">Zip: </label>
+                <input matInput id="u-zip" name="u-zip" type="text" formControlName="u_zip">
+              </mat-form-field>
+            <mat-card-actions>
+                <button class="subButton" mat-raised-button type="submit" (click)="onUpdateUserProf()">Update</button>
+                <button mat-raised-button color="primary" (click)="updateSwitch()">Cancel</button>
+            </mat-card-actions>
+        </form>
+
+    </mat-card>
+}
+
+ </div>
+ 
+<!--  
+
+   -->
