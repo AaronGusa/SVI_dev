@@ -23,13 +23,13 @@
 
 <div >
     <div class="container">
-        <mat-sidenav-container autosize >
+        <mat-sidenav-container autosize id="mainSideNavContainer">
 
-            <mat-sidenav 
+            <mat-sidenav id="mainSideNav"
                         [mode]="isMobile ? 'over' : 'side'" 
                         [opened]="isMobile ? 'false' : 'true'"
                         position="end" >
-            <mat-nav-list class="scroll-icons-container">
+                <mat-nav-list class="scroll-icons-container">
                     @if (isMobile) {
                         <a mat-list-item routerLink="/home">
                         <span class="entry">
@@ -119,7 +119,7 @@
                             </span>
                         </a>
                     }
-            </mat-nav-list>
+                </mat-nav-list>
             </mat-sidenav> 
             <mat-sidenav-content id="content2" >
                 

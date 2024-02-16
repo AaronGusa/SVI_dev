@@ -102,6 +102,13 @@ a {
     font-style: normal;
     text-decoration: none;
     color: black;
+    transition: all;
+    padding: .25rem;
+}
+a:hover {
+    background-color: var(--secondary-color2);
+    transition-duration: .5s;
+    border-radius: 15%;
 }
 
 header {
@@ -172,12 +179,14 @@ mat-toolbar{
     padding: 0 1.75rem 0 0 ;
 }
 
-mat-sidenav-container {
+
+#mainSideNavContainer {
     height: calc(100vh - (headerHeight/4));
 }
 
+
 /* // Move the content down so that it won't be hidden by the toolbar */
-mat-sidenav {
+#mainSideNav {
     /* padding-top: 3.5rem; */
     @media screen and (min-width: 600px) {
       /* padding-top: 4rem; */
@@ -191,15 +200,13 @@ mat-sidenav {
     }
   }
 
-/* // Move the content down so that it won't be hidden by the toolbar */
+/* // Move the content down so that it won't be hidden by the toolbar 
 mat-sidenav-content{
-    /* padding-top: 3.5rem; */
+     padding-top: 3.5rem; 
     @media screen and (min-width: 600px) {
-        /* padding-top: 4rem; */
+        /* padding-top: 4rem; 
     }
-}
-
-
+}*/
 
 /* .expanded {
     width: 250px;   
@@ -284,8 +291,9 @@ footer {
 }
 
 #content2 {
-    /* border: 8px solid black; */
+    /* border: 8px solid black; 
     display: flex;
+    flex-direction: column;*/
     min-height: calc(100vh - 80px - 164px);
     margin: 0;
     padding: 0;
