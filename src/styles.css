@@ -326,7 +326,8 @@ DASHBOARD ----------------------------------------------------------------------
 }
 
 .DashCurrentHeader {
- 
+ display: flex;
+ justify-content: space-between;
 }
 
 .DashCurrentTitle {

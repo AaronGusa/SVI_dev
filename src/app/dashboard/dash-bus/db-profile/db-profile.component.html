@@ -1,1 +1,101 @@
-<p>db-profile works!</p>
+<div class="DashCurrentContainer">
+    
+    @if (!updateCheck) {
+        <mat-card class="DashCurrentCard">
+            <mat-card-header class="DashCurrentHeader">
+                <mat-card-title class="DashCurrentTitle">Profile Information  </mat-card-title>
+                <mat-card-subtitle class="DashCurrentSubtitle">Current</mat-card-subtitle>
+                @if (business.b_active === true) {
+                    <label class="DashCurrentPriv">Active</label>
+                } @else {
+                    <label class="DashCurrentPriv">Not Active</label>
+                }
+            </mat-card-header>
+            <mat-card-content id="DashCurrentContent">
+                <div class="DashCurrentImageCont">
+                    <img class="DashCurrentImage" src="https://www.dictionary.com/e/wp-content/uploads/2018/04/nailed-it.jpg" alt="Keanu Reeves">
+                </div>
+                <div class="DashCurrentbusinessInfo">
+                    <h2>Business Information</h2>
+                    <p class="DashCurrentName">Name:    {{business.b_name}} </p>
+                    <p class="DashCurrentName">Email:    {{business.b_email}}</p>
+                    <p class="DashCurrentName">Phone:    {{business.b_phone}}</p>
+                    <p class="DashCurrentName">Site:    {{business.b_website}}</p>
+
+                </div>
+                <hr>    
+                <div class="DashCurrentbusinessAddress">
+                    <h2>Address</h2>
+                    <p class="DashCurrentAddress">{{business.b_street}}</p>
+                    <p class="DashCurrentAddress"> {{business.b_city}}, {{business.b_state}}</p>
+                    <p class="DashCurrentAddress"> {{business.b_zip}}</p>
+    
+                </div>
+    
+            </mat-card-content>
+            <mat-card-footer>
+                <button mat-raised-button (click)="updateSwitch()">Update</button>
+            </mat-card-footer>
+        </mat-card>
+    } @else {
+        <mat-card>
+            <h1>Update Information</h1>
+            <form class="Db_Prof_Form" [formGroup]="bProfileForm">
+                <mat-form-field>
+                    <label for="b-businessname">Business Name: </label>
+                    <input matInput id="b-businessname" name="b-businessname" type="text" formControlName="b_name">
+                </mat-form-field>
+                
+                <mat-form-field>
+                    <label for="b-phone">Phone: </label>
+                    <input matInput id="b-phone" name="b-phone" type="tel" formControlName="b_phone">
+                </mat-form-field>
+                
+                <mat-form-field>
+                    <label for="b-email">Email: </label>
+                    <input matInput id="b-email" name="b-email" type="email" formControlName="b_email">
+                </mat-form-field>
+                
+                <mat-form-field>
+                    <label for="b-website">Website: </label>
+                    <input matInput id="b-website" name="b-website" type="text" formControlName="b_website">
+                </mat-form-field>
+                
+                <mat-form-field>
+                    <label for="b-street">Street: </label>
+                    <input matInput id="b-street" name="b-street" type="text" formControlName="b_street">
+                </mat-form-field>
+                
+                <mat-form-field>
+                    <label for="b-city">City: </label>
+                    <input matInput id="b-city" name="b-city" type="text" formControlName="b_city">
+                </mat-form-field>
+                
+                <mat-form-field>
+                    <label for="b-state">State: </label>
+                    <input matInput id="b-state" name="b-state" type="text" formControlName="b_state">
+                </mat-form-field>
+                
+                <mat-form-field>
+                    <label for="b-zip">Zip: </label>
+                    <input matInput id="b-zip" name="b-zip" type="text" formControlName="b_zip">
+                </mat-form-field>
+                
+                <label for="b-active">Active</label>
+                <mat-checkbox id="b-active" formControlName="b_active">Active</mat-checkbox>
+                
+                <mat-card-actions>
+                    <button id="subButton" mat-raised-button type="submit" (click)="onUpdateUserProf()">Update</button>
+                    <button mat-raised-button color="warn" (click)="updateSwitch()">Cancel</button>
+                </mat-card-actions>
+            </form>
+        </mat-card>
+        
+        
+    }
+    
+     </div>
+     
+    <!--  
+    
+       -->
