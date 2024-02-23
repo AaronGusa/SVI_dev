@@ -22,6 +22,7 @@ import { DaReviewsComponent } from './dashboard/dash-admin/da-reviews/da-reviews
 import { DaStatsComponent } from './dashboard/dash-admin/da-stats/da-stats.component';
 import { DashAdminComponent } from './dashboard/dash-admin/dash-admin.component';
 import { DashBusComponent } from './dashboard/dash-bus/dash-bus.component';
+import { DashLandingComponent } from './dashboard/dash-landing/dash-landing.component';
 
 
 export const routes: Routes = [
@@ -35,6 +36,7 @@ export const routes: Routes = [
     {path: 'business-profile/:b_id', title: "Profile", component: BusinessProfileComponent},
     {path: 'dashboard', title: "Dashboard", component: DashboardComponent, children: [
         // Paths for dash views
+        {path: '', redirectTo: 'user/profile', pathMatch: 'full'},
         {path: 'user', component: DashUserComponent, children: [    
             {path: 'profile', component: DuProfileComponent},
             {path: 'appointments', component: DuAppointComponent},
