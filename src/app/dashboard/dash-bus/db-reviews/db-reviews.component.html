@@ -1,1 +1,20 @@
-<p>db-reviews works!</p>
+<div class="userDash_review">
+    @for (r of reviewArray; track $index) {
+        <mat-expansion-panel>
+    
+            <mat-expansion-panel-header >
+                <div class="du_review_expanHeader">
+                    <h2>{{ r.b_id }}: {{r.u_id}}</h2>
+                    
+                    <p>|   {{r.revDate | date}}</p>
+                </div>
+            </mat-expansion-panel-header>
+    
+            <div>
+                <p>{{r.rev_content}}</p>
+                <p>{{ r.rating }} stars</p>
+            </div>
+        </mat-expansion-panel>
+    
+    }
+    </div>
