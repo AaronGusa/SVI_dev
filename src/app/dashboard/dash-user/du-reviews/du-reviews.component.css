@@ -1,0 +1,15 @@
+.userDash_review {
+    border-radius: 25px;
+    overflow: hidden;
+}
+
+.du_review_expanHeader {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+
+span.mat_content {
+    align-items: center;
+}
