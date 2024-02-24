@@ -13,16 +13,9 @@ export class BusinessService {
 
   constructor(private http: HttpClient) { }
 
- async fetchBusinesses() { 
-    try {
-      const businesses = await this.http.get(this.businessUrl);
-      console.log(businesses);
-      return businesses;
-    }
-    catch (error) {
-      console.error('Error Fetching Businesses: ', error);
-      throw error;
-    }};
+  fetchBusinesses(): Observable<Business[]> { // Specify Observable with the correct type
+    return this.http.get<Business[]>(this.businessUrl);
+  };
 
   postBusiness(business: BusinessSubmit): Observable<BusinessSubmit> {
     console.log('Line 21 of BusinessService: ', business);
