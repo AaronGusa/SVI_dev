@@ -14,6 +14,7 @@ export class Business {
     public b_active: boolean;
     public u_id: number;
     public created: Date;
+    public 
   
     constructor(
       b_id: string,

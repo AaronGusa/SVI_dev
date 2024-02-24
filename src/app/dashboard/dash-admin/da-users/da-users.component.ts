@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../app-services';
+import { User } from '../../../models/user.model';
 
 @Component({
   selector: 'app-da-users',
@@ -13,14 +14,15 @@ export class DaUsersComponent implements OnInit {
 
   constructor(private userService: UserService) {}
 
-  ngOnInit () {
-    this.getAllUsers();
+  async ngOnInit () {
+    await this.getAllUsers();
   }
 
   async getAllUsers() {
     try {
-      this.users = await this.userService.fetchUsers();
-      console.log(this.users)
+      const users = await this.userService.fetchUsers();
+      console.log(typeof users);
+      this.users = users;
     } catch (error) {
       console.error('Error fetching users:', error);
       // Handle error gracefully, e.g., show error message to the user
