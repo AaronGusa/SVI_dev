@@ -1,1 +1,5 @@
 <p>da-businesses works!</p>
+<h2>{{ businesses.length }}</h2>
+@for (business of businesses; track $index) {
+    <h1>{{ business.b_name }}</h1>
+}

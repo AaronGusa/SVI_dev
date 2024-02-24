@@ -13,7 +13,7 @@ export class UserService {
 
   async fetchUsers() {
     try {
-      const users = await this.http.get(this.userUrl).toPromise();
+      const users = await this.http.get(this.userUrl);
       return users;
     } catch (error) {
       console.error('Error Fetching Users: ', error);
