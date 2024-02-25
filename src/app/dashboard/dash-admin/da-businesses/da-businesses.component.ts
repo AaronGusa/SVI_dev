@@ -1,18 +1,19 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { BusinessService } from '../../../app-services';
 import { Business } from '../../../models/business.model';
+import { LoadingComponent } from '../../../features/loading/loading.component';
 
 
 @Component({
   selector: 'app-da-businesses',
   standalone: true,
-  imports: [],
+  imports: [LoadingComponent],
   templateUrl: './da-businesses.component.html',
   styleUrl: './da-businesses.component.css'
 })
 export class DaBusinessesComponent implements OnInit, AfterViewInit {
   businesses: Business[] = [];
-
+  businessTrue: boolean = false;
 
   constructor(private businessService: BusinessService) {}
 
@@ -30,6 +31,7 @@ export class DaBusinessesComponent implements OnInit, AfterViewInit {
       
       if (fetchedBusinesses !== undefined) {
         this.businesses = fetchedBusinesses;
+        this.businessTrue = true;
       }; 
 
     } catch (error) {

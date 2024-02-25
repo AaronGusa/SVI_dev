@@ -1,5 +1,10 @@
-<p>USERS count: {{ users.length }}</p>
-@for (user of users; track $index) {
-    <h1>{{user.u_fname}} {{user.u_lname}}</h1>
-    <p>{{ user.u_id }}</p>
+@if (usersTrue) {
+
+    <p>USERS count: {{ users.length }}</p>
+    @for (user of users; track $index) {
+        <h1>{{user.u_fname}} {{user.u_lname}}</h1>
+        <p>{{ user.u_id }}</p>
+    }
+} @else {
+    <app-loading></app-loading>
 }

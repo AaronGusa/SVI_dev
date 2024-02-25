@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { User } from '../models/user.model';
 // import * as bcrypt from 'bcryptjs';
 
 @Injectable({
@@ -11,14 +12,18 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  async fetchUsers() {
-    try {
-      const users = await this.http.get(this.userUrl);
-      return users;
-    } catch (error) {
-      console.error('Error Fetching Users: ', error);
-      throw error;
-    }
+  // async fetchUsers() {
+  //   try {
+  //     const users = await this.http.get(this.userUrl);
+  //     return users;
+  //   } catch (error) {
+  //     console.error('Error Fetching Users: ', error);
+  //     throw error;
+  //   }
+  // }
+
+  fetchUsers(): Observable<User[]> {
+    return this.http.get<User[]>(this.userUrl);
   }
 
 

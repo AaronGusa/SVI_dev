@@ -36,7 +36,7 @@ export class FindBusinessComponent implements OnInit, AfterViewInit {
   selectedZip: Boolean = false;
   formcontrol = new FormControl('');
   // Business Variables
-  businesses: Business[] = [];
+  businesses: any = [];
   businessListFiltered: Business[] = [];
   // Categories and Services Variables
   categories: Category[] = [];
