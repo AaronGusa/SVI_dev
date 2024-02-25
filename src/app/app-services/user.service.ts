@@ -11,7 +11,12 @@ export class UserService {
   private userUrl = 'https://stellavibe.onrender.com/users';
 
   constructor(private http: HttpClient) { }
+  
+  fetchUsers(): Observable<User[]> {
+      return this.http.get<User[]>(this.userUrl);
+    }
 
+    
   // async fetchUsers() {
   //   try {
   //     const users = await this.http.get(this.userUrl);
@@ -22,9 +27,7 @@ export class UserService {
   //   }
   // }
 
-  fetchUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.userUrl);
-  }
+  
 
 
   fetchUser(id: string) {
