@@ -1,4 +1,4 @@
-@if (usersTrue) {
+@if (!loading) {
 
     <p>USERS count: {{ users.length }}</p>
     @for (user of users; track $index) {

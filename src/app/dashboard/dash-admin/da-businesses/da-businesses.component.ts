@@ -25,6 +25,7 @@ export class DaBusinessesComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.businesses;
   }
+
   async allBusinesses() {
     try {
       const fetchedBusinesses = await this.businessService.fetchBusinesses().toPromise();
@@ -32,6 +33,7 @@ export class DaBusinessesComponent implements OnInit, AfterViewInit {
       if (fetchedBusinesses !== undefined) {
         this.businesses = fetchedBusinesses;
         this.businessTrue = true;
+        console.log(fetchedBusinesses);
       }; 
 
     } catch (error) {

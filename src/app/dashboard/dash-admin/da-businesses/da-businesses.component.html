@@ -1,7 +1,7 @@
 @if (businessTrue) {
     <h2>Registered Professionals: {{ businesses.length }}</h2>
     @for (business of businesses; track $index) {
-        <h1>{{ business.b_name }}</h1>
+        <h2>{{ business.b_name }}</h2>
     }
 } @else {
     <app-loading></app-loading>
