@@ -11,7 +11,14 @@ export class User {
     public u_zip: string;
     public u_priv: number;
     public hashedPassword: string;
-    public u_favs: string[];
+    public u_favs: [
+      {
+        b_id: string;
+        s_id: number[];
+        ufav_created: Date;
+
+      }
+    ];
   
     constructor(
       u_id: number,
@@ -25,7 +32,15 @@ export class User {
       u_lname: string,
       u_zip: string,
       u_priv: number,
-      hashedPassword: string
+      hashedPassword: string,
+      u_favs: [
+        {
+        b_id: string;
+        s_id: number[];
+        ufav_created: Date;
+        
+      }
+      ]
     ) {
       this.u_id = u_id;
       this.u_phone = u_phone;
@@ -39,6 +54,7 @@ export class User {
       this.u_zip = u_zip;
       this.u_priv = u_priv;
       this.hashedPassword = hashedPassword;
+      this.u_favs = u_favs;
     }
   }
   

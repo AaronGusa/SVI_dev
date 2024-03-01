@@ -12,6 +12,7 @@ import { DashUserComponent } from './dashboard/dash-user/dash-user.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { DuAppointComponent } from './dashboard/dash-user/du-appoint/du-appoint.component';
 import { DuReviewsComponent } from './dashboard/dash-user/du-reviews/du-reviews.component';
+import { DuBusFavsComponent } from './dashboard/dash-user/du-bus-favs/du-bus-favs.component';
 import { DbProfileComponent } from './dashboard/dash-bus/db-profile/db-profile.component';
 import { DbAppointmentsComponent } from './dashboard/dash-bus/db-appointments/db-appointments.component';
 import { DbReviewsComponent } from './dashboard/dash-bus/db-reviews/db-reviews.component';
@@ -41,7 +42,7 @@ export const routes: Routes = [
             {path: 'profile', component: DuProfileComponent},
             {path: 'appointments', component: DuAppointComponent},
             {path: 'reviews', component: DuReviewsComponent},
-
+            {path: 'favorites', component: DuBusFavsComponent}
         ]},
         {path: 'business', component: DashBusComponent, children: [    
             {path: 'profile', component: DbProfileComponent},

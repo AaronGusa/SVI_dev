@@ -105,7 +105,7 @@ export class FindBusinessComponent implements OnInit, AfterViewInit {
       }
       
       //console.log(this.businesses);
-      //console.log(this.categories);
+      console.log(this.categories);
     
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -137,13 +137,20 @@ export class FindBusinessComponent implements OnInit, AfterViewInit {
     }
 
     if (this.selectedServices && this.selectedServices.length > 0) {
-      
-  
-       this.businessListFiltered = this.businessListFiltered.filter(business =>
+      this.businessListFiltered = this.businessListFiltered.filter(business =>
+        business.b_services && Array.isArray(business.b_services) && // Check if b_services is an array
         this.selectedServices.some(serviceId =>
           business.b_services.includes(serviceId)
         )
-        );
+      );
+  
+      //  this.businessListFiltered = this.businessListFiltered.filter(business =>
+      //   this.selectedServices.some(serviceId =>
+      //     business.b_services.includes(serviceId)
+      //   )
+      //   )
+
+      //   };
     } 
     // else {
     //   console.log('No services found');
