@@ -1,8 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { UserService } from '../../../app-services'; 
+import { User } from '../../../models/user.model';
+import {MatButtonModule} from '@angular/material/button';
+import { BusinessService } from '../../../app-services'; 
+import { Business } from '../../../models/business.model';
 
 @Component({
   selector: 'app-du-bus-favs',
@@ -10,11 +14,106 @@ import { UserService } from '../../../app-services';
   imports: [
     MatCardModule,
     MatIconModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatButtonModule
   ],
   templateUrl: './du-bus-favs.component.html',
   styleUrl: './du-bus-favs.component.css'
 })
-export class DuBusFavsComponent {
+export class DuBusFavsComponent implements OnInit {
+businesses: Business[] = [];
+userFavs: any[];
+// businesses = [{b_name: "Business 1", b_service: "Hair", b_rating: "⭐⭐⭐"}];
+user = {
+  u_id: 1,
+  u_phone: "123-456-7890",
+  u_email: "example@example.com",
+  u_street: "123 Example St",
+  u_city: "Example City",
+  u_country: "Example Country",
+  u_username: "exampleuser",
+  u_fname: "John",
+  u_lname: "Doe",
+  u_zip: "12345",
+  u_priv: 1,
+  hashedPassword: "hashedpassword123",
+  u_favs: [
+      {
+          b_id: "23-0001",
+          s_id: [1001, 1002, 1003],
+          ufav_created: new Date("2023-01-15"),
+          ufav_last_updated: new Date("2023-03-20"),
+          ufav_notes: "This is my favorite restaurant.",
+          active: true,
+          ufav_unfav: null
+      },
+      {
+          b_id: "23-0023",
+          s_id: [3],
+          ufav_created: new Date("2023-02-10"),
+          ufav_last_updated: new Date("2023-04-05"),
+          ufav_notes: "Great place for coffee!",
+          active: true,
+          ufav_unfav: null
+      },
+      {
+          b_id: "23-0028",
+          s_id: [1, 2, 3],
+          ufav_created: new Date("2023-03-05"),
+          ufav_last_updated: new Date("2023-05-15"),
+          ufav_notes: "They have amazing desserts.",
+          active: false,
+          ufav_unfav: new Date("2023-07-20")
+      }
+  ]
+};
+
+constructor(private bServe: BusinessService) {}
+
+async ngOnInit() {
+  await this.getBusinesses();
+  this.userFavs = this.makeUFavs(this.businesses, this.user);
+}
+
+async getBusinesses() {
+  try {
+    const fetchedBusinesses = await this.bServe.fetchBusinesses().toPromise();
+    
+    if (fetchedBusinesses !== undefined) {
+      this.businesses = fetchedBusinesses;
+      // this.businessTrue = true;
+      console.log(fetchedBusinesses);
+    }; 
+
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+makeUFavs(businesses: Business[], user) {
+  const favoriteBusinesses = [];
+
+    // Iterate through each favorite object in the user's profile
+    for (const favorite of user.u_favs) {
+        // Find the business with matching b_id
+        const business = businesses.find(b => b.b_id === favorite.b_id);
+        // If business is found, construct the UserFavorite object
+        if (business) {
+            const favoriteBusiness = {
+                ...business,
+                ufav_created: favorite.ufav_created,
+                ufav_last_updated: favorite.ufav_last_updated,
+                ufav_notes: favorite.ufav_notes,
+                active: favorite.active,
+                ufav_unfav: favorite.ufav_unfav
+            };
+            favoriteBusinesses.push(favoriteBusiness);
+        }
+    }
+
+    return favoriteBusinesses;
+}
+
+
 
 }

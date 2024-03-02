@@ -2,7 +2,7 @@
 <div class="featured">
     <!-- <div class="underclass"> -->
          <!-- <img class="fImage1" src="./assets/images/stocks/shrunk/agustin-fernandez-Znyjl9pbaUs-unsplash.webp" alt=""> -->
-       <img class="fImage2" src="./assets/images/stocks/shrunk/andrea-donato-MGt5tcLebds-unsplash.webp" alt="">
+       <img class="fImage2" src="./assets/images/stocks/shrunk/andrea-donato-MGt5tcLebds-unsplash.webp" placeholder alt="">
         <!-- <img class="fImage3" src="./assets/images/stocks/shrunk/raphael-lovaski-pxax5WuM7eY-unsplash.webp" alt=""> -->
     <!-- </div> -->
 </div>
@@ -18,11 +18,11 @@
         <div class="FBC_column1">
             <img class="FBC_profile_pic" src="https://www.pngfind.com/pngs/m/610-6104451_image-placeholder-png-user-profile-placeholder-image-png.png" alt="profile pic placeholder">
             <div class="FBC_star_container">
-                <img class="FBC_star" src="../../assets/images/stocks/star.webp" alt="star pic">
-                <img class="FBC_star" src="../../assets/images/stocks/star.webp" alt="star pic">
-                <img class="FBC_star" src="../../assets/images/stocks/star.webp" alt="star pic">
-                <img class="FBC_star" src="../../assets/images/stocks/star.webp" alt="star pic">
-                <img class="FBC_star" src="../../assets/images/stocks/star.webp" alt="star pic">
+                <img class="FBC_star" ngSrc="../../assets/images/stocks/star.webp" width="20.74" height="20" alt="star pic">
+                <img class="FBC_star" ngSrc="../../assets/images/stocks/star.webp" width="20.74" height="20" alt="star pic">
+                <img class="FBC_star" ngSrc="../../assets/images/stocks/star.webp" width="20.74" height="20" alt="star pic">
+                <img class="FBC_star" ngSrc="../../assets/images/stocks/star.webp" width="20.74" height="20" alt="star pic">
+                <img class="FBC_star" ngSrc="../../assets/images/stocks/star.webp" width="20.74" height="20" alt="star pic">
             </div>
         </div>
         <div class="FBC_column2">
@@ -40,7 +40,7 @@
         <ul class="UTC_userLoop">
             @for (test of SV_testimonies; track test.username) {
             <li class="UTC_userCard">
-                <img class="UTC_userPic" src={{test.userpic}} alt="user image">
+                <img class="UTC_userPic" ngSrc={{test.userpic}} width="300" height="200" alt="user image" placeholder>
                 <div class="UTC_text">
                     <h2>{{test.username}} says:</h2>
                     

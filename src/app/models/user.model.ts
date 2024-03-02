@@ -16,7 +16,10 @@ export class User {
         b_id: string;
         s_id: number[];
         ufav_created: Date;
-
+        ufav_last_updated: Date; 
+        ufav_notes: string;
+        active: boolean; 
+        ufav_unfav: Date;
       }
     ];
   
@@ -38,8 +41,11 @@ export class User {
         b_id: string;
         s_id: number[];
         ufav_created: Date;
-        
-      }
+        ufav_last_updated: Date; 
+        ufav_notes: string;
+        active: boolean; 
+        ufav_unfav: Date;
+        }
       ]
     ) {
       this.u_id = u_id;
