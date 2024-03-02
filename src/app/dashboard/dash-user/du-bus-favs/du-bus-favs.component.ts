@@ -7,6 +7,7 @@ import { User } from '../../../models/user.model';
 import {MatButtonModule} from '@angular/material/button';
 import { BusinessService } from '../../../app-services'; 
 import { Business } from '../../../models/business.model';
+import { LoadingComponent } from '../../../features/loading/loading.component';
 
 @Component({
   selector: 'app-du-bus-favs',
@@ -15,14 +16,18 @@ import { Business } from '../../../models/business.model';
     MatCardModule,
     MatIconModule,
     MatExpansionModule,
-    MatButtonModule
+    MatButtonModule,
+    LoadingComponent
   ],
   templateUrl: './du-bus-favs.component.html',
   styleUrl: './du-bus-favs.component.css'
 })
 export class DuBusFavsComponent implements OnInit {
 businesses: Business[] = [];
-userFavs: any[];
+userFavs = [];
+activeFavorites = [];
+inactiveFavorites = [];
+Loading: boolean = true;
 // businesses = [{b_name: "Business 1", b_service: "Hair", b_rating: "⭐⭐⭐"}];
 user = {
   u_id: 1,
@@ -44,7 +49,7 @@ user = {
           ufav_created: new Date("2023-01-15"),
           ufav_last_updated: new Date("2023-03-20"),
           ufav_notes: "This is my favorite restaurant.",
-          active: true,
+          sub_active: true,
           ufav_unfav: null
       },
       {
@@ -53,7 +58,7 @@ user = {
           ufav_created: new Date("2023-02-10"),
           ufav_last_updated: new Date("2023-04-05"),
           ufav_notes: "Great place for coffee!",
-          active: true,
+          sub_active: true,
           ufav_unfav: null
       },
       {
@@ -62,7 +67,7 @@ user = {
           ufav_created: new Date("2023-03-05"),
           ufav_last_updated: new Date("2023-05-15"),
           ufav_notes: "They have amazing desserts.",
-          active: false,
+          sub_active: false,
           ufav_unfav: new Date("2023-07-20")
       }
   ]
@@ -72,7 +77,10 @@ constructor(private bServe: BusinessService) {}
 
 async ngOnInit() {
   await this.getBusinesses();
-  this.userFavs = this.makeUFavs(this.businesses, this.user);
+  const { activeFavorites, inactiveFavorites } = this.makeUFavs( this.businesses, this.user);
+  this.activeFavorites = activeFavorites;
+  this.inactiveFavorites = inactiveFavorites;
+  this.Loading = false;
 }
 
 async getBusinesses() {
@@ -82,7 +90,6 @@ async getBusinesses() {
     if (fetchedBusinesses !== undefined) {
       this.businesses = fetchedBusinesses;
       // this.businessTrue = true;
-      console.log(fetchedBusinesses);
     }; 
 
   } catch (error) {
@@ -91,27 +98,33 @@ async getBusinesses() {
 }
 
 makeUFavs(businesses: Business[], user) {
-  const favoriteBusinesses = [];
+  const activeFavorites = [];
+  const inactiveFavorites = [];
 
-    // Iterate through each favorite object in the user's profile
-    for (const favorite of user.u_favs) {
-        // Find the business with matching b_id
-        const business = businesses.find(b => b.b_id === favorite.b_id);
-        // If business is found, construct the UserFavorite object
-        if (business) {
-            const favoriteBusiness = {
-                ...business,
-                ufav_created: favorite.ufav_created,
-                ufav_last_updated: favorite.ufav_last_updated,
-                ufav_notes: favorite.ufav_notes,
-                active: favorite.active,
-                ufav_unfav: favorite.ufav_unfav
-            };
-            favoriteBusinesses.push(favoriteBusiness);
-        }
-    }
+  // Iterate through each favorite object in the user's profile
+  for (const favorite of user.u_favs) {
+      // Find the business with matching b_id
+      const business = businesses.find(b => b.b_id === favorite.b_id);
+      // If business is found, construct the UserFavorite object
+      if (business) {
+          const favoriteBusiness = {
+              ...business,
+              ufav_created: favorite.ufav_created,
+              ufav_last_updated: favorite.ufav_last_updated,
+              ufav_notes: favorite.ufav_notes,
+              sub_active: favorite.sub_active,
+              ufav_unfav: favorite.ufav_unfav
+          };
+          // Push the favorite into the appropriate array based on sub_active value
+          if (favorite.sub_active) {
+              activeFavorites.push(favoriteBusiness);
+          } else {
+              inactiveFavorites.push(favoriteBusiness);
+          }
+      }
+  }
 
-    return favoriteBusinesses;
+  return { activeFavorites, inactiveFavorites };
 }
 
 

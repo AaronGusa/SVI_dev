@@ -1,41 +1,14 @@
+
+@if (Loading) {
+  <app-loading></app-loading>
+} @else {
 <h1>My Favorite Businesses</h1>
-<!-- 
-<mat-expansion-panel hideToggle>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        This is the expansion title
-      </mat-panel-title>
-      <mat-panel-description>
-        This is a summary of the content
-      </mat-panel-description>
-    </mat-expansion-panel-header>
 
-    <mat-card class="example-card">
-        <mat-card-header>
-          <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-title>Shiba Inu</mat-card-title>
-          <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-        </mat-card-header>
-        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-        <mat-card-content>
-          <p>
-            The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-            A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-            bred for hunting.
-          </p>
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-button>LIKE</button>
-          <button mat-button>SHARE</button>
-        </mat-card-actions>
-      </mat-card>
-  </mat-expansion-panel> -->
-
-  @for (b of userFavs; track $index) {
-    
+@for (b of activeFavorites; track $index) {
+  @if (b.sub_active) {
     <mat-card>
         <mat-card-header>
-            <mat-card-title>{{ b.b_name }} {{ b.b_rating }}</mat-card-title>
+            <mat-card-title>{{ b.b_name }} {{ b.b_rating }} ACTIVE</mat-card-title>
         </mat-card-header> 
         <mat-card-content>
             <mat-expansion-panel >
@@ -44,4 +17,25 @@
             </mat-expansion-panel> 
         </mat-card-content>
     </mat-card>    
+  } 
+}
+
+@if (inactiveFavorites) {
+  <h1>History</h1>
+  @for (ib of inactiveFavorites; track $index) {
+    @if (!ib.sub_active) {
+      <mat-card>
+          <mat-card-header>
+              <mat-card-title>{{ ib.b_name }} {{ ib.b_rating }} ACTIVE</mat-card-title>
+          </mat-card-header> 
+          <mat-card-content>
+              <mat-expansion-panel >
+                  <mat-expansion-panel-header>Details</mat-expansion-panel-header>
+                  <button mat-raised-button color="warn">Remove</button>
+              </mat-expansion-panel> 
+          </mat-card-content>
+      </mat-card>    
+    } 
   }
+}
+}

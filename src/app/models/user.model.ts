@@ -18,7 +18,7 @@ export class User {
         ufav_created: Date;
         ufav_last_updated: Date; 
         ufav_notes: string;
-        active: boolean; 
+        sub_active: boolean; 
         ufav_unfav: Date;
       }
     ];
@@ -43,7 +43,7 @@ export class User {
         ufav_created: Date;
         ufav_last_updated: Date; 
         ufav_notes: string;
-        active: boolean; 
+        sub_active: boolean; 
         ufav_unfav: Date;
         }
       ]
