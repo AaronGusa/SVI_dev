@@ -8,6 +8,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { BusinessService } from '../../../app-services'; 
 import { Business } from '../../../models/business.model';
 import { LoadingComponent } from '../../../features/loading/loading.component';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-du-bus-favs',
@@ -17,7 +18,8 @@ import { LoadingComponent } from '../../../features/loading/loading.component';
     MatIconModule,
     MatExpansionModule,
     MatButtonModule,
-    LoadingComponent
+    LoadingComponent,
+    DatePipe
   ],
   templateUrl: './du-bus-favs.component.html',
   styleUrl: './du-bus-favs.component.css'
