@@ -9,12 +9,19 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatStepperModule } from '@angular/material/stepper';
 import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
 
 
 @Component({
   selector: 'app-user-sign',
   standalone: true,
-  imports: [MatCheckboxModule, LoadingComponent, MatFormFieldModule, MatStepperModule, ReactiveFormsModule, MatInputModule],
+  imports: [MatCheckboxModule, 
+            LoadingComponent, 
+            MatFormFieldModule, 
+            MatStepperModule, 
+            ReactiveFormsModule, 
+            MatInputModule,
+            MatButtonModule],
   templateUrl: './user-sign.component.html',
   styleUrl: './user-sign.component.css'
 })

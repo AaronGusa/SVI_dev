@@ -10,7 +10,10 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatInputModule } from '@angular/material/input';
 import { LoadingComponent } from '../../../features/loading/loading.component';
 import { MatCardModule } from '@angular/material/card';
-import {MatExpansionModule} from '@angular/material/expansion';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import {MatButtonModule} from '@angular/material/button';
+
 
 @Component({
   selector: 'app-bus-sign',
@@ -22,10 +25,13 @@ import {MatExpansionModule} from '@angular/material/expansion';
             ReactiveFormsModule, 
             MatInputModule,
             MatCardModule,
-            MatExpansionModule],
+            MatExpansionModule,
+            MatButtonToggleModule,
+            MatButtonModule],
   templateUrl: './bus-sign.component.html',
   styleUrl: './bus-sign.component.css'
 })
+
 export class BusSignComponent {
   @Input() _foundUser: number;
   services: any[] = [];

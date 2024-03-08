@@ -86,12 +86,12 @@
                 
                 <mat-accordion>
                     @if (isLoading) {
-                        <div *ngIf="isLoading">
+                        <div>
                             <app-loading></app-loading>
                         </div>
                     }
                     @if (!isLoading) {
-                        <div *ngIf="!isLoading">
+                        <div>
 
                             <mat-expansion-panel *ngFor="let category of categories | orderBy:'cat'" >
                                 <mat-expansion-panel-header>
@@ -103,9 +103,11 @@
                                         <mat-button-toggle-group name="services" 
                                         aria-label="services" 
                                         multiple style="display: flex; flex-wrap: wrap; align-content: center; justify-content: center;">
-                                            <mat-button-toggle *ngFor="let service of category.services | orderBy:'s_name' ; let i = index" [value]="service.s_name" (click)="addService2Business(service.s_id)">
-                                                {{ service.s_name }}
-                                            </mat-button-toggle>
+                                            @for (service of category.services; track $index) {
+                                                <mat-button-toggle [value]="service.s_name" (click)="addService2Business(service.s_id)">
+                                                    {{ service.s_name }}
+                                                </mat-button-toggle>
+                                            }
                                         </mat-button-toggle-group>
                                 </mat-content>
                             </mat-expansion-panel>
