@@ -1,2 +1,23 @@
-<p>signup-user works!</p>
+@if ( !showBusinessForm || !userSubSuccess || !goBusinessSignUp) {
+    <div>
+
+        <app-user-sign
+            (goBusinessSignUp)="handleBusiness2Add($event)"
+            (showBusinessForm)="goToBusiness($event)"
+            (userSubSuccess)="handleUserSuccess($event)"
+            (clientId)="handleUserId($event)"
+        >
+    </app-user-sign>
+    </div>
+}
+@if (goBusinessSignUp && userSubSuccess && showBusinessForm && userFound) {
+    <div >
+        <button mat-raised-button (click)="happeningMan()">Go Back</button>
+    <hr>
+        <app-bus-sign
+            [_foundUser]="_foundUserID"
+        ></app-bus-sign>
+    </div>
+}
+
 <a routerLink="/login">Back to Login!</a>
