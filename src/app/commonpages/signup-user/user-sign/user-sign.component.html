@@ -3,10 +3,8 @@
     <h1>Sign Up</h1>
     <mat-vertical-stepper [linear]="false" #stepper [animationDuration]="duration">
       <mat-step-header>Username and Password</mat-step-header>
-      <mat-step > 
-        <!-- [stepControl]="username_pass_form" -->
+      <mat-step [stepControl]="username_pass_form"> 
         <form [formGroup]="username_pass_form">
-            <!-- [formGroup]="username_pass_form" -->
           <ng-template matStepLabel>Choose a Username & Password</ng-template>
           <mat-form-field>
             <mat-label>Username</mat-label>
@@ -24,7 +22,6 @@
       
     <mat-step [stepControl]="person_info_form">
     <form [formGroup]="person_info_form">
-        <!--   -->
         <hr>
         <ng-template matStepLabel>Enter your details</ng-template>
 

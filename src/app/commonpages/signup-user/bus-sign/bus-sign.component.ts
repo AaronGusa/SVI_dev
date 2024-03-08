@@ -4,10 +4,25 @@ import { ServiceService } from '../../../app-services';
 import { BusinessService } from '../../../app-services';
 import { Router } from '@angular/router';
 
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatInputModule } from '@angular/material/input';
+import { LoadingComponent } from '../../../features/loading/loading.component';
+import { MatCardModule } from '@angular/material/card';
+import {MatExpansionModule} from '@angular/material/expansion';
+
 @Component({
   selector: 'app-bus-sign',
   standalone: true,
-  imports: [],
+  imports: [MatCheckboxModule, 
+            LoadingComponent, 
+            MatFormFieldModule, 
+            MatStepperModule, 
+            ReactiveFormsModule, 
+            MatInputModule,
+            MatCardModule,
+            MatExpansionModule],
   templateUrl: './bus-sign.component.html',
   styleUrl: './bus-sign.component.css'
 })

@@ -1,1 +1,126 @@
-<p>bus-sign works!</p>
+<mat-card>
+    
+    <mat-vertical-stepper [linear]="false" #stepper [animationDuration]='duration'>
+        <mat-step-header>Business Sign Up</mat-step-header>
+        <mat-step [stepControl]="busForm">
+            <form [formGroup]="busForm">    
+                <ng-template matStepLabel>Business Contact Information</ng-template>
+                <mat-form-field>
+                    <mat-label>Name</mat-label>
+                    <input matInput 
+                            formControlName="b_name"
+                            required 
+                            placeholder="Business Name"
+                            name="businessName">
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Email</mat-label>
+                    <input matInput 
+                            formControlName="b_email"
+                            type="email" 
+                            required 
+                            placeholder="Business Email"
+                            name="businessEmail">
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Phone</mat-label>
+                    <input matInput 
+                        formControlName="b_phone"
+                        required 
+                        type="tel"
+                        placeholder="Business Phone"
+                        name="businessPhone">
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Website</mat-label>
+                    <input matInput 
+                        type="url"
+                        formControlName="b_website" 
+                        placeholder="Business Website" 
+                        name="businessWebsite">
+                </mat-form-field>
+            </form>
+        </mat-step>  
+        <mat-step [stepControl]="busForm">
+            <form [formGroup]="busForm"> 
+                <ng-template matStepLabel>Business Address Information</ng-template>
+
+                <mat-form-field>
+                    <mat-label>Street Address</mat-label>
+                    <input matInput 
+                            formControlName="b_street"
+                            required 
+                            name="businessStreetAddress">
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Town/City</mat-label>
+                    <input matInput 
+                            formControlName="b_city"
+                            required 
+                            name="businessCity">
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>State</mat-label>
+                    <input matInput 
+                            formControlName="b_state"
+                            required 
+                            name="businessState">
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Zipcode</mat-label>
+                    <input matInput 
+                            required 
+                            formControlName="b_zip"
+                            placeholder="Business Postal Code" 
+                            name="businessPostalCode">
+                </mat-form-field>
+            </form>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Business Categories and Services</ng-template>
+            <div>
+                
+                <br>
+                <label>Select Categories and Services you provide:</label>
+                <br>
+                
+                <mat-accordion>
+                    @if (isLoading) {
+                        <div *ngIf="isLoading">
+                            <app-loading></app-loading>
+                        </div>
+                    }
+                    @if (!isLoading) {
+                        <div *ngIf="!isLoading">
+
+                            <mat-expansion-panel *ngFor="let category of categories | orderBy:'cat'" >
+                                <mat-expansion-panel-header>
+                                    {{ category.cat }}
+                                </mat-expansion-panel-header>
+                                
+                                <mat-content >
+                                    
+                                        <mat-button-toggle-group name="services" 
+                                        aria-label="services" 
+                                        multiple style="display: flex; flex-wrap: wrap; align-content: center; justify-content: center;">
+                                            <mat-button-toggle *ngFor="let service of category.services | orderBy:'s_name' ; let i = index" [value]="service.s_name" (click)="addService2Business(service.s_id)">
+                                                {{ service.s_name }}
+                                            </mat-button-toggle>
+                                        </mat-button-toggle-group>
+                                </mat-content>
+                            </mat-expansion-panel>
+                        </div>
+                    }
+                </mat-accordion>
+            </div>
+
+            <br>
+        
+            <mat-card-footer>
+                <button mat-raised-button color="primary" (click)="CompleteBusSign()" #registerButton [disabled]="!busForm.valid">Register My Business</button>
+            </mat-card-footer>
+            
+        </mat-step>
+
+    </mat-vertical-stepper>       
+</mat-card>
