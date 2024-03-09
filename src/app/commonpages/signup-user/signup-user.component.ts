@@ -3,11 +3,13 @@ import { RouterLink } from '@angular/router';
 import { UserService } from '../../app-services';
 import { BusSignComponent } from './bus-sign/bus-sign.component';
 import { UserSignComponent } from './user-sign/user-sign.component';
+import {MatButtonModule} from '@angular/material/button';
+
 
 @Component({
   selector: 'app-signup-user',
   standalone: true,
-  imports: [RouterLink, BusSignComponent, UserSignComponent],
+  imports: [RouterLink, BusSignComponent, UserSignComponent, MatButtonModule],
   templateUrl: './signup-user.component.html',
   styleUrl: './signup-user.component.css'
 })
