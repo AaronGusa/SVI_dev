@@ -8,8 +8,22 @@
           <ng-template matStepLabel>Choose a Username & Password</ng-template>
           <mat-form-field>
             <mat-label>Username</mat-label>
-            <input matInput formControlName="u_username" required name="username" value="userModel.u_username">
+            <input matInput formControlName="u_username" required name="username" value="userModel.u_username"
+                   (blur)="checkUsernameAvailability()" 
+            >
+            @if (usernameSearch) {
+              <div >
+                <mat-progress-bar mode="buffer"></mat-progress-bar>
+              </div>  
+            } 
+            
+            @if (usernameValid) {
+              <h1>✅</h1>
+            } <!---->
           </mat-form-field>
+          @if (usernameInvalid) {
+            <p>Username taken!</p>
+          }  
           <mat-form-field>
             <mat-label>Password</mat-label>
             <input matInput formControlName="u_pass" type="password" required name="u_pass" value="userModel.u_pass">
@@ -46,12 +60,29 @@
       
       <div>
         <button mat-raised-button matStepperPrevious>Back</button>
-        <button mat-raised-button matStepperNext>Next</button>
+        <!-- <button mat-raised-button matStepperNext>Next</button> -->
+      </div>
+      <br>
+      <br>
+      <div>  
+        <mat-checkbox default=false (change)="showBusinessSignUp($event.checked)" >  
+          Do you own a business you would like to register?
+        </mat-checkbox>
+      </div>
+      <br>
+      <div>
+        <button  mat-raised-button 
+                color="primary" 
+                (click)="CompleteUserSign()" 
+                #registerButton 
+                [disabled]="!username_pass_form.valid && !person_info_form"
+                >{{business2Add ? 'Go to Business Signup' : 'Signup' }}
+        </button>
       </div>
     </mat-step>
-    <mat-step [stepControl]="address_form">
+    <!-- <mat-step [stepControl]="address_form">
       <form [formGroup]="address_form">
-        <!-- [formGroup]="address_form" -->
+         [formGroup]="address_form"
         <hr>
         <ng-template matStepLabel>Share your address</ng-template>
 
@@ -79,15 +110,15 @@
       <div>
         <button mat-raised-button matStepperPrevious>Back</button>
       </div>
-<br>
-      <!-- Check box to reveal the business sign up -->
+      <br>
+       Check box to reveal the business sign up 
 
       <mat-checkbox default=false (change)="showBusinessSignUp($event.checked)" >  
         Do you own a business you would like to register?
       </mat-checkbox>
-<br>    
-<br>
-      <div>  
+      <br>    
+      <br>
+       <div>  
         <button  mat-raised-button 
                 color="primary" 
                 (click)="CompleteUserSign()" 
@@ -97,7 +128,7 @@
         </button>
       </div>
       </form>
-    </mat-step>
+    </mat-step> -->
   </mat-vertical-stepper>
 </div>
 }

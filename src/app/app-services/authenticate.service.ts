@@ -46,6 +46,7 @@ export class AuthService {
             this.loggedIn = false;
             this.tempPackage = [{auth: "AUTH FAILED", u_priv: 10, loggedIn: this.loggedIn}];
             console.log('MAJOR ERROR BRO!')
+            console.log(this.tempPackage)
         }
     }
 

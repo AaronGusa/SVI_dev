@@ -9,10 +9,13 @@ import { User } from '../models/user.model';
 })
 export class UserService {
   private userUrl = 'https://stellavibe.onrender.com/users';
+  // private userUrl = 'localhost:3000/users';
+
 
   constructor(private http: HttpClient) { }
   
   fetchUsers(): Observable<User[]> {
+    console.log('Here ya go, entered fetchUsers()')
       return this.http.get<User[]>(this.userUrl);
     }
 
@@ -42,7 +45,8 @@ export class UserService {
 
   async postUser(userSubmitted: any) {
     console.log(userSubmitted);
-    const posted = this.http.post(this.userUrl, userSubmitted).toPromise();
+    const posted = await this.http.post(this.userUrl, userSubmitted).toPromise();
+    console.log(posted);
     return posted;
   }
 
@@ -78,6 +82,31 @@ export class UserService {
     } catch (error) {
       console.error('Error Verifying User: ', error);
       throw error;
+    }
+  }
+
+  //SignUp User Verification
+
+  async verifySignUpUsername(username: string) {
+    try {
+    // Make a GET request to check if the username is available
+    const response = this.http.get(`${this.userUrl}/uname/${username}`);
+    console.log(response);
+    if (response) {
+      
+        // Handle the response here
+        // console.log(response.length);
+        //console.log(response);
+        console.log(response);
+        return response;
+      } else {
+        const Error = JSON.stringify({error:'Error Verifying Username: '+ username});
+        return Error;
+      }
+    } catch (error) {
+        // Handle errors
+        console.error('Error checking username availability:', error);
+        throw error;
     }
   }
 }

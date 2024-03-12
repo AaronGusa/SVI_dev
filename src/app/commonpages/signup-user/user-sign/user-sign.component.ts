@@ -10,7 +10,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatStepperModule } from '@angular/material/stepper';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
-
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 @Component({
   selector: 'app-user-sign',
@@ -21,7 +21,9 @@ import {MatButtonModule} from '@angular/material/button';
             MatStepperModule, 
             ReactiveFormsModule, 
             MatInputModule,
-            MatButtonModule],
+            MatButtonModule,
+            MatProgressBarModule
+          ],
   templateUrl: './user-sign.component.html',
   styleUrl: './user-sign.component.css'
 })
@@ -38,6 +40,9 @@ export class UserSignComponent implements OnInit {
   userSubmitting: boolean = false;
   userSuccess: boolean = false;
   goToBusiness: boolean = false;
+  usernameSearch: boolean = false;
+  usernameInvalid: boolean = false;
+  usernameValid: boolean = false;
   // username_pass_form: FormGroup = this._formBuilder.group({usePassCtrl: ['']});
   // person_info_form: FormGroup = this._formBuilder.group({personInfoCtrl: ['']});
   // address_form: FormGroup = this._formBuilder.group({addressCtrl: ['']});
@@ -114,7 +119,7 @@ export class UserSignComponent implements OnInit {
 
   goToBusinessSignUp() {
     // When called, this function will navigate the user to the routerLink="/sign-up/business" page
-
+    this.business2Add = !this.business2Add;
 }
 
   CompleteUserSign() {
@@ -130,12 +135,17 @@ export class UserSignComponent implements OnInit {
       let u_phone = this.person_info_form.get('u_phone').value; 
       let u_email = this.person_info_form.get('u_email').value; 
     
+      let u_street = null;
+      let u_city = null;
+      let u_state = null;
+      let u_country = null;
+      let u_zip = null;
     
-      let u_street = this.address_form.get('u_street').value;
-      let u_city = this.address_form.get('u_city').value;
-      let u_state = this.address_form.get('u_state').value;
-      let u_country = this.address_form.get('u_country').value;
-      let u_zip = this.address_form.get('u_zip').value;
+      // let u_street = this.address_form.get('u_street').value;
+      // let u_city = this.address_form.get('u_city').value;
+      // let u_state = this.address_form.get('u_state').value;
+      // let u_country = this.address_form.get('u_country').value;
+      // let u_zip = this.address_form.get('u_zip').value;
     
       this.userForm = this._formBuilder.group({
         u_username: u_username,
@@ -180,7 +190,7 @@ export class UserSignComponent implements OnInit {
           //Conditions
           this.userSuccess = true;
           this.userSubmitting = false;
-          this.goToBusiness = true;
+          this.goToBusiness = this.goToBusiness;
           this._userID = response.insertedId;
           //console.log('The _userID is ', this._userID)
           
@@ -207,5 +217,41 @@ export class UserSignComponent implements OnInit {
     }
 
 
+  }
+
+  async checkUsernameAvailability() {
+    try {
+      const username = this.username_pass_form.get('u_username').value;
+       console.log(username)
+      if (username===null) {
+        this.usernameSearch = false;
+      } else {
+        this.usernameSearch = true;
+      }
+
+    
+      const response: any = await this.userService.verifySignUpUsername(username);
+      console.log(response)
+      if (response.length === 0) {
+        console.log(response);
+        console.log('Response length equals zero entered');
+        this.usernameSearch = false;
+        this.usernameValid = true;
+        this.usernameInvalid = false;
+        this.username_pass_form.patchValue({
+          u_username: username
+        });  
+      } else {
+        console.log('Response length does not equal zero entered');
+        console.log(response);
+
+        // this.usernameSearch = false;
+        this.usernameInvalid = true;
+        this.usernameValid = false;
+      }
+    } catch (error) {
+      // this.username_pass_form.get('u_username').reset();
+      throw error;
+    }
   }
 }
