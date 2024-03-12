@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroupDirective, NgForm, ReactiveFormsModule, FormsModule, FormControl, FormGroup, Validators  } from '@angular/forms';
 import { ServiceService } from '../../../app-services';
 import { BusinessService } from '../../../app-services';
 import { UserService } from '../../../app-services';
@@ -11,6 +11,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-user-sign',
@@ -20,9 +21,11 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
             MatFormFieldModule, 
             MatStepperModule, 
             ReactiveFormsModule, 
+            FormsModule,
             MatInputModule,
             MatButtonModule,
-            MatProgressBarModule
+            MatProgressBarModule,
+            MatIcon
           ],
   templateUrl: './user-sign.component.html',
   styleUrl: './user-sign.component.css'
@@ -43,6 +46,7 @@ export class UserSignComponent implements OnInit {
   usernameSearch: boolean = false;
   usernameInvalid: boolean = false;
   usernameValid: boolean = false;
+  userHasText: boolean = false;
   // username_pass_form: FormGroup = this._formBuilder.group({usePassCtrl: ['']});
   // person_info_form: FormGroup = this._formBuilder.group({personInfoCtrl: ['']});
   // address_form: FormGroup = this._formBuilder.group({addressCtrl: ['']});
@@ -221,17 +225,19 @@ export class UserSignComponent implements OnInit {
 
   async checkUsernameAvailability() {
     try {
+      this.usernameSearch = false;
+      this.usernameInvalid= false;
+      this.usernameValid = false;
       const username = this.username_pass_form.get('u_username').value;
-       console.log(username)
-      if (username===null) {
+      if (username===null || username.length === 0) {
         this.usernameSearch = false;
+        return;
       } else {
         this.usernameSearch = true;
       }
 
     
       const response: any = await this.userService.verifySignUpUsername(username);
-      console.log(response)
       if (response.length === 0) {
         console.log(response);
         console.log('Response length equals zero entered');
@@ -245,7 +251,7 @@ export class UserSignComponent implements OnInit {
         console.log('Response length does not equal zero entered');
         console.log(response);
 
-        // this.usernameSearch = false;
+        this.usernameSearch = false;
         this.usernameInvalid = true;
         this.usernameValid = false;
       }
@@ -253,5 +259,22 @@ export class UserSignComponent implements OnInit {
       // this.username_pass_form.get('u_username').reset();
       throw error;
     }
+  }
+
+  clearUsernameAttempt() {
+    this.username_pass_form.patchValue({
+      u_username: '' // Set the value of u_username to an empty string
+    });
+  
+    // Manually blur the input field
+    const inputElement = document.getElementById('u_username');
+    if (inputElement) {
+      inputElement.blur();
+    }
+  }
+
+  hasText(): boolean {
+    const usernameValue = this.username_pass_form.get('u_username').value;
+    return usernameValue && usernameValue.trim().length > 0;
   }
 }

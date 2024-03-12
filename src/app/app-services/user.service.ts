@@ -90,14 +90,14 @@ export class UserService {
   async verifySignUpUsername(username: string) {
     try {
     // Make a GET request to check if the username is available
-    const response = this.http.get(`${this.userUrl}/uname/${username}`);
-    console.log(response);
+    const response = this.http.get(`${this.userUrl}/uname/${username}`).toPromise();
+    //console.log(response);
     if (response) {
-      
+
         // Handle the response here
         // console.log(response.length);
         //console.log(response);
-        console.log(response);
+        //console.log(response);
         return response;
       } else {
         const Error = JSON.stringify({error:'Error Verifying Username: '+ username});

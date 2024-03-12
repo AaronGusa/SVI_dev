@@ -16,18 +16,24 @@
                 <mat-progress-bar mode="buffer"></mat-progress-bar>
               </div>  
             } 
-            
-            @if (usernameValid) {
-              <h1>✅</h1>
-            } <!---->
+            @if (hasText()) {
+              <button matSuffix mat-icon-button aria-label="Clear" (click)="clearUsernameAttempt()">
+                <mat-icon>close</mat-icon>
+              </button>
+            }
+            <!---->
           </mat-form-field>
-          @if (usernameInvalid) {
-            <p>Username taken!</p>
-          }  
+          
           <mat-form-field>
             <mat-label>Password</mat-label>
             <input matInput formControlName="u_pass" type="password" required name="u_pass" value="userModel.u_pass">
           </mat-form-field>
+          @if (usernameInvalid) {
+            <p>🚫Username taken!🚫</p>
+          }  
+          @if (usernameValid) {
+              ✅
+            } 
         </form>
         <div>
           <button mat-raised-button matStepperNext>Next</button>
@@ -75,7 +81,7 @@
                 color="primary" 
                 (click)="CompleteUserSign()" 
                 #registerButton 
-                [disabled]="!username_pass_form.valid && !person_info_form"
+                [disabled]="!username_pass_form.valid && !person_info_form.valid && !usernameValid"
                 >{{business2Add ? 'Go to Business Signup' : 'Signup' }}
         </button>
       </div>

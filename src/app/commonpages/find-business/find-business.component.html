@@ -52,33 +52,33 @@
     @for (b of businessListFiltered; track $index) {
         <div>
             <mat-accordion>
-            <mat-expansion-panel style="display: flex; flex-direction:column; justify-content: space-between;">
-                <mat-expansion-panel-header >
-                <h1>{{ b.b_name }} - {{b.b_id}}</h1>
-                <p>Rating: {{ b.b_rating }}</p>
-                </mat-expansion-panel-header>
-                <mat-panel-description>
-                
-                </mat-panel-description>
-                <div>
-                <div>
-                    <p>{{ b.b_phone }}</p>
-                    <p>{{ b.b_email }}</p>
-                    <p>{{ b.b_website }}</p>
+                <mat-expansion-panel style="display: flex; flex-direction:column; justify-content: space-between;">
+                    <mat-expansion-panel-header >
+                    <h1>{{ b.b_name }} - {{b.b_id}}</h1>
+                    <p>Rating: {{ b.b_rating }}</p>
+                    </mat-expansion-panel-header>
+                    <mat-panel-description>
+                    
+                    </mat-panel-description>
                     <div>
-                        {{ b.b_services }}
-                    </div>
                     <div>
-                    <h3>Address</h3>
-                    <p>{{ b.b_street }}</p>
-                    <p>{{ b.b_city }}</p>
-                    <p>{{ b.b_state }}</p>
-                    <p>{{ b.b_zip }}</p>
+                        <p>{{ b.b_phone }}</p>
+                        <p>{{ b.b_email }}</p>
+                        <p>{{ b.b_website }}</p>
+                        <div>
+                            {{ b.b_services }}
+                        </div>
+                        <div>
+                        <h3>Address</h3>
+                        <p>{{ b.b_street }}</p>
+                        <p>{{ b.b_city }}</p>
+                        <p>{{ b.b_state }}</p>
+                        <p>{{ b.b_zip }}</p>
+                        </div>
+                        <button mat-raised ><a routerLink="/business-profile/">Go to Business Page</a></button>
                     </div>
-                    <button mat-raised ><a routerLink="/business-profile/">Go to Business Page</a></button>
-                </div>
-                </div>
-            </mat-expansion-panel>
+                    </div>
+                </mat-expansion-panel>
             </mat-accordion>
             <br>
             <br>
