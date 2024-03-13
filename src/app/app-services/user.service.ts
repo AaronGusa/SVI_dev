@@ -46,7 +46,7 @@ export class UserService {
   async fetchUsername(username: string) {
     try {
       // Make a GET request to retrieve user profile via username
-      const response = await this.http.get(`${this.userUrl}/uname/${username}`).toPromise();
+      const response = await this.http.get(`${this.userUrl}/uname/${username}`);
       //console.log(response);
       if (response) {
   

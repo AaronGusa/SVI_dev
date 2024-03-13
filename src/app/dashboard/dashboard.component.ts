@@ -43,6 +43,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
   buslvl = this.Buslvl;
   admin = this.Admin;
   u_name: string = "";
+  prof: any;
+  data: any;
+  userInfo: any;
 
   constructor( private r: ActivatedRoute,
                private userService: UserService,
@@ -53,13 +56,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
     // Grab username from params
     this.r.params.subscribe(params => {
       this.u_name = params['clientUsername']
-      //this.loadUserProfile();
-      
     });
-    this.Profile = this.userProfileService.loadUserProfile(this.u_name);
-      console.log("Dashboard Investigation")
-      console.log(typeof this.Profile)
-      console.log(this.Profile)
+    this.showUserData();
+    // this.Profile = this.userProfileService.getUsername(this.u_name);
+    //   console.log("Dashboard Investigation")
+    //   console.log(typeof this.Profile)
+    //   console.log(this.Profile)
     // this.userProfileSubscription = this.userProfileService.loadUserProfile(this.u_name).subscribe(userProfile => {
     //   // Handle user profile data
     // });
@@ -75,6 +77,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
     // Fetch client profile
     this.Profile = await this.userService.fetchUsername(this.u_name);
     console.log('Profile: ' + this.Profile)
+  }
+
+  async showUserData() {
+    let response = await this.userProfileService.getUsername('testeroni')
+    if (response) {
+    console.log('Response: ' + response);
+    } else {
+      console.log('No response for showUserData')
+    }
   }
 
 }
