@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-
+import { UserProfileService } from '../../../app-services/userProfile.service';
 
 @Component({
   selector: 'app-du-profile',
@@ -14,12 +14,13 @@ import { MatButtonModule } from '@angular/material/button';
             MatFormFieldModule,
             MatInputModule,
             MatCardModule,
-            MatButtonModule
+            MatButtonModule,
             ],
   templateUrl: './du-profile.component.html',
   styleUrl: './du-profile.component.css'
 })
 export class DuProfileComponent implements OnInit {
+  @Input() Profile;
   updateCheck = false;
   
   profileForm: FormGroup<any>;
@@ -29,12 +30,20 @@ export class DuProfileComponent implements OnInit {
 
   user = [{"_id":"6561ac9c66bff91aa86f2443","u_id":{"$numberInt":"1135"},"u_phone":"5555555555","u_email":"ab@lincoln.com","u_street":"555 Fifth Ave","u_city":"Five Town","u_state":"Utah","u_country":"United States","u_zip":"84084","u_username":"Tester","u_fname":"Abraham","u_lname":"Lincoln","u_priv":"1","u_pass":"$2b$10$iKZKrn4opjVfRF7TvnFTiOQxf9ILArSrSyhUPpZ8e3o9/rrxDBDP."}]
 
-  constructor(private formBuilder: FormBuilder) {};
+  constructor(private formBuilder: FormBuilder,
+              private uProfService: UserProfileService         
+    ) {};
 
   ngOnInit(): void {
     this.initializeForm();
     this.populateFormData();
     // this.subscribeToFormChanges();
+    console.log("duProfile: " + this.Profile);
+    // this.r.params.subscribe(params => {
+    //   this.u_name = params['clientUsername']
+    //   this.loadUserProfile();
+    // });
+
   }
 
   updateSwitch() {

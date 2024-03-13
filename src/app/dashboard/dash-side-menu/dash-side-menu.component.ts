@@ -13,5 +13,6 @@ export class DashSideMenuComponent {
   @Input() buslvl: number;
   @Input() admin: number;
   @Input() u_name: string;
+  @Input() profile: string;
 
 }

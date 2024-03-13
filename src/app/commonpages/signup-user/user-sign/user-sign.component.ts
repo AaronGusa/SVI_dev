@@ -47,6 +47,7 @@ export class UserSignComponent implements OnInit {
   usernameInvalid: boolean = false;
   usernameValid: boolean = false;
   userHasText: boolean = false;
+
   // username_pass_form: FormGroup = this._formBuilder.group({usePassCtrl: ['']});
   // person_info_form: FormGroup = this._formBuilder.group({personInfoCtrl: ['']});
   // address_form: FormGroup = this._formBuilder.group({addressCtrl: ['']});
@@ -54,6 +55,8 @@ export class UserSignComponent implements OnInit {
     u_username: [null],
     u_pass: [null]
   });
+
+  
   
   person_info_form: FormGroup = this._formBuilder.group({
     u_fname: new FormControl(null, Validators.required),
@@ -89,36 +92,19 @@ export class UserSignComponent implements OnInit {
   
 
   constructor(private userService: UserService,
-              private _formBuilder: FormBuilder) 
+              private _formBuilder: FormBuilder,
+              private r: Router) 
   { }
 
   ngOnInit() {
     this.userForm = this._formBuilder.group({});
 
-    // this.username_pass_form = this._formBuilder.group({
-    //   u_username: [null],
-    //   u_pass: [null]
-    // });
-    // this.person_info_form = this._formBuilder.group({
-    //   u_fname: new FormControl(null, Validators.required),
-    //   u_lname: new FormControl(null, Validators.required),
-    //   u_phone: new FormControl(null, Validators.required),
-    //   u_email: new FormControl(null, [Validators.required, Validators.email]),
-    // });
-    // this.address_form = this._formBuilder.group({
-    //   u_street: new FormControl(null, Validators.required),
-    //   u_city: new FormControl(null, Validators.required),
-    //   u_state: new FormControl(null, Validators.required),
-    //   u_country: new FormControl(null, Validators.required),
-    //   u_zip: new FormControl(null, Validators.required),
-    // });
     console.log(this.username_pass_form)
   }
   
   showBusinessSignUp(value) {
     this.business2Add = value;
     this.goBusinessSignUp.emit(this.business2Add);
-    //console.log(this.goBusinessSignUp)
   };
 
   goToBusinessSignUp() {
@@ -145,12 +131,7 @@ export class UserSignComponent implements OnInit {
       let u_country = null;
       let u_zip = null;
     
-      // let u_street = this.address_form.get('u_street').value;
-      // let u_city = this.address_form.get('u_city').value;
-      // let u_state = this.address_form.get('u_state').value;
-      // let u_country = this.address_form.get('u_country').value;
-      // let u_zip = this.address_form.get('u_zip').value;
-    
+     
       this.userForm = this._formBuilder.group({
         u_username: u_username,
         u_pass: u_pass,
@@ -165,7 +146,6 @@ export class UserSignComponent implements OnInit {
         u_zip: u_zip
       });
 
-    //console.log(this.userForm)
 
     this.processUserSignUp();
     
@@ -179,8 +159,7 @@ export class UserSignComponent implements OnInit {
     try {
       // Get the user data from this.userForm
       const userData = this.userForm.value;
-      //console.log("User Password:")
-      //console.log(this.userForm.value);
+   
   
       // Call the postUsers function to send the user data to the backend
       const response: any = await this.userService.postUser(userData);
@@ -190,23 +169,24 @@ export class UserSignComponent implements OnInit {
         
         
         if (response.acknowledged === true) {
-          //console.log('User Success:', response);
           //Conditions
           this.userSuccess = true;
           this.userSubmitting = false;
           this.goToBusiness = this.goToBusiness;
           this._userID = response.insertedId;
-          //console.log('The _userID is ', this._userID)
           
           //Emitters
           this.userSubSuccess.emit(this.userSuccess);
           this.showBusinessForm.emit(this.goToBusiness);
           this.clientId.emit(this._userID);
-          //console.log(
+          console.log(
             //'Emitted: userSubSuccess: ', this.userSuccess,
            // 'Emitted: showBusinessForm: ', this.goToBusiness,
-           // 'Emitted: clientId: ', this._userID
-         // )
+           'Emitted: clientId: ', this._userID
+         )
+            const username = this.username_pass_form.get('u_username').value.toLowerCase();
+
+            this.r.navigate([`/dashboard/${username}`]);
          
         } else {
           console.log('User Failed:', response);
@@ -228,7 +208,7 @@ export class UserSignComponent implements OnInit {
       this.usernameSearch = false;
       this.usernameInvalid= false;
       this.usernameValid = false;
-      const username = this.username_pass_form.get('u_username').value;
+      const username = this.username_pass_form.get('u_username').value.toLowerCase();
       if (username===null || username.length === 0) {
         this.usernameSearch = false;
         return;

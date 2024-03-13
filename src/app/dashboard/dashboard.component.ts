@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, Output, OnDestroy } from '@angular/core';
 import { DashUserComponent } from './dash-user/dash-user.component';
 import { DashBusComponent } from './dash-bus/dash-bus.component';
 import { DashAdminComponent } from './dash-admin/dash-admin.component';
@@ -7,7 +7,12 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import { RouterModule, RouterOutlet } from '@angular/router';
+import {ActivatedRoute, RouterModule, RouterOutlet } from '@angular/router';
+import { UserService } from '../app-services';
+import { UserProfileService } from '../app-services/userProfile.service';
+import { User } from '../models/user.model';
+import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -20,19 +25,56 @@ import { RouterModule, RouterOutlet } from '@angular/router';
             DashUserComponent, 
             DashBusComponent,
             DashAdminComponent,
-            RouterOutlet
+            RouterOutlet,
           ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
-export class DashboardComponent {
-   u_priv = 1;
-   usrlvl = 3;
-   buslvl = 2;
-   admin  = 1;
-   u_name = "Hey User";
+export class DashboardComponent implements OnInit, OnDestroy {
+  @Output() UserProf: User[] = [];  
+  @Output() Profile: any = "";
+  userProfileSubscription: Subscription;
 
-  
+  u_priv: number = 10;
+  private Usrlvl = 3;
+  private Buslvl = 2;
+  private Admin  = 1;
+  usrlvl = this.Usrlvl;
+  buslvl = this.Buslvl;
+  admin = this.Admin;
+  u_name: string = "";
 
+  constructor( private r: ActivatedRoute,
+               private userService: UserService,
+               private userProfileService: UserProfileService 
+    ) {}
+
+  async ngOnInit() {
+    // Grab username from params
+    this.r.params.subscribe(params => {
+      this.u_name = params['clientUsername']
+      //this.loadUserProfile();
+      
+    });
+    this.Profile = this.userProfileService.loadUserProfile(this.u_name);
+      console.log("Dashboard Investigation")
+      console.log(typeof this.Profile)
+      console.log(this.Profile)
+    // this.userProfileSubscription = this.userProfileService.loadUserProfile(this.u_name).subscribe(userProfile => {
+    //   // Handle user profile data
+    // });
+  }
+
+  ngOnDestroy(): void {
+    if (this.userProfileSubscription) {
+      this.userProfileSubscription.unsubscribe();
+    }
+  }
+
+  async loadUserProfile() {
+    // Fetch client profile
+    this.Profile = await this.userService.fetchUsername(this.u_name);
+    console.log('Profile: ' + this.Profile)
+  }
 
 }

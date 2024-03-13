@@ -15,7 +15,7 @@ export class UserService {
   constructor(private http: HttpClient) { }
   
   fetchUsers(): Observable<User[]> {
-    console.log('Here ya go, entered fetchUsers()')
+ //   console.log('Here ya go, entered fetchUsers()')
       return this.http.get<User[]>(this.userUrl);
     }
 
@@ -42,6 +42,31 @@ export class UserService {
       return error;
     }
   }
+
+  async fetchUsername(username: string) {
+    try {
+      // Make a GET request to retrieve user profile via username
+      const response = await this.http.get(`${this.userUrl}/uname/${username}`).toPromise();
+      //console.log(response);
+      if (response) {
+  
+          // Handle the response here
+          let responseJSON = JSON.stringify(response)
+          // console.log(response.length);
+          //console.log(response);
+          //console.log(response);
+          return responseJSON;
+        } else {
+          const Error = JSON.stringify({error:'Error Verifying Username: '+ username});
+          return Error;
+        }
+      } catch (error) {
+          // Handle errors
+          console.error('Error checking username availability:', error);
+          throw error;
+      }
+    }
+  
 
   async postUser(userSubmitted: any) {
     console.log(userSubmitted);

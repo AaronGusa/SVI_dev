@@ -35,10 +35,10 @@ export const routes: Routes = [
     {path: 'signup', title: "Sign Up", component: SignupUserComponent},
     {path: 'find-business', title: "Business Search", component: FindBusinessComponent},
     {path: 'business-profile/:b_id', title: "Profile", component: BusinessProfileComponent},
-    {path: 'dashboard', title: "Dashboard", component: DashboardComponent, children: [
+    {path: 'dashboard/:clientUser', title: "Dashboard", component: DashboardComponent, children: [
         // Paths for dash views
-        {path: '', redirectTo: 'user/profile', pathMatch: 'full'},
-        {path: 'user', component: DashUserComponent, children: [    
+        {path: '', redirectTo: 'profile', pathMatch: 'full'},
+        {path: '', component: DashUserComponent, children: [    
             {path: 'profile', component: DuProfileComponent},
             {path: 'appointments', component: DuAppointComponent},
             {path: 'reviews', component: DuReviewsComponent},
