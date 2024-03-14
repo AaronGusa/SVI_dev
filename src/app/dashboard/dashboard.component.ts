@@ -55,6 +55,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   async ngOnInit() {
     // Grab username from params
     this.r.params.subscribe(params => {
+      console.log("r params " + params['clientUsername']);
       this.u_name = params['clientUsername']
     });
     this.showUserData();

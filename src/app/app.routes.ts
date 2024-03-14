@@ -35,7 +35,7 @@ export const routes: Routes = [
     {path: 'signup', title: "Sign Up", component: SignupUserComponent},
     {path: 'find-business', title: "Business Search", component: FindBusinessComponent},
     {path: 'business-profile/:b_id', title: "Profile", component: BusinessProfileComponent},
-    {path: 'dashboard/:clientUser', title: "Dashboard", component: DashboardComponent, children: [
+    {path: 'dashboard/:clientUsername', title: "Dashboard", component: DashboardComponent, children: [
         // Paths for dash views
         {path: '', redirectTo: 'profile', pathMatch: 'full'},
         {path: '', component: DashUserComponent, children: [    

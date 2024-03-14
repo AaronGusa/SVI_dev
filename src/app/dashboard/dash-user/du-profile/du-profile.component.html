@@ -1,12 +1,13 @@
  <div class="DashCurrentContainer">
     
-@if (!updateCheck) {
+@if (!isLoading) {
+  @if (!updateCheck) {
     <mat-card class="DashCurrentCard">
         <mat-card-header class="DashCurrentHeader">
             <mat-card-title class="DashCurrentTitle">Profile Information  </mat-card-title>
             <mat-card-subtitle class="DashCurrentSubtitle">Current</mat-card-subtitle>
             
-            <label class="DashCurrentPriv">{{user[0].u_priv}}</label>
+            <label class="DashCurrentPriv">{{user.u_priv}}</label>
         </mat-card-header>
         <mat-card-content id="DashCurrentContent">
             <div class="DashCurrentImageCont">
@@ -14,19 +15,24 @@
             </div>
             <div class="DashCurrentUserInfo">
                 <h2>User Information</h2>
-                <p class="DashCurrentName">Name:    {{user[0].u_fname}} {{user[0].u_lname}}</p>
-                <p class="DashCurrentName">Email:    {{user[0].u_email}}</p>
-                <p class="DashCurrentName">Username:    {{user[0].u_username}}</p>
+                <p class="DashCurrentName">Name:    {{user.u_fname}} {{user.u_lname}}</p>
+                <p class="DashCurrentName">Email:    {{user.u_email}}</p>
+                <p class="DashCurrentName">Username:    {{user.u_username}}</p>
             </div>
             <hr>    
             <div class="DashCurrentUserAddress">
+              @if (user.u_city === null ) {
+                <H2>Consider completing your profile 
+                  with Update
+                </H2>
+              } @else {
                 <h2>Address</h2>
-                <p class="DashCurrentAddress">{{user[0].u_street}}</p>
-                <p class="DashCurrentAddress"> {{user[0].u_city}}, {{user[0].u_state}}</p>
-                <p class="DashCurrentAddress"> {{user[0].u_zip}}</p>
-
+                <p class="DashCurrentAddress">{{user.u_street}}</p>
+                <p class="DashCurrentAddress"> {{user.u_city}}, {{user.u_state}}</p>
+                <p class="DashCurrentAddress"> {{user.u_zip}}</p>
+              } 
             </div>
-
+            
         </mat-card-content>
         <mat-card-footer>
             <button mat-raised-button (click)="updateSwitch()">Update</button>
@@ -37,7 +43,12 @@
         <form class="Du_Prof_Form" [formGroup]="profileForm">
             <mat-form-field>
                 <label for="first-name">First Name: </label>
-                <input matInput id="first-name" name="first-name" type="text" formControlName="firstName">
+                <input matInput id="first-name" 
+                       name="first-name" 
+                       type="text" 
+                       formControlName="firstName"
+                       value="{{user.f_name}}"
+                       >
               </mat-form-field>
               
               <mat-form-field>
@@ -52,7 +63,7 @@
               
               <mat-form-field>
                 <label for="u-username">Username: </label>
-                <input matInput id="u-username" name="u-username" type="text" formControlName="u_username">
+                <input matInput id="u-username" name="u-username" type="text" formControlName="u_username" readonly>
               </mat-form-field>
               
               <mat-form-field>
@@ -81,7 +92,10 @@
         </form>
 
     </mat-card>
+}} @else {
+  <app-loading></app-loading>
 }
+
 
  </div>
  

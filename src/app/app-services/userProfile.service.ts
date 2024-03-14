@@ -11,16 +11,35 @@ import { HttpClient } from '@angular/common/http';
 export class UserProfileService {
   private userProfileSubject = new BehaviorSubject<User | null>(null);
   private usernameURL = 'https://stellavibe.onrender.com/users';
+  private usernameURLPost = 'https://stellavibe.onrender.com/users/userup/'
+  UserProf: any;
+  userData: any;
 
   constructor(private http: HttpClient) {
   }
 
   async getUsername(username: string) {
-    let user = await this.http.get(`${this.usernameURL}/uname/${username}`).toPromise();
-    // user[0].assignments.splice(0,1);
-    let userInfo = JSON.stringify(user);
-    console.log(typeof userInfo)
-    return userInfo;
+    try {
+      let user: any = await this.http.get(`${this.usernameURL}/uname/${username}`).toPromise();
+      // user[0].assignments.splice(0,1);
+      this.UserProf = user;
+      //this.UserProf = JSON.stringify(user);
+      console.log(typeof user + user)
+      return this.UserProf;
+    } catch (error) {
+      return error;
+    }
+  }
+
+  async putUserUpdate(u_id, payload) {
+    try {
+      const response = await this.http.put(`${this.usernameURLPost}/${u_id}`, payload).toPromise();
+      console.log('PUT request successful:', response);
+      return response; 
+    } catch (error) {
+      console.error('PUT request failed:', error);
+      throw error; 
+    }
   }
 
   // loadUserProfile(username: string) {
