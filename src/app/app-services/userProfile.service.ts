@@ -33,7 +33,8 @@ export class UserProfileService {
 
   async putUserUpdate(u_id, payload) {
     try {
-      const response = await this.http.put(`${this.usernameURLPost}/${u_id}`, payload).toPromise();
+      console.log(`${this.usernameURLPost}${u_id}`);
+      const response = await this.http.put(`${this.usernameURLPost}${u_id}`, payload).toPromise();
       console.log('PUT request successful:', response);
       return response; 
     } catch (error) {
