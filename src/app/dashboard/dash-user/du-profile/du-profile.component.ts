@@ -74,6 +74,7 @@ export class DuProfileComponent implements OnInit {
       firstName: [this.user && this.user.length > 0 ? this.user.u_fname : '', Validators.required],
       lastName: [this.user && this.user.length > 0 ? this.user.u_lname : '', Validators.required],
       u_email: [this.user && this.user.length > 0 ? this.user.u_email : '', Validators.email],
+      u_phone: [this.user && this.user.length > 0 ? this.user.u_phone : ''],
       u_username: [this.user && this.user.length > 0 ? this.user.u_username : '', Validators.required],
       u_street: [this.user && this.user.length > 0 ? this.user.u_street : ''],
       u_city: [this.user && this.user.length > 0 ? this.user.u_city : ''],
@@ -92,6 +93,7 @@ export class DuProfileComponent implements OnInit {
         firstName: userData.u_fname || '',
         lastName: userData.u_lname || '',
         u_email: userData.u_email || '',
+        u_phone: userData.u_phone || '',
         u_username: userData.u_username || '',
         u_street: userData.u_street || '',
         u_city: userData.u_city || '',
@@ -112,8 +114,8 @@ onUpdateUserProf() {
       u_street: this.profileForm.value.u_street,
       u_city: this.profileForm.value.u_city,
       u_state: this.profileForm.value.u_state,
-      u_zip: this.profileForm.value.u_zip
-      
+      u_zip: this.profileForm.value.u_zip,
+      u_phone: this.profileForm.value.u_phone
       // Add other fields as needed
   };
   //console.log(`Payload for ${this.user.u_id}: `, payload);
