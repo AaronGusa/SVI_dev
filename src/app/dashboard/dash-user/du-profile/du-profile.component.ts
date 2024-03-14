@@ -113,10 +113,10 @@ onUpdateUserProf() {
       u_city: this.profileForm.value.u_city,
       u_state: this.profileForm.value.u_state,
       u_zip: this.profileForm.value.u_zip
+      
       // Add other fields as needed
   };
-  //this.updateCheck = !this.updateCheck;
-  console.log('Payload:', payload);
+  //console.log(`Payload for ${this.user.u_id}: `, payload);
   // Call your method to update the array with the payload
   this.updateArrayWithPayload(this.user.u_id, payload);
 }
@@ -125,8 +125,10 @@ async updateArrayWithPayload(u_id, payload) {
   try {
     let response = await this.uProfService.putUserUpdate(u_id, payload);
     if (response) {
-      console.log(response)
-      //this.showUserData();
+      console.log("UPDATE RESPONSE: " + JSON.stringify(response))
+      this.showUserData();
+      this.updateCheck = !this.updateCheck;
+
     }
   } catch (error) {
     console.log(error)
