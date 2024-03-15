@@ -112,27 +112,56 @@ export class UserService {
 
   //SignUp User Verification
 
+  // async verifySignUpUsername(username: string) {
+  //   try {
+  //   // Make a GET request to check if the username is available
+  //   const response = await this.http.get(`${this.userUrl}/uname/${username}`).toPromise();
+  //   console.log("Verify Response: " + response);
+  //   if (response.status === 400) {
+
+  //       // Handle the response here
+  //       // console.log(response.length);
+  //       //console.log(response);
+  //       //console.log(response);
+  //       return response;
+  //     } else {
+  //       const Error = JSON.stringify({error:'Error Verifying Username: '+ username});
+  //       return Error;
+  //     }
+  //   } catch (error) {
+  //       // Handle errors
+  //       console.error('Error checking username availability:', error);
+  //       throw error;
+  //   }
+  // }
+
   async verifySignUpUsername(username: string) {
     try {
-    // Make a GET request to check if the username is available
-    const response = this.http.get(`${this.userUrl}/uname/${username}`).toPromise();
-    //console.log(response);
-    if (response) {
+        // Make a GET request to check if the username is available
+        const response: any = await this.http.get(`${this.userUrl}/uname/${username}`).toPromise();
 
-        // Handle the response here
-        // console.log(response.length);
-        //console.log(response);
-        //console.log(response);
-        return response;
-      } else {
-        const Error = JSON.stringify({error:'Error Verifying Username: '+ username});
-        return Error;
-      }
+        if (response.status === 200) {
+            // Username exists, so return false
+            return false;
+        } else {
+            // Unexpected response status, log and throw error
+            console.error('Unexpected response status:', response.status);
+            throw new Error('Unexpected response from server');
+        }
     } catch (error) {
         // Handle errors
-        console.error('Error checking username availability:', error);
-        throw error;
+        if (error.status === 400) {
+            // Username doesn't exist, so return true
+            return true;
+        } else {
+            // Log the error
+            console.error('Error checking username availability:', error);
+            // Optionally rethrow the error if you want it to propagate further
+            // throw error;
+            // You can also handle the error in another way, such as returning an error flag
+            return { error: true };
+        }
     }
-  }
+}
 }
 

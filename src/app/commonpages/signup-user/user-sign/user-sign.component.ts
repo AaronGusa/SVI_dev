@@ -218,7 +218,7 @@ export class UserSignComponent implements OnInit {
 
     
       const response: any = await this.userService.verifySignUpUsername(username);
-      if (response.length === 0) {
+      if (response === true) {
         console.log(response);
         console.log('Response length equals zero entered');
         this.usernameSearch = false;
