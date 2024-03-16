@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { UserService } from './user.service'; // Assuming you have a UserService to fetch user data
+import { UserService } from './user.service';
 import { User } from '../models/user.model';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { toArray } from 'rxjs/operators';
