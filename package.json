@@ -20,6 +20,8 @@
     "@angular/platform-browser": "^17.0.0",
     "@angular/platform-browser-dynamic": "^17.0.0",
     "@angular/router": "^17.0.0",
+    "@squoosh/cli": "^0.7.3",
+    "@squoosh/lib": "^0.5.3",
     "base-64": "^1.0.0",
     "bcrypt": "^5.1.1",
     "dotenv": "^16.3.2",

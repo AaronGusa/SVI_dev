@@ -33,6 +33,7 @@ export class DuProfileComponent implements OnInit {
   userInfo: any;
   profileForm: FormGroup<any>;
   isLoading: boolean = false;
+  userPicData: any = [];
   //  = new FormGroup({
     // firstName: new FormControl(''),
     // lastName: new FormControl(''),})
@@ -55,7 +56,8 @@ export class DuProfileComponent implements OnInit {
       //console.log(this.u_name)
     });
     // this.u_name = this.r.params['clientUsername'];
-    await this.showUserData()
+    await this.showUserData();
+    this.getUserPic(this.user.u_id);
     this.initializeForm();
     this.populateFormData();
     // this.subscribeToFormChanges();
@@ -66,7 +68,11 @@ export class DuProfileComponent implements OnInit {
 
   }
 
-  getUserPic() {
+  async getUserPic(u_id: number) {
+    this.userPicData = await this.imgService.getUserProfileImage(u_id);
+    console.log("UserPic Data: " + this.userPicData); 
+    // Logging keys (properties) of the object
+     console.log("Properties of userPicData:", Object.keys(this.userPicData.u_id));
 
   }
 
