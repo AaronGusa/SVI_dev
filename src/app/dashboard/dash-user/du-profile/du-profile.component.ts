@@ -6,8 +6,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { UserProfileService } from '../../../app-services/userProfile.service';
 import { DashboardComponent } from '../../dashboard.component';
-import {ActivatedRoute, RouterModule, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, RouterModule, RouterOutlet } from '@angular/router';
 import { LoadingComponent } from '../../../features/loading/loading.component';
+import { ImageService } from '../../../app-services';
 
 @Component({
   selector: 'app-du-profile',
@@ -40,6 +41,7 @@ export class DuProfileComponent implements OnInit {
   user: any;
   constructor(private formBuilder: FormBuilder,
               private uProfService: UserProfileService,
+              private imgService: ImageService,
               private dash: DashboardComponent,
               private r: ActivatedRoute,
 
@@ -62,6 +64,17 @@ export class DuProfileComponent implements OnInit {
     //   this.loadUserProfile();
     // });
 
+  }
+
+  getUserPic() {
+
+  }
+
+   changeUserPic(event: any) {
+    const file = event.target.files[0];
+    // console.log(event.target.files[0]);
+    const squoosher = this.imgService.squooshIt(file);
+     
   }
 
   updateSwitch() {

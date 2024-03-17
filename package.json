@@ -20,7 +20,6 @@
     "@angular/platform-browser": "^17.0.0",
     "@angular/platform-browser-dynamic": "^17.0.0",
     "@angular/router": "^17.0.0",
-    "@squoosh/lib": "^0.5.3",
     "base-64": "^1.0.0",
     "bcrypt": "^5.1.1",
     "dotenv": "^16.3.2",
@@ -33,6 +32,7 @@
     "swagger-ui-express": "^5.0.0",
     "tslib": "^2.3.0",
     "validatorjs": "^3.22.1",
+    "webp-converter-browser": "^1.0.4",
     "zone.js": "~0.14.2"
   },
   "devDependencies": {
