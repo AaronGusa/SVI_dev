@@ -55,10 +55,18 @@ export class ImageService {
   // USER Profile Image
 
   async getUserProfileImage(u_id: number) {
-    console.log("Get User Profile Image u_id: " + u_id)
+    // console.log("Get User Profile Image u_id: " + u_id)
     try {
-      const userImage = await this.http.get(`${this.userProfImageUrl}${u_id}`).toPromise();
-      console.log(userImage);
+      let userImage = await this.http.get(`${this.userProfImageUrl}${u_id}`).toPromise();
+      if (!userImage) {
+       
+          // Return a placeholder image
+          userImage = { u_profImage: "/SVI_dev/src/assets/images/logo/Backup/Logo1.2.png" };
+          console.log(userImage)
+          return userImage;
+      
+      }
+
       return userImage;
     } catch (error) {
       console.error('Error fetching User Profile Pic: ' + error);
