@@ -1,1 +1,15 @@
-<p>business-profile-user works!</p>
+@if (isLoading) {
+    <app-loading></app-loading>
+} @else {
+    <div class="business_prof_container">
+        <h1>Proffesional at {{b_name}}</h1>
+    </div>
+    
+
+    <div class="business_prof_container">
+
+        <img class="profile_pic" src={{profileImages.u_profImage}} alt="">
+        <H2>{{uData.u_fname}} {{uData.u_lname}}</H2>
+
+    </div>
+}

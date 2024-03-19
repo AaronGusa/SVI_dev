@@ -9,6 +9,7 @@ import { User } from '../models/user.model';
 })
 export class UserService {
   private userUrl = 'https://stellavibe.onrender.com/users';
+  private userIDGet = '/user/';
   // private userUrl = 'localhost:3000/users';
 
 
@@ -30,7 +31,19 @@ export class UserService {
   //   }
   // }
 
-  
+  async fetchUserID(id: string) {
+    try{
+      id = id.toString();
+      // console.log(typeof id)
+      const fetchedUser = await this.http.get(`${this.userUrl}${this.userIDGet}${id}`).toPromise();
+      // console.log(`${this.userUrl}${this.userIDGet}${id}`)
+      // console.log(`Fetched User Data: ${fetchedUser}`)
+      return fetchedUser; 
+    } catch (error) {
+      console.error(`Error Fetching User ${id}: `, error);
+      throw error;
+    }
+  }
 
 
   fetchUser(id: string) {

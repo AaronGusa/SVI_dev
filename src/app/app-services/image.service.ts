@@ -77,9 +77,12 @@ export class ImageService {
 
   async getBusProfileImage(b_id: string) {
     try {
-      const busImage = await this.http.get(`${this.busProfImageUrl}${b_id}`)
+      const busImage = await this.http.get(`${this.busProfImageUrl}${b_id}`).toPromise();
+      // console.log(`${this.busProfImageUrl}${b_id}`)
+      // console.log('GetBusProfile: ' + busImage);
+      return busImage;
     } catch (error) {
-      console.error('Error fetching business profile pic: ' + error);
+      // console.error('Error fetching business profile pic: ' + error);
       return error;
     }
   }

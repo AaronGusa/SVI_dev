@@ -8,7 +8,8 @@ import { Service } from '../models/service.model';
 })
 export class ServiceService {
   private categoryUrl = 'https://stellavibe.onrender.com/services/services';
-  private serviceUrl = 'https://stellavibe.onrender.com/services/services';
+  private serviceUrl = 'https://stellavibe.onrender.com/services/';
+  private servId = '/servid/';
 
   categories: Category[] = [];
   services: Service[] = [];
@@ -24,7 +25,10 @@ export class ServiceService {
   fetchServices() {
     return this.http.get<Service[]>(this.serviceUrl)
   };
-  
+
+  fetchSID(s_id) {
+    return this.http.get(`${this.serviceUrl}${this.servId}${s_id}`).toPromise();
+  }
 
 
 }

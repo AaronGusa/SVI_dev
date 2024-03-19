@@ -75,8 +75,8 @@
                         <p>{{ b.b_state }}</p>
                         <p>{{ b.b_zip }}</p>
                         </div>
-                        <button mat-raised ><a routerLink="/business-profile/">Go to Business Page</a></button>
-                    </div>
+                            <button mat-raised-button color="primary" ><a routerLink="/business-profile/{{b.b_id}}">Go to Business Page</a></button>
+                        </div>
                     </div>
                 </mat-expansion-panel>
             </mat-accordion>

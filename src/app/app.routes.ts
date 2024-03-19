@@ -5,7 +5,7 @@ import { AboutComponent } from './commonpages/about/about.component';
 import { LoginComponent } from './commonpages/login/login.component';
 import { SignupUserComponent } from './commonpages/signup-user/signup-user.component';
 import { FindBusinessComponent } from './commonpages/find-business/find-business.component';
-import { BusinessProfileComponent } from './searchfind/business-profile/business-profile.component';
+import { BusinessProfileComponent } from './commonpages/business-profile/business-profile.component'
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DuProfileComponent } from './dashboard/dash-user/du-profile/du-profile.component';
 import { DashUserComponent } from './dashboard/dash-user/dash-user.component';

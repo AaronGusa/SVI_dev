@@ -1,19 +1,50 @@
-<!-- <div *ngIf="isLoading"> -->
-    @if (isLoading){
-        <app-loading></app-loading> }
-<!-- </div> -->
-<!-- <div *ngIf="!isLoading"> -->
-@if (!isLoading) {    
+@if (isLoading) {
+    <app-loading></app-loading> 
+} @else {    
     <mat-tab-group dynamicHeight>
-        <mat-tab label="{{businessSelect.b_name}} Profile">
-            <h1>Welcome to {{businessSelect.b_name}}</h1>
-            <app-business-profile-user></app-business-profile-user>
+        <mat-tab label="{{bData.b_name}} Profile">
+            <h1>Welcome to {{bData.b_name}}</h1>
+            <div class="business_prof_container">
+                <img class="business_profile_image" src={{profileImages.b_profImage}} alt="business_profile">
+                <div class="business_prof_info">
+                    <h2>Located in {{bData.b_city}}</h2>
+                    <div class="business_prof_container">
+                        <p>{{bData.b_phone}}</p>
+                        <p>{{bData.b_website}}</p>
+                    </div>    
+                    <div class="business_prof_container">
+                        <p>{{bData.b_street}}</p><hr>
+                        <p>{{bData.b_city}}</p>
+                        <p>{{bData.b_state}}</p>
+                        <p>{{bData.b_zip}}</p>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="business_prof_container">
+                <h2>Our Services</h2>
+                <hr>
+                @for (service of servComplete; track $index) {
+                    <h3>{{service.s_name}}</h3>
+                }
+                <hr>
+            </div>
+            <app-business-profile-user
+                [bData] = bData
+                [profileImages] = profileImages
+                [b_name] = bData.b_name
+            ></app-business-profile-user>
+            <div>
+
+            </div>
         </mat-tab>
         <mat-tab label="Our Work">
             <app-business-profile-images></app-business-profile-images>
         </mat-tab>
         <mat-tab label="Reviews">
-            <h2>Here's' what people are saying about {{businessSelect.b_name}}</h2>
+            <h2>Here's' what people are saying about {{bData.b_name}}</h2>
+            <app-business-profile-reviews></app-business-profile-reviews>
         </mat-tab>
     </mat-tab-group>
 }

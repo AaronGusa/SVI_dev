@@ -11,7 +11,8 @@ import { Category } from '../../models/category.model';
 import { RefineSearchMenuComponent } from '../../features/refine-search-menu/refine-search-menu.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatExpansionModule } from '@angular/material/expansion';
-
+import { MatButton } from '@angular/material/button';
+import { RouterModule } from '@angular/router';
 
 
 @Component({
@@ -23,7 +24,9 @@ import { MatExpansionModule } from '@angular/material/expansion';
             ServiceSearchComponent, 
             ZipSearchComponent,
             RefineSearchMenuComponent,
-            MatExpansionModule  
+            MatExpansionModule,
+            MatButton,
+            RouterModule  
           ],
   templateUrl: './find-business.component.html',
   styleUrl: './find-business.component.css'
