@@ -11,14 +11,15 @@
         </mat-card-header>
         <mat-card-content id="DashCurrentContent">
           <div class="profilePicContainer">
-            <div class="DashCurrentImageCont">
-                <!-- <img class="DashCurrentImage" src="https://i.pinimg.com/originals/f8/c6/b7/f8c6b794fda3fe6a49c868a230bea49a.jpg" alt="Keanu Reeves"> -->
+            <!-- <div class="DashCurrentImageCont">
                 <img class="DashCurrentImage" src={{userPicData.u_profImage}} alt="userProf">
 
             </div>
             <button  id="subButton" mat-raised-button (click)="profilePic.click()">Change Profile Pic</button>
-            <input id="profilePicHiddenInput" #profilePic type="file" (change)="changeUserPic($event)">
-
+            <input id="profilePicHiddenInput" #profilePic type="file" (change)="changeUserPic($event)"> -->
+            <div>
+              <app-dash-profile-image></app-dash-profile-image>
+            </div>
           </div>  
             <br>
             <div class="DashCurrentUserInfo">

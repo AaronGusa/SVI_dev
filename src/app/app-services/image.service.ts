@@ -14,32 +14,20 @@ export class ImageService {
   private busServiceImages = 'https://stellavibe.onrender.com/images/busImages';
 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+               
+    ) { }
 
   async squooshIt(file: File) {
-    // // Create a worker
-    // const worker = createWorker();
-
-    // // Add the file to the worker
-    // await worker.addFile(file);
-
-    // // Run the conversion
-    // await worker.run((imagePool, options) => {
-    //   const image = imagePool.ingestImage(file);
-    //   return encode(image, { webp: {} });
-    // });
-
-    // // Get the result
-    // const encodedData = await worker.encodedWith.webp;
-
-    // // Cleanup
-    // await worker.close();
-
-    // // Convert to base64
-    // const base64String = btoa(String.fromCharCode.apply(null, encodedData));
-
-    // return 'data:image/webp;base64,' + base64String;
+    //const webbed = await encode() 
   }
+  
+  
+  // async squooshEncode() {
+  //   const rawImageData = await this.loadImage();
+  //   const webpBuffer = await encode(rawImageData);
+  //   return webpBuffer;
+  // }
 
 
   fetchBusinessImages() {

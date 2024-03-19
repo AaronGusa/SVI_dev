@@ -9,6 +9,7 @@ import { DashboardComponent } from '../../dashboard.component';
 import { ActivatedRoute, RouterModule, RouterOutlet } from '@angular/router';
 import { LoadingComponent } from '../../../features/loading/loading.component';
 import { ImageService } from '../../../app-services';
+import { DashProfileImageComponent } from '../../dash-profile-image/dash-profile-image.component';
 
 @Component({
   selector: 'app-du-profile',
@@ -21,7 +22,8 @@ import { ImageService } from '../../../app-services';
             MatButtonModule,
             DashboardComponent,
             RouterModule,
-            LoadingComponent
+            LoadingComponent,
+            DashProfileImageComponent
             ],
   templateUrl: './du-profile.component.html',
   styleUrl: './du-profile.component.css'
@@ -80,7 +82,7 @@ export class DuProfileComponent implements OnInit {
     const file = event.target.files[0];
     // console.log(event.target.files[0]);
     const squoosher = this.imgService.squooshIt(file);
-     
+
   }
 
   updateSwitch() {
