@@ -18,7 +18,9 @@
             <button  id="subButton" mat-raised-button (click)="profilePic.click()">Change Profile Pic</button>
             <input id="profilePicHiddenInput" #profilePic type="file" (change)="changeUserPic($event)"> -->
             <div>
-              <app-dash-profile-image></app-dash-profile-image>
+              <app-dash-profile-image
+                [u_id] = user.u_id
+              ></app-dash-profile-image>
             </div>
           </div>  
             <br>

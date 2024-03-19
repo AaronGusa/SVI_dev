@@ -59,7 +59,7 @@ export class DuProfileComponent implements OnInit {
     });
     // this.u_name = this.r.params['clientUsername'];
     await this.showUserData();
-    this.getUserPic(this.user.u_id);
+    //this.getUserPic(this.user.u_id);
     this.initializeForm();
     this.populateFormData();
     // this.subscribeToFormChanges();
@@ -70,13 +70,13 @@ export class DuProfileComponent implements OnInit {
 
   }
 
-  async getUserPic(u_id: number) {
-    this.userPicData = await this.imgService.getUserProfileImage(u_id);
-    console.log("UserPic Data: " + this.userPicData); 
-    // Logging keys (properties) of the object
-     console.log("Properties of userPicData:", Object.keys(this.userPicData.u_id));
+  // async getUserPic(u_id: number) {
+  //   this.userPicData = await this.imgService.getUserProfileImage(u_id);
+  //   console.log("UserPic Data: " + this.userPicData); 
+  //   // Logging keys (properties) of the object
+  //   console.log("Properties of userPicData:", Object.keys(this.userPicData));
 
-  }
+  // }
 
    changeUserPic(event: any) {
     const file = event.target.files[0];
@@ -170,6 +170,7 @@ async showUserData() {
     if (response) {
       if (Array.isArray(response)) {
         this.user = response; // If response is already an array, assign it directly
+        console.log('Line 174 DUPROFILE COMP' + this.user);
       } else {
         // If response is not an array, try to parse it
         this.user = (response);

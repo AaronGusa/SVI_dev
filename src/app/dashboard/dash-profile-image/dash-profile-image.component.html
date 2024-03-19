@@ -1,15 +1,26 @@
 <div class="avatar-container">
-    @if (file !== '') {
-        <div class="image-container"
+    @if (userPicData.u_profImage || userPicData.b_profImage) {
+        <img class="profile_pic" 
             [ngClass]="{'box-shadow-avatar': !!file}"
-            [ngStyle]="{backgroundImage: 'url(' + file + ')'}">
-        </div>
+            [ngStyle]="{backgroundImage: 'url(' + file + ')'}"  
+            src={{userPicData.u_profImage}} alt="userProf">
+    
     } @else {
-        <div #placeholder>
-            <div class="image-container avatar-placeholder">
+    
+        @if (file !=='') {
+            <div class="image-container" 
+                [ngClass]="{'box-shadow-avatar': !!file}"
+                [ngStyle]="{backgroundImage: 'url(' + file + ')'}">
+            </div> 
+        } @else {   
+            <div #placeholder>
+                <div class="image-container avatar-placeholder">
+                </div>
             </div>
-        </div>
-    }
+        }
+    } 
+
+
     <label for="avatar-input-file">
         <div class="icon-wrapper">
             <input type="file" id="avatar-input-file" accept="image/*" (change)="onFileChange($event)" />

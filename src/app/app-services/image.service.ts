@@ -51,6 +51,7 @@ export class ImageService {
           // Return a placeholder image
           userImage = { u_profImage: "/SVI_dev/src/assets/images/logo/Backup/Logo1.2.png" };
           console.log(userImage)
+          
           return userImage;
       
       }
@@ -64,13 +65,13 @@ export class ImageService {
 
   async updateUserProfileImage(u_id: number, userImageData: string) {
     try {
-      const updatedUserImage = await this.http.put(`${this.profUserImage}${u_id}`, { u_profImage: userImageData });
-      return updatedUserImage;
+        const updatedUserImage = await this.http.put(`${this.profUserImage}${u_id}`, { u_profImage: userImageData }).toPromise();
+        return updatedUserImage; // Assuming the server returns data with update status
     } catch (error) {
-      console.error('Error updating User Profile Pic: ' + error);
-      return error;
+        console.error('Error updating User Profile Pic:', error);
+        return { error: 'Error updating User Profile Pic' };
     }
-  }
+}
 
   // BUSINESS Profile Image
 

@@ -87,6 +87,13 @@ hr {
     align-items: center;
 }
 
+.profile_pic {
+    border-radius: 15px;
+    box-shadow: 2px 2px  25px rgba(157, 173, 166, 1);
+    padding: 1rem;
+    margin: 1rem;
+}
+
 @media (min-width: 600px) {
     
     .spacer_nuetral {
