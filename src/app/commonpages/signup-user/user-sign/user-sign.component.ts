@@ -116,6 +116,7 @@ export class UserSignComponent implements OnInit {
   goToBusinessSignUp() {
     // When called, this function will navigate the user to the routerLink="/sign-up/business" page
     this.business2Add = !this.business2Add;
+    this.goBusinessSignUp.emit(this.business2Add);
 }
 // User Only
   // async CompleteUserSign() {
@@ -248,7 +249,7 @@ export class UserSignComponent implements OnInit {
           
           //Emitters
           this.userSubSuccess.emit(this.userSuccess);
-          this.showBusinessForm.emit(this.goToBusiness);
+          //this.showBusinessForm.emit(this.goToBusiness);
           this.clientId.emit(this._userID);
           console.log(
             //'Emitted: userSubSuccess: ', this.userSuccess,
@@ -334,8 +335,60 @@ export class UserSignComponent implements OnInit {
     return this.imageService.signUpUserCreate(userId);
   }
 
-  CompleteUserSignAndGoBus() {
+  async CompleteUserSignAndGoBus() {
+    // If business2Add is true, this function will call the processUserSignUp() function
+    // If successful, then will call the goToBusinessSignUp() function
+    
+    let u_username = this.username_pass_form.get('u_username').value;
+    let u_pass = this.username_pass_form.get('u_pass').value;
 
+
+    let u_fname = this.person_info_form.get('u_fname').value;
+    let u_lname = this.person_info_form.get('u_lname').value;
+    let u_phone = this.person_info_form.get('u_phone').value; 
+    let u_email = this.person_info_form.get('u_email').value; 
+
+    let u_street = null;
+    let u_city = null;
+    let u_state = null;
+    let u_country = null;
+    let u_zip = null;
+
+
+    this.userForm = this._formBuilder.group({
+        u_username: u_username,
+        u_pass: u_pass,
+        u_fname: u_fname,
+        u_lname: u_lname,
+        u_phone: u_phone,
+        u_email: u_email,
+        u_street: u_street,
+        u_city: u_city,
+        u_state: u_state,    
+        u_country: u_country,
+        u_zip: u_zip
+    });
+
+    // Call the processUserSignUp function
+    await this.processUserSignUp();
+
+    // Get the username from the form
+    const username = this.username_pass_form.get('u_username').value.toLowerCase();
+  
+    // Call createProfileImagesEntry and await its response
+    const profCompleted = await this.createProfileImagesEntry(this.userId);
+    console.log('profCompleted', JSON.stringify(profCompleted));
+  
+    // Check if profile creation was successful
+    if (profCompleted && profCompleted.acknowledged === true ) {
+        // Navigate to the business form
+      //  this.goToBusinessSignUp();
+      //emitters for business sign up
+        this.goBusinessSignUp.emit(true);
+        this.showBusinessForm.emit(true);
+    } else {
+        console.log('Wuh HOOO');
+    }
   }
 
 

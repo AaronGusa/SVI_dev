@@ -19,7 +19,7 @@ export class SignupUserComponent implements OnInit {
   userSubSuccess: boolean = false;
   userFound: boolean = false;
   Conditions: boolean[];
-  private clientId: string;
+  clientId: string;
    _foundUser: any;
   private _foundUserID: number;
 
@@ -45,6 +45,7 @@ export class SignupUserComponent implements OnInit {
       this._foundUser = await this.userService.fetchUser(value);
       this.userFound = true;
       this._foundUserID = this._foundUser.u_id;
+      this.clientId = this._foundUser.u_id;
       //console.log('User Found: ', this.userFound)
       //console.log('Found User: ', this._foundUser)
     } catch (error) {
