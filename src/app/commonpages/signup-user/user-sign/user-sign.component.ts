@@ -90,7 +90,8 @@ export class UserSignComponent implements OnInit {
       u_username: 'janedoe',
       u_fname: 'Jane',
       u_lname: 'Doe',
-      u_pass: '123456'
+      u_pass: '123456',
+      has_bus: true
   };
 
   
@@ -188,6 +189,7 @@ export class UserSignComponent implements OnInit {
     let u_state = null;
     let u_country = null;
     let u_zip = null;
+    let has_bus = this.business2Add;
 
 
     this.userForm = this._formBuilder.group({
@@ -201,7 +203,8 @@ export class UserSignComponent implements OnInit {
         u_city: u_city,
         u_state: u_state,    
         u_country: u_country,
-        u_zip: u_zip
+        u_zip: u_zip,
+        has_bus: has_bus
     });
 
     // Call the processUserSignUp function
