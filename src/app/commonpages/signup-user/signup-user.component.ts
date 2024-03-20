@@ -20,6 +20,7 @@ export class SignupUserComponent implements OnInit {
   userFound: boolean = false;
   Conditions: boolean[];
   clientId: string;
+  username: string;
    _foundUser: any;
   private _foundUserID: number;
 
@@ -63,6 +64,10 @@ export class SignupUserComponent implements OnInit {
     //console.log('User Success: ', value)  
     this.userSubSuccess = value;
     this.Conditions[2] = value;
+  }
+
+  handleUsername(value: string) {
+    this.username = value;
   }
 
   happeningMan() {

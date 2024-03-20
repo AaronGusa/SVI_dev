@@ -37,11 +37,11 @@ export class UserSignComponent implements OnInit {
   @Output() userSubSuccess: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() showBusinessForm: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() clientId: EventEmitter<string> = new EventEmitter<string>();
+  @Output() username: EventEmitter<string> = new EventEmitter<string>();
   
   private _userID: string;
   private userId: any;
 
-  
   business2Add: boolean = false;
   hideUserForm: boolean = false;
   userSubmitting: boolean = false;
@@ -209,7 +209,8 @@ export class UserSignComponent implements OnInit {
 
     // Get the username from the form
     const username = this.username_pass_form.get('u_username').value.toLowerCase();
-  
+    this.username.emit(username);
+    
     // Call createProfileImagesEntry and await its response
     const profCompleted = await this.createProfileImagesEntry(this.userId);
     console.log('profCompleted', JSON.stringify(profCompleted));
@@ -374,7 +375,7 @@ export class UserSignComponent implements OnInit {
 
     // Get the username from the form
     const username = this.username_pass_form.get('u_username').value.toLowerCase();
-  
+    this.username.emit(username);
     // Call createProfileImagesEntry and await its response
     const profCompleted = await this.createProfileImagesEntry(this.userId);
     console.log('profCompleted', JSON.stringify(profCompleted));

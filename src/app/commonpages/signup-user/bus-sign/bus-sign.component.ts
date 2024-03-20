@@ -32,8 +32,9 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrl: './bus-sign.component.css'
 })
 
-export class BusSignComponent {
+export class BusSignComponent implements OnInit{
   @Input() _foundUser: number;
+  @Input() username: string;
   services: any[] = [];
   categories: any[] = [];
   selectedCategories: number[] = [];
@@ -57,21 +58,21 @@ ngOnInit() {
 this.fetchCategories();
 
 this.busForm = this._formBuilder.group({
-b_id: [null],
-b_name: [null, Validators.required],
-b_email: [null, [Validators.required, Validators.email]],
-b_phone: [null],
-b_website: [null],
-b_street: [null],
-b_city: [null],
-b_state: [null],
-b_zip: [null],
-b_active: [null],
-b_services: [null],
-b_rating: [null],
-u_id: [null],
-created:[null]
-});
+  b_id: [null],
+  b_name: [null, Validators.required],
+  b_email: [null, [Validators.required, Validators.email]],
+  b_phone: [null],
+  b_website: [null],
+  b_street: [null],
+  b_city: [null],
+  b_state: [null],
+  b_zip: [null],
+  b_active: [null],
+  b_services: [null],
+  b_rating: [null],
+  u_id: [null],
+  created:[null]
+  });
 }
 
 async fetchCategories() {
@@ -137,7 +138,7 @@ async processBusSignUp() {
     console.log('Business Posted: ', posted);
     
     this.isLoading = false;
-    this.r.navigate(['/login']);  
+    this.r.navigate([`/dashboard/${this.username}`]);
   } catch (error) {
     console.error('Error Posting Business: ', error);
   }
