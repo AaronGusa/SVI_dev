@@ -77,13 +77,22 @@
       </div>
       <br>
       <div>
+        @if (!business2Add) {
         <button  mat-raised-button 
                 color="primary" 
                 (click)="CompleteUserSign()" 
                 #registerButton 
+                [disabled]="!username_pass_form.valid || !person_info_form.valid || !usernameValid"
+                >Sign Up</button>
+
+      } @else {
+        <button  mat-raised-button 
+                color="primary" 
+                (click)="CompleteUserSignAndGoBus()" 
+                #registerButton 
                 [disabled]="!username_pass_form.valid && !person_info_form.valid && !usernameValid"
-                >{{business2Add ? 'Go to Business Signup' : 'Signup' }}
-        </button>
+                >Go to Business Sign Up</button>
+      }
       </div>
     </mat-step>
     <!-- <mat-step [stepControl]="address_form">

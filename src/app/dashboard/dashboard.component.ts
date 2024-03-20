@@ -83,7 +83,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   async showUserData() {
     let response = await this.userProfileService.getUsername('testeroni')
     if (response) {
-    console.log('Response: ' + response);
+    console.log('Response: ' + response.json());
     this.u_priv = response.u_priv;
     } else {
       console.log('No response for showUserData')

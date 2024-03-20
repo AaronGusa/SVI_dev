@@ -12,6 +12,7 @@ export class ImageService {
   private profUserImage = 'https://stellavibe.onrender.com/images/profImages/user_update/';
   private profBusImage = 'https://stellavibe.onrender.com/images/profImages/bus_update/';
   private busServiceImages = 'https://stellavibe.onrender.com/images/busImages';
+  private profUserInit = 'https://stellavibe.onrender.com/images/profileImgInit';
 
 
   constructor(private http: HttpClient,
@@ -41,6 +42,45 @@ export class ImageService {
   };
 
   // USER Profile Image
+  async signUpUserCreate(u_id: number) {
+    console.log('Type of U_id: ' + typeof u_id);
+  
+    try {
+      let response = await this.http.post(`${this.profUserInit}`, {"u_id": u_id}, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).toPromise();
+  
+      console.log(`${this.profUserInit}`);
+      return response;
+    } catch (error) {
+      return error;
+    }
+  }
+  // //POST
+  // // SignupRecordCreation
+  // async signUpUserCreate(u_id: number) {
+  //   console.log('Type of U_id: ' + typeof u_id)
+
+  //   try {
+  //     let response = await this.http.post(`${this.profUserInit}`, {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json'
+  //       },
+  //       body: {"u_id": u_id}
+  //     });
+  //     console.log(`${this.profUserInit}`)
+      
+
+
+  //     return response;
+  //   } catch (error) {
+  //     return error;
+  //   }
+  // }
+
 
   async getUserProfileImage(u_id: number) {
     // console.log("Get User Profile Image u_id: " + u_id)

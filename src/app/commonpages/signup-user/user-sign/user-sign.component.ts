@@ -3,14 +3,15 @@ import { FormBuilder, FormGroupDirective, NgForm, ReactiveFormsModule, FormsModu
 import { ServiceService } from '../../../app-services';
 import { BusinessService } from '../../../app-services';
 import { UserService } from '../../../app-services';
+import { ImageService } from '../../../app-services';
 import { LoadingComponent } from '../../../features/loading/loading.component';
 import { Router } from '@angular/router';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatStepperModule } from '@angular/material/stepper';
-import {MatInputModule} from '@angular/material/input';
-import {MatButtonModule} from '@angular/material/button';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatIcon } from '@angular/material/icon';
 
 @Component({
@@ -30,6 +31,7 @@ import { MatIcon } from '@angular/material/icon';
   templateUrl: './user-sign.component.html',
   styleUrl: './user-sign.component.css'
 })
+
 export class UserSignComponent implements OnInit {
   @Output() goBusinessSignUp: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() userSubSuccess: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -37,6 +39,8 @@ export class UserSignComponent implements OnInit {
   @Output() clientId: EventEmitter<string> = new EventEmitter<string>();
   
   private _userID: string;
+  private userId: any;
+
   
   business2Add: boolean = false;
   hideUserForm: boolean = false;
@@ -92,17 +96,19 @@ export class UserSignComponent implements OnInit {
   
 
   constructor(private userService: UserService,
+              private imageService: ImageService,
               private _formBuilder: FormBuilder,
               private r: Router) 
   { }
 
   ngOnInit() {
     this.userForm = this._formBuilder.group({});
-
+    this.business2Add = false;
     console.log(this.username_pass_form)
   }
   
   showBusinessSignUp(value) {
+    console.log('showBusiness: ' + value)
     this.business2Add = value;
     this.goBusinessSignUp.emit(this.business2Add);
   };
@@ -111,28 +117,79 @@ export class UserSignComponent implements OnInit {
     // When called, this function will navigate the user to the routerLink="/sign-up/business" page
     this.business2Add = !this.business2Add;
 }
+// User Only
+  // async CompleteUserSign() {
+  //   // If business2Add is true, this function will call the processUserSignUp() function
+  //   // If successful, then will call the goToBusinessSignUp() function
+    
+  //     let u_username = this.username_pass_form.get('u_username').value;
+  //     let u_pass = this.username_pass_form.get('u_pass').value;
+    
+    
+  //     let u_fname = this.person_info_form.get('u_fname').value;
+  //     let u_lname = this.person_info_form.get('u_lname').value;
+  //     let u_phone = this.person_info_form.get('u_phone').value; 
+  //     let u_email = this.person_info_form.get('u_email').value; 
+    
+  //     let u_street = null;
+  //     let u_city = null;
+  //     let u_state = null;
+  //     let u_country = null;
+  //     let u_zip = null;
+    
+     
+  //     this.userForm = this._formBuilder.group({
+  //       u_username: u_username,
+  //       u_pass: u_pass,
+  //       u_fname: u_fname,
+  //       u_lname: u_lname,
+  //       u_phone: u_phone,
+  //       u_email: u_email,
+  //       u_street: u_street,
+  //       u_city: u_city,
+  //       u_state: u_state,    
+  //       u_country: u_country,
+  //       u_zip: u_zip
+  //     });
 
-  CompleteUserSign() {
+
+  //   this.processUserSignUp();
+
+  //   const username = this.username_pass_form.get('u_username').value.toLowerCase();
+      
+      
+  //       const profCompleted = await this.createProfileImagesEntry(this.userId);
+  //       console.log('profCompleted' + Object.values(profCompleted));
+        
+  //       if (profCompleted.acknowledged === true ) {
+  //         this.r.navigate([`/dashboard/${username}`]);
+  //       } else {
+  //         console.log('Wuh HOOO')
+  //       }
+    
+  // }
+
+  async CompleteUserSign() {
     // If business2Add is true, this function will call the processUserSignUp() function
     // If successful, then will call the goToBusinessSignUp() function
     
-      let u_username = this.username_pass_form.get('u_username').value;
-      let u_pass = this.username_pass_form.get('u_pass').value;
-    
-    
-      let u_fname = this.person_info_form.get('u_fname').value;
-      let u_lname = this.person_info_form.get('u_lname').value;
-      let u_phone = this.person_info_form.get('u_phone').value; 
-      let u_email = this.person_info_form.get('u_email').value; 
-    
-      let u_street = null;
-      let u_city = null;
-      let u_state = null;
-      let u_country = null;
-      let u_zip = null;
-    
-     
-      this.userForm = this._formBuilder.group({
+    let u_username = this.username_pass_form.get('u_username').value;
+    let u_pass = this.username_pass_form.get('u_pass').value;
+
+
+    let u_fname = this.person_info_form.get('u_fname').value;
+    let u_lname = this.person_info_form.get('u_lname').value;
+    let u_phone = this.person_info_form.get('u_phone').value; 
+    let u_email = this.person_info_form.get('u_email').value; 
+
+    let u_street = null;
+    let u_city = null;
+    let u_state = null;
+    let u_country = null;
+    let u_zip = null;
+
+
+    this.userForm = this._formBuilder.group({
         u_username: u_username,
         u_pass: u_pass,
         u_fname: u_fname,
@@ -144,12 +201,26 @@ export class UserSignComponent implements OnInit {
         u_state: u_state,    
         u_country: u_country,
         u_zip: u_zip
-      });
+    });
 
+    // Call the processUserSignUp function
+    await this.processUserSignUp();
 
-    this.processUserSignUp();
-    
-  }
+    // Get the username from the form
+    const username = this.username_pass_form.get('u_username').value.toLowerCase();
+  
+    // Call createProfileImagesEntry and await its response
+    const profCompleted = await this.createProfileImagesEntry(this.userId);
+    console.log('profCompleted', JSON.stringify(profCompleted));
+  
+    // Check if profile creation was successful
+    if (profCompleted && profCompleted.acknowledged === true ) {
+        // Navigate to the dashboard
+        this.r.navigate([`/dashboard/${username}`]);
+    } else {
+        console.log('Wuh HOOO');
+    }
+}
 
   async processUserSignUp() {
     // // When called, this function will process the user's sign up information and POST it to the backend
@@ -184,10 +255,11 @@ export class UserSignComponent implements OnInit {
            // 'Emitted: showBusinessForm: ', this.goToBusiness,
            'Emitted: clientId: ', this._userID
          )
-            const username = this.username_pass_form.get('u_username').value.toLowerCase();
 
-            this.r.navigate([`/dashboard/${username}`]);
-         
+        this.userId = response.userId;
+          
+          
+          
         } else {
           console.log('User Failed:', response);
         }
@@ -257,4 +329,14 @@ export class UserSignComponent implements OnInit {
     const usernameValue = this.username_pass_form.get('u_username').value;
     return usernameValue && usernameValue.trim().length > 0;
   }
+
+  createProfileImagesEntry(userId: number) {
+    return this.imageService.signUpUserCreate(userId);
+  }
+
+  CompleteUserSignAndGoBus() {
+
+  }
+
+
 }
