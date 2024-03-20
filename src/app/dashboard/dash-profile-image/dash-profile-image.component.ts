@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { NgStyle } from '@angular/common';
 import { NgClass, NgTemplateOutlet } from '@angular/common';
-import { ImageCropProfileComponent } from './image-crop-profile/image-crop-profile.component';
 import { Observable } from 'rxjs';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MatDialog, MatDialogModule, MatDialogRef, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent,} from '@angular/material/dialog';
@@ -11,7 +10,7 @@ import { ImageService } from '../../app-services';
 @Component({
   selector: 'app-dash-profile-image',
   standalone: true,
-  imports: [MatIcon, NgStyle, NgClass, NgTemplateOutlet, ImageCropProfileComponent, MatDialogModule],
+  imports: [MatIcon, NgStyle, NgClass, NgTemplateOutlet, MatDialogModule],
   templateUrl: './dash-profile-image.component.html',
   styleUrl: './dash-profile-image.component.css'
 })
@@ -120,16 +119,6 @@ async resizeAndConvertToBase64(file: File): Promise<string> {
       reader.readAsDataURL(file);
   });
 }
-
-  // openAvatarEditor(image: string): Observable<any> {
-  //   const dialogRef = this.dialog.open(ImageCropProfileComponent, {
-  //     maxWidth: '80vw',
-  //     maxHeight: '80vh',
-  //     data: image,
-  //   });
-
-  //   return dialogRef.afterClosed();
-  // }
 
   resetInput(){
     const input = document.getElementById('avatar-input-file') as HTMLInputElement;
