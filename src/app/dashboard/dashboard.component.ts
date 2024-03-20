@@ -56,7 +56,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     // Grab username from params
     this.r.params.subscribe(params => {
       console.log("r params " + params['clientUsername']);
-      this.u_name = params['clientUsername']
+      this.u_name = params['clientUsername'];
     });
     this.showUserData();
     // this.Profile = this.userProfileService.getUsername(this.u_name);
@@ -83,8 +83,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
   async showUserData() {
     let response = await this.userProfileService.getUsername('testeroni')
     if (response) {
-    console.log('Response: ' + response.json());
-    this.u_priv = response.u_priv;
+      console.log('Response: ' + response.json());
+      this.u_priv = response.u_priv;
+      console.log(this.u_priv)
     } else {
       console.log('No response for showUserData')
     }

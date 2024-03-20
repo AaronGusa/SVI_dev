@@ -189,7 +189,9 @@ export class UserSignComponent implements OnInit {
     let u_state = null;
     let u_country = null;
     let u_zip = null;
-    let has_bus = this.business2Add;
+    let has_bus = false;
+
+    
 
 
     this.userForm = this._formBuilder.group({
@@ -207,6 +209,7 @@ export class UserSignComponent implements OnInit {
         has_bus: has_bus
     });
 
+    
     // Call the processUserSignUp function
     await this.processUserSignUp();
 
@@ -235,7 +238,7 @@ export class UserSignComponent implements OnInit {
     try {
       // Get the user data from this.userForm
       const userData = this.userForm.value;
-   
+      console.log('UserDATA line 238: ' + Object.values(userData))
   
       // Call the postUsers function to send the user data to the backend
       const response: any = await this.userService.postUser(userData);
@@ -357,6 +360,7 @@ export class UserSignComponent implements OnInit {
     let u_state = null;
     let u_country = null;
     let u_zip = null;
+    let has_bus = true;
 
 
     this.userForm = this._formBuilder.group({
@@ -370,7 +374,8 @@ export class UserSignComponent implements OnInit {
         u_city: u_city,
         u_state: u_state,    
         u_country: u_country,
-        u_zip: u_zip
+        u_zip: u_zip,
+        has_bus: has_bus
     });
 
     // Call the processUserSignUp function
@@ -381,7 +386,7 @@ export class UserSignComponent implements OnInit {
     this.username.emit(username);
     // Call createProfileImagesEntry and await its response
     const profCompleted = await this.createProfileImagesEntry(this.userId);
-    console.log('profCompleted', JSON.stringify(profCompleted));
+    //console.log('profCompleted', JSON.stringify(profCompleted));
   
     // Check if profile creation was successful
     if (profCompleted && profCompleted.acknowledged === true ) {
