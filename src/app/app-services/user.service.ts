@@ -10,6 +10,7 @@ import { User } from '../models/user.model';
 export class UserService {
   private userUrl = 'https://stellavibe.onrender.com/users';
   private userIDGet = '/user/';
+  private usernameVerify = '/unameCheck/'
   // private userUrl = 'localhost:3000/users';
 
 
@@ -82,11 +83,14 @@ export class UserService {
   
 
   async postUser(userSubmitted: any) {
-    console.log(userSubmitted);
+    try {
+    console.log("UserSubmitted" + userSubmitted);
     const posted = await this.http.post(this.userUrl, userSubmitted).toPromise();
-    console.log(posted);
-    return posted;
-  }
+    console.log("Posted" + posted);
+    return posted; 
+  } catch (error) {
+    throw error;
+  }};
 
   //Login Verification
   async verifyUser(userSubmitted: any) {
@@ -151,21 +155,19 @@ export class UserService {
   async verifySignUpUsername(username: string) {
     try {
         // Make a GET request to check if the username is available
-        const response: any = await this.http.get(`${this.userUrl}/uname/${username}`).toPromise();
+        const response: any = await this.http.get(`${this.userUrl}${this.usernameVerify}${username}`).toPromise();
 
-        if (response.status === 200) {
+        if (response.usernameFound === true) {
             // Username exists, so return false
             return false;
-        } else {
-            // Unexpected response status, log and throw error
-            console.error('Unexpected response status:', response.status);
-            throw new Error('Unexpected response from server');
+        } else if (response.usernameFound === false) {
+            // Username doesn't exist, so return true
+            return true;
         }
     } catch (error) {
         // Handle errors
         if (error.status === 400) {
-            // Username doesn't exist, so return true
-            return true;
+            return error;
         } else {
             // Log the error
             console.error('Error checking username availability:', error);

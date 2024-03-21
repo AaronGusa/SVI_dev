@@ -11,6 +11,7 @@ import { BusinessSubmit } from '../models/businessSubmit.model';
 export class BusinessService {
   private businessUrl = 'https://stellavibe.onrender.com/businesses';
   private busIDGet = '/bus/';
+  private busPost = 'https://stellavibe.onrender.com/businesses/newbus';
 
   constructor(private http: HttpClient) { }
 
@@ -22,9 +23,12 @@ export class BusinessService {
     return this.http.get(this.businessUrl + this.busIDGet + `${b_id}`);
   }
 
-  postBusiness(business: BusinessSubmit): Observable<BusinessSubmit> {
-    console.log('Line 21 of BusinessService: ', business);
-    return this.http.post<BusinessSubmit>(this.businessUrl, business);
+  postBusiness(business) {
+    console.log(`${this.busPost}`);
+    console.log('Line 21 of BusinessService: ', JSON.stringify(business));
+    return this.http.post(`${this.busPost}`, business).toPromise();
   };
   
+
+
 }

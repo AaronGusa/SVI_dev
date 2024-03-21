@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, FormGroup, Validators } from '@angular/forms';
 import { ServiceService } from '../../../app-services';
 import { BusinessService } from '../../../app-services';
@@ -32,7 +32,7 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrl: './bus-sign.component.css'
 })
 
-export class BusSignComponent implements OnInit{
+export class BusSignComponent implements OnInit {
   @Input() _foundUser: number;
   @Input() username: string;
   services: any[] = [];
@@ -55,24 +55,26 @@ export class BusSignComponent implements OnInit{
     private r: Router) {}
 
 ngOnInit() {
-this.fetchCategories();
+  console.log('BUS_NGONINT_username: ' + this.username);
+  console.log('BUS_NGONINT_foundUser: ' + this._foundUser);
+  this.fetchCategories();
 
-this.busForm = this._formBuilder.group({
-  b_id: [null],
-  b_name: [null, Validators.required],
-  b_email: [null, [Validators.required, Validators.email]],
-  b_phone: [null],
-  b_website: [null],
-  b_street: [null],
-  b_city: [null],
-  b_state: [null],
-  b_zip: [null],
-  b_active: [null],
-  b_services: [null],
-  b_rating: [null],
-  u_id: [null],
-  created:[null]
-  });
+  this.busForm = this._formBuilder.group({
+      b_id: [null],
+      b_name: [null, Validators.required],
+      b_email: [null, [Validators.required, Validators.email]],
+      b_phone: [null],
+      b_website: [null],
+      b_street: [null],
+      b_city: [null],
+      b_state: [null],
+      b_zip: [null],
+      b_active: [null],
+      b_services: [null],
+      b_rating: [null],
+      u_id: [null],
+      created:[null]
+    });
 }
 
 async fetchCategories() {
@@ -91,16 +93,18 @@ addService2Business(serviceId: number) {
 
 async CompleteBusSign() {
   try{
+    console.log('The services array: ' + this.busServices)
+
     this.busForm.patchValue({
       b_id:"tbd",
       b_active: true,
-      b_rating: -1,
+      b_rating: 0,
       u_id: this._foundUser,
       created: new Date(),
-      services: this.busServices
+      b_services: this.busServices
     });
 
-    console.log(this.busServices);
+    console.log('Business Services: ' + JSON.stringify(this.busServices));
 
     // this.busForm = this._formBuilder.group({
     //   b_id: b_id_value,
@@ -132,15 +136,31 @@ async CompleteBusSign() {
 
 async processBusSignUp() {
   try{
+    const busFormValue = this.busForm.value
     //console.log('this.busForm.value: ', this.busForm.value);
     this.isLoading = true;
-    const posted = await this.busService.postBusiness(this.busForm.value);
-    console.log('Business Posted: ', posted);
+    console.log('BUS_BusForm: ' + JSON.stringify(busFormValue)) 
+    const posted: any = await this.busService.postBusiness(busFormValue);
+    console.log('Business Posted: ', JSON.stringify(posted));
     
-    this.isLoading = false;
-    this.r.navigate([`/dashboard/${this.username}`]);
+    if (posted.acknowledged === true) {
+      console.log('Business Successfully POSTed!')
+      this.isLoading = false;
+      this.r.navigate([`/dashboard/${this.username}`]);
+    } else {
+
+      console.log('OH NOOOOOOOOOOOOOOOOOOOOO, something is still wrong!' + JSON.stringify(posted))
+    };
+
   } catch (error) {
     console.error('Error Posting Business: ', error);
+    return error;
   }
 }
+
+ConsoleLog() {
+  console.log('WORKS')
+}
+
+
 }

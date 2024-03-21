@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { UserService } from '../../app-services';
 import { BusSignComponent } from './bus-sign/bus-sign.component';
 import { UserSignComponent } from './user-sign/user-sign.component';
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @Component({
@@ -37,7 +37,7 @@ export class SignupUserComponent implements OnInit {
     //console.log('Business Go To: ', value)
     this.goBusinessSignUp = value;
     this.Conditions[0] = value;
-
+    console.log('gotoBusiness: ' + this.username);
   }
 
   async handleUserId(value: string) {
@@ -47,6 +47,8 @@ export class SignupUserComponent implements OnInit {
       this.userFound = true;
       this._foundUserID = this._foundUser.u_id;
       this.clientId = this._foundUser.u_id;
+      this.username = this._foundUser.u_username;
+
       //console.log('User Found: ', this.userFound)
       //console.log('Found User: ', this._foundUser)
     } catch (error) {
@@ -80,7 +82,9 @@ export class SignupUserComponent implements OnInit {
     console.log('_foundUserID: ', this._foundUserID)
   }
 
-
+  // ConsoleLog() {
+  //   console.log('WORKS')
+  // }
 
 }
 

@@ -10,7 +10,7 @@ export class User {
     public u_lname: string;
     public u_zip: string;
     public u_priv: number;
-    public hashedPassword: string;
+    public u_pass: string;
     public u_favs: [
       {
         b_id: string;
@@ -35,7 +35,7 @@ export class User {
       u_lname: string,
       u_zip: string,
       u_priv: number,
-      hashedPassword: string,
+      u_pass: string,
       u_favs: [
         {
         b_id: string;
@@ -59,7 +59,7 @@ export class User {
       this.u_lname = u_lname;
       this.u_zip = u_zip;
       this.u_priv = u_priv;
-      this.hashedPassword = hashedPassword;
+      this.u_pass = u_pass;
       this.u_favs = u_favs;
     }
   }

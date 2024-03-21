@@ -14,8 +14,7 @@
 
 @if (goBusinessSignUp && userSubSuccess && showBusinessForm && userFound) {
     <div >
-        <button mat-raised-button (click)="happeningMan()">Go Back</button>
-    <hr>
+        
         <app-bus-sign
             [_foundUser] = clientId
             [username] = username
@@ -23,5 +22,6 @@
     </div>
 }
 
-    
+    <button mat-raised-button (click)="happeningMan()">Go Back</button>
+    <hr>
 <button mat-raised-button routerLink="/login">Back to Login!</button>

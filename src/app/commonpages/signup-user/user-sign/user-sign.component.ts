@@ -37,7 +37,7 @@ export class UserSignComponent implements OnInit {
   @Output() userSubSuccess: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() showBusinessForm: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() clientId: EventEmitter<string> = new EventEmitter<string>();
-  @Output() username: EventEmitter<string> = new EventEmitter<string>();
+  @Output() usernameEmit: EventEmitter<string> = new EventEmitter<string>();
   
   private _userID: string;
   private userId: any;
@@ -212,10 +212,10 @@ export class UserSignComponent implements OnInit {
     
     // Call the processUserSignUp function
     await this.processUserSignUp();
-
+    console.log('Got past processUserSignUp in user only sign up')
     // Get the username from the form
     const username = this.username_pass_form.get('u_username').value.toLowerCase();
-    this.username.emit(username);
+    this.usernameEmit.emit(username);
     
     // Call createProfileImagesEntry and await its response
     const profCompleted = await this.createProfileImagesEntry(this.userId);
@@ -225,6 +225,7 @@ export class UserSignComponent implements OnInit {
     if (profCompleted && profCompleted.acknowledged === true ) {
         // Navigate to the dashboard
         this.r.navigate([`/dashboard/${username}`]);
+        console.log('WE HAVE IT BOYS AND GIRLS')
     } else {
         console.log('Wuh HOOO');
     }
@@ -238,7 +239,7 @@ export class UserSignComponent implements OnInit {
     try {
       // Get the user data from this.userForm
       const userData = this.userForm.value;
-      console.log('UserDATA line 238: ' + Object.values(userData))
+      console.log('UserDATA line 238: ' + Object(userData));
   
       // Call the postUsers function to send the user data to the backend
       const response: any = await this.userService.postUser(userData);
@@ -383,7 +384,7 @@ export class UserSignComponent implements OnInit {
 
     // Get the username from the form
     const username = this.username_pass_form.get('u_username').value.toLowerCase();
-    this.username.emit(username);
+    this.usernameEmit.emit(username);
     // Call createProfileImagesEntry and await its response
     const profCompleted = await this.createProfileImagesEntry(this.userId);
     //console.log('profCompleted', JSON.stringify(profCompleted));

@@ -52,7 +52,7 @@ export class ImageService {
         }
       }).toPromise();
   
-      console.log(`${this.profUserInit}`);
+      console.log(`ProfUserInit URL: ${this.profUserInit}`);
       return response;
     } catch (error) {
       return error;
