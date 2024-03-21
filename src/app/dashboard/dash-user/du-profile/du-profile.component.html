@@ -4,10 +4,8 @@
   @if (!updateCheck) {
     <mat-card class="DashCurrentCard">
         <mat-card-header class="DashCurrentHeader">
-            <mat-card-title class="DashCurrentTitle">Profile Information  </mat-card-title>
-            <mat-card-subtitle class="DashCurrentSubtitle">Current</mat-card-subtitle>
-            
-            <label class="DashCurrentPriv">{{user.u_priv}}</label>
+            <mat-card-title class="DashCurrentTitle"></mat-card-title>
+            <mat-card-subtitle class="DashCurrentSubtitle"></mat-card-subtitle>
         </mat-card-header>
         <mat-card-content id="DashCurrentContent">
           <div class="profilePicContainer">
@@ -25,8 +23,7 @@
           </div>  
             <br>
             <div class="DashCurrentUserInfo">
-                <h2>User Information</h2>
-                <p class="DashCurrentName">Name:    {{user.u_fname}} {{user.u_lname}}</p>
+                <h2 class="DashCurrentName">{{user.u_fname}} {{user.u_lname}}</h2>
                 <p class="DashCurrentName">Email:    {{user.u_email}}</p>
                 <p class="DashCurrentName">Phone:    ({{user.u_phone[0]}}{{user.u_phone[1]}}{{user.u_phone[2]}}) 
                                                       {{user.u_phone[3]}}{{user.u_phone[4]}}{{user.u_phone[5]}}-{{user.u_phone[6]}}{{user.u_phone[7]}}{{user.u_phone[8]}}{{user.u_phone[9]}} </p>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, OnDestroy } from '@angular/core';
+import { Component, OnInit, Output, OnDestroy, EventEmitter } from '@angular/core';
 import { DashUserComponent } from './dash-user/dash-user.component';
 import { DashBusComponent } from './dash-bus/dash-bus.component';
 import { DashAdminComponent } from './dash-admin/dash-admin.component';
@@ -33,6 +33,7 @@ import { Subscription } from 'rxjs';
 export class DashboardComponent implements OnInit, OnDestroy {
   @Output() UserProf: User[] = [];  
   @Output() Profile: any = "";
+  @Output() _uPriv: EventEmitter<number> = new EventEmitter<number>();
   userProfileSubscription: Subscription;
 
   u_priv: number = 10;
@@ -46,6 +47,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   prof: any;
   data: any;
   userInfo: any;
+
 
   constructor( private r: ActivatedRoute,
                private userService: UserService,
@@ -81,11 +83,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   async showUserData() {
-    let response = await this.userProfileService.getUsername('testeroni')
+    let response = await this.userProfileService.getUsername(this.u_name);
     if (response) {
-      console.log('Response: ' + JSON.stringify(response));
+      //console.log('Response: ' + JSON.stringify(response));
       this.u_priv = response.u_priv;
-      console.log(this.u_priv)
+      console.log( 'UPRIV: ' + typeof this.u_priv)
+      this._uPriv.emit(this.u_priv);
+      this.data = response;
+      //console.log(this.u_priv)
     } else {
       console.log('No response for showUserData')
     }
