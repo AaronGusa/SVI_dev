@@ -17,8 +17,10 @@ import { AppServices } from '../../../app-services/app-services.module';
 export class DuAppointComponent {
   username: any = ''; 
   appointments: any; 
-  have_appointments: boolean = false;
-  viewPastAppointments: boolean = false;
+  currentAppointments: any = [];
+  pastAppointments: any = [];
+  has_current_appointments: boolean = false;
+  has_past_appointments: boolean = false;
   cancelConfirm: boolean = false;
   indexNumber: number = null;
   delIndexNumber: number = null;
@@ -31,8 +33,9 @@ constructor(private r: ActivatedRoute,
   ) {}
 
 async ngOnInit() {
-  this.have_appointments = false;
-  this.username = this.r.snapshot.paramMap.get('u_username');
+  this.has_current_appointments = false;
+  console.log(this.r)
+  this.username = this.r.parent.snapshot.paramMap.get('clientUsername');
   console.log('USERNAME: ' + this.username);
   this.getUserAppointments();
 }
@@ -41,10 +44,35 @@ async ngOnInit() {
     this.appointments = await this.aServe.getUserApps(this.username);
 
     console.log('The appointemnts: ' + JSON.stringify(this.appointments));
-    this.have_appointments = true;
+    this.filterAppointments(this.appointments)
   }
   
-  
+  filterAppointments(appointments) {
+    const today = new Date();
+    
+
+    appointments.forEach(appointment => {
+        const appointmentDate = new Date(appointment.app_date);
+        if (appointmentDate >= today) {
+            this.currentAppointments.push(appointment);
+        } else {
+            this.pastAppointments.push(appointment);
+        }
+    });
+
+    if (this.pastAppointments.length === 0) {
+      this.has_past_appointments = false;
+    } else {
+      this.has_past_appointments = true;
+    }
+
+    if (this.currentAppointments.length === 0) {
+      this.has_current_appointments = false;
+      
+    } else {
+      this.has_current_appointments = true;
+    }
+  }
 
   viewDetails() {
 
@@ -65,7 +93,8 @@ async ngOnInit() {
   }
 
   viewPastAppToggle() {
-    this.viewPastAppointments = !this.viewPastAppointments;
+    this.has_past_appointments = !this.has_past_appointments;
+    console.log(this.has_past_appointments)
   }
 
   appointStatus(status: string) {

@@ -2,8 +2,8 @@
     <h2>Appointments</h2>
     <div class="card du-current-appointments">
         <h3>Current Appointments</h3>
-        @if (have_appointments) {
-            @for (a of appointments; track $index) {
+        @if (has_current_appointments) {
+            @for (a of currentAppointments; track $index) {
                 <mat-expansion-panel>
                     <mat-expansion-panel-header>
                         <span>{{ a.app_status }}</span>  
@@ -48,10 +48,16 @@
       </div>
     <div class="card du-past-appointments">
       <h3>Past Appointments</h3>
-      <button (click)="viewPastAppToggle()">Load Past Appointments</button>
-       @if (viewPastAppointments) { 
-        @if (have_appointments) {
-            @for (a of appointments; track $index) {
+      @if (has_past_appointments) {
+        <button mat-raised-button (click)="viewPastAppToggle()">Hide Past Appointments</button>
+      } @else {
+        <button mat-raised-button color='primary' (click)="viewPastAppToggle()">Show Past Appointments</button>
+
+      }
+       
+      @if (has_past_appointments) { 
+        @if (pastAppointments) {
+            @for (a of pastAppointments; track $index) {
                 <mat-expansion-panel>
                     <mat-expansion-panel-header>
                         <span>{{ a.app_status}}</span>  

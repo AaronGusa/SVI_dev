@@ -1,3 +1,4 @@
+@if (!isLoading) {
 <div class="userDash_review">
 @for (r of reviewArray; track $index) {
     <mat-expansion-panel>
@@ -18,3 +19,6 @@
 
 }
 </div>
+} @else {
+    <app-loading></app-loading>
+}

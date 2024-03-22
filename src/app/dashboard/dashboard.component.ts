@@ -57,7 +57,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   async ngOnInit() {
     // Grab username from params
     this.r.params.subscribe(params => {
-      console.log("r params " + params['clientUsername']);
+      //console.log("r params " + params['clientUsername']);
       this.u_name = params['clientUsername'];
     });
     this.showUserData();
@@ -79,7 +79,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   async loadUserProfile() {
     // Fetch client profile
     this.Profile = await this.userService.fetchUsername(this.u_name);
-    console.log('Profile: ' + this.Profile)
+    //console.log('Profile: ' + this.Profile)
   }
 
   async showUserData() {
@@ -87,7 +87,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     if (response) {
       //console.log('Response: ' + JSON.stringify(response));
       this.u_priv = response.u_priv;
-      console.log( 'UPRIV: ' + typeof this.u_priv)
+      //console.log( 'UPRIV: ' + typeof this.u_priv)
       this._uPriv.emit(this.u_priv);
       this.data = response;
       //console.log(this.u_priv)

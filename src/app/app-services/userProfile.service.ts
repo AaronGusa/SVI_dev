@@ -24,12 +24,13 @@ export class UserProfileService {
       // user[0].assignments.splice(0,1);
       this.UserProf = user;
       //this.UserProf = JSON.stringify(user);
-      console.log(typeof user + user)
+      //console.log(typeof user + user)
       return this.UserProf;
     } catch (error) {
       return error;
     }
   }
+
 
   async putUserUpdate(u_id, payload) {
     try {
