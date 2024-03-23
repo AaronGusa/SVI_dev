@@ -1,9 +1,9 @@
 <div class="avatar-container">
-    @if (userPicData.u_profImage) {
-        <img class="profile_pic" 
+    @if (busPicData.b_profImage) {
+        <img class="business_profile_image" 
             [ngClass]="{'box-shadow-avatar': !!file}"
             [ngStyle]="{backgroundImage: 'url(' + file + ')'}"  
-            src={{userPicData.u_profImage}} alt="userProf">
+            src={{busPicData.b_profImage}} alt="userProf">
     
     } @else {
     

@@ -11,7 +11,9 @@ import { BusinessSubmit } from '../models/businessSubmit.model';
 export class BusinessService {
   private businessUrl = 'https://stellavibe.onrender.com/businesses';
   private busIDGet = '/bus/';
+  private busUserGet = '/usr/';
   private busPost = 'https://stellavibe.onrender.com/businesses/newbus';
+  private busPut = '/busUp/';
 
   constructor(private http: HttpClient) { }
 
@@ -23,11 +25,20 @@ export class BusinessService {
     return this.http.get(this.businessUrl + this.busIDGet + `${b_id}`);
   }
 
+  fetchUserBusiness(u_id: number) {
+    console.log(this.businessUrl + this.busUserGet + `${u_id}`)
+    return this.http.get(this.businessUrl + this.busUserGet + `${u_id}`).toPromise();
+  }
+
   postBusiness(business) {
     console.log(`${this.busPost}`);
     console.log('Line 21 of BusinessService: ', JSON.stringify(business));
     return this.http.post(`${this.busPost}`, business).toPromise();
   };
+
+  putBusiness(b_id: number, payload) {
+    return this.http.put(`${this.businessUrl}${this.busPut}${b_id}`, payload );
+  }
   
 
 

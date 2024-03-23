@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { firstValueFrom } from 'rxjs';
 //import { createWorker, encode } from '@squoosh/lib';
 
 @Injectable({
@@ -11,7 +12,7 @@ export class ImageService {
   private busProfImageUrl = 'https://stellavibe.onrender.com/images/profImages/bus/';
   private profUserImage = 'https://stellavibe.onrender.com/images/profImages/user_update/';
   private profBusImage = 'https://stellavibe.onrender.com/images/profImages/bus_update/';
-  private busServiceImages = 'https://stellavibe.onrender.com/images/busImages';
+  private busServiceImages = 'https://stellavibe.onrender.com/images/busImages/';
   private profUserInit = 'https://stellavibe.onrender.com/images/profileImgInit';
 
 
@@ -127,9 +128,12 @@ export class ImageService {
     }
   }
 
-  async updateBusProfileImage(b_id: number, busImageData: string) {
+  async updateBusProfileImage(b_id: string, busImageData: string) {
     try {
-      const updatedBusImage = await this.http.put(`${this.profBusImage}${b_id}`, { u_profImage: busImageData });
+      //console.log(`${this.profBusImage}${b_id}`);
+      //console.log(busImageData);
+      const updatedBusImage = await firstValueFrom(this.http.put(`${this.profBusImage}${b_id}`, { b_profImage: busImageData }));;
+     // console.log(updatedBusImage);
       return updatedBusImage;
     } catch (error) {
       console.error('Error updating Business Profile Pic: ' + error);

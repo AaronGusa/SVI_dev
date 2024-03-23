@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
@@ -14,7 +14,7 @@ import { AppServices } from '../../../app-services/app-services.module';
   templateUrl: './du-appoint.component.html',
   styleUrl: './du-appoint.component.css'
 })
-export class DuAppointComponent {
+export class DuAppointComponent implements OnInit {
   username: any = ''; 
   appointments: any; 
   currentAppointments: any = [];

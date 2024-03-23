@@ -67,7 +67,7 @@ export class UserService {
           // Handle the response here
           let responseJSON = JSON.stringify(response)
           // console.log(response.length);
-          //console.log(response);
+          console.log(response);
           //console.log(response);
           return responseJSON;
         } else {

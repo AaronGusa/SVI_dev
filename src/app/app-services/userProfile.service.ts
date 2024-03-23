@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { UserService } from './user.service';
 import { User } from '../models/user.model';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, firstValueFrom } from 'rxjs';
 import { toArray } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 
@@ -11,7 +11,8 @@ import { HttpClient } from '@angular/common/http';
 export class UserProfileService {
   private userProfileSubject = new BehaviorSubject<User | null>(null);
   private usernameURL = 'https://stellavibe.onrender.com/users';
-  private usernameURLPost = 'https://stellavibe.onrender.com/users/userup/'
+  private usernameURLPost = 'https://stellavibe.onrender.com/users/userup/';
+  private busURLPut = 'https://stellavibe.onrender.com/businesses/busUpdate/';
   UserProf: any;
   userData: any;
 
@@ -43,6 +44,19 @@ export class UserProfileService {
       throw error; 
     }
   }
+
+  async putBusUpdate(b_id: string , payload) {
+    try {
+      console.log(`${this.busURLPut}${b_id}`);
+      const response = await firstValueFrom(this.http.put(`${this.busURLPut}${b_id}`, payload));
+      console.log('PUT request successful:', response);
+      return response; 
+    } catch (error) {
+      console.error('PUT request failed:', error);
+      return error; 
+    }
+  }
+
 
   // loadUserProfile(username: string) {
   //   try {

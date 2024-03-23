@@ -1,3 +1,4 @@
+@if (!isLoading) {
 <div class="DashCurrentContainer">
     
     @if (!updateCheck) {
@@ -8,18 +9,22 @@
                 @if (business.b_active === true) {
                     <label class="DashCurrentPriv">Active</label>
                 } @else {
-                    <label class="DashCurrentPriv">Not Active</label>
+                    <label class="DashCurrentPriv">Inactive</label>
                 }
             </mat-card-header>
             <mat-card-content id="DashCurrentContent">
                 <div class="DashCurrentImageCont">
-                    <img class="DashCurrentImage" src="https://www.dictionary.com/e/wp-content/uploads/2018/04/nailed-it.jpg" alt="Keanu Reeves">
+                    <!-- <img class="business_profile_image " src={{busImages.b_profImage}}  alt="business profile image"> -->
+                    <app-db-profile-image
+                    [b_id] = business.b_id
+                    ></app-db-profile-image>
                 </div>
                 <div class="DashCurrentbusinessInfo">
                     <h2>Business Information</h2>
                     <p class="DashCurrentName">Name:    {{business.b_name}} </p>
                     <p class="DashCurrentName">Email:    {{business.b_email}}</p>
-                    <p class="DashCurrentName">Phone:    {{business.b_phone}}</p>
+                    <p class="DashCurrentName">Phone:    ({{business.b_phone[0]}}{{business.b_phone[1]}}{{business.b_phone[2]}}) 
+                        {{business.b_phone[3]}}{{business.b_phone[4]}}{{business.b_phone[5]}}-{{business.b_phone[6]}}{{business.b_phone[7]}}{{business.b_phone[8]}}{{business.b_phone[9]}} </p>
                     <p class="DashCurrentName">Site:    {{business.b_website}}</p>
 
                 </div>
@@ -34,21 +39,32 @@
     
             </mat-card-content>
             <mat-card-footer>
-                <button mat-raised-button (click)="updateSwitch()">Update</button>
+                <button mat-raised-button color="primary" (click)="updateSwitch()">Update</button>
             </mat-card-footer>
         </mat-card>
     } @else {
         <mat-card>
             <h1>Update Information</h1>
-            <form class="Db_Prof_Form" [formGroup]="bProfileForm">
+            <form class="Db_Prof_Form"  [formGroup]="bProfileForm" (ngSubmit)="onUpdateBusProf()">
                 <mat-form-field>
                     <label for="b-businessname">Business Name: </label>
-                    <input matInput id="b-businessname" name="b-businessname" type="text" formControlName="b_name">
+                    <input matInput
+                           id="b-businessname" 
+                           name="b-businessname" 
+                           type="text" 
+                           formControlName="b_name"
+                           >
                 </mat-form-field>
                 
                 <mat-form-field>
                     <label for="b-phone">Phone: </label>
-                    <input matInput id="b-phone" name="b-phone" type="tel" formControlName="b_phone">
+                    <input matInput 
+                           id="b-phone" 
+                           name="b-phone" 
+                           type="tel" 
+                           formControlName="b_phone"
+                        
+                           >
                 </mat-form-field>
                 
                 <mat-form-field>
@@ -82,10 +98,10 @@
                 </mat-form-field>
                 
                 
-                <mat-checkbox id="b-active" formControlName="b_active">Active</mat-checkbox>
+                <mat-checkbox id="b-active" formControlName="b_active" checked={{business.b_active}}>Active?</mat-checkbox>
                 
                 <mat-card-actions>
-                    <button id="subButton" mat-raised-button type="submit" (click)="onUpdateUserProf()">Update</button>
+                    <button id="subButton" mat-raised-button type="submit" (click)="onUpdateBusProf()">Update</button>
                     <button mat-raised-button color="warn" (click)="updateSwitch()">Cancel</button>
                 </mat-card-actions>
             </form>
@@ -95,7 +111,9 @@
     }
     
      </div>
+
+} @else {
+    <app-loading></app-loading>
+}
      
-    <!--  
-    
-       -->
+ 
