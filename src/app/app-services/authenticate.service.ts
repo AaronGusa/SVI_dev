@@ -10,7 +10,7 @@ interface AuthResponseData{
 export class AuthService {
     private loggedIn = false;
     passwordHash: string = "";
-    private tempEmailValue: string = "stellavi.dev@outlook.com"; 
+    private tempUserValue: string = "stellavi"; 
     private tempPassValue = "Stellavi24";
     private tempPassHashed: string = "";
     //tempPassValue: string = "6833d0884cbdf610e27c2826acd316fd046cf9613a13fa38f39da6e8516da9e44aa944b4b2aee0dfa345623bc6e94b23c2b5ca053c9f4dd95ca1fee1e226e458";
@@ -20,7 +20,7 @@ export class AuthService {
     constructor(private http: HttpClient,
                 private r: Router) { }
 
-    async login(email: string, password: string) {
+    async login(username: string, password: string) {
         try {
             this.tempPassHashed = await this.hashPassword(this.tempPassValue);
             this.passwordHash = await this.hashPassword(password);
@@ -35,11 +35,11 @@ export class AuthService {
             console.error('Error hashing password:', error);
         }
 
-        if (email === this.tempEmailValue && this.passwordHash === this.tempPassHashed) {
+        if (username === this.tempUserValue && this.passwordHash === this.tempPassHashed) {
             console.log('Email and Password Pass')
             
             console.log(this.tempPackage);
-            this.r.navigate(['/dashboard']);
+            this.r.navigate([`/dashboard/${username}`]);
             this.loggedIn = true;
             this.tempPackage = [{ auth: this.tempToken, u_priv: 1, loggedIn: this.loggedIn}];
         } else {

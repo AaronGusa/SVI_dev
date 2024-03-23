@@ -25,7 +25,7 @@ export class DashProfileImageComponent implements OnInit, ControlValueAccessor{
   async ngOnInit() {
     await this.getUserPic(this.u_id);
     console.log(this.u_id);
-    console.log("Properties of userPicData:", Object.keys(this.userPicData));
+    console.log("Properties of userPicData:", Object.entries(this.userPicData));
 
   }
 

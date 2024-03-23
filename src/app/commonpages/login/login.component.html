@@ -13,17 +13,16 @@
             <mat-card-content>
                 <form #logForm="ngForm" (ngSubmit)="onSubmit(logForm)">
                     <mat-form-field>
-                        <mat-label for="email">E-mail</mat-label>
+                        <mat-label for="username">Username</mat-label>
                         <input matInput 
-                                type="email"
-                                id="email"
+                                id="username"
                                 class="form-control"
                                 ngModel
-                                name="email"
+                                name="username"
                                 required
-                                email
+                                
                         >
-                        <mat-error>Please enter a valid email address.</mat-error>
+                        <mat-error>Please enter a valid username.</mat-error>
                     </mat-form-field>
                     |
                     <mat-form-field>
@@ -42,9 +41,10 @@
             
             @if (logForm.valid) {
                 <h2>✅</h2>
-              } @else {
-                <h2>❌</h2>
               }
+               <!-- @else {
+                <h2>❌</h2>
+              } -->
             <mat-card-actions>
                 <button mat-raised-button 
                         type=submit

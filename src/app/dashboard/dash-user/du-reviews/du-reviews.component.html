@@ -1,23 +1,30 @@
 @if (!isLoading) {
 <div class="userDash_review">
-@for (r of reviewArray; track $index) {
-    <mat-expansion-panel>
+    <h1>My Reviews</h1>
+    @for (r of reviewArray; track $index) {
+        
+        <mat-expansion-panel>
+            
 
-        <mat-expansion-panel-header >
-            <div class="du_review_expanHeader">
-                <h2>{{ r.b_id }}: {{r.u_id}}</h2>
-                
-                <p>|   {{r.revDate | date}}</p>
+            <mat-expansion-panel-header >
+                <div class="du_review_expanHeader">
+                    @if (r.active_review) {
+                        <p>✅</p>
+                    } @else {
+                        ❌
+                    }
+                    <h2>{{ r.b_name }}</h2>
+                    
+                    <p>|   {{r.revDate | date}}</p>
+                </div>
+            </mat-expansion-panel-header>
+
+            <div>
+                <p>{{r.rev_content}}</p>
+                <p>{{ r.rating }} stars</p>
             </div>
-        </mat-expansion-panel-header>
-
-        <div>
-            <p>{{r.rev_content}}</p>
-            <p>{{ r.rating }} stars</p>
-        </div>
-    </mat-expansion-panel>
-
-}
+        </mat-expansion-panel>
+    }
 </div>
 } @else {
     <app-loading></app-loading>

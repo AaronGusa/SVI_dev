@@ -173,7 +173,7 @@ async showUserData() {
         console.log('Line 174 DUPROFILE COMP' + this.user);
       } else {
         // If response is not an array, try to parse it
-        this.user = (response);
+        this.user = response;
         console.log(this.user)
       }
       this.isLoading = false;

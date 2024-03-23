@@ -43,7 +43,7 @@ export class LoginComponent {
 
   constructor (private auth: AuthService) {}
 
-  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
+  //emailFormControl = new FormControl('', [Validators.required, Validators.email]);
 
   matcher = new MyErrorStateMatcher();
 
@@ -55,7 +55,7 @@ export class LoginComponent {
 
   onSubmit(form: NgForm) {
     console.log(form.value);
-    this.auth.login(form.value.email, form.value.password);
+    this.auth.login(form.value.username, form.value.password);
     form.reset();
   }
 }

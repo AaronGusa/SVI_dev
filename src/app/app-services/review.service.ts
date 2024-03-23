@@ -12,8 +12,8 @@ export class ReviewService {
 
   async fetchReviews() {
     try {
-      const reviews = await this.http.get(this.reviewUrl).toPromise();
-      return reviews;
+    
+      return await this.http.get(this.reviewUrl).toPromise();
     } catch (error) {
       console.error('Error Fetching Reviews: ', error);
       throw error;

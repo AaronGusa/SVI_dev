@@ -34,16 +34,16 @@ constructor(private r: ActivatedRoute,
 
 async ngOnInit() {
   this.has_current_appointments = false;
-  console.log(this.r)
+  // console.log(this.r)
   this.username = this.r.parent.snapshot.paramMap.get('clientUsername');
-  console.log('USERNAME: ' + this.username);
+  // console.log('USERNAME: ' + this.username);
   this.getUserAppointments();
 }
 
   async getUserAppointments() {
     this.appointments = await this.aServe.getUserApps(this.username);
 
-    console.log('The appointemnts: ' + JSON.stringify(this.appointments));
+    // console.log('The appointemnts: ' + JSON.stringify(this.appointments));
     this.filterAppointments(this.appointments)
   }
   
@@ -94,7 +94,7 @@ async ngOnInit() {
 
   viewPastAppToggle() {
     this.has_past_appointments = !this.has_past_appointments;
-    console.log(this.has_past_appointments)
+    // console.log(this.has_past_appointments)
   }
 
   appointStatus(status: string) {
@@ -115,8 +115,8 @@ async ngOnInit() {
   // }
 
   cancelConfirmation(index: number) {
-    // console.log(panelId);
-    // console.log(this.showConfirmation)
+    // // console.log(panelId);
+    // // console.log(this.showConfirmation)
     // this.showConfirmation[panelId] = !this.showConfirmation[panelId];
     this.indexNumber = index;
     this.cancelConfirm = true;
