@@ -1,8 +1,15 @@
-import { Component } from '@angular/core';
-import {MatExpansionModule, matExpansionAnimations} from '@angular/material/expansion';
+import { Component, OnInit } from '@angular/core';
+import {MatExpansionModule} from '@angular/material/expansion';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-import { DATE_PIPE_DEFAULT_OPTIONS, DatePipe } from '@angular/common';
+import { DatePipe } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { AppServices } from '../../../app-services/app-services.module';
+import { BusinessService } from '../../../app-services';
+import { UserService } from '../../../app-services';
+import { firstValueFrom } from 'rxjs';
+
 
 @Component({
   selector: 'app-db-appointments',
@@ -12,255 +19,100 @@ import { DATE_PIPE_DEFAULT_OPTIONS, DatePipe } from '@angular/common';
   styleUrl: './db-appointments.component.css'
 })
 export class DbAppointmentsComponent {
-  pastAppointments: any[] = [
-    {
-      b_id: "23-001",
-      u_id: "1004",
-      dapp_req_created: "2024-01-25T00:00:00.000Z",
-      dapp: "2024-02-14T00:00:00.000Z",
-      sid_req: "2001",
-      app_confirmed: "pending",
-      dapp_created: null,
-    },
-    {
-      b_id: "23-002",
-      u_id: "1005",
-      dapp_req_created: "2024-01-27T00:00:00.000Z",
-      dapp: "2024-02-20T00:00:00.000Z",
-      sid_req: "3001",
-      app_confirmed: "confirmed",
-      dapp_created: "2024-02-15T00:00:00.000Z",
-    },
-    {
-      b_id: "23-003",
-      u_id: "1006",
-      dapp_req_created: "2024-01-30T00:00:00.000Z",
-      dapp: "2024-02-08T13:00:00.000Z",
-      sid_req: "1001",
-      app_confirmed: "confirmed",
-      dapp_created: "2024-02-02T10:00:00.000Z",
-    },
-    {
-      b_id: "23-004",
-      u_id: "1007",
-      dapp_req_created: "2024-02-01T00:00:00.000Z",
-      dapp: "2024-02-12T15:00:00.000Z",
-      sid_req: "4001",
-      app_confirmed: "rejected",
-      dapp_created: null,
-    },
-    {
-      b_id: "23-0027",
-      u_id: "1127",
-      dapp_req_created: "2024-02-13T00:00:00.000Z",
-      dapp: "2024-02-22T11:00:00.000Z",
-      sid_req: "2006",
-      app_confirmed: "confirmed",
-      dapp_created: "2024-02-16T14:00:00.000Z",
-    },
-    {
-      b_id: "23-0028",
-      u_id: "1128",
-      dapp_req_created: "2024-02-14T00:00:00.000Z",
-      dapp: "2024-02-22T11:00:00.000Z",
-      sid_req: "5",
-      app_confirmed: "pending",
-      dapp_created: null,
-    },
-    {
-      b_id: "23-0029",
-      u_id: "1129",
-      dapp_req_created: "2024-02-15T00:00:00.000Z",
-      dapp: "2024-02-23T09:00:00.000Z",
-      sid_req: "3002",
-      app_confirmed: "confirmed",
-      dapp_created: "2024-02-17T12:00:00.000Z",
-    },
-    {
-      b_id: "23-0031",
-      u_id: "1131",
-      dapp_req_created: "2024-02-05T12:00:00.000Z",
-      dapp: null,
-      sid_req: "4008",
-      app_confirmed: "rejected",
-      dapp_created: null,
-    },
-    {
-      b_id: "23-0032",
-      u_id: "1132",
-      dapp_req_created: "2024-02-08T07:00:00.000Z",
-      dapp: "2024-02-22T10:00:00.000Z",
-      sid_req: "1005",
-      app_confirmed: "confirmed",
-      dapp_created: "2024-02-16T08:00:00.000Z",
-    },
-    {
-      b_id: "23-0033",
-      u_id: "1133",
-      dapp_req_created: "2024-02-10T16:00:00.000Z",
-      dapp: "2024-02-16T12:00:00.000Z",
-      sid_req: "4002",
-      app_confirmed: "confirmed",
-      dapp_created: "2024-02-12T11:00:00.000Z",
-    },
-    {
-      b_id: "23-0034",
-      u_id: "1134",
-      dapp_req_created: "2024-02-12T09:00:00.000Z",
-      dapp: "2024-02-22T11:00:00.000Z",
-      sid_req: "2",
-      app_confirmed: "pending",
-      dapp_created: null,
-    },
-    {
-      b_id: "23-0035",
-      u_id: "1135",
-      dapp_req_created: "2024-02-14T18:00:00.000Z",
-      dapp: "2024-02-21T15:00:00.000Z",
-      sid_req: "3002",
-      app_confirmed: "confirmed",
-      dapp_created: "2024-02-19T12:00:00.000Z",
-    },
-    {
-      b_id: "23-0036",
-      u_id: "1136",
-      dapp_req_created: "2024-02-16T05:00:00.000Z",
-      dapp: null,
-      sid_req: "4010",
-      app_confirmed: "pending",
-      dapp_created: null,
-    }
-  ];
-  currentAppointments: any[] = [
-    {
-      b_id: "23-001",
-      u_id: "1004",
-      dapp_req_created: "2024-01-25T00:00:00.000Z",
-      dapp: "2024-02-14T00:00:00.000Z",
-      sid_req: "2001",
-      app_confirmed: "pending",
-      dapp_created: null,
-    },
-    {
-      b_id: "23-002",
-      u_id: "1005",
-      dapp_req_created: "2024-01-27T00:00:00.000Z",
-      dapp: "2024-02-20T00:00:00.000Z",
-      sid_req: "3001",
-      app_confirmed: "confirmed",
-      dapp_created: "2024-02-15T00:00:00.000Z",
-    },
-    {
-      b_id: "23-003",
-      u_id: "1006",
-      dapp_req_created: "2024-01-30T00:00:00.000Z",
-      dapp: "2024-02-08T13:00:00.000Z",
-      sid_req: "1001",
-      app_confirmed: "confirmed",
-      dapp_created: "2024-02-02T10:00:00.000Z",
-    },
-    {
-      b_id: "23-004",
-      u_id: "1007",
-      dapp_req_created: "2024-02-01T00:00:00.000Z",
-      dapp: "2024-02-12T15:00:00.000Z",
-      sid_req: "4001",
-      app_confirmed: "rejected",
-      dapp_created: null,
-    },
-    {
-      b_id: "23-0027",
-      u_id: "1127",
-      dapp_req_created: "2024-02-13T00:00:00.000Z",
-      dapp: "2024-02-22T11:00:00.000Z",
-      sid_req: "2006",
-      app_confirmed: "confirmed",
-      dapp_created: "2024-02-16T14:00:00.000Z",
-    },
-    {
-      b_id: "23-0028",
-      u_id: "1128",
-      dapp_req_created: "2024-02-14T00:00:00.000Z",
-      dapp: null,
-      sid_req: "5",
-      app_confirmed: "pending",
-      dapp_created: null,
-    },
-    {
-      b_id: "23-0029",
-      u_id: "1129",
-      dapp_req_created: "2024-02-15T00:00:00.000Z",
-      dapp: "2024-02-23T09:00:00.000Z",
-      sid_req: "3002",
-      app_confirmed: "confirmed",
-      dapp_created: "2024-02-17T12:00:00.000Z",
-    },
-    {
-      b_id: "23-0031",
-      u_id: "1131",
-      dapp_req_created: "2024-02-05T12:00:00.000Z",
-      dapp: null,
-      sid_req: "4008",
-      app_confirmed: "rejected",
-      dapp_created: null,
-    },
-    {
-      b_id: "23-0032",
-      u_id: "1132",
-      dapp_req_created: "2024-02-08T07:00:00.000Z",
-      dapp: "2024-02-22T10:00:00.000Z",
-      sid_req: "1005",
-      app_confirmed: "confirmed",
-      dapp_created: "2024-02-16T08:00:00.000Z",
-    },
-    {
-      b_id: "23-0033",
-      u_id: "1133",
-      dapp_req_created: "2024-02-10T16:00:00.000Z",
-      dapp: "2024-02-16T12:00:00.000Z",
-      sid_req: "4002",
-      app_confirmed: "confirmed",
-      dapp_created: "2024-02-12T11:00:00.000Z",
-    },
-    {
-      b_id: "23-0034",
-      u_id: "1134",
-      dapp_req_created: "2024-02-12T09:00:00.000Z",
-      dapp: null,
-      sid_req: "2",
-      app_confirmed: "pending",
-      dapp_created: null,
-    },
-    {
-      b_id: "23-0035",
-      u_id: "1135",
-      dapp_req_created: "2024-02-14T18:00:00.000Z",
-      dapp: "2024-02-21T15:00:00.000Z",
-      sid_req: "3002",
-      app_confirmed: "confirmed",
-      dapp_created: "2024-02-19T12:00:00.000Z",
-    },
-    {
-      b_id: "23-0036",
-      u_id: "1136",
-      dapp_req_created: "2024-02-16T05:00:00.000Z",
-      dapp: null,
-      sid_req: "4010",
-      app_confirmed: "pending",
-      dapp_created: null,
-    }
-  ];
+  username: any = ''; 
+  userProf: any;
+  busProf: any;
 
-  viewPastAppointments: boolean = false;
+  b_id: string;
+  appointments: any; 
+  currentAppointments: any = [];
+  pastAppointments: any = [];
+  has_current_appointments: boolean = false;
+  has_past_appointments: boolean = false;
   cancelConfirm: boolean = false;
   indexNumber: number = null;
   delIndexNumber: number = null;
   deleteConfirm: boolean = false;
-  today = new Date;
 
   showConfirmation: { [key: string]: boolean } = {};
 
+constructor(private r: ActivatedRoute,
+            private aServe: AppServices,
+            private bServe: BusinessService,
+            private uServe: UserService
+  ) {}
+
+  async ngOnInit() {
+    this.has_current_appointments = false;
+    this.username = this.r.parent.parent.snapshot.paramMap.get('clientUsername');
+    await this.getClientProfile(); // Wait for getClientProfile to finish before proceeding
+  }
   
+  async getClientProfile() {
+    this.userProf = await this.uServe.fetchUsername(this.username); // Wait for fetchUsername to resolve
+    
+    if (this.userProf.u_id) {
+      await this.getBusB_id(this.userProf.u_id); // Now call getBusB_id after userProf is set
+    } else {
+      console.log('UserProf delayed');
+    }
+  }
+  
+  async getBusB_id(userID) {
+    //console.log('UserID passed in: ' + userID)
+    this.busProf = await this.bServe.fetchUserBusiness(userID);
+    
+    if (this.busProf.b_id) {
+      await this.getBusAppointments(this.busProf.b_id)
+    }
+
+  }
+
+  async getClientInfo(appointments) {
+    for (let i = 0; i < appointments.length; i++) {
+      const appointment = appointments[i];
+      const userProfile: any = await this.uServe.fetchUsername(appointment.u_username);
+      if (userProfile) {
+        appointment.u_fname = userProfile.u_fname; // Assuming 'u_fname' is the property for user first name
+        appointment.u_lname = userProfile.u_lname; // Assuming 'u_lname' is the property for user last name
+      }
+    }
+  }
+
+  async getBusAppointments(b_id) {
+    this.appointments = await this.aServe.getBusApps(b_id);
+    await this.getClientInfo(this.appointments);
+    //console.log('The appointemnts: ' + JSON.stringify(this.appointments));
+    this.filterAppointments(this.appointments);
+    //await this.getClientInfo(this.appointments);
+  }
+  
+  filterAppointments(appointments) {
+    const today = new Date();
+    
+
+    appointments.forEach(appointment => {
+        const appointmentDate = new Date(appointment.app_date);
+        if (appointmentDate >= today) {
+            this.currentAppointments.push(appointment);
+        } else {
+            this.pastAppointments.push(appointment);
+        }
+    });
+
+    if (this.pastAppointments.length === 0) {
+      this.has_past_appointments = false;
+    } else {
+      this.has_past_appointments = true;
+    }
+
+    if (this.currentAppointments.length === 0) {
+      this.has_current_appointments = false;
+      
+    } else {
+      this.has_current_appointments = true;
+    }
+  }
 
   viewDetails() {
 
@@ -281,7 +133,8 @@ export class DbAppointmentsComponent {
   }
 
   viewPastAppToggle() {
-    this.viewPastAppointments = !this.viewPastAppointments;
+    this.has_past_appointments = !this.has_past_appointments;
+    // console.log(this.has_past_appointments)
   }
 
   appointStatus(status: string) {
@@ -302,8 +155,8 @@ export class DbAppointmentsComponent {
   // }
 
   cancelConfirmation(index: number) {
-    // console.log(panelId);
-    // console.log(this.showConfirmation)
+    // // console.log(panelId);
+    // // console.log(this.showConfirmation)
     // this.showConfirmation[panelId] = !this.showConfirmation[panelId];
     this.indexNumber = index;
     this.cancelConfirm = true;
@@ -313,5 +166,7 @@ export class DbAppointmentsComponent {
     this.delIndexNumber = index;
     this.deleteConfirm = false;
   }
+
+  
 
 }

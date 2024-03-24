@@ -26,7 +26,7 @@ export class BusinessService {
   }
 
   fetchUserBusiness(u_id: number) {
-    console.log(this.businessUrl + this.busUserGet + `${u_id}`)
+    //console.log(this.businessUrl + this.busUserGet + `${u_id}`)
     return this.http.get(this.businessUrl + this.busUserGet + `${u_id}`).toPromise();
   }
 

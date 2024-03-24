@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, firstValueFrom } from 'rxjs';
 import { User } from '../models/user.model';
 // import * as bcrypt from 'bcryptjs';
 
@@ -8,9 +8,9 @@ import { User } from '../models/user.model';
   providedIn: 'root'
 })
 export class UserService {
-  private userUrl = 'https://stellavibe.onrender.com/users';
-  private userIDGet = '/user/';
-  private usernameVerify = '/unameCheck/'
+  private userUrl = 'https://stellavibe.onrender.com/users/';
+  private userIDGet = 'user/';
+  private usernameVerify = 'unameCheck/'
   // private userUrl = 'localhost:3000/users';
 
 
@@ -36,7 +36,7 @@ export class UserService {
     try{
       id = id.toString();
       // console.log(typeof id)
-      const fetchedUser = await this.http.get(`${this.userUrl}${this.userIDGet}${id}`).toPromise();
+      const fetchedUser = await firstValueFrom(this.http.get(`${this.userUrl}${this.userIDGet}${id}`));
       // console.log(`${this.userUrl}${this.userIDGet}${id}`)
       // console.log(`Fetched User Data: ${fetchedUser}`)
       return fetchedUser; 
@@ -49,7 +49,7 @@ export class UserService {
 
   fetchUser(id: string) {
     try{
-      const user = this.http.get(`${this.userUrl}/${id}`).toPromise();
+      const user = this.http.get(`${this.userUrl}${id}`).toPromise();
       return user;
     } catch (error) {
       console.error('Error Fetching User: ', error);
@@ -60,16 +60,11 @@ export class UserService {
   async fetchUsername(username: string) {
     try {
       // Make a GET request to retrieve user profile via username
-      const response = await this.http.get(`${this.userUrl}/uname/${username}`);
+      const response = await firstValueFrom(this.http.get(`${this.userUrl}/uname/${username}`));
       //console.log(response);
       if (response) {
-  
-          // Handle the response here
-          let responseJSON = JSON.stringify(response)
-          // console.log(response.length);
-          console.log(response);
-          //console.log(response);
-          return responseJSON;
+  ;
+          return response;
         } else {
           const Error = JSON.stringify({error:'Error Verifying Username: '+ username});
           return Error;
