@@ -1,3 +1,6 @@
+@if (isLoading) {
+    <app-loading></app-loading>
+} @else {
 <div class="container">
     <h2>Appointments</h2>
     <div class="card du-current-appointments">
@@ -26,12 +29,29 @@
                         <mat-panel-title class="du-appointment-title">
                             <h2>{{a.u_fname}} {{a.u_lname}}</h2>
                             <h4>{{a.app_date | date: "MMM dd, yyyy"}}</h4>
+                            <p>{{a.s_name}}</p>
+
                         </mat-panel-title>
                     </mat-expansion-panel-header>
                         <p>Time: {{a.app_time | date: "hh:mm a" }}</p>
+                        <p>Requested: {{a.app_created | date: "MMM dd, yyyy" }}</p>
                         <span class="du-appointment-date">Business: {{a.b_name}}</span>
                         <span class="du-appointment-description"></span>
                         <div>
+                            <span>
+                                @switch (a.app_status) {
+                                    @case ('pending') {
+                                       <button mat-raised-button color="primary" (click)="confirmAppointment($index)">Confirm Appointment</button>
+                                    }
+                                    @case ('rejected') {
+                                        <button mat-raised-button color="primary" (click)="confirmAppointment($index)">ReInstate Appointment</button>
+
+                                    }
+                                    @default {
+                                        <p></p>
+                                    }
+                                }  
+                            </span> 
                             @if (cancelConfirm && indexNumber === $index) {
                                 <span>Are you sure?</span>
                                 <button mat-raised-button color="warn" (click)="cancelAppointment($index)">Confirm</button>
@@ -39,7 +59,7 @@
                                 <button mat-raised-button (click)="cancelConfirmation($index)">Cancel Appointment</button>
                             }
                         </div>
-            
+                        
                 </mat-expansion-panel>
           }
           }  @else {
@@ -60,7 +80,7 @@
             @for (a of pastAppointments; track $index) {
                 <mat-expansion-panel>
                     <mat-expansion-panel-header>
-                        <span>{{ a.app_status}}</span>  
+                        <!-- <span>{{ a.app_status}}</span>   -->
                         <span>
                             @switch (a.app_confirmed) {
                                 @case ('confirmed') {
@@ -77,9 +97,9 @@
                                 }
                             }  
                         </span>     
-                        <mat-panel-title class="du-appointment-title">Appointment for {{a.u_fname}} {{a.u_lname}}</mat-panel-title>
+                        <mat-panel-title class="du-appointment-title">Appointment for {{a.u_fname}} {{a.u_lname}}: {{a.s_name}}</mat-panel-title>
                     </mat-expansion-panel-header>
-                        <span class="du-appointment-date">Business: {{a.b_id}}</span>
+                        <span class="du-appointment-date">Business: {{a.b_name}}</span>
                         <span class="du-appointment-description"></span>
                         <div>
                             @if (deleteConfirm && delIndexNumber === $index) {
@@ -101,3 +121,4 @@
 
     
   </div>
+}

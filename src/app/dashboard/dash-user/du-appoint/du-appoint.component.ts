@@ -5,7 +5,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { AppServices } from '../../../app-services/app-services.module';
+import { AppointmentService } from '../../../app-services';
 
 @Component({
   selector: 'app-du-appoint',
@@ -29,7 +29,7 @@ export class DuAppointComponent implements OnInit {
   showConfirmation: { [key: string]: boolean } = {};
 
 constructor(private r: ActivatedRoute,
-            private aServe: AppServices
+            private aServe: AppointmentService
   ) {}
 
 async ngOnInit() {

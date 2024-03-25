@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Category } from '../models/category.model';
 import { Service } from '../models/service.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,9 +19,23 @@ export class ServiceService {
   constructor(private http: HttpClient) { }
 
   // Categories services
-  fetchCategories() {
-    return this.http.get<Category[]>(this.categoryUrl);
-  };
+  fetchCategories(): Observable<Category[]> {
+    return new Observable(observer => {
+      const subscription = this.http.get<Category[]>(this.serviceUrl)
+        .subscribe({
+          next: categories => observer.next(categories),
+          error: error => observer.error(error),
+          complete: () => observer.complete()
+        });
+  
+      
+      return {
+        unsubscribe() {
+          subscription.unsubscribe();
+        }
+      };
+    });
+  }
 
   fetchServices() {
     return this.http.get<Service[]>(this.serviceUrl)
