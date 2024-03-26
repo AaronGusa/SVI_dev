@@ -43,12 +43,28 @@
                                 <span>Find</span>
                             </span>
                         </a>
-                        <a mat-list-item routerLink="/login">
-                            <span class="entry">
-                                <mat-icon>fingerprint</mat-icon>
-                                <span>Login</span>
-                            </span>
-                        </a>
+                       
+                        @if (auth.isLoggedIn$ | async) {
+                            <a mat-list-item routerLink="/login">
+                                <span class="entry">
+                                    <mat-icon>fingerprint</mat-icon>
+                                    <span>Login</span>
+                                </span>
+                            </a>
+                          } @else {
+                            <a mat-list-item routerLink="/home" (click)="logout()">
+                                <span class="entry">
+                                    <mat-icon>fingerprint</mat-icon>
+                                    <span>Logout</span>
+                                </span>
+                            </a>
+                            <a mat-list-item routerLink="/dashboard">
+                                <span class="entry">
+                                    <mat-icon>fingerprint</mat-icon>
+                                    <span>DashBoard</span>
+                                </span>
+                            </a>
+                          }
                         <a mat-list-item routerLink="/signup">
                             <span class="entry">
                                 <mat-icon>phonelink_setup</mat-icon>

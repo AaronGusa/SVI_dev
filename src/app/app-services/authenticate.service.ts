@@ -2,12 +2,20 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Router } from '@angular/router';
 
+
+const AUTH_DATA = 'auth_data'
+
 interface AuthResponseData{
 
 }
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
+    
+
+
+
+
     private loggedIn = false;
     passwordHash: string = "";
     private tempUserValue: string = "stellavi"; 

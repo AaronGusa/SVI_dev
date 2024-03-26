@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { FormControl, FormGroupDirective, NgForm, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroupDirective, NgForm, Validators, FormsModule, ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { LoadingComponent } from '../../features/loading/loading.component';
-import { RouterLink } from '@angular/router';
-import { AuthService } from '../../app-services/authenticate.service';
+import { Router, RouterLink } from '@angular/router';
+import { AuthStore } from '../../app-services/auth/auth.store';
 
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -41,9 +41,23 @@ export class LoginComponent {
   isLoading: Boolean = false;
   tbd: any = '';
 
-  constructor (private auth: AuthService) {}
+  //Form
+  logForm: FormGroup;
+
+  constructor (private auth: AuthStore,
+               private fbuild: FormBuilder,
+               private r: Router
+              //  private auth: AuthStore
+               ) {
+                this.logForm = fbuild.group({
+                  username:  ['stellavi', [Validators.required]],
+                  password: ['Stellvi24', [Validators.required]]
+                }); 
+               }
 
   //emailFormControl = new FormControl('', [Validators.required, Validators.email]);
+
+  
 
   matcher = new MyErrorStateMatcher();
 
@@ -53,9 +67,25 @@ export class LoginComponent {
     this.isLoginMode = !this.isLoginMode;
   }
 
+  login() {
+    const val = this.logForm.value;
+
+    this.auth.login(val.username, val.password)
+      .subscribe(
+        () => {
+          this.r.navigateByUrl('/dashboard')
+        },
+        err => {
+          alert("Login Failed!");
+        }
+      )
+  }
+
   onSubmit(form: NgForm) {
-    console.log(form.value);
-    this.auth.login(form.value.username, form.value.password);
-    form.reset();
+    // console.log(form.value);
+    // this.auth.login(this.logForm.value.username, form.value.password).subscribe(
+    //   () => {}
+    // );
+    // form.reset();
   }
 }

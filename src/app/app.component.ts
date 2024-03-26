@@ -10,7 +10,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { MatSidenav } from '@angular/material/sidenav';
-
+import { AuthStore } from './app-services/auth/auth.store';
 
 @Component({
   selector: 'app-root',
@@ -41,7 +41,8 @@ export class AppComponent {
   isBobbing: boolean = false;
 
 
-  constructor(private observer: BreakpointObserver) {}
+  constructor(public auth: AuthStore,
+              private observer: BreakpointObserver) {}
 
   ngOnInit() {
     this.observer.observe(['(max-width: 1000px)']).subscribe((screenSize) => {
@@ -74,6 +75,10 @@ export class AppComponent {
   @HostListener('window:scroll', [])
   onScroll() {
     this.isBobbing = window.scrollY > 0;
+  }
+
+  logout() {
+    this.auth.logout;
   }
 
 }
