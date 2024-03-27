@@ -9,7 +9,7 @@ const AUTH_DATA = "auth_data";
     providedIn: 'root'
 })
 export class AuthStore {
-    private userHttp: 'https://stellavibe.onrender.com/users/login';
+    private userHttp = 'https://stellavibe.onrender.com/users/login';
     private subject = new BehaviorSubject<UserLogin>(null);
 
     user$: Observable<UserLogin> = this.subject.asObservable();

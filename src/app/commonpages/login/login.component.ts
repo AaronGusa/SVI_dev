@@ -44,10 +44,9 @@ export class LoginComponent {
   //Form
   logForm: FormGroup;
 
-  constructor (private auth: AuthStore,
+  constructor (public auth: AuthStore, //MAKE PRIVATE AFTER TESTING
                private fbuild: FormBuilder,
                private r: Router
-              //  private auth: AuthStore
                ) {
                 this.logForm = fbuild.group({
                   username:  ['stellavi', [Validators.required]],
@@ -69,23 +68,27 @@ export class LoginComponent {
 
   login() {
     const val = this.logForm.value;
+    console.log(Object.values(this.auth.isLoggedIn$))
+
+    console.log(val.username + ' ' + val.password)
 
     this.auth.login(val.username, val.password)
-      .subscribe(
-        () => {
-          this.r.navigateByUrl('/dashboard')
+      .subscribe({
+        next: () => {
+          this.r.navigateByUrl(`/dashboard/${val.username}`);
         },
-        err => {
-          alert("Login Failed!");
+        error: err => {
+          // Handle error
+          console.log(err);
         }
-      )
+      })
   }
 
-  onSubmit(form: NgForm) {
-    // console.log(form.value);
-    // this.auth.login(this.logForm.value.username, form.value.password).subscribe(
-    //   () => {}
-    // );
-    // form.reset();
-  }
+  // onSubmit(form: NgForm) {
+  //   // console.log(form.value);
+  //   // this.auth.login(this.logForm.value.username, form.value.password).subscribe(
+  //   //   () => {}
+  //   // );
+  //   // form.reset();
+  // }
 }
