@@ -4,6 +4,11 @@
     <mat-tab-group dynamicHeight>
         <mat-tab label="{{bData.b_name}} Profile">
             <h1>Welcome to {{bData.b_name}}</h1>
+            @if (favorited) {
+                <button>❤️</button>
+            } @else {
+                <button>🤍</button>
+            }
             <div class="business_prof_container">
                 <img class="business_profile_image" src={{profileImages.b_profImage}} alt="business_profile">
                 <div class="business_prof_info">

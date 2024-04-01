@@ -31,6 +31,7 @@ export class BusinessProfileComponent implements OnInit{
   profileImages: any;
   services: any;
   servComplete: any = [];
+  favorited: Boolean = false;
 
   constructor(private aroute: ActivatedRoute,
               private bServe: BusinessService,
