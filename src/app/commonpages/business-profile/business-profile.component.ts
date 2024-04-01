@@ -5,9 +5,11 @@ import { BusinessProfileUserComponent } from './business-profile-user/business-p
 import { BusinessProfileReviewsComponent } from './business-profile-reviews/business-profile-reviews.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTabsModule } from '@angular/material/tabs';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 import { ActivatedRoute, RouterModule, Params } from '@angular/router';
 import { LoadingComponent } from '../../features/loading/loading.component';
+import { CalendarComponent } from '../../commonelements/calendar/calendar.component';
 
 import { BusinessService } from '../../app-services';
 import { ImageService } from '../../app-services';
@@ -17,7 +19,8 @@ import { ServiceService } from '../../app-services';
   selector: 'app-business-profile',
   standalone: true,
   imports: [BusinessProfileImagesComponent, BusinessProfileMenuComponent, BusinessProfileUserComponent,
-      BusinessProfileReviewsComponent, MatExpansionModule, MatTabsModule, RouterModule, LoadingComponent],
+      BusinessProfileReviewsComponent, MatExpansionModule, MatTabsModule, RouterModule, LoadingComponent,
+      CalendarComponent,  MatButtonToggleModule],
   templateUrl: './business-profile.component.html',
   styleUrl: './business-profile.component.css'
 })
