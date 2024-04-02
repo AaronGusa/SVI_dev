@@ -40,6 +40,7 @@ export class AppComponent {
   isCollapsed = true;
   isBobbing: boolean = false;
 
+  user$ = this.auth.user$;
 
   constructor(public auth: AuthStore,
               private observer: BreakpointObserver) {}
@@ -78,7 +79,7 @@ export class AppComponent {
   }
 
   logout() {
-    this.auth.logout;
+    this.auth.logout();
   }
 
 }

@@ -44,26 +44,28 @@
                             </span>
                         </a>
                        
-                        @if (auth.isLoggedIn$ | async) {
+                        @if (auth.isLoggedOut$ | async) {
                             <a mat-list-item routerLink="/login">
                                 <span class="entry">
                                     <mat-icon>fingerprint</mat-icon>
                                     <span>Login</span>
                                 </span>
                             </a>
-                          } @else {
+                          } @else if (auth.isLoggedIn$ | async) {
                             <a mat-list-item routerLink="/home" (click)="logout()">
                                 <span class="entry">
-                                    <mat-icon>fingerprint</mat-icon>
+                                    <mat-icon>lock</mat-icon>
                                     <span>Logout</span>
                                 </span>
                             </a>
-                            <a mat-list-item routerLink="/dashboard">
+                            @if (auth.user$ | async; as user) {
+                            <a mat-list-item routerLink="/dashboard/{{user.u_username}}">
                                 <span class="entry">
-                                    <mat-icon>fingerprint</mat-icon>
+                                    <mat-icon>dashboard</mat-icon>
                                     <span>DashBoard</span>
                                 </span>
                             </a>
+                        }
                           }
                         <a mat-list-item routerLink="/signup">
                             <span class="entry">
@@ -101,14 +103,42 @@
                             }
                             </span>
                         </a>
-                        <a mat-list-item routerLink="/login">
+                        <!-- <a mat-list-item routerLink="/login">
                             <span class="entry">
                                 <mat-icon>fingerprint</mat-icon>
                             @if (!isCollapsed) {
                                 <span>Login</span>
                             }
                             </span>
-                        </a>
+                        </a> -->
+                        
+                        @if (auth.isLoggedOut$ | async) {
+                            <a mat-list-item routerLink="/login">
+                                <span class="entry">
+                                    <mat-icon>fingerprint</mat-icon>
+                                    @if (!isCollapsed) {
+                                        <span>Login</span>
+                                    }
+                                </span>
+                            </a>
+                          } @else if (auth.isLoggedIn$ | async) {
+                            <a mat-list-item routerLink="/home" (click)="logout()">
+                                <span class="entry">
+                                    <mat-icon>lock</mat-icon>
+                                    @if (!isCollapsed) {
+                                        <span>Logout</span>
+                                    }
+                                </span>
+                            </a>
+                            <a mat-list-item routerLink="/dashboard/{{auth.user$}}">
+                                <span class="entry">
+                                    <mat-icon>dashboard</mat-icon>
+                                    @if (!isCollapsed) {
+                                        <span>Dashboard</span>
+                                    }
+                                </span>
+                            </a>
+                          }
                         <a mat-list-item routerLink="/signup">
                             <span class="entry">
                                 <mat-icon>phonelink_setup</mat-icon>

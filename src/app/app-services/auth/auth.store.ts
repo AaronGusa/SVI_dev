@@ -36,6 +36,8 @@ export class AuthStore {
             tap(user => {
                 this.subject.next(user);
                 localStorage.setItem(AUTH_DATA, JSON.stringify(user));
+                console.log('FROM AUTH: ' + JSON.stringify(user));
+
             }),
             shareReplay()
         )
