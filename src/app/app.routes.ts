@@ -24,6 +24,7 @@ import { DaStatsComponent } from './dashboard/dash-admin/da-stats/da-stats.compo
 import { DashAdminComponent } from './dashboard/dash-admin/dash-admin.component';
 import { DashBusComponent } from './dashboard/dash-bus/dash-bus.component';
 import { DashLandingComponent } from './dashboard/dash-landing/dash-landing.component';
+import { authGuard } from './app-services/auth/auth.guard';
 
 
 export const routes: Routes = [
@@ -35,7 +36,9 @@ export const routes: Routes = [
     {path: 'signup', title: "Sign Up", component: SignupUserComponent},
     {path: 'find-business', title: "Business Search", component: FindBusinessComponent},
     {path: 'business-profile/:b_id', title: "Profile", component: BusinessProfileComponent},
-    {path: 'dashboard/:clientUsername', title: "Dashboard", component: DashboardComponent, children: [
+    {path: 'dashboard/:clientUsername', title: "Dashboard", component: DashboardComponent, 
+                                                            canActivate: [authGuard], 
+                                                            children: [
         // Paths for dash views
         {path: '', redirectTo: 'profile', pathMatch: 'full'},
         {path: '', component: DashUserComponent, children: [    

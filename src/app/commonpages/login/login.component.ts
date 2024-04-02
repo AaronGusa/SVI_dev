@@ -49,8 +49,8 @@ export class LoginComponent {
                private r: Router
                ) {
                 this.logForm = fbuild.group({
-                  username:  ['stellavi', [Validators.required]],
-                  password: ['Stellvi24', [Validators.required]]
+                  username:  ['', [Validators.required]],
+                  password: ['', [Validators.required]]
                 }); 
                }
 
