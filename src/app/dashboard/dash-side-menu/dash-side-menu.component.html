@@ -1,43 +1,45 @@
-<h3>Hey {{data.u_fname}}</h3>
-{{data.u_id}}
-<ul class="dash-side-menu-ul">
-        <li><h2>User</h2></li>
-        <hr>
-        <li><a routerLink="profile">Profile</a></li>
-        <li><a routerLink="appointments">Appointments</a></li>
-        <li><a routerLink="reviews">Reviews</a></li>
-        <li><a routerLink="favorites">Subs</a></li>
-    </ul>
-
-@if (u_priv === buslvl) {
+@if (!isLoading) {
+    <h3>Hey {{ prof.u_fname }}</h3>
     <ul class="dash-side-menu-ul">
-        <li><h2>Business</h2></li>
-        <hr>
-        <li><a routerLink="business/profile">Profile</a></li>
-        <li><a routerLink="business/appointments">Appointments</a></li>
-        <li><a routerLink="business/reviews">Reviews</a></li>
-        <li><a routerLink="business/stats">Stats</a></li>
+            <li><h2>User</h2></li>
+            <hr>
+            <li><a routerLink="profile">Profile</a></li>
+            <li><a routerLink="appointments">Appointments</a></li>
+            <li><a routerLink="reviews">Reviews</a></li>
+            <li><a routerLink="favorites">Subs</a></li>
+        </ul>
+
+    @if (u_priv === buslvl) {
+        <ul class="dash-side-menu-ul">
+            <li><h2>Business</h2></li>
+            <hr>
+            <li><a routerLink="business/profile">Profile</a></li>
+            <li><a routerLink="business/appointments">Appointments</a></li>
+            <li><a routerLink="business/reviews">Reviews</a></li>
+            <li><a routerLink="business/stats">Stats</a></li>
+            
+        </ul>
+    } @else if (u_priv === admin) {
         
-    </ul>
-} @else if (u_priv === admin) {
-    
-    <ul class="dash-side-menu-ul">
-        <li><h2>Business</h2></li>
-        <hr>
-        <li><a routerLink="business/profile">Profile</a></li>
-        <li><a routerLink="business/appointments">Appointments</a></li>
-        <li><a routerLink="business/reviews">Reviews</a></li>
-        <li><a routerLink="business/stats">Stats</a></li>
-    </ul>
-    <ul class="dash-side-menu-ul">
-        <li><h2>Admin</h2></li>
-        <hr>
-        <li><a routerLink="admin/users">Users</a></li>
-        <li><a routerLink="admin/business">Businesses</a></li>
-        <li><a routerLink="admin/reviews">Reviews</a></li>
-        <li><a routerLink="admin/stats">Stats</a></li>
-    </ul>
+        <ul class="dash-side-menu-ul">
+            <li><h2>Business</h2></li>
+            <hr>
+            <li><a routerLink="business/profile">Profile</a></li>
+            <li><a routerLink="business/appointments">Appointments</a></li>
+            <li><a routerLink="business/reviews">Reviews</a></li>
+            <li><a routerLink="business/stats">Stats</a></li>
+        </ul>
+        <ul class="dash-side-menu-ul">
+            <li><h2>Admin</h2></li>
+            <hr>
+            <li><a routerLink="admin/users">Users</a></li>
+            <li><a routerLink="admin/business">Businesses</a></li>
+            <li><a routerLink="admin/reviews">Reviews</a></li>
+            <li><a routerLink="admin/stats">Stats</a></li>
+        </ul>
+    }
+} @else {
+    <app-loading></app-loading>
 }
-
 
 

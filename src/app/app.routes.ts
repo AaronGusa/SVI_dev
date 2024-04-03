@@ -24,7 +24,7 @@ import { DaStatsComponent } from './dashboard/dash-admin/da-stats/da-stats.compo
 import { DashAdminComponent } from './dashboard/dash-admin/dash-admin.component';
 import { DashBusComponent } from './dashboard/dash-bus/dash-bus.component';
 import { DashLandingComponent } from './dashboard/dash-landing/dash-landing.component';
-import { authGuard } from './app-services/auth/auth.guard';
+import { authGuard, canActivateUserGuard, verifyUserGuard } from './app-services/auth/auth.guard';
 
 
 export const routes: Routes = [
@@ -42,6 +42,7 @@ export const routes: Routes = [
         // Paths for dash views
         {path: '', redirectTo: 'profile', pathMatch: 'full'},
         {path: '', component: DashUserComponent, children: [    
+                                                            
             {path: 'profile', component: DuProfileComponent},
             {path: 'appointments', component: DuAppointComponent},
             {path: 'reviews', component: DuReviewsComponent},

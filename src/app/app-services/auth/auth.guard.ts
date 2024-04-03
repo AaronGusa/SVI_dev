@@ -1,28 +1,8 @@
-// import { Injectable } from "@angular/core";
-// import { AuthStore } from "./auth.store";
-// import { ActivatedRouteSnapshot, CanActivate, GuardResult, MaybeAsync, Router, RouterStateSnapshot, UrlTree } from "@angular/router";
-// import { Observable, map } from "rxjs";
-
-// @Injectable()
-// export class AuthGuard implements CanActivate {
-//     constructor( private auth: AuthStore,
-//                  private r: Router
-//                ) {};
-
-//     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> {
-//         return this.auth.isLoggedIn$
-//         .pipe(
-//             map(loggedIn => 
-//                 loggedIn? true: this.r.parseUrl('home'))
-//         )
-//     }
-
-// }
 
 import { inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRouteSnapshot, NavigationEnd, Router } from '@angular/router';
 import { AuthStore } from './auth.store';
-import { map } from 'rxjs';
+import { filter, map } from 'rxjs';
 
 export const authGuard = () => {
   const auth = inject(AuthStore);
@@ -32,3 +12,36 @@ export const authGuard = () => {
     map(loggedIn => loggedIn ? true : router.parseUrl('home'))
   );
 };
+
+export const canActivateUserGuard = () => {
+    const auth = inject(AuthStore);
+    const router = inject(Router);
+  
+    return router.events.pipe(
+      filter(event => event instanceof NavigationEnd),
+      map(() => {
+        const usernameFromUrl = router.url.split('/')[2]; // Get the username from the URL after navigation has ended
+        console.log(usernameFromUrl)
+        return auth.user$['u_username'] === usernameFromUrl ? true : router.parseUrl('home');
+      })
+    );
+  };
+
+  export const verifyUserGuard = () => {
+    const auth = inject(AuthStore);
+    const router = inject(Router);
+    
+  
+    return auth.user$.pipe(
+      map(user => {
+        const usernameFromUrl = router.url.split('/')[2]; // assuming the username is the second segment of the URL
+        console.log(usernameFromUrl)
+        if (user['u_username'] === usernameFromUrl) {
+            return true;
+        } else {
+            return router.parseUrl('login');
+        }
+      })
+    );
+  };
+  

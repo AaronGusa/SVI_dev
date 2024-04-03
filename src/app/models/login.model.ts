@@ -1,4 +1,5 @@
 export class UserLogin {
+    [x: string]: string;
     public username: string;
     public password: string;
 

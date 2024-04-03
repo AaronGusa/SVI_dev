@@ -90,6 +90,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       //console.log( 'UPRIV: ' + typeof this.u_priv)
       this._uPriv.emit(this.u_priv);
       this.data = response;
+      this.loadUserProfile();
       //console.log(this.u_priv)
     } else {
       console.log('No response for showUserData')
