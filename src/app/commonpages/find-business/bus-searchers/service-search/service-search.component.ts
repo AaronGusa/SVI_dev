@@ -25,6 +25,7 @@ export class ServiceSearchComponent implements OnInit {
     //console.log('Service-search Line 25')
     //console.log(this.categories);
     this.sortCategories();
+    //console.log("This Service Search Cat List: " + this.categories)
   }
 
   sortCategories() {
@@ -32,7 +33,6 @@ export class ServiceSearchComponent implements OnInit {
       if (a && a.cat && b && b.cat) {
         const catA = a.cat.toUpperCase();
         const catB = b.cat.toUpperCase();
-  
         if (catA < catB) {
           return -1;
         }

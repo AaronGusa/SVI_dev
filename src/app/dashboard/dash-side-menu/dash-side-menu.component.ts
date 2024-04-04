@@ -17,7 +17,7 @@ export class DashSideMenuComponent implements OnInit, OnChanges{
   @Input() admin: number;
   @Input() u_name: string;
   @Input() profile: Observable<any>;
-  @Input() _uPriv: EventEmitter<number>; // Declare _uPriv as an EventEmitter
+  @Input() _uPriv: EventEmitter<number>; 
   @Input() data: any;
   isLoading: Boolean = true;
   prof;

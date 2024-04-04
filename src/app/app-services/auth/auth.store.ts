@@ -4,6 +4,7 @@ import { UserLogin } from '../../models/login.model'
 import { HttpClient } from "@angular/common/http";
 
 const AUTH_DATA = "auth_data";
+const FAV_LIST = "fav_bus_list"
 
 @Injectable({
     providedIn: 'root'
@@ -36,6 +37,7 @@ export class AuthStore {
             tap(user => {
                 this.subject.next(user);
                 localStorage.setItem(AUTH_DATA, JSON.stringify(user));
+                localStorage.setItem(FAV_LIST, JSON.stringify(user['fav_bus']))
                 console.log('FROM AUTH: ' + JSON.stringify(user));
 
             }),

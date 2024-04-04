@@ -77,10 +77,21 @@ ngOnInit() {
     });
 }
 
+// async fetchCategories() {
+//   this.isLoading = true;
+//   this.categories = await this.servService.fetchCategories().toPromise();
+//   this.isLoading = false;
+// }
+
 async fetchCategories() {
   this.isLoading = true;
-  this.categories = await this.servService.fetchCategories().toPromise();
-  this.isLoading = false;
+  try {
+    this.categories = await this.servService.fetchCategories().toPromise();
+  } catch (error) {
+    console.error('Error fetching categories:', error);
+  } finally {
+    this.isLoading = false;
+  }
 }
 
 addService2Business(serviceId: number) {

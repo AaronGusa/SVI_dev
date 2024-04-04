@@ -39,11 +39,12 @@ export class FindBusinessComponent implements OnInit, AfterViewInit {
   selectedZip: Boolean = false;
   formcontrol = new FormControl('');
   // Business Variables
-  businesses: any = [];
+  businesses: Business[] = [];
   businessListFiltered: Business[] = [];
   // Categories and Services Variables
-  categories: Category[] = [];
-  services: Service[] = [];
+  // categories: Category[] = [];
+  categories: any = [];
+  services: any = [];
   selectedServices: any[] = [];
   // Zip and City Variables
   zipList: any[] = [];
@@ -82,34 +83,133 @@ export class FindBusinessComponent implements OnInit, AfterViewInit {
     this.selectedZip = true;
   }
 
+  // async fetchData() {
+  //   try {
+  //     const fetchedBusinesses = await this.businessService.fetchBusinesses().toPromise();
+  //     const fetchedCategories = await this.serviceService.fetchCategories().toPromise();
+      
+
+  //     if (fetchedBusinesses !== undefined) {
+  //       this.businesses = fetchedBusinesses;
+  //     }; 
+
+  //     if (fetchedCategories !== undefined) {
+  //       this.categories = fetchedCategories;
+  //     };
+
+  //     this.createZipList();
+  //     this.createCityList();
+      
+  //     if (this.zipList.length >= 1 && this.cityList.length >= 1) {
+  //       // console.log('Ziplist line 99');
+  //       // console.log(this.zipList);
+  //       // console.log('CityList Line 101');
+  //       // console.log(this.cityList);
+  //       this.loading = false;
+  //     }
+      
+  //     //console.log(this.businesses);
+  //     console.log(this.categories);
+    
+  //   } catch (error) {
+  //     console.error('Error fetching data:', error);
+  //   }
+  // }
+
+  // async fetchData() {
+  //   try {
+  //     const fetchedBusinesses = await this.businessService.fetchBusinesses().toPromise();
+  //     await this.serviceService.fetchServicesSub().subscribe({
+  //       next: categories => {
+  //         this.categories = categories;
+  //         //console.log(this.categories)
+  //         this.createZipList();
+  //         this.createCityList();
+  //         if (this.zipList.length >= 1 && this.cityList.length >= 1) {
+  //           // console.log('Ziplist line 99');
+  //           // console.log(this.zipList);
+  //           // console.log('CityList Line 101');
+  //           // console.log(this.cityList);
+            
+  //           this.loading = false;
+  //         }
+  //       },
+  //       error: error => {
+  //         console.error('Error fetching categories:', error);
+  //         // Handle error, e.g., display error message
+  //       }
+        
+  //     });
+
+  //     await this.serviceService.fetchCategories().subscribe({
+  //       next: services => {
+  //         this.services = services;
+  //         console.log("Services COMPO")
+          
+  //       },
+  //       error: error => {
+  //         console.error('Error fetching categories:', error);
+  //         // Handle error, e.g., display error message
+  //       }});
+
+        
+  //     if (fetchedBusinesses !== undefined) {
+  //       this.businesses = fetchedBusinesses;
+
+  //     }
+
+  //     if (this.services && this.businesses) {
+  //       this.addServiceNamesToBusinesses(this.services, this.businesses)
+  //     } else {
+  //       console.log("There's no services or businesses")
+  //     }
+
+  //   } catch (error) {
+  //     console.error('Error fetching data:', error);
+  //     // Handle error, e.g., display error message
+  //   }
+  // }
+
   async fetchData() {
     try {
       const fetchedBusinesses = await this.businessService.fetchBusinesses().toPromise();
-      const fetchedCategories = await this.serviceService.fetchCategories().toPromise();
-      
-
-      if (fetchedBusinesses !== undefined) {
+  
+      // Fetch categories
+      const categories = await this.serviceService.fetchCategories().toPromise();
+      this.services = categories;
+      this.serviceService.fetchServicesSub().subscribe({
+              next: categories => {
+                this.categories = categories;
+                //console.log(this.categories)
+                this.createZipList();
+                this.createCityList();
+                if (this.zipList.length >= 1 && this.cityList.length >= 1) {
+                  // console.log('Ziplist line 99');
+                  // console.log(this.zipList);
+                  // console.log('CityList Line 101');
+                  // console.log(this.cityList);
+                  
+                  this.loading = false;
+                }
+              },
+              error: error => {
+                console.error('Error fetching categories:', error);
+                // Handle error, e.g., display error message
+              }
+      })
+  
+      // Now that both businesses and services are fetched, call addServiceNamesToBusinesses
+      if (fetchedBusinesses !== undefined && this.services !== undefined) {
         this.businesses = fetchedBusinesses;
-      }; 
-
-      if (fetchedCategories !== undefined) {
-        this.categories = fetchedCategories;
-      };
-
-      this.createZipList();
-      this.createCityList();
+        this.addServiceNamesToBusinesses(this.services, this.businesses);
       
-      if (this.zipList.length >= 1 && this.cityList.length >= 1) {
-        // console.log('Ziplist line 99');
-        // console.log(this.zipList);
-        // console.log('CityList Line 101');
-        // console.log(this.cityList);
-        this.loading = false;
-      }
-      
-      //console.log(this.businesses);
-      console.log(this.categories);
-    
+  
+      // Continue with other operations like creating zip list, city list, etc.
+        this.createZipList();
+        this.createCityList();
+        if (this.zipList.length >= 1 && this.cityList.length >= 1) {
+          this.loading = false;
+      }}
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -204,6 +304,8 @@ export class FindBusinessComponent implements OnInit, AfterViewInit {
     if (this.sortRating > 0) {
       filteredList = filteredList.filter(business => business.b_rating >= this.sortRating);
       filteredList.sort((a, b) => b.b_rating - a.b_rating);
+    } else if (this.sortRating === 0 ) {
+      filteredList = this.businesses;
     }
 
     if (this.sortActiveOnly) {
@@ -231,7 +333,7 @@ export class FindBusinessComponent implements OnInit, AfterViewInit {
   
   applyRatingFilter(value: number) {
     this.sortRating = value;
-    console.log('Entered sortRatingFilter CONFIRMED')
+    //console.log('Entered sortRatingFilter CONFIRMED')
     this.handleCombinedFilters();
   }
   
@@ -239,5 +341,34 @@ export class FindBusinessComponent implements OnInit, AfterViewInit {
     this.sortActiveOnly = value;
     this.handleCombinedFilters();
   }
+
+  getServiceName(s_id: number) {
+    const service = this.services.find(category => category.s_id === s_id);
+    return service ? service.s_name : '';
+  }
+
+  addServiceNamesToBusinesses(services: any[], businesses: any[]) {
+    businesses.forEach(business => {
+        business.b_services.forEach((serviceId, index) => {
+            const service = services.find(s => s.s_id === serviceId);
+            if (service) {
+                business.b_services[index] = { s_id: serviceId, s_name: service.s_name };
+            }
+        });
+
+        // Sort the b_services array by s_name
+        business.b_services.sort((a, b) => a.s_name.localeCompare(b.s_name));
+    });
+
+    console.log(this.businesses);
+}
+
+  // preprocessBusinessList() {
+  //   this.businessListFiltered.forEach(business => {
+  //     business.sortedServiceNames = business.b_services
+  //       .map(serviceId => this.getServiceName(serviceId))
+  //       .sort();
+  //   });
+  // }
 
 }

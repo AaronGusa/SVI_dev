@@ -11,6 +11,7 @@ export class UserService {
   private userUrl = 'https://stellavibe.onrender.com/users/';
   private userIDGet = 'user/';
   private usernameVerify = 'unameCheck/'
+  private favUp = 'favup';
   // private userUrl = 'localhost:3000/users';
 
 
@@ -172,6 +173,20 @@ export class UserService {
             return { error: true };
         }
     }
-}
+  }
+
+  async favoriteUpdate(u_id: number, b_id: string) {
+    const body = { "u_id": u_id, "b_id": b_id };
+    try {
+        const response: any = await this.http.put(`${this.userUrl}${this.favUp}`, body).toPromise();
+        console.log('Favorite update successful:', response);
+        return response; // Return the response for further processing if needed
+    } catch (error) {
+        console.error('Error updating favorite:', error);
+        throw error; // Rethrow the error for handling in the calling code
+    }
+  }
+
+
 }
 

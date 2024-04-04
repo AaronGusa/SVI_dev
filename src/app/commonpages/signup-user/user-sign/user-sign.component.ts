@@ -190,6 +190,7 @@ export class UserSignComponent implements OnInit {
     let u_country = null;
     let u_zip = null;
     let has_bus = false;
+    let fav_bus = [];
 
     
 
@@ -206,7 +207,8 @@ export class UserSignComponent implements OnInit {
         u_state: u_state,    
         u_country: u_country,
         u_zip: u_zip,
-        has_bus: has_bus
+        has_bus: has_bus,
+        fav_bus: fav_bus
     });
 
     
@@ -362,6 +364,7 @@ export class UserSignComponent implements OnInit {
     let u_country = null;
     let u_zip = null;
     let has_bus = true;
+    let fav_bus = []
 
 
     this.userForm = this._formBuilder.group({
@@ -376,7 +379,8 @@ export class UserSignComponent implements OnInit {
         u_state: u_state,    
         u_country: u_country,
         u_zip: u_zip,
-        has_bus: has_bus
+        has_bus: has_bus,
+        fav_bus: fav_bus
     });
 
     // Call the processUserSignUp function

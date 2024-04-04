@@ -1,4 +1,4 @@
-import { Component, ViewChild, HostListener } from '@angular/core';
+import { Component, ViewChild, HostListener, OnInit, OnChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './commonelements/header/header.component';
@@ -31,9 +31,9 @@ import { AuthStore } from './app-services/auth/auth.store';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'SVI_dev';
-
+  user;
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
   isMobile= true;
@@ -45,6 +45,7 @@ export class AppComponent {
               private observer: BreakpointObserver) {}
 
   ngOnInit() {
+    this.userGet();
     this.observer.observe(['(max-width: 1000px)']).subscribe((screenSize) => {
       if(screenSize.matches){
         this.isMobile = true;
@@ -52,7 +53,21 @@ export class AppComponent {
         this.isMobile = false;
       }
     });
-}
+  }
+
+  ngOnChanges() {
+    this.userGet();
+  }
+
+  userGet() {
+    if (this.auth.isLoggedIn$) {
+      const getLocal = localStorage.getItem('auth_data');
+      this.user = getLocal ? JSON.parse(getLocal)['u_username'] : null;
+      console.log('THIS USER MAIN: ' + this.user)
+    } else {
+      this.user = '';
+    }
+  }
 
   toggleMenuBoy() {
     // console.log('Function Runs')

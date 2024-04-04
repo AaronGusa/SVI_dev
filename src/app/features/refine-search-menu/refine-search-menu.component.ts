@@ -45,18 +45,21 @@ export class RefineSearchMenuComponent implements AfterViewInit {
   onFilterByNameChange() {
     this.sortName = !this.sortName; //sortName boolean switch 
     this.filterByNameChange.emit(this.sortName);
-    console.log('onFilterNAME changed to: ' + this.sortName);
+    //console.log('onFilterNAME changed to: ' + this.sortName);
   }
 
-  onRatingFilterChange() {
-    // if (this.sortName) {
-    // // this.sortName = false;
-    // this.onFilterByNameChange();
-    // }
-    // this.sortRating = rating;
+  onRatingFilterChange(rating: number) {
+    if (this.sortRating === rating) {
+        this.sortRating = 0; // Reset the filter
+    } else {
+        this.sortRating = rating;
+    }
+    
     console.log('RATING: ' + this.sortRating);
+    
     this.ratingFilterChange.emit(this.sortRating);
-  }
+}
+
   
   onShowActiveOnlyChange() {
     this.sortActiveOnly= !this.sortActiveOnly;

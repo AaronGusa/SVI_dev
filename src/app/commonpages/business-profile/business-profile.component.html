@@ -3,12 +3,16 @@
 } @else {    
     <mat-tab-group dynamicHeight>
         <mat-tab label="{{bData.b_name}} Profile">
-            <h1>Welcome to {{bData.b_name}}</h1>
-            @if (favorited) {
-                <button>❤️</button>
-            } @else {
-                <button>🤍</button>
-            }
+            <h1>Welcome to {{bData.b_name}}
+
+            @if (auth.isLoggedIn$ | async) {
+                @if (favorited) {
+                    <button mat-button (click)="favoriteBus()">❤️</button>
+                } @else {
+                    <button mat-button (click)="favoriteBus()">🤍</button>
+                }
+            }</h1>
+
             <div class="business_prof_container">
                 <img class="business_profile_image" src={{profileImages.b_profImage}} alt="business_profile">
                 <div class="business_prof_info">

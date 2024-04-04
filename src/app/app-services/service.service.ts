@@ -37,6 +37,24 @@ export class ServiceService {
     });
   }
 
+  fetchServicesSub() {
+    return new Observable(observer => {
+      const subscription = this.http.get<Category[]>(this.categoryUrl)
+        .subscribe({
+          next: categories => observer.next(categories),
+          error: error => observer.error(error),
+          complete: () => observer.complete()
+        });
+  
+      
+      return {
+        unsubscribe() {
+          subscription.unsubscribe();
+        }
+      };
+    });
+  }
+
   fetchServices() {
     return this.http.get<Service[]>(this.serviceUrl)
   };

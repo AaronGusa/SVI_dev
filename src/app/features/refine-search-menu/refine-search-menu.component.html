@@ -2,14 +2,14 @@
 <mat-form-field>
   <mat-label>Filter by Rating</mat-label>
   <mat-select matNativeControl [(value)]="sortRating" >
-    <mat-option [value]="5" (click)="onRatingFilterChange()">⭐⭐⭐⭐⭐</mat-option>
-    <mat-option [value]="4" (click)="onRatingFilterChange()">⭐⭐⭐⭐➕</mat-option>
-    <mat-option [value]="3" (click)="onRatingFilterChange()">⭐⭐⭐➕</mat-option>
-    <mat-option [value]="2" (click)="onRatingFilterChange()">⭐⭐➕</mat-option>
-    <mat-option [value]="1" (click)="onRatingFilterChange()">⭐➕</mat-option>
+    <mat-option  (click)="onRatingFilterChange(5)">⭐⭐⭐⭐⭐</mat-option>
+    <mat-option (click)="onRatingFilterChange(4)">⭐⭐⭐⭐➕</mat-option>
+    <mat-option  (click)="onRatingFilterChange(3)">⭐⭐⭐➕</mat-option>
+    <mat-option  (click)="onRatingFilterChange(2)">⭐⭐➕</mat-option>
+    <mat-option  (click)="onRatingFilterChange(1)">⭐➕</mat-option>
   </mat-select>
   @if (sortRating !== 0) {
-    <button  matSuffix mat-icon-button aria-label="Clear" (click)="sortRating=0">
+    <button  matSuffix mat-button-raised aria-label="Clear" (click)="onRatingFilterChange(0)">
           <mat-icon>close</mat-icon>
      </button>
     }

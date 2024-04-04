@@ -1,0 +1,61 @@
+@if (Loading) {
+  <app-loading></app-loading>
+} @else {
+  <h1>My Favorite Businesses</h1>
+
+  @for (b of activeFavorites; track $index) {
+    @if (b.sub_active) {
+      <mat-card>
+          <mat-card-header>
+              <mat-card-title>{{ b.b_name }} {{ b.b_rating }} ACTIVE</mat-card-title>
+          </mat-card-header> 
+          <mat-card-content>
+              <mat-expansion-panel >
+                  <mat-expansion-panel-header>Details</mat-expansion-panel-header>
+                  <div>
+                    <p>Created: {{b.ufav_created | date }}</p>
+                    <mat-card>
+                      <mat-card-header>
+                      <p>Notes: </p>
+                      </mat-card-header>
+                      <mat-card-content>
+                        {{b.ufav_notes}}
+                      </mat-card-content>
+                      <mat-card-actions>
+                        <button mat-raised-button>Update Notes</button>
+                      </mat-card-actions>
+                    </mat-card>
+                  </div>
+                  <button mat-raised-button color="warn">Remove</button>
+              </mat-expansion-panel> 
+          </mat-card-content>
+      </mat-card>    
+    } 
+  }
+<br>
+  @if (inactiveFavorites) {
+    <mat-expansion-panel >
+      <mat-expansion-panel-header>
+      <h1>History</h1>
+
+      </mat-expansion-panel-header>
+      @for (ib of inactiveFavorites; track $index) {
+        @if (!ib.sub_active) {
+          <mat-card>
+              <mat-card-header>
+                  <mat-card-title>{{ ib.b_name }} {{ ib.b_rating }} Unsubbed</mat-card-title>
+              </mat-card-header> 
+              <mat-card-content>
+                  <mat-expansion-panel >
+                      <mat-expansion-panel-header>Details</mat-expansion-panel-header>
+                      <p>Unsubbed: {{ib.ufav_created | date }}</p>
+
+                  </mat-expansion-panel> 
+              </mat-card-content>
+          </mat-card>    
+        } 
+      }
+    </mat-expansion-panel> 
+
+  }
+}

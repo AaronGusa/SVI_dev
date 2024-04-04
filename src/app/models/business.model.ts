@@ -9,12 +9,12 @@ export class Business {
     public b_phone: string;
     public b_email: string;
     public b_website: string;
-    public b_services: number[];
+    public b_services: any[];
     public b_rating: number;
     public b_active: boolean;
     public u_id: number;
     public created: Date;
-    public 
+    
   
     constructor(
       b_id: string,
@@ -27,7 +27,7 @@ export class Business {
       b_phone: string,
       b_email: string,
       b_website: string,
-      b_services: number[],
+      b_services: any[],
       b_rating: number,
       b_active: boolean,
       u_id: number,
