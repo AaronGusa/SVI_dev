@@ -83,6 +83,7 @@ padding: .5rem;
     width: 70%;
     background-color: #636363;
     color: white;
+    padding: 0.5rem;
 }
 
 .FBC_column2 h1, p{
@@ -97,7 +98,7 @@ padding: .5rem;
 
 .FBC_profile_pic {
     height: 100px;
-
+    border-radius: 25px;
 }
 
 .FBC_star_container {
