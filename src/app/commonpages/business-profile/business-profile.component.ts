@@ -188,10 +188,9 @@ export class BusinessProfileComponent implements OnInit{
       "b_name": this.bData.b_name,
       "s_id": this.formService.value,
     };
-    console.log(postComplete)
 
     const response = await this.aServe.postAppointment(postComplete);
-    console.log(response);
+    //console.log(response);
     //this.b_id is set earlier
     //this.selected is the date
     //this.selectedSID is set by setAppointmentFunction

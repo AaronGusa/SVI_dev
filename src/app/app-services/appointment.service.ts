@@ -53,9 +53,7 @@ export class AppointmentService {
 
   async postAppointment(postComplete) {
     try {
-      console.log(`${this.appBaseUrl}${this.appNewUrl}`)
       const response: any = await this.http.post(`${this.appBaseUrl}${this.appNewUrl}`, postComplete).toPromise();
-      console.log(response)
       return response;
     } catch (error) {
       return error;
