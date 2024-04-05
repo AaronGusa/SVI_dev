@@ -66,6 +66,24 @@ hr {
     width: 100%;
 }
 
+.simple_container {
+    margin: 0;
+    padding: 0.5rem;
+}
+
+.simple_centered_container {
+    margin: 0;
+    padding: 0.5rem;
+    justify-content: center;
+}
+
+.simple_textcentered_container {
+    margin: 0;
+    padding: 0.5rem;
+    justify-content: center;
+    text-align: center;
+}
+
 .featured {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -181,6 +199,15 @@ hr {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+}
+
+.bus_work_images {
+    width: 300px;
+    height: auto;
+    border-radius: 30px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    margin: 0.5rem;
+
 }
 
 @media (min-width: 600px) {

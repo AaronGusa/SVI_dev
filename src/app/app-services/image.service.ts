@@ -15,6 +15,7 @@ export class ImageService {
   private profBusImage = 'https://stellavibe.onrender.com/images/profImages/bus_update/';
   private busServiceImages = 'https://stellavibe.onrender.com/images/busImages/';
   private profUserInit = 'https://stellavibe.onrender.com/images/profileImgInit';
+  private busImages = 'https://stellavibe.onrender.com/images/busImages/';
 
 
   constructor(private http: HttpClient,
@@ -82,6 +83,14 @@ export class ImageService {
   //     return error;
   //   }
   // }
+  async fetchBusImages(b_id: string) {
+    try {
+      let images = await firstValueFrom(this.http.get(`${this.busImages}${b_id}`));
+      return images;
+    } catch (error) {
+      return error;
+    }
+  }
 
 
   async getUserProfileImage(u_id: number) {

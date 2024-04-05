@@ -1,1 +1,9 @@
-<p>business-profile-images works!</p>
+<div class="simple_container">
+    @if (s_name) {
+        <h1>Check out our work!</h1>
+        <h2>{{s_name}}</h2>
+    }
+    @for (i of imagesAndServices.s_images; track $index) {
+        <img class="bus_work_images" [src]="i.s_image" alt="hmm">
+    }
+</div>

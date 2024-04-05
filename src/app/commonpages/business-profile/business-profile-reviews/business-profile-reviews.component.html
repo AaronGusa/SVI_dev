@@ -1,4 +1,53 @@
-@if (!reviews) {
-    <h1>Be the First to Review this Amazing Business!</h1>
-    <button mat-raised-button color="primary">Leave Review</button>
-}
+<div class="simple_centered_container">
+    @if (reviews !== undefined) {
+        <div class="simple_textcentered_container">
+            <h2>No reviews yet! Take a chance on this wonderful professional and let everyone know how they did!</h2>
+        </div>
+            <!-- <h1>Be the First to Review this Amazing Business!</h1> -->
+        <!-- <button mat-raised-button color="primary">Leave Review</button> -->
+    } @else {
+        @for (r of reviews; track $index) {
+            @if (r.active_review) {
+                <mat-expansion-panel style="margin: 0.5rem 0; box-shadow: 2px 2px 3px rgba(0,0,0,0.25);">
+                    
+
+                    <mat-expansion-panel-header >
+                        <mat-panel-title>
+                            @if (r.rating !== 0) { 
+                                @switch (r.rating !== 0) {
+                                    @case (r.rating == 5) {
+                                        <p id="icons">⭐⭐⭐⭐⭐</p> 
+                                    }
+                                    @case (r.rating == 4) {
+                                        <p id="icons">⭐⭐⭐⭐</p>
+                                    }
+                                    @case (r.rating == 3) {
+                                        <p id="icons">⭐⭐⭐</p>
+                                    }
+                                    @case (r.rating == 2) {
+                                        <p id="icons">⭐⭐</p>
+                                    }
+                                    @case (r.rating == 1) {
+                                        <p id="icons">⭐</p>
+                                    }
+                                    @default {
+                                        <p></p>
+                                    }
+                                }                         
+                            }   
+
+                            
+                        </mat-panel-title>    
+                        <mat-panel-description>
+                            <p>|   {{r.revDate | date}}</p>
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+
+                    <div>
+                        <p>{{r.rev_content}}</p>
+                    </div>
+                </mat-expansion-panel>
+            }
+        } 
+    }
+</div>

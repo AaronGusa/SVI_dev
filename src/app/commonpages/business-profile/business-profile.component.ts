@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { BusinessProfileImagesComponent } from './business-profile-images/business-profile-images.component';
@@ -42,6 +42,7 @@ import { AppComponent } from '../../app.component';
   styleUrl: './business-profile.component.css'
 })
 export class BusinessProfileComponent implements OnInit{
+  @Output() b_id_: string;
   b_id: string = '';
   bData: any;
   isLoading: Boolean = true;
@@ -79,6 +80,7 @@ export class BusinessProfileComponent implements OnInit{
     this.checkFavs();
     this.isLoading = true;
     this.b_id = this.aroute.snapshot.paramMap.get('b_id');
+    this.b_id_ = this.b_id;
     //this.getBusiness(this.b_id);
     this.bServe.fetchBusiness(this.b_id).subscribe((data) => {
       this.bData = data;
@@ -190,6 +192,10 @@ export class BusinessProfileComponent implements OnInit{
     };
 
     const response = await this.aServe.postAppointment(postComplete);
+
+    if(response) {
+      window.location.reload();
+    }
     //console.log(response);
     //this.b_id is set earlier
     //this.selected is the date
