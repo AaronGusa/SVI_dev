@@ -21,6 +21,24 @@ export class ServiceService {
   // Categories services
   fetchCategories(): Observable<Category[]> {
     return new Observable(observer => {
+      const subscription = this.http.get<Category[]>(this.categoryUrl)
+        .subscribe({
+          next: categories => observer.next(categories),
+          error: error => observer.error(error),
+          complete: () => observer.complete()
+        });
+  
+      
+      return {
+        unsubscribe() {
+          subscription.unsubscribe();
+        }
+      };
+    });
+  }
+
+  fetchCategories2(): Observable<Category[]> {
+    return new Observable(observer => {
       const subscription = this.http.get<Category[]>(this.serviceUrl)
         .subscribe({
           next: categories => observer.next(categories),

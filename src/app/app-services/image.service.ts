@@ -10,6 +10,7 @@ export class ImageService {
   private userProfImageUrl = 'https://stellavibe.onrender.com/images/profImages/user/';
   
   private busProfImageUrl = 'https://stellavibe.onrender.com/images/profImages/bus/';
+  private busProfImagesUrl = 'https://stellavibe.onrender.com/images/profImages/businesses/';
   private profUserImage = 'https://stellavibe.onrender.com/images/profImages/user_update/';
   private profBusImage = 'https://stellavibe.onrender.com/images/profImages/bus_update/';
   private busServiceImages = 'https://stellavibe.onrender.com/images/busImages/';
@@ -115,6 +116,17 @@ export class ImageService {
 }
 
   // BUSINESS Profile Image
+  async getBusProfileImages() {
+    try {
+      const busImages = await this.http.get(`${this.busProfImagesUrl}`).toPromise();
+      // console.log(`${this.busProfImageUrl}${b_id}`)
+      // console.log('GetBusProfile: ' + busImage);
+      return busImages;
+    } catch (error) {
+      // console.error('Error fetching business profile pic: ' + error);
+      return error;
+    }
+  }
 
   async getBusProfileImage(b_id: string) {
     try {

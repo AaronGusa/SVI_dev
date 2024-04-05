@@ -3,85 +3,155 @@
 }
 
 @if (!loading) {
-
-    @if (zipFieldSelected) { 
-        <div>
-            <app-zip-search
-            [zip]="zipList"
-            (zipSelected)="applyFilters({ zip: $event })"
-            (click)="onSearchSelected()"
-            ></app-zip-search> 
-            
-            
-        </div>
-    } 
-    <ng-container>
-        @if (cityFieldSelected) { 
-            <ng-container >
-                <app-city-search
-                    [cities]="cityList"
-                    (citySelected)="applyFilters({ city: $event })"
-                    (click)="onSearchSelected()"
-                ></app-city-search>
-        
-            </ng-container>
+<div class="standard_container">
+    <h1>Find Services</h1>
+</div>
+<div class="searchers_container">    
+    <div class="zip_city_container">
+        @if (zipFieldSelected) { 
+            <div class="zip_city_cards">
+                <app-zip-search
+                [zip]="zipList"
+                (zipSelected)="applyFilters({ zip: $event })"
+                (click)="onSearchSelected()"
+                ></app-zip-search> 
+                
+                
+            </div>
         } 
-    </ng-container> 
-
-    @if (categories.length > 0) {
         <div>
-            <app-service-search
+            @if (cityFieldSelected) { 
+                <div  class="zip_city_cards">
+                    <app-city-search
+                        [cities]="cityList"
+                        (citySelected)="applyFilters({ city: $event })"
+                        (click)="onSearchSelected()"
+                    ></app-city-search>
+            
+                </div>
+            } 
+        </div> 
+        <div class="zip_city_cards">
+            <app-rating-filter
+                [list2Sort]="businessListFiltered"
+                (ratingFilterChange)="applyRatingFilter($event)"
+            ></app-rating-filter>
+        </div>
+
+    </div>
+    @if (categories.length > 0) {
+        <div >
+            <app-service-search 
                 [categories]="categories"
                 (servicesSelected)="applyFilters({ selectedServices: $event })"
             ></app-service-search>
         </div>
     }
-  
+    
 
- <div >
-    <app-refine-search-menu
-    [list2Sort]="businessListFiltered"
-    (filterByNameChange)="applyFilterByName($event)"
-    (ratingFilterChange)="applyRatingFilter($event)"
-    (showActiveOnlyChange)="applyShowActiveOnly($event)"
-  >
-  </app-refine-search-menu>
+    <div>
+        <div class="bf_toggle_container">
+            <app-toggle-filter 
+                (showActiveOnlyChange)="applyShowActiveOnly($event)"
+                (filterByNameChange)="applyFilterByName($event)"
 
-    <p>{{ businessListFiltered.length }} Businesses Found</p>
-   
+            ></app-toggle-filter>
+        </div>
+
+        <div class="standard_container">
+            <h2>{{ businessListFiltered.length }} Businesses Found</h2>
+        </div>
+    </div> 
+</div> 
+<div>          
     @for (b of businessListFiltered; track $index) {
-        <div>
-            <mat-accordion>
-                <mat-expansion-panel style="display: flex; flex-direction:column; justify-content: space-between;">
-                    <mat-expansion-panel-header >
-                    <h1>{{ b.b_name }} - {{b.b_id}}</h1>
-                    <p>Rating: {{ b.b_rating }}</p>
-                    </mat-expansion-panel-header>
-                    <mat-panel-description>
-                    
-                    </mat-panel-description>
-                    <div>
-                    <div>
-                        <p>{{ b.b_phone }}</p>
-                        <p>{{ b.b_email }}</p>
-                        <p>{{ b.b_website }}</p>
+        <div class="business_find_">
+            <mat-card>
+
+                <mat-accordion >
+                    <mat-expansion-panel style="
+                        background-color: rgba(157, 173, 166, 0.75);
+                    ">
+                        <mat-expansion-panel-header id="bf_expand_header" style="
+                            padding: 64px;
+                        "> 
+                            
+                            <mat-panel-title>
+                                <h2 class="bf_text">{{ b.b_name }}</h2>
+                            </mat-panel-title>
+
+                            <mat-panel-description
+                                style="
+                                    display: flex;
+                                    justify-content: right;
+                                
+                                "
+                            >
+                                @if (b.b_rating !== 0) { 
+                                    @switch (b.b_rating !== 0) {
+                                        @case (b.b_rating === 5) {
+                                            <p id="icons">⭐⭐⭐⭐⭐</p> 
+                                        }
+                                        @case (b.b_rating === 4) {
+                                            <p id="icons">⭐⭐⭐⭐</p>
+                                        }
+                                        @case (b.b_rating === 3) {
+                                            <p id="icons">⭐⭐⭐</p>
+                                        }
+                                        @case (b.b_rating === 2) {
+                                            <p id="icons">⭐⭐</p>
+                                        }
+                                        @case (b.b_rating === 1) {
+                                            <p id="icons">⭐</p>
+                                        }
+                                        @default {
+                                            <p></p>
+                                        }
+                                    }
+                                 
+                                 
+                                 
+                                 
+                                 }       
+                                <div>
+                                    @if (b.b_profImage) {
+                                    <img class='bus_find_profImg' src={{b.b_profImage}} alt="Profile Image">
+                                    }
+                                </div>
+                                </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        
                         <div>
-                                @for (service of b.b_services; track $index) {
-                                    {{service.s_name}}
-                                } 
+                            <div>
+                                <div class="standard_container">
+                                    <p>({{ b.b_phone[0] }}{{ b.b_phone[1] }}{{ b.b_phone[2] }}) {{ b.b_phone[3] }}{{ b.b_phone[4] }}{{ b.b_phone[5] }}-{{ b.b_phone[6] }}{{ b.b_phone[7] }}{{ b.b_phone[8] }}{{ b.b_phone[9] }}</p>
+                                    <p>{{ b.b_email }}</p>
+                                    <p>{{ b.b_website }}</p>
+                                </div>
+                                <div class="bus_service_container">
+                                    <h3>{{b.b_name}} Services</h3>
+                                    <hr>
+                                    @for (service of b.b_services; track $index)
+                                    {
+                                        <a routerLink="/business-profile/{{b.b_id}}">
+                                            <mat-card id="bus_find_service" >
+                                                <mat-card-content >{{ findSName(service) }}</mat-card-content>
+                                            </mat-card>  
+                                        </a>  
+                                    }
+                                </div>
+                                <!-- <h3>Address</h3> -->
+                                <hr>
+                                <div class="standard_container">
+                                    <p>{{ b.b_street }}    {{ b.b_city }}, {{ b.b_state }}</p>
+                                    <!-- <p>{{ b.b_zip }}</p> -->
+                                </div>
+                                <button mat-raised-button  routerLink="/business-profile/{{b.b_id}}">Go to Business Page</button>
+                            </div>
                         </div>
-                        <div>
-                        <h3>Address</h3>
-                        <p>{{ b.b_street }}</p>
-                        <p>{{ b.b_city }}</p>
-                        <p>{{ b.b_state }}</p>
-                        <p>{{ b.b_zip }}</p>
-                        </div>
-                            <button mat-raised-button color="primary" ><a routerLink="/business-profile/{{b.b_id}}">Go to Business Page</a></button>
-                        </div>
-                    </div>
-                </mat-expansion-panel>
-            </mat-accordion>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </mat-card>    
             <br>
             <br>
         </div>

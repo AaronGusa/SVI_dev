@@ -57,6 +57,7 @@ export class UserProfileService {
     }
   }
 
+}
 
   // loadUserProfile(username: string) {
   //   try {
@@ -96,5 +97,5 @@ export class UserProfileService {
   //         console.error('Error checking username availability:', error);
   //         throw error;
   //     }
-  //   }
-}
+  //   }}
+
