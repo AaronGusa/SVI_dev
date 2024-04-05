@@ -1,0 +1,17 @@
+@if (isLoading) {
+    <app-loading></app-loading>
+} @else {
+    <div class="containerCont">
+        <div class="buttonCont">
+            <h1>Select service:</h1>
+            <mat-button-toggle-group class="buttonGroup" name="serviceButtonGroup" aria-label="Service Select">
+                @for (service of servComplete; track $index) {
+                    <mat-button-toggle mat-button-raised value={{service.s_id}}>{{service.s_name}}</mat-button-toggle>
+                }
+            </mat-button-toggle-group>
+        </div>
+        <div class="calendarCont">
+            <app-calendar></app-calendar>
+        </div>
+    </div>
+}

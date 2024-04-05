@@ -1,0 +1,57 @@
+ // async favoriteBus() {
+    //   const localUID = localStorage.getItem("auth_data");
+    //   console.log(localUID + " " + typeof localUID)
+
+    //   const authData = localUID ? JSON.parse(localUID) : null;
+
+
+    //   const userID = parseInt(authData['u_id']);
+    //   console.log('Local Storage Pull Confirm: ' + userID);
+    //   const businessID = this.aroute.snapshot.paramMap.get('b_id');
+    //   console.log('Business Params Confirm: ' + businessID);
+    //   //build payload
+    //   if (userID && businessID) {
+    //     const response = await this.uServe.favoriteUpdate(userID, businessID);
+    //     console.log(response);
+    //     this.favorited = !this.favorited;
+
+    //     // Update auth_data.fav_bus in localStorage
+    //     // Update auth_data.fav_bus in localStorage
+    //     try {  
+    //         if (this.favorited) {
+    //             // Initialize fav_bus array if it doesn't exist
+    //             console.log('authData: ', authData)
+    //             authData['fav_bus'] = authData['fav_bus'] || [];
+    //             console.log('Type of fav_bus:', typeof authData['fav_bus']); // Should print "object"
+
+    //             if (!Array.isArray(authData['fav_bus'])) {
+    //                 console.error('fav_bus is not an array:', authData['fav_bus']);
+    //             } else {
+    //                 if (!authData['fav_bus'].includes(businessID)) {
+    //                     authData['fav_bus'].push(businessID);
+    //                     console.log('Added businessID:', businessID);
+    //                 } else {
+    //                     console.log('BusinessID already exists in fav_bus:', businessID);
+    //                 }
+    //             }
+    //         } else {
+    //             // Remove businessID from fav_bus array
+    //             authData['fav_bus'] = authData['fav_bus'] || [];
+    //             const index = authData['fav_bus'].indexOf(businessID);
+    //             if (index !== -1) {
+    //                 authData['fav_bus'].splice(index, 1);
+    //                 console.log('Removed businessID:', businessID);
+    //             } else {
+    //                 console.log('BusinessID not found in fav_bus:', businessID);
+    //             }
+    //         }
+    //       } catch (error) {
+    //         console.log("Error:" + error)
+    //       }
+
+    //     } else {
+    //       console.log("HOLY CRAP THERE'S AN ERROR")
+    //     }
+      
+
+    // }

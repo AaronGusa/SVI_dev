@@ -9,15 +9,25 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatIcon } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 import { ActivatedRoute, RouterModule, Params } from '@angular/router';
 import { LoadingComponent } from '../../features/loading/loading.component';
 import { CalendarComponent } from '../../commonelements/calendar/calendar.component';
 
-import { BusinessService, UserService } from '../../app-services';
+import { AppointmentService, BusinessService, UserService } from '../../app-services';
 import { ImageService } from '../../app-services';
 import { ServiceService } from '../../app-services';
 import { AuthStore } from '../../app-services/auth/auth.store';
+import { provideNativeDateAdapter } from '@angular/material/core';
+import { AppComponent } from '../../app.component';
 
 
 
@@ -25,9 +35,10 @@ import { AuthStore } from '../../app-services/auth/auth.store';
   selector: 'app-business-profile',
   standalone: true,
   imports: [BusinessProfileImagesComponent, BusinessProfileMenuComponent, BusinessProfileUserComponent,
-      BusinessProfileReviewsComponent, MatExpansionModule, MatTabsModule, RouterModule, LoadingComponent,
-      CalendarComponent, MatButtonModule, MatButtonToggleModule, CommonModule],
+      BusinessProfileReviewsComponent, MatExpansionModule, MatTabsModule, MatIcon, MatCardModule, RouterModule, LoadingComponent,
+      CalendarComponent, MatButtonModule, MatDatepickerModule, MatButtonToggleModule,MatSelectModule, MatInputModule, ReactiveFormsModule, CommonModule, MatFormFieldModule],
   templateUrl: './business-profile.component.html',
+  providers: [provideNativeDateAdapter()],
   styleUrl: './business-profile.component.css'
 })
 export class BusinessProfileComponent implements OnInit{
@@ -39,13 +50,29 @@ export class BusinessProfileComponent implements OnInit{
   services: any;
   servComplete: any = [];
   favorited: Boolean = false;
+  dateSelected: Date | null;
+  
+  // ============================ Appointments ================================
+  formDate = new FormControl('');
+  formService = new FormControl('');
+  formHour = new FormControl('');
+  
+  availableHours = [9,10,11,12,13,14,15,16,17];
+  selectedHour: number;
+  selected: Date | null;
+  selectedSID: number;
+  username: string;
+  userID: number;
+  
 
   constructor(private aroute: ActivatedRoute,
               private bServe: BusinessService,
               private uServe: UserService,
               private iServe: ImageService,
               private sServe: ServiceService,
-              public auth: AuthStore
+              private aServe: AppointmentService,
+              public auth: AuthStore,
+              public fb: FormBuilder
     ) {}
 
   async ngOnInit() {
@@ -87,14 +114,11 @@ export class BusinessProfileComponent implements OnInit{
 
   }
 
-  // async fetchExtractServices() {
-  //   const servicesData = await this.sServe.fetchServices();
-  //   for (let service of this.services; let i ++ 1) {
-  //     //For each s_id search servicesData, create new entry in servComplete array
-      
-  //   }
-
-  // }
+  myFilter = (d: Date | null): boolean => {
+    const day = (d || new Date()).getDay();
+    // Prevent Saturday and Sunday from being selected.
+    return day !== 0 && day !== 6;
+  };
 
   async fetchExtractServices() {
     this.allServices = await this.sServe.fetchServices().toPromise();
@@ -120,12 +144,13 @@ export class BusinessProfileComponent implements OnInit{
       const favBusArray = favBusList ? JSON.parse(favBusList) : [];
   
       const authData = localStorage.getItem("auth_data");
-      const userID = authData ? JSON.parse(authData)['u_id'] : null;
+      this.userID = authData ? JSON.parse(authData)['u_id'] : null;
+      this.username = authData ? JSON.parse(authData)['u_username'] : null;
       
       const businessID = this.aroute.snapshot.paramMap.get('b_id');
   
-      if (userID && businessID) {
-          const response = await this.uServe.favoriteUpdate(userID, businessID);
+      if (this.userID && businessID) {
+          const response = await this.uServe.favoriteUpdate(this.userID, businessID);
           
           this.favorited = !this.favorited;
   
@@ -149,62 +174,50 @@ export class BusinessProfileComponent implements OnInit{
       }
   }
 
-    // async favoriteBus() {
-    //   const localUID = localStorage.getItem("auth_data");
-    //   console.log(localUID + " " + typeof localUID)
+  //=========================================== Appointments =========================================
+  async buildAppointment() {
+    const authData = localStorage.getItem("auth_data");
+      this.userID = authData ? JSON.parse(authData)['u_id'] : null;
+      this.username = authData ? JSON.parse(authData)['u_username'] : null;
+    const postComplete = {
+      "b_id": this.b_id,
+      "u_id": this.userID,
+      "u_username": this.username,
+      "app_date": this.formDate.value,
+      "app_time": this.formHour.value,
+      "b_name": this.bData.b_name,
+      "s_id": this.formService.value,
+    };
+    console.log(postComplete)
 
-    //   const authData = localUID ? JSON.parse(localUID) : null;
+    const response = await this.aServe.postAppointment(postComplete);
+    console.log(response);
+    //this.b_id is set earlier
+    //this.selected is the date
+    //this.selectedSID is set by setAppointmentFunction
+    //this.username will be set in lines 136+- 
+    //this.u_id set and found in line 136
+  }
 
+  setAppointmentService(s_id) {
+    this.selectedSID = s_id;
+    //console.log(s_id)
+    this.formService.setValue(s_id);
+  }
 
-    //   const userID = parseInt(authData['u_id']);
-    //   console.log('Local Storage Pull Confirm: ' + userID);
-    //   const businessID = this.aroute.snapshot.paramMap.get('b_id');
-    //   console.log('Business Params Confirm: ' + businessID);
-    //   //build payload
-    //   if (userID && businessID) {
-    //     const response = await this.uServe.favoriteUpdate(userID, businessID);
-    //     console.log(response);
-    //     this.favorited = !this.favorited;
+  setDate(date) {
+    //console.log(date)
+    //console.log(this.selected)
+    this.formDate.setValue(date);
+    this.formHour.setValue('');
+  }
 
-    //     // Update auth_data.fav_bus in localStorage
-    //     // Update auth_data.fav_bus in localStorage
-    //     try {  
-    //         if (this.favorited) {
-    //             // Initialize fav_bus array if it doesn't exist
-    //             console.log('authData: ', authData)
-    //             authData['fav_bus'] = authData['fav_bus'] || [];
-    //             console.log('Type of fav_bus:', typeof authData['fav_bus']); // Should print "object"
-
-    //             if (!Array.isArray(authData['fav_bus'])) {
-    //                 console.error('fav_bus is not an array:', authData['fav_bus']);
-    //             } else {
-    //                 if (!authData['fav_bus'].includes(businessID)) {
-    //                     authData['fav_bus'].push(businessID);
-    //                     console.log('Added businessID:', businessID);
-    //                 } else {
-    //                     console.log('BusinessID already exists in fav_bus:', businessID);
-    //                 }
-    //             }
-    //         } else {
-    //             // Remove businessID from fav_bus array
-    //             authData['fav_bus'] = authData['fav_bus'] || [];
-    //             const index = authData['fav_bus'].indexOf(businessID);
-    //             if (index !== -1) {
-    //                 authData['fav_bus'].splice(index, 1);
-    //                 console.log('Removed businessID:', businessID);
-    //             } else {
-    //                 console.log('BusinessID not found in fav_bus:', businessID);
-    //             }
-    //         }
-    //       } catch (error) {
-    //         console.log("Error:" + error)
-    //       }
-
-    //     } else {
-    //       console.log("HOLY CRAP THERE'S AN ERROR")
-    //     }
-      
-
-    // }
+  onHourSelected(hour, date) {
+    console.log(hour);
+    console.log(date);
+    date.setHours(hour);
+    this.formDate.setValue(date);
+  }
+   
 }
   

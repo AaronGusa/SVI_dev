@@ -121,7 +121,6 @@ hr {
 }
 
 .business_profile_image {
-    width: 200px;
     height: auto;
     border-radius: 15%;
     box-shadow: 2px 2px  25px rgba(157, 173, 166, 1);
@@ -133,6 +132,40 @@ hr {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
+    align-items: center;
+}
+
+.business_serv_container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content:center;
+    align-items: center;
+    background-color: rgba(157, 173, 166, 0.50);
+    
+}
+
+.bus_service {
+    margin: 0.5rem;
+}
+
+.business_address_mini_cont {
+    display: flex;
+    flex-direction: column;
+}
+
+.business_address_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.located_container {
+    border: 1px solid rgba(0, 0, 0, 0.7);
+    padding: 1rem;
+    border-radius: 45px;
+    background-color: rgba(157, 173, 166, 0.50);
 }
 
 .business_prof_phWb_container {

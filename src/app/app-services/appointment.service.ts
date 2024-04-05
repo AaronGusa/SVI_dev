@@ -11,6 +11,7 @@ export class AppointmentService {
   private appUsrUrl = 'usr/';
   private appAllUrl = 'a_a/';
   private appBusUrl = 'bus/';
+  private appNewUrl = 'newApp';
 
   constructor(private http: HttpClient) {}
 
@@ -48,6 +49,17 @@ export class AppointmentService {
     return this.http.get(`${this.appBaseUrl}${this.appBusUrl}${b_id}`).pipe(
       first()
     );
+  }
+
+  async postAppointment(postComplete) {
+    try {
+      console.log(`${this.appBaseUrl}${this.appNewUrl}`)
+      const response: any = await this.http.post(`${this.appBaseUrl}${this.appNewUrl}`, postComplete).toPromise();
+      console.log(response)
+      return response;
+    } catch (error) {
+      return error;
+    }
   }
 
 
