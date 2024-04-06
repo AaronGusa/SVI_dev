@@ -14,6 +14,7 @@ export class AppointmentService {
   private appBusUrl = 'bus/';
   private appNewUrl = 'newApp';
   private userDelApp = 'userDeleteApp/';
+  private busAppUpdate = 'updateAppointment/';
 
   constructor(private http: HttpClient) {}
 
@@ -79,6 +80,16 @@ export class AppointmentService {
     } catch (error) {
         return error;
     }
+}
+
+async busAppStatus(app_id, payload) {
+  try {
+    console.log(`${this.appBaseUrl}${this.busAppUpdate}${app_id}`)
+    const response = await firstValueFrom(this.http.put(`${this.appBaseUrl}${this.busAppUpdate}${app_id}`, payload));
+    return response;
+  } catch (error) {
+    return error;
+  }
 }
 
 

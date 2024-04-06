@@ -1,20 +1,49 @@
 <div class="userDash_review">
+@if (isLoading) {
+    <app-loading></app-loading>
+} @else {
     @for (r of reviewArray; track $index) {
         <mat-expansion-panel>
     
-            <mat-expansion-panel-header >
-                <div class="du_review_expanHeader">
-                    <h2>{{ r.b_id }}: {{r.u_id}}</h2>
+            <mat-expansion-panel-header  [collapsedHeight]="'70px'">
+                <mat-panel-title><h4>{{ r.u_fname }} {{r.u_lname}}</h4></mat-panel-title>
+                <mat-panel-description>
+            
+                    @if (r.rating !== 0) { 
+                        @switch (r.rating !== 0) {
+                            @case (r.rating == 5) {
+                                <p style="color:yellow" id="icons" >⭐⭐⭐⭐⭐</p> 
+                            }
+                            @case (r.rating == 4) {
+                                <p style="color:yellow" id="icons">⭐⭐⭐⭐</p>
+                            }
+                            @case (r.rating == 3) {
+                                <p style="color:yellow" id="icons">⭐⭐⭐</p>
+                            }
+                            @case (r.rating == 2) {
+                                <p style="color:yellow" id="icons">⭐⭐</p>
+                            }
+                            @case (r.rating == 1) {
+                                <p style="color:yellow" id="icons">⭐</p>
+                            }
+                            @default {
+                                <p></p>
+                            }
+                        }                         
+                    }      
                     
-                    <p>|   {{r.revDate | date}}</p>
-                </div>
+                
+                
+                </mat-panel-description>
             </mat-expansion-panel-header>
-    
+            <hr>
+            <p>Date Rated:  {{r.revDate | date}}</p>
+            
             <div>
                 <p>{{r.rev_content}}</p>
-                <p>{{ r.rating }} stars</p>
             </div>
         </mat-expansion-panel>
     
     }
+}
     </div>

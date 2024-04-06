@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
@@ -19,7 +19,7 @@ import { LoadingComponent } from '../../../features/loading/loading.component';
   styleUrl: './db-appointments.component.css'
 })
 
-export class DbAppointmentsComponent implements OnInit {
+export class DbAppointmentsComponent implements OnInit, OnChanges {
   username: any = '';
   userProf: any;
   busProf: any;
@@ -67,6 +67,10 @@ export class DbAppointmentsComponent implements OnInit {
     this.username = this.r.parent.parent.snapshot.paramMap.get('clientUsername');
     this.getClientProfile();
     this.getServices();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.getBusAppointments(this.busProf.b_id);
   }
 
   async getClientProfile() {
@@ -173,12 +177,23 @@ export class DbAppointmentsComponent implements OnInit {
     this.cancelConfirm = true;
   }
 
-  deleteRecord(index: number) {
+  async deleteRecord(index: number) {
     this.delIndexNumber = index;
     this.deleteConfirm = false;
   }
 
-  confirmAppointment(index: number) {
+  async confirmAppointment(index: number) {
     console.log(this.currentAppointments[index]);
+    const appointment = this.currentAppointments[index];
+    appointment.app_status = 'confirmed';
+    appointment.app_approved = new Date().toISOString();
+    console.log(appointment);
+    const response = await this.aServe.busAppStatus(appointment.app_id, appointment);
+    console.log(response);
+    this.currentAppointments = [];
+    this.getBusAppointments(this.busProf.b_id);
+    
   }
+
+
 }

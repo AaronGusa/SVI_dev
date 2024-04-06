@@ -1,19 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { DatePipe } from '@angular/common'; 
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { DatePipe, getLocaleFirstDayOfWeek } from '@angular/common'; 
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { ReviewService } from '../../../app-services';
+import { UserService } from '../../../app-services';
 import { HttpClient } from '@angular/common/http';
+import { firstValueFrom } from 'rxjs';
+
+import { LoadingComponent } from '../../../features/loading/loading.component';
 
 @Component({
   selector: 'app-db-reviews',
   standalone: true,
-  imports: [DatePipe, MatExpansionModule, MatButtonModule, MatSnackBarModule],
+  imports: [DatePipe, MatExpansionModule, MatButtonModule, MatSnackBarModule, LoadingComponent],
   templateUrl: './db-reviews.component.html',
   styleUrl: './db-reviews.component.css'
 })
-export class DbReviewsComponent implements OnInit {
+export class DbReviewsComponent implements OnInit, OnChanges {
   reviewArray: any[] = [
     {
         "_id": "64c92eb0eef1b2bf9978cb88",
@@ -211,22 +215,62 @@ export class DbReviewsComponent implements OnInit {
         "revUpdate": "2023-08-14T08:15:35.900Z"
     }
 ]
+userData$: any;
 userId: number = 1005;
-mybusiness: any;
+myBusiness: any;
 b_id: string;
+user$: any; 
+isLoading: Boolean = true;
 
 constructor(private rServe: ReviewService,
-            private http: HttpClient
+            private http: HttpClient,
+            private uServe: UserService
     ) {}
 
 ngOnInit(): void {
+    this.isLoading = true;
+    this.myBusiness = localStorage.getItem('bus');
+    this.getBusinessReviews();
+};
+
+ngOnChanges(changes: SimpleChanges): void {
     this.getBusinessReviews();
 }
 
-getBusinessReviews() {
-    this.mybusiness = localStorage.getItem('bus');
-    console.log(this.mybusiness)
+async getBusinessReviews() {
+    
+    this.reviewArray = await this.rServe.getBusReviews(this.myBusiness); 
+    await this.getUserNames();
+    console.log(this.userData$)
+    // Accessing the resolved array from the usersPromise
+    //this.user$ = await usersPromise;
+    this.matchReviewsWithUser(this.reviewArray, this.userData$);
+
 }
+
+async getUserNames() {
+    return await this.uServe.fetchUsersToo().then(users => {
+        this.userData$ = users;
+    });
+}
+
+matchReviewsWithUser(reviewArray, userArray) {
+     // Iterate through each review
+     reviewArray.forEach(review => {
+        // Find the user object with the matching u_id
+        const user = userArray.find(user => user.u_id === review.u_id);
+        if (user) {
+            // If a matching user is found, add u_fname and u_lname to the review object
+            review.u_fname = user.u_fname;
+            review.u_lname = user.u_lname;
+        }
+    });
+    
+    // Clear the userArray
+    this.userData$.length = 0;
+    this.isLoading = false;
+}
+
  
 
 }

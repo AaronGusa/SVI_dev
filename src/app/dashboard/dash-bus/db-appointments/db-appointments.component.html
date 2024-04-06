@@ -9,7 +9,6 @@
             @for (a of currentAppointments; track $index) {
                 <mat-expansion-panel>
                     <mat-expansion-panel-header>
-                        <span>{{ a.app_status }}</span>  
                         <span>
                             @switch (a.app_status) {
                                 @case ('confirmed') {
@@ -20,6 +19,9 @@
                                 }
                                 @case ('rejected') {
                                     <p>❌</p>
+                                }
+                                @case ('deleted') {
+                                    <p>🚫</p>
                                 }
                                 @default {
                                     <p></p>

@@ -8,10 +8,10 @@ import { User } from '../models/user.model';
   providedIn: 'root'
 })
 export class UserService {
-  private userUrl = 'https://stellavibe.onrender.com/users/';
-  private userIDGet = 'user/';
-  private usernameVerify = 'unameCheck/'
-  private favUp = 'favup';
+  private userUrl = 'https://stellavibe.onrender.com/users';
+  private userIDGet = '/user/';
+  private usernameVerify = '/unameCheck/'
+  private favUp = '/favup';
   // private userUrl = 'localhost:3000/users';
 
 
@@ -32,6 +32,11 @@ export class UserService {
   //     throw error;
   //   }
   // }
+
+  async fetchUsersToo() {
+    //   console.log('Here ya go, entered fetchUsers()')
+         return await firstValueFrom(this.http.get(this.userUrl));
+       }
 
   async fetchUserID(id: string) {
     try{
