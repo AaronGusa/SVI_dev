@@ -62,7 +62,7 @@ export class DbProfileComponent implements OnInit, OnChanges {
       //console.log("DUPROFILE PARAMS? " + params['clientUsername'])
       //console.log(this.u_name)
     });
-    console.log(this.u_name);
+    //console.log(this.u_name);
     
     await this.showUserData();
     await this.getBusinessProfile();
@@ -120,7 +120,7 @@ onUpdateBusProf() {
       b_state: this.bProfileForm.value.b_state,
       b_zip: this.bProfileForm.value.b_zip,
       b_active: this.bProfileForm.value.b_active};
-      console.log('b_active: ' + this.bProfileForm.value.b_active);
+      //console.log('b_active: ' + this.bProfileForm.value.b_active);
     // this.updateCheck = !this.updateCheck;
     // console.log('Payload:', payload);
     // Call your method to update the array with the payload
@@ -149,7 +149,9 @@ onUpdateBusProf() {
 
   async getBusinessProfile() {
    
-      let business = await this.bServe.fetchUserBusiness(this.u_id);
+      let business: any = await this.bServe.fetchUserBusiness(this.u_id);
+      let storage = business.b_id;
+      localStorage.setItem( 'bus', storage);
       this.business = business;
 
    // console.log('After the getUserandBusiness, USER: ' + JSON.stringify(this.user) + ' BUSINESS: ' + JSON.stringify(this.business));
@@ -164,7 +166,7 @@ onUpdateBusProf() {
 
   updateSwitch() {
     this.updateCheck = !this.updateCheck;
-    console.log(this.updateCheck);
+    //console.log(this.updateCheck);
   }
 
   

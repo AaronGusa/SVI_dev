@@ -124,7 +124,7 @@ getUserFaves() {
 
     });
 
-    console.log('Active favorites:', this.activeFavorites);
+   // console.log('Active favorites:', this.activeFavorites);
 }
 
 }

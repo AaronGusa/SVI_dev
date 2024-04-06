@@ -24,14 +24,14 @@ export class DashProfileImageComponent implements OnInit, ControlValueAccessor{
 
   async ngOnInit() {
     await this.getUserPic(this.u_id);
-    console.log(this.u_id);
-    console.log("Properties of userPicData:", Object.entries(this.userPicData));
+    //console.log(this.u_id);
+    //console.log("Properties of userPicData:", Object.entries(this.userPicData));
 
   }
 
   async getUserPic(u_id: number) {
     this.userPicData = await this.imgService.getUserProfileImage(u_id);
-    console.log("UserPic Data: " + this.userPicData); 
+    //console.log("UserPic Data: " + this.userPicData); 
     // Logging keys (properties) of the object
 
   }
@@ -67,10 +67,10 @@ export class DashProfileImageComponent implements OnInit, ControlValueAccessor{
         const base64String = await this.resizeAndConvertToBase64(files[0]);
         let response: any = await this.imgService.updateUserProfileImage(this.u_id, base64String);
 
-        console.log('On File Change:', this.file);
+        //console.log('On File Change:', this.file);
         // let response: any = await this.imgService.updateUserProfileImage(this.u_id, this.file);
         if (response && response.acknowledged) {
-            console.log('Profile image updated successfully:', response);
+            //console.log('Profile image updated successfully:', response);
             this.getUserPic(this.u_id);
         } else {
             console.error('Error updating user profile image:', response);

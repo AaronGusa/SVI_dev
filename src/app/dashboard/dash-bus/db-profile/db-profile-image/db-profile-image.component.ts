@@ -24,14 +24,14 @@ export class DbProfileImageComponent implements OnInit, ControlValueAccessor{
 
   async ngOnInit() {
     await this.getBusPic(this.b_id);
-    console.log(this.b_id);
-    console.log("Properties of busPicData:", Object.entries(this.busPicData));
+    // console.log(this.b_id);
+    // console.log("Properties of busPicData:", Object.entries(this.busPicData));
 
   }
 
   async getBusPic(b_id: string) {
     this.busPicData = await this.iService.getBusProfileImage(b_id);
-    console.log("BusPic Data: " + this.busPicData); 
+    // console.log("BusPic Data: " + this.busPicData); 
     // Logging keys (properties) of the object
 
   }
@@ -66,14 +66,14 @@ export class DbProfileImageComponent implements OnInit, ControlValueAccessor{
         // this.file = _file;
         const base64String = await this.resizeAndConvertToBase64(files[0]);
         let response: any = await this.iService.updateBusProfileImage(this.b_id, base64String);
-        console.log('Response? ' + JSON.stringify(response))
-        console.log('On File Change:', this.file);
+        // console.log('Response? ' + JSON.stringify(response))
+        // console.log('On File Change:', this.file);
         // let response: any = await this.imgService.updateUserProfileImage(this.u_id, this.file);
         if (response && response.acknowledged) {
-            console.log('Profile image updated successfully:', response);
+            // console.log('Profile image updated successfully:', response);
             this.getBusPic(this.b_id);
         } else {
-            console.error('Error updating the business profile image (Line 76~):', response);
+            // console.error('Error updating the business profile image (Line 76~):', response);
         }
         this.resetInput();
     }

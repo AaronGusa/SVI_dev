@@ -115,7 +115,7 @@ export class FindBusinessComponent implements OnInit, AfterViewInit {
 
       if (fetchedProfImgs !== undefined) {
         this.businessesProfImgs = fetchedProfImgs;
-        console.log(this.businessesProfImgs);
+        //console.log(this.businessesProfImgs);
         // Iterate through each business record
         this.businesses.forEach(business => {
         // Find corresponding b_profImage for the current business b_id
@@ -128,11 +128,11 @@ export class FindBusinessComponent implements OnInit, AfterViewInit {
         )
         //console.log(this.businesses);
        // console.log(this.businessesProfImgs);
-        console.log(this.businessListFiltered);
+        //console.log(this.businessListFiltered);
 
         this.businessListFiltered = this.businesses;
     
-        console.log(this.businessListFiltered)
+        //console.log(this.businessListFiltered)
 
       }
       
@@ -152,9 +152,9 @@ export class FindBusinessComponent implements OnInit, AfterViewInit {
         this.loading = false;
       }
       
-      console.log(this.businesses);
-      console.log(this.categories);
-      console.log(this.servicesData)
+      //console.log(this.businesses);
+      //console.log(this.categories);
+      //console.log(this.servicesData)
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -276,7 +276,7 @@ export class FindBusinessComponent implements OnInit, AfterViewInit {
   
   applyRatingFilter(value: number) {
     this.sortRating = value;
-    console.log('Entered sortRatingFilter CONFIRMED')
+    //console.log('Entered sortRatingFilter CONFIRMED')
     this.handleCombinedFilters();
   }
   
@@ -292,7 +292,7 @@ export class FindBusinessComponent implements OnInit, AfterViewInit {
 
   async getBusPic(b_id: string) {
     const foundBusiness = this.businessesProfImgs.find(business => business.b_id === b_id);
-    console.log(foundBusiness)
+    //console.log(foundBusiness)
 
 
     

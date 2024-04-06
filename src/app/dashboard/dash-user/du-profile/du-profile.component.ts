@@ -106,7 +106,7 @@ export class DuProfileComponent implements OnInit {
   
 
   populateFormData() {
-    console.log(this.user + " " + this.user.length)
+    //console.log(this.user + " " + this.user.length)
     if (this.user) {
       const userData = this.user; // Access the first element of the user array
       
@@ -148,7 +148,7 @@ async updateArrayWithPayload(u_id, payload) {
   try {
     let response = await this.uProfService.putUserUpdate(u_id, payload);
     if (response) {
-      console.log("UPDATE RESPONSE: " + JSON.stringify(response))
+      //console.log("UPDATE RESPONSE: " + JSON.stringify(response))
       this.showUserData();
       this.updateCheck = !this.updateCheck;
 
@@ -170,18 +170,18 @@ async showUserData() {
     if (response) {
       if (Array.isArray(response)) {
         this.user = response; // If response is already an array, assign it directly
-        console.log('Line 174 DUPROFILE COMP' + this.user);
+        //console.log('Line 174 DUPROFILE COMP' + this.user);
       } else {
         // If response is not an array, try to parse it
         this.user = response;
-        console.log(this.user)
+        //console.log(this.user)
       }
       this.isLoading = false;
     } else {
       console.log('No response for showUserData');
     }
   } catch (error) {
-    console.error('Error fetching user data:', error);
+    //console.error('Error fetching user data:', error);
     this.isLoading = false;
   }
 }

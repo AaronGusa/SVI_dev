@@ -106,7 +106,7 @@ export class DbAppointmentsComponent implements OnInit {
   }
 
   async getServices() {
-    if (this.services.length > 0) {
+    if (this.services !== undefined && this.services.length > 0) {
       this.appointments.forEach((appointment, index) => { // Added index parameter
         const service = this.services.find(service => service.s_id === appointment.s_id);
         if (service) {
@@ -115,10 +115,10 @@ export class DbAppointmentsComponent implements OnInit {
         }
       });
     } else {
-      console.error("Services are not properly initialized or fetched.");
+      console.log("Services are not properly initialized or fetched.");
     }
     //console.log("S_name added? " + this.appointments);
-  }s
+  }
 
 
   filterAppointments(appointments) {

@@ -52,6 +52,7 @@ body {
     display: flex;
     flex-direction: column;
     margin: 0; 
+    padding: 0;
     font-family: Roboto, sans-serif;
 }
 
@@ -423,7 +424,8 @@ mat-sidenav-content{
 }
 
 .container {
-    flex: 1; /* Grow to fill remaining space */
+    flex: 1; /* Grow to fill remaining space ---------------------------------------------------------*/
+    
 }
 
 .spinner_cont {
@@ -451,9 +453,7 @@ footer {
     padding: 0 0 0 0.5rem;
 }
 
-.content {
-    background-color: red;
-}
+
 
 #content2 {
     /* border: 8px solid black; 
@@ -461,7 +461,7 @@ footer {
     flex-direction: column;*/
     min-height: calc(100vh - 80px - 164px);
     margin: 0;
-    padding: 0;
+    padding: 0.75rem;
     object-fit: cover;
 
 }

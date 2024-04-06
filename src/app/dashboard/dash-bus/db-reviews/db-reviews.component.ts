@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common'; 
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { ReviewService } from '../../../app-services';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-db-reviews',
@@ -11,7 +13,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
   templateUrl: './db-reviews.component.html',
   styleUrl: './db-reviews.component.css'
 })
-export class DbReviewsComponent {
+export class DbReviewsComponent implements OnInit {
   reviewArray: any[] = [
     {
         "_id": "64c92eb0eef1b2bf9978cb88",
@@ -209,7 +211,22 @@ export class DbReviewsComponent {
         "revUpdate": "2023-08-14T08:15:35.900Z"
     }
 ]
-
 userId: number = 1005;
+mybusiness: any;
+b_id: string;
+
+constructor(private rServe: ReviewService,
+            private http: HttpClient
+    ) {}
+
+ngOnInit(): void {
+    this.getBusinessReviews();
+}
+
+getBusinessReviews() {
+    this.mybusiness = localStorage.getItem('bus');
+    console.log(this.mybusiness)
+}
+ 
 
 }
