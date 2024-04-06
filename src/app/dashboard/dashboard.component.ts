@@ -79,7 +79,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   async loadUserProfile() {
     // Fetch client profile
     this.Profile = await this.userService.fetchUsername(this.u_name);
-    console.log('Profile: ' + typeof this.Profile)
+    //console.log('Profile: ' + typeof this.Profile)
   }
 
   async showUserData() {

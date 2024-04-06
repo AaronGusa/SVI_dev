@@ -63,7 +63,7 @@ export class AppComponent implements OnInit{
     if (this.auth.isLoggedIn$) {
       const getLocal = localStorage.getItem('auth_data');
       this.user = getLocal ? JSON.parse(getLocal)['u_username'] : null;
-      console.log('THIS USER MAIN: ' + this.user)
+      //console.log('THIS USER MAIN: ' + this.user)
     } else {
       this.user = '';
     }

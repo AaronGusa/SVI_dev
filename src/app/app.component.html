@@ -67,12 +67,14 @@
                             </a>
                         }
                           }
-                        <a mat-list-item routerLink="/signup">
-                            <span class="entry">
-                                <mat-icon>phonelink_setup</mat-icon>
-                                <span>Sign Up</span>
-                            </span>
-                        </a>
+                        @if (auth.isLoggedOut$ | async) {  
+                            <a mat-list-item routerLink="/signup">
+                                <span class="entry">
+                                    <mat-icon>phonelink_setup</mat-icon>
+                                    <span>Sign Up</span>
+                                </span>
+                            </a>
+                        }   
                         <a mat-list-item routerLink="/about">
                             <span class="entry">
                                 <mat-icon>file_copy</mat-icon>
@@ -139,14 +141,16 @@
                                 </span>
                             </a>
                           }
-                        <a mat-list-item routerLink="/signup">
-                            <span class="entry">
-                                <mat-icon>phonelink_setup</mat-icon>
-                            @if (!isCollapsed) {
-                                <span>Sign Up</span>
-                            }
-                            </span>
-                        </a>
+                        @if (auth.isLoggedOut$ | async) {  
+                            <a mat-list-item routerLink="/signup">
+                                <span class="entry">
+                                    <mat-icon>phonelink_setup</mat-icon>
+                                @if (!isCollapsed) {
+                                    <span>Sign Up</span>
+                                }
+                                </span>
+                            </a>
+                        }    
                         <a mat-list-item routerLink="/about">
                             <span class="entry">
                                 <mat-icon>file_copy</mat-icon>

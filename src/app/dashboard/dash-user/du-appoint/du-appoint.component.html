@@ -4,10 +4,15 @@
         <h3>Current Appointments</h3>
         @if (has_current_appointments) {
             @for (a of currentAppointments; track $index) {
-                <mat-expansion-panel>
-                    <mat-expansion-panel-header>
-                        <span>{{ a.app_status }}</span>  
-                        <span>
+                <mat-expansion-panel style="margin: 0.5rem 0; box-shadow: 2px 2px 5px rgba(0,0,0,0.5);">
+                    <mat-expansion-panel-header [collapsedHeight]="'70px'" >
+                        <mat-panel-title class="du-appointment-title">
+                            <h3>{{a.b_name}}</h3>
+                        </mat-panel-title>
+                        <mat-panel-description style="display: flex; justify-content:flex-end;">
+                            <h4>{{a.app_date | date: "MMM dd, yyyy"}}</h4>
+                        </mat-panel-description>
+                        <div class="justifyAndAlign">
                             @switch (a.app_status) {
                                 @case ('confirmed') {
                                     <p>✅</p>
@@ -18,44 +23,51 @@
                                 @case ('rejected') {
                                     <p>❌</p>
                                 }
+                                @case ('deleted') {
+                                    <p>🚫</p>
+                                }
                                 @default {
                                     <p></p>
                                 }
-                            }  
-                        </span>     
-                        <mat-panel-title class="du-appointment-title">
-                            <h2>{{a.b_name}}</h2>
-                            <h4>{{a.app_date | date: "MMM dd, yyyy"}}</h4>
-                        </mat-panel-title>
+                            } 
+                        </div>
                     </mat-expansion-panel-header>
                         <p>Time: {{a.app_time | date: "hh:mm a" }}</p>
-                        <span class="du-appointment-date">Business: {{a.b_name}}</span>
+                        @if (a.app_status === 'deleted') {
+                            <p>This appointment was deleted at {{ a.app_deleted | date: "hh:mma, MMM dd, yyyy"}}</p>
+                        }
+                        <!-- <span class="du-appointment-date">Business: {{a.b_name}}</span> -->
                         <span class="du-appointment-description"></span>
-                        <div>
+                        <div class="cancel_main_container">
                             @if (cancelConfirm && indexNumber === $index) {
-                                <span>Are you sure?</span>
-                                <button mat-raised-button color="warn" (click)="cancelAppointment($index)">Cancel</button>
+                                <div class="cancel_container">
+
+                                    <div>Are you sure?</div>
+                                    <div  class="cancel_button_container">
+                                        <button class="cancel_buttons" mat-raised-button color="warn" (click)="cancelAppointment($index)">Yes</button>
+                                        <button class="cancel_buttons" mat-raised-button style="background-color: #9DADA6; color: white" (click)="cancelConfirm = false">No</button>
+                                    </div>    
+                                </div>
+
                             } @else {
-                                <button mat-raised-button (click)="cancelConfirmation($index)">Cancel Appointment</button>
+                                <button mat-raised-button (click)="cancelConfirmation($index)">Remove Appointment</button>
                             }
-                        </div>
-            
+                        </div>    
                 </mat-expansion-panel>
           }
           }  @else {
           <p>No current appointments found.</p>
           }
-      </div>
+    </div>
     <div class="card du-past-appointments">
       <h3>Past Appointments</h3>
-      @if (has_past_appointments) {
-        <button mat-raised-button (click)="viewPastAppToggle()">Hide Past Appointments</button>
+      @if (!has_past_appointments) {
+        <button mat-raised-button color='primary' (click)="viewPastAppToggle()">Hide Past Appointments</button>
       } @else {
         <button mat-raised-button color='primary' (click)="viewPastAppToggle()">Show Past Appointments</button>
-
       }
        
-      @if (has_past_appointments) { 
+      @if (!has_past_appointments) { 
         @if (pastAppointments) {
             @for (a of pastAppointments; track $index) {
                 <mat-expansion-panel>
@@ -72,21 +84,43 @@
                                 @case ('rejected') {
                                     <p>❌</p>
                                 }
+                                @case ('deleted') {
+                                    <p>🚫</p>
+                                }
                                 @default {
                                     <p></p>
                                 }
                             }  
                         </span>     
-                        <mat-panel-title class="du-appointment-title">Appointment for {{a.dapp}}</mat-panel-title>
+                        <mat-panel-title class="du-appointment-title">{{a.b_name}} - {{a.app_date | date: "MMM dd, yyyy"}}</mat-panel-title>
                     </mat-expansion-panel-header>
-                        <span class="du-appointment-date">Business: {{a.b_id}}</span>
+                        <!-- <span class="du-appointment-date">Business: {{a.b_id}}</span> -->
                         <span class="du-appointment-description"></span>
-                        <div>
+                        <!-- <div>
                             @if (deleteConfirm && delIndexNumber === $index) {
                                 <span>Are you sure?</span>
                                 <button mat-raised-button color="warn" (click)="deleteAppointment($index)">Delete</button>
                             } @else {
                                 <button mat-raised-button (click)="deleteAppointment($index)">Delete Appointment</button>
+                            }
+                        </div> -->
+                        <div class="cancel_main_container">
+                            <div class="review_button_container">
+                                <button mat-raised-button style="background-color: #9DADA6; color: white" (click)="clickClack()">Leave Review</button>
+
+                            </div>
+                            @if (deleteConfirm && delIndexNumber === $index) {
+                                <div class="cancel_container">
+
+                                    <div>Are you sure?</div>
+                                    <div  class="cancel_button_container">
+                                        <button class="cancel_buttons" mat-raised-button color="warn" (click)="deleteAppointment($index)">Yes</button>
+                                        <button class="cancel_buttons" mat-raised-button style="background-color: #9DADA6; color: white" (click)="deleteConfirm = false">No</button>
+                                    </div>    
+                                </div>
+
+                            } @else {
+                                <button mat-raised-button (click)="deleteAppointment($index)">Remove Appointment</button>
                             }
                         </div>
             

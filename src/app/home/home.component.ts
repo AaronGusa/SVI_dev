@@ -66,6 +66,7 @@ export class HomeComponent implements OnInit {
       // Iterate through each business record
       this.businesses.forEach(business => {
       // Find corresponding b_profImage for the current business b_id
+      
       const matchingImg = this.businessesProfImgs.find(b => b.b_id === business.b_id);
 
       // If there's a matching image, update the business record

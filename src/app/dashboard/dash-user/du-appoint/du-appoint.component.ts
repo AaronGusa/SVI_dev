@@ -29,11 +29,12 @@ export class DuAppointComponent implements OnInit {
   showConfirmation: { [key: string]: boolean } = {};
 
 constructor(private r: ActivatedRoute,
-            private aServe: AppointmentService
+            private aServe: AppointmentService,
   ) {}
 
 async ngOnInit() {
   this.has_current_appointments = false;
+  this.has_past_appointments = false;
   // console.log(this.r)
   this.username = this.r.parent.snapshot.paramMap.get('clientUsername');
   // console.log('USERNAME: ' + this.username);
@@ -64,6 +65,7 @@ async ngOnInit() {
       this.has_past_appointments = false;
     } else {
       this.has_past_appointments = true;
+      //console.log(this.pastAppointments);
     }
 
     if (this.currentAppointments.length === 0) {
@@ -87,8 +89,18 @@ async ngOnInit() {
     this.deleteConfirm = true;
   }
 
-  cancelAppointment(index: number) {
+  async cancelAppointment(index: number) {
     this.indexNumber = index;
+    const appointment = this.currentAppointments[index];
+    const app_id = appointment.app_id;
+    try {
+      const response = await this.aServe.userDeleteApp(app_id, appointment);
+      console.log(Object.entries(response));
+      this.currentAppointments = [];
+      this.getUserAppointments();
+    } catch (error) {
+      console.log(error);
+    }
     this.cancelConfirm = false;
   }
 
@@ -125,6 +137,10 @@ async ngOnInit() {
   deleteRecord(index: number) {
     this.delIndexNumber = index;
     this.deleteConfirm = false;
+  }
+
+  clickClack() {
+    console.log('CLICK CLACK')
   }
 
 
