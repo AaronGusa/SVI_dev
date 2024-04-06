@@ -1,0 +1,477 @@
+.mat-typography {
+    height: max-content;
+}
+
+.tweenHeadFoot {
+    margin: 0;
+    height: 100vh;
+}
+
+.container {
+    height: 100%;
+}
+
+.center_text {
+    text-align: center;
+}
+
+.justifyAndAlign {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.simple_container {
+    margin: 0;
+    padding: 0.5rem;
+}
+
+.simple_centered_container {
+    margin: 0;
+    padding: 0.5rem;
+    justify-content: center;
+}
+
+.simple_textcentered_container {
+    margin: 0;
+    padding: 0.5rem;
+    justify-content: center;
+    text-align: center;
+}
+
+.cancel_container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    padding: 0.5rem;
+    border: 1px solid #05001b;
+    border-radius: 45px;
+}
+
+.cancel_main_container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    padding: 0.5rem;
+    border-radius: 45px;
+}
+
+.cancel_buttons {
+    margin: 0.5rem;
+}
+
+.cancel_button_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;    
+}
+
+.featured {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+
+}
+
+.fImage1 {
+    z-index: 1;
+    grid-column: 1 / span 2;
+    grid-row: 2 / span 5;
+    width: auto;
+    height: 200px;
+    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.85);
+    border-radius: 500px;
+    overflow: visible;
+}
+
+.fImage2 {
+    z-index: 0;
+    grid-column: 1 / span 4;
+    grid-row: 1 / span 4;
+}
+
+.menu {
+    z-index: 100000;
+}
+
+.spacer_nuetral {
+    display: none;
+}
+
+#logo_submark {
+    display:none;
+}
+
+#logo_full {
+    width: 250px;
+}
+
+#header_StellaVi {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile_pic {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 2px 2px  25px rgba(157, 173, 166, 1);
+    padding: 1rem;
+    margin: 1rem;
+}
+
+.business_profile_image {
+    height: auto;
+    border-radius: 15%;
+    box-shadow: 2px 2px  25px rgba(157, 173, 166, 1);
+
+}
+
+.business_prof_container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.business_serv_container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content:center;
+    align-items: center;
+    background-color: rgba(157, 173, 166, 0.50);
+    
+}
+
+.bus_service {
+    margin: 0.5rem;
+}
+
+.business_address_mini_cont {
+    display: flex;
+    flex-direction: column;
+}
+
+.business_address_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.located_container {
+    border: 1px solid rgba(0, 0, 0, 0.7);
+    padding: 1rem;
+    border-radius: 45px;
+    background-color: rgba(157, 173, 166, 0.50);
+}
+
+.business_prof_phWb_container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.container_flex_centered {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.bus_work_images {
+    width: 300px;
+    height: auto;
+    border-radius: 30px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    margin: 0.5rem;
+
+}
+
+@media (min-width: 600px) {
+    
+    .spacer_nuetral {
+        visibility: hidden;
+    }
+
+    #logo_submark {
+        visibility: visible;
+    }
+}
+
+a {
+    font-style: normal;
+    text-decoration: none;
+    color: black;
+    transition: all;
+    padding: 0.5rem;
+    margin: .5rem;
+    border-radius: 50%;
+}
+a:hover {
+    background-color: var(--secondary-color2);
+    transition-duration: 1s;
+    border-radius: 0%;
+}
+
+li {
+    padding: .5rem;
+    overflow: visible;
+}
+
+header {
+    background-color: var(--primary-color);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    height: 164px;
+}
+
+
+.logo_main {
+    margin: .5rem;
+    width: 150px;
+    background-color: rgba(255, 255, 255, 0.85);
+    border-radius: 25px 25px;
+}
+
+.spacer_nuetral {
+    width: 5rem;
+}
+
+#header_StellaVi {
+    margin: 0;
+    padding: 0;
+    font-size: 2rem;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+.scroll-icons-container {
+    background-color: var(--primary-color);
+
+    position: fixed;
+    top: 164px; /* Adjust as needed based on your design */
+    right: 0; /* Adjust as needed based on your design */
+    z-index: 1000; /* Ensure it's above other content */
+}
+
+.bobbing {
+    animation: bobbing 1s infinite alternate ease-in-out;
+}
+
+@keyframes bobbing {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(5px); /* Adjust the bobbing distance */
+    }
+}
+/* 
+mat-toolbar{
+    position:fixed;
+    top:0;
+    z-index: 10;
+    margin:0 0 1rem 0;
+    padding:1rem;
+    @media screen and (max-width: 600px) {
+        visibility: hidden;
+      }
+} */
+
+.hambStack {
+    font-size: 2rem;
+    padding: 0 1.75rem 0 0 ;
+}
+
+
+#mainSideNavContainer {
+    height: calc(100vh - (headerHeight/4));
+}
+
+
+/* // Move the content down so that it won't be hidden by the toolbar */
+#mainSideNav {
+    /* padding-top: 3.5rem; */
+    @media screen and (min-width: 600px) {
+      /* padding-top: 4rem; */
+    }
+
+    .entry{
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding:0.75rem;
+    }
+  }
+
+/* // Move the content down so that it won't be hidden by the toolbar 
+mat-sidenav-content{
+     padding-top: 3.5rem; 
+    @media screen and (min-width: 600px) {
+        /* padding-top: 4rem; 
+    }
+}*/
+
+/* .expanded {
+    width: 250px;   
+} */
+
+/* a {
+    display: flex;
+    flex-direction: row;
+  
+    align-items: center;
+    justify-content: flex-start;
+  
+    gap: 8px;
+  
+    min-width: 200px;
+  
+    padding: 16px;
+  
+    box-sizing: border-box;
+  
+    text-decoration: none;
+    color: #000;
+    border-radius: 4px;
+  
+    transition: background-color 75ms ease-out;
+  
+    /* // change overflowing text to ellipsis */
+.text-container {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+&:hover {
+    background-color: #deebff;
+}
+
+&.active {
+    background-color: #c1daff;
+    font-weight: bold;
+    color: rgb(36, 82, 231);
+}
+
+
+.content {
+    min-height: calc(100vh - (headerHeight + footerHeight));  /*Ensure content fills viewport height */
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    flex: 1; /* Grow to fill remaining space ---------------------------------------------------------*/
+    
+}
+
+.spinner_cont {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer {
+    position: relative; /* Position relative to parent container */
+    bottom: 0; /* Stick to bottom of parent container */
+    background-color: var(--primary-color2);
+    height: 80px;
+    color: white;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-size: small;
+    box-sizing: border-box;
+}
+
+
+.footer_text {
+    margin: 0;
+    padding: 0 0 0 0.5rem;
+}
+
+
+
+#content2 {
+    /* border: 8px solid black; 
+    display: flex;
+    flex-direction: column;*/
+    min-height: calc(100vh - 80px - 164px);
+    margin: 0;
+    padding: 0;
+    object-fit: cover;
+
+}
+
+.mat-mdc-progress-spinner {
+    --mdc-circular-progress-active-indicator-color: var(--primary-color2);
+}
+
+/* 
+DASHBOARD ----------------------------------------------------------------------------------------
+
+*/
+
+/* .DashCurrentContainer {
+
+}
+
+.DashCurrentCard {
+    
+} */
+
+.DashCurrentHeader {
+ display: flex;
+ justify-content: space-between;
+}
+
+/* .DashCurrentTitle {
+
+}
+
+.DashCurrentSubtitle {
+
+} */
+
+.DashCurrentImage {
+    width: 12rem;
+    border-radius: 15%;
+    grid-row: 1/5;
+    
+}
+
+#DashCurrentContent {
+    display: flex;
+    flex-direction: row;
+    /* grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr; */
+    flex-wrap: wrap;
+}
+
+.DashCurrentImageCont {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+/* .DashCurrentName{
+} */
+
+
+#subButton {
+    background-color: var(--secondary-color2);
+    color: white;
+}

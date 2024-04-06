@@ -75,10 +75,10 @@ $chestnut: (
   300: #dfaa74,
   400: #d99756,
   500: #9d4e40, // primary color
-  600: #cb7c31,
-  700: #c37229,
-  800: #bb6922,
-  900: #ae5716,
+  600: #884337,
+  700: #7c3d32,
+  800: #5f3027,
+  900: #361b17,
   A100: #ffffff,
   A200: #fff5ef,
   A400: #ffd6bc,
@@ -101,22 +101,166 @@ $chestnut: (
   ),
 );
 
+$lion: (
+  50: #ffffff, // Lightest tint
+  100: #f3b86a,
+  200: #dfa860,
+  300: #ce9b59,
+  400: #c59555,
+  500: #B98B4F, // Primary color
+  600: #a17944,
+  700: #725631,
+  800: #382a18,
+  900: #0a0804, // Darkest shade
+  A100: #ffffff, // Lightest accent
+  A200: #c9d1cf,
+  A400: #977343,
+  A700: #725631, // Darkest accent
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #ffffff, // Contrast for primary color
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #ffffff, // Contrast for accent color
+    A700: #ffffff,
+  ),
+);
+
+$pale-dogwood: (
+  50: #ffffff, // Lightest tint
+  100: #fadcca, // Default for 100-900 values
+  200: #e7cbbb,
+  300: #e6cab9,
+  400: #e2c7b8,
+  500: #DBC1B2, // Primary color
+  600: #9b887d,
+  700: #9b887d,
+  800: #8a796f,
+  900: #3a332f, // Darkest shade
+  A100: #ffffff, // Lightest accent
+  A200: #c9d1cf,
+  A400: #9b887d,
+  A700: #9b887d, // Darkest accent
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #ffffff, // Contrast for primary color
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #ffffff, // Contrast for accent color
+    A700: #ffffff,
+  ),
+);
+
+
+$bone: (
+  50: #ffffff, // Lightest tint
+  100: #6F9E7C, // Default for 100-900 values
+  200: #eeebdc,
+  300: #dfddd0,
+  400: #dbd9ca,
+  500: #D3D1C4, // Primary color
+  600: #b6b4a8,
+  700: #88867d,
+  800: #5c5b55,
+  900: #141413, // Darkest shade
+  A100: #ffffff, // Lightest accent
+  A200: #b9b9b9,
+  A400: #9b887d,
+  A700: #9b887d, // Darkest accent
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #ffffff, // Contrast for primary color
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #ffffff, // Contrast for accent color
+    A700: #ffffff,
+  ),
+);
+
+$cambridge-blue: (
+  50: #ffffff, // Lightest tint
+  100: #b0f7c4, // Default for 100-900 values
+  200: #a0e2b3,
+  300: #8bc49b,
+  400: #7bad89,
+  500: #6F9E7C, // Primary color
+  600: #55795f,
+  700: #3c5342,
+  800: #314637,
+  900: #17201a, // Darkest shade
+  A100: #ffffff, // Lightest accent
+  A200: #b9b9b9,
+  A400: #3c5342,
+  A700: #2c3d31, // Darkest accent
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #ffffff, // Contrast for primary color
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #000000,
+    A400: #ffffff, // Contrast for accent color
+    A700: #ffffff,
+  ),
+);
+
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$SVI_dev-primary: mat.define-palette($ash-gray, A200, A100, A400);
-$SVI_dev-accent: mat.define-palette($persian-orange, A200, A100, A400);
+$SVI_dev-primary: mat.define-palette($ash-gray, A200, A100, A700);
+$SVI_dev-secondary: mat.define-palette($persian-orange, A200, A100, A400);
+$SVI_dev-tertiary: mat.define-palette($pale-dogwood, A200, A100, A700);
+
+
+$SVI_dev-accent: mat.define-palette($lion, A200, A100, A400, A700);
+$SVI_dev-accent-secondary: mat.define-palette($bone, A200, A100, A400, A700);
+
 
 // The warn palette is optional (defaults to red).
 $SVI_dev-warn: mat.define-palette($chestnut);
+$SVI_dev-confirm: mat.define-palette($cambridge-blue);
 
 
 // Create the theme object
 $SVI_dev-theme: mat.define-light-theme((
   color: (
     primary: $SVI_dev-primary, // replace with your primary color
+    secondary: $SVI_dev-secondary,
+    tertiary: $SVI_dev-tertiary,
     accent: $SVI_dev-accent, // replace with your accent color
+    accent2: $SVI_dev-accent-secondary,
     warn: $SVI_dev-warn, // replace with your warn color
+    confirm: $SVI_dev-confirm
   )
 ));
 

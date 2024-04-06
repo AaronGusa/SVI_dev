@@ -9,35 +9,39 @@
             @for (a of currentAppointments; track $index) {
                 <mat-expansion-panel>
                     <mat-expansion-panel-header>
-                        <span>
-                            @switch (a.app_status) {
-                                @case ('confirmed') {
-                                    <p>✅</p>
-                                }
-                                @case ('pending') {
-                                    <p>⚠️</p>
-                                }
-                                @case ('rejected') {
-                                    <p>❌</p>
-                                }
-                                @case ('deleted') {
-                                    <p>🚫</p>
-                                }
-                                @default {
-                                    <p></p>
-                                }
-                            }  
-                        </span>     
+                          
                         <mat-panel-title class="du-appointment-title">
                             <h2>{{a.u_fname}} {{a.u_lname}}</h2>
-                            <h4>{{a.app_date | date: "MMM dd, yyyy"}}</h4>
-                            <p>{{a.s_name}}</p>
+                            
 
                         </mat-panel-title>
+                        <mat-panel-description style="display: flex; justify-content: space-between; color:black">
+                            <h4>{{a.app_date | date: "MMM dd, yyyy"}}</h4>
+                            <span>
+                                @switch (a.app_status) {
+                                    @case ('confirmed') {
+                                        <p>✅</p>
+                                    }
+                                    @case ('pending') {
+                                        <p>⚠️</p>
+                                    }
+                                    @case ('rejected') {
+                                        <p>❌</p>
+                                    }
+                                    @case ('deleted') {
+                                        <p>🚫</p>
+                                    }
+                                    @default {
+                                        <p></p>
+                                    }
+                                }  
+                            </span>   
+                        </mat-panel-description>
                     </mat-expansion-panel-header>
+                        <span class="du-appointment-date"><h3>Business: {{a.b_name}}</h3></span>
+
                         <p>Time: {{a.app_time | date: "hh:mm a" }}</p>
                         <p>Requested: {{a.app_created | date: "MMM dd, yyyy" }}</p>
-                        <span class="du-appointment-date">Business: {{a.b_name}}</span>
                         <span class="du-appointment-description"></span>
                         <div>
                             <span>
@@ -49,6 +53,9 @@
                                         <button mat-raised-button color="primary" (click)="confirmAppointment($index)">ReInstate Appointment</button>
 
                                     }
+                                    @case ('deleted') {
+                                        <p></p>
+                                    }
                                     @default {
                                         <p></p>
                                     }
@@ -57,8 +64,10 @@
                             @if (cancelConfirm && indexNumber === $index) {
                                 <span>Are you sure?</span>
                                 <button mat-raised-button color="warn" (click)="cancelAppointment($index)">Confirm</button>
-                            } @else {
+                            } @else if (a.app_status !== 'deleted') {
                                 <button mat-raised-button (click)="cancelConfirmation($index)">Cancel Appointment</button>
+                            } @else {
+                                <h3>Deleted: {{a.app_deleted | date: "MMM dd, yyyy"}}</h3>
                             }
                         </div>
                         

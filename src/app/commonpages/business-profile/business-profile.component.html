@@ -115,14 +115,21 @@
                                 }
                             </mat-select>
                         </mat-form-field>
-
-                        @if (this.formService.valid && this.formDate.valid && this.formHour.valid) {
-                            <h1>✅</h1>
-                            <button mat-raised-button color="primary" (click)="buildAppointment()" type="button">Submit Appointment</button>
+                        @if (this.auth.isLoggedIn$) {
+                            @if (this.formService.valid && this.formDate.valid && this.formHour.valid) {
+                                <h1>✅</h1>
+                                <button mat-raised-button color="primary" (click)="buildAppointment()" type="button">Submit Appointment</button>
+                            } @else {
+                            <span><p>Complete all fields ❌</p></span>
+                            }
                         } @else {
-                            <h1>❌</h1>
+                            <h4>To book an appointment please:</h4> 
+                            <div style="display: flex; flex-direction: row; justify-content: justify;">
+
+                                <button mat-raised-button color="primary" routerLink="/login" style="margin: 0 1rem;">Log in</button>
+                                <button mat-raised-button color="accent">Sign Up</button>
+                            </div>
                         }
-                        
                     </form>
                 </div>
             </div>
