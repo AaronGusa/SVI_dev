@@ -29,19 +29,21 @@
   </mat-drawer-container> -->
 
 <div class="dashboard_cont">
-    <div class="dash_side_menu">
-      <!-- <p>{{Profile}}</p> -->
-        <app-dash-side-menu
-            [u_priv] = "u_priv"
-            [usrlvl] = "usrlvl"
-            [buslvl] = "buslvl"
-            [admin] = "admin"
-            [u_name] = "u_name"
-            [profile] = "Profile"
-            [_uPriv] = "_uPriv"
-            [data] = "data"
-        
-            ></app-dash-side-menu>
+  <button class="toggle-button" (click)="toggleMenu()">
+      <span class="arrow"></span>
+    </button>
+  <div class="dash_side_menu">
+    
+      <app-dash-side-menu
+          [u_priv] = "u_priv"
+          [usrlvl] = "usrlvl"
+          [buslvl] = "buslvl"
+          [admin] = "admin"
+          [u_name] = "u_name"
+          [profile] = "Profile"
+          [_uPriv] = "_uPriv"
+          [data] = "data"
+          ></app-dash-side-menu>
     </div>
     <div class="dash_content">
         <!-- <h1>Dashboard</h1>  -->

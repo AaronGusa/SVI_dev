@@ -1,190 +1,100 @@
-<div class="uni">
 <div class="content">
-<header>
-    <a routerLink="/home">
-        <div class="header_logo">
-            <img id="logo_submark" class="logo_main" src="../assets/images/logo/StellaVi-Submark1-03.webp" alt="Logo image">
-        </div>
-    </a>
-        <div class="spacer_nuetral">
-        </div>
-        <div id="header_StellaVi">
-            <a routerLink="/home">
-                <img id="logo_full" class="logo_main" src="../assets/images/logo/StellaVi-Primary-01.webp" alt="">
-            </a>
-    
-        </div>
-    <!-- <mat-toolbar color="primary"> -->
-        <button class="hambStack" mat-icon-button aria-label="Menu icon" (click)="toggleMenuBoy()">
-          <mat-icon>menu</mat-icon>
+    <div id="burger_container" class="burger_container">
+        <button class="hambStack" mat-button-raised aria-label="Menu icon" (click)="toggleMenuBoy()">
+        <span></span>
+        <span></span>
+        <span></span>
         </button>
-    <!-- </mat-toolbar> -->
-    
-</header>
+    </div>
 
-<div class="tweenHeadFoot">
+    <app-header></app-header>
+
+    <div >
     <div class="container">
-        <mat-sidenav-container autosize id="mainSideNavContainer">
+        <mat-sidenav-container autosize id="mainSideNavContainer" style="background-color: transparent;">
 
             <mat-sidenav id="mainSideNav"
                         [mode]="isMobile ? 'over' : 'side'" 
                         [opened]="isMobile ? 'false' : 'true'"
-                        position="end" >
-                <mat-nav-list class="scroll-icons-container">
-                    @if (isMobile) {
-                        <a mat-list-item routerLink="/home">
-                        <span class="entry">
-                            <mat-icon>house</mat-icon>
-                            <span>Home</span>
-                        </span>
-                        </a>
-                        <a mat-list-item  routerLink="/find-business">
-                            <span class="entry">
-                                <mat-icon>search</mat-icon>
-                                <span>Find</span>
-                            </span>
-                        </a>
-                       
-                        @if (auth.isLoggedOut$ | async) {
-                            <a mat-list-item routerLink="/login">
+                        position="end" 
+                        color="secondary">
+                <mat-nav-list >
+                    <div class="sticky_top testBox">
+                        
+                            <a mat-list-item routerLink="/home" (click)="toggleMenuBoy()">
                                 <span class="entry">
-                                    <mat-icon>fingerprint</mat-icon>
-                                    <span>Login</span>
+                                    <mat-icon>house</mat-icon>
+                                    <span>Home</span>
                                 </span>
                             </a>
-                          } @else if (auth.isLoggedIn$ | async) {
-                            <a mat-list-item routerLink="/home" (click)="logout()">
+                            <a mat-list-item  routerLink="/find-business" (click)="toggleMenuBoy()">
                                 <span class="entry">
-                                    <mat-icon>lock</mat-icon>
-                                    <span>Logout</span>
+                                    <mat-icon>search</mat-icon>
+                                    <span>Find</span>
                                 </span>
                             </a>
-                            @if (auth.user$ | async; as user) {
-                            <a mat-list-item routerLink="/dashboard/{{user.u_username}}">
+                        
+                            @if (auth.isLoggedOut$ | async) {
+                                <a mat-list-item routerLink="/login" (click)="toggleMenuBoy()">
+                                    <span class="entry">
+                                        <mat-icon>fingerprint</mat-icon>
+                                        <span>Login</span>
+                                    </span>
+                                </a>
+                            } @else if (auth.isLoggedIn$ | async) {
+                                <a mat-list-item routerLink="/home" (click)="logout()">
+                                    <span class="entry">
+                                        <mat-icon>lock</mat-icon>
+                                        <span>Logout</span>
+                                    </span>
+                                </a>
+                                @if (auth.user$ | async; as user) {
+                                <a mat-list-item routerLink="/dashboard/{{user.u_username}}" (click)="toggleMenuBoy()">
+                                    <span class="entry">
+                                        <mat-icon>dashboard</mat-icon>
+                                        <span>DashBoard</span>
+                                    </span>
+                                </a>
+                            }
+                            }
+                            @if (auth.isLoggedOut$ | async) {
+                            <a mat-list-item routerLink="/signup" (click)="toggleMenuBoy()">
                                 <span class="entry">
-                                    <mat-icon>dashboard</mat-icon>
-                                    <span>DashBoard</span>
+                                    <mat-icon>phonelink_setup</mat-icon>
+                                    <span>Sign Up</span>
                                 </span>
                             </a>
                         }
-                          }
-                        @if (auth.isLoggedOut$ | async) {  
-                            <a mat-list-item routerLink="/signup">
+                            <a mat-list-item routerLink="/about" (click)="toggleMenuBoy()">
                                 <span class="entry">
-                                    <mat-icon>phonelink_setup</mat-icon>
-                                    <span>Sign Up</span>
+                                    <mat-icon>file_copy</mat-icon>
+                                    <span>About</span>
                                 </span>
                             </a>
-                        }   
-                        <a mat-list-item routerLink="/about">
-                            <span class="entry">
-                                <mat-icon>file_copy</mat-icon>
-                                <span>About</span>
-                            </span>
-                        </a>
-                        <hr>
-                        <a mat-list-item routerLink="/style-guide">
-                            <span class="entry">
-                                <mat-icon>settings_system_daydream</mat-icon>
-                                <span>Style Guide</span>
-                            </span>
-                        </a>
-                    } @else { 
-                        <a mat-list-item routerLink="/home" (click)="testButton()">
-                            <span class="entry">
-                                <mat-icon>house</mat-icon>
-                            @if (!isCollapsed) {
-                                <span>Home</span>
-                            }
-                            </span>
-                        </a>
-                        <a mat-list-item routerLink="/find-business">
-                            <span class="entry">
-                                <mat-icon>search</mat-icon>
-                            @if (!isCollapsed) {
-                                <span>Find</span>
-                            }
-                            </span>
-                        </a>
-                        <!-- <a mat-list-item routerLink="/login">
-                            <span class="entry">
-                                <mat-icon>fingerprint</mat-icon>
-                            @if (!isCollapsed) {
-                                <span>Login</span>
-                            }
-                            </span>
-                        </a> -->
+                            <hr>
+                            <a mat-list-item routerLink="/style-guide" (click)="toggleMenuBoy()">
+                                <span class="entry">
+                                    <mat-icon>settings_system_daydream</mat-icon>
+                                    <span>Style Guide</span>
+                                </span>
+                            </a>
                         
-                        @if (auth.isLoggedOut$ | async) {
-                            <a mat-list-item routerLink="/login">
-                                <span class="entry">
-                                    <mat-icon>fingerprint</mat-icon>
-                                    @if (!isCollapsed) {
-                                        <span>Login</span>
-                                    }
-                                </span>
-                            </a>
-                          } @else if (auth.isLoggedIn$ | async) {
-                            <a mat-list-item routerLink="/home" (click)="logout()">
-                                <span class="entry">
-                                    <mat-icon>lock</mat-icon>
-                                    @if (!isCollapsed) {
-                                        <span>Logout</span>
-                                    }
-                                </span>
-                            </a>
-                            <a mat-list-item routerLink="/dashboard/{{user}}">
-                                <span class="entry">
-                                    <mat-icon>dashboard</mat-icon>
-                                    @if (!isCollapsed) {
-                                        <span>Dashboard</span>
-                                    }
-                                </span>
-                            </a>
-                          }
-                        @if (auth.isLoggedOut$ | async) {  
-                            <a mat-list-item routerLink="/signup">
-                                <span class="entry">
-                                    <mat-icon>phonelink_setup</mat-icon>
-                                @if (!isCollapsed) {
-                                    <span>Sign Up</span>
-                                }
-                                </span>
-                            </a>
-                        }    
-                        <a mat-list-item routerLink="/about">
-                            <span class="entry">
-                                <mat-icon>file_copy</mat-icon>
-                            @if (!isCollapsed) {
-                                <span>About</span>
-                            }
-                            </span>
-                        </a>
-                        <hr>
-                        <a mat-list-item routerLink="/style-guide">
-                            <span class="entry">
-                                <mat-icon>settings_system_daydream</mat-icon>
-                            @if (!isCollapsed) {
-                                <span>Style Guide</span>
-                            }
-                            </span>
-                        </a>
-                    }
+                    </div>    
                 </mat-nav-list>
             </mat-sidenav> 
             <mat-sidenav-content id="content2" >
                 
-                    <router-outlet></router-outlet>
+                <router-outlet></router-outlet>
                 
             </mat-sidenav-content>
         </mat-sidenav-container>
     </div>    
   
-</div>
+    </div>
+    <app-footer></app-footer> 
+
 </div>
 <!-- <app-header></app-header>
 <router-outlet></router-outlet>
 
 <div></div>-->
-<app-footer></app-footer> 
-</div>

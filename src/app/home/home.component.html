@@ -1,25 +1,29 @@
 
-<div class="featured">
-    <!-- <div class="underclass"> -->
-         <!-- <img class="fImage1" src="./assets/images/stocks/shrunk/agustin-fernandez-Znyjl9pbaUs-unsplash.webp" alt=""> -->
-    <img class="fImage1" src="../../assets/images/logo/StellaVi-Submark2-04 (1).webp" alt="logo">
-    <img class="fImage2" src="../../assets/images/stocks/shrunk/alysa-bajenaru-88IV5AtWjB8-unsplash (1).webp" placeholder alt="splash image">
-        <!-- <img class="fImage3" src="./assets/images/stocks/shrunk/raphael-lovaski-pxax5WuM7eY-unsplash.webp" alt=""> -->
-    <!-- </div> -->
+<!-- <div class="pic_container_featured">
+    
+         <img class="fImage1 hide" src="./assets/images/stocks/shrunk/agustin-fernandez-Znyjl9pbaUs-unsplash.webp" alt="">
+        <img class="fImage2 hide" src="../../assets/images/stocks/shrunk/alysa-bajenaru-88IV5AtWjB8-unsplash (1).webp" alt="logo">
+        <img class="fImage3 hide fix_pix" src="./assets/images/stocks/shrunk/raphael-lovaski-pxax5WuM7eY-unsplash.webp" alt="">
+    
+</div> -->
+<div class="papaBigRig container_flex_row_wrap center_text background-trans">
+    <h1 class="papaBigRig1" >Finding Aesthetician Entreprenuers Near You</h1>
+    <h2 class="papaBigRig2 secondary_container padding background-trans">Discover the perfect blend of beauty and professionalism with Stella Vi.</h2> 
+    <br>
+    <h3 class="papaBigRig3">Our platform seamlessly connects clients with talented cosmetology and aesthetic professionals</h3> 
+    <br>   
+    <p class="padding papaBigRig4">Daily empowering communities to thrive through mutual support and accountability.</p>
 </div>
-<div class="overlord">
-    <h1>Finding Aesthetician Entreprenuers Near You</h1>
-    <p>Discover the perfect blend of beauty and professionalism with Stella Vi. Our platform seamlessly connects clients with talented cosmetology and aesthetic professionals, 
-       empowering communities to thrive through mutual support and accountability.</p>
-</div>
-
-<div>
-    <h1>Featured Professional</h1>
-    <!-- <p>This section will have a randomized professional from across all categories with a rating of 4 of 5 stars and above.</p> -->
+<hr>
+<div class="bigPicture primary_container centered center_text background-trans">
+    <h1 class="padding_margin_exclude">Featured Professional</h1>
+    <h3 class="bottom_exclude">Meet {{_Featured.b_name}}</h3>
+    <hr>
     @if (_Featured) {
-        <div class="FBC_featuredBusCard">
-            <div class="FBC_column1">
-                <img class="FBC_profile_pic" src={{_Featured.u_profImage}} alt="Profile Image">
+        <div class="FBC_featuredBusCard background-trans">
+            <div class="  FBC_column1">
+
+                <img class="FBC_profile_pic image_standard" src={{_Featured.u_profImage}} alt="Profile Image">
                 
                 @if (_Featured.b_rating !== 0) { 
                     @switch (_Featured.b_rating !== 0) {
@@ -39,15 +43,15 @@
                             <p id="icons">⭐</p>
                         }
                         @default {
-                            <p></p>
+                            <p>This Business has not been Rated as of yet!</p>
                         }
                     }
                 } 
                 
                 
             </div>
-            <div class="FBC_column2">
-                <h1><a routerLink="/business-profile/{{_Featured.b_id}}" style="color: white;">{{_Featured.b_name}}</a></h1>
+            <div class=" bigPicture FBC_column2 background-trans">
+                <a routerLink="/business-profile/{{_Featured.b_id}}" ><h1>{{_Featured.b_name}}</h1></a>
                 <img class="FBC_profile_pic" src={{_Featured.b_profImage}}>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
                    sed do eiusmod tempor incididunt ut labore et dolore magna 
@@ -57,7 +61,7 @@
         </div>
     }
 </div>
-<div>
+<!-- <div>
     <h1>What are people saying about Stella Vi?</h1>
     <p>This section will host testimonials from users about Stella Vi</p>
     <div class="UTC_userTestimonialCont"> 
@@ -76,7 +80,7 @@
             </li>
             }
         </ul>
-        <!-- <div class="UTC_row1">
+         <div class="UTC_row1">
             <img class="UTC_profile_pic" src="" alt="profile pic placeholder">
             {{test.userpic}}
         </div>
@@ -85,6 +89,6 @@
             <h2>[Main Service]</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
      </p>
-        </div> -->
+        </div>
     </div>
-</div>
+</div> -->

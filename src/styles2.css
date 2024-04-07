@@ -1,0 +1,76 @@
+/* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+
+/* FONTS */
+@fontface {
+    font-family: 'Chapaza';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Chapaza'), url('./assets/fonts/Chapaza.ttf') format('truetype');
+}
+
+@fontface {
+    font-family: 'ChapazaItalic';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Chapaza Italic'), url('./assets/fonts/ChapazaItalic.ttf') format('truetype');
+}
+
+:root {
+    --primary-color: ; /* Primary color */
+    --primary-color2: 
+    --secondary-color: ; /* Secondary color */
+    --secondary-color2: ;
+    --tertiary-color: ; /* Tertiary color */
+    --primary: #9DADA6;
+    --secondary: #CC8B6A;;
+    --tertiary: #DBC1B2;
+    --accent: #B98B4F;
+    --accent2: #D3D1C4;
+    --warn: #9D4E40;
+    --confirm: #6F9E7C;
+}
+
+
+h1, h2, h3, h4 {
+    font-family: "Chapaza", serif;
+}
+
+p {
+    font-family: Roboto, serif;
+}
+
+/* CSS */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    min-height:auto;
+    position: relative;
+}
+
+html {
+    overflow-x: hidden;
+}
+
+body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 0; 
+    padding: 0;
+    font-family: Roboto, sans-serif;
+}
+
+
+
+img {
+    margin: 0;
+    padding: 0;
+}
+
+hr {
+    width: 100%;
+}
+

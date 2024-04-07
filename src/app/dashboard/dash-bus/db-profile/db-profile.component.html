@@ -3,15 +3,15 @@
     
     @if (!updateCheck) {
         <mat-card class="DashCurrentCard">
-            <mat-card-header class="DashCurrentHeader">
+           <!-- <mat-card-header class="DashCurrentHeader">
                 <mat-card-title class="DashCurrentTitle">Profile Information  </mat-card-title>
-                <mat-card-subtitle class="DashCurrentSubtitle">Current</mat-card-subtitle>
+                 <mat-card-subtitle class="DashCurrentSubtitle">Current</mat-card-subtitle>
                 @if (business.b_active === true) {
                     <label class="DashCurrentPriv">Active</label>
                 } @else {
                     <label class="DashCurrentPriv">Inactive</label>
-                }
-            </mat-card-header>
+                } 
+            </mat-card-header>-->
             <mat-card-content id="DashCurrentContent">
                 <div class="DashCurrentImageCont">
                     <!-- <img class="business_profile_image " src={{busImages.b_profImage}}  alt="business profile image"> -->
@@ -39,7 +39,7 @@
     
             </mat-card-content>
             <mat-card-footer>
-                <button mat-raised-button color="primary" (click)="updateSwitch()">Update</button>
+                <button mat-raised-button color="primary" (click)="updateSwitch()" style="color: white; background-color: var(--accent);">Update</button>
             </mat-card-footer>
         </mat-card>
     } @else {
@@ -101,7 +101,7 @@
                 <mat-checkbox id="b-active" formControlName="b_active" checked={{business.b_active}}>Active?</mat-checkbox>
                 
                 <mat-card-actions>
-                    <button id="subButton" mat-raised-button type="submit" (click)="onUpdateBusProf()">Update</button>
+                    <button id="subButton" mat-raised-button type="submit" (click)="onUpdateBusProf()" style="color: white; background-color: var(--accent);">Update</button>
                     <button mat-raised-button color="warn" (click)="updateSwitch()">Cancel</button>
                 </mat-card-actions>
             </form>

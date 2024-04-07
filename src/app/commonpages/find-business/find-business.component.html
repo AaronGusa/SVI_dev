@@ -76,7 +76,7 @@
                             padding: 64px;
                         "> 
                             
-                            <mat-panel-title>
+                            <mat-panel-title style="flex-grow: 20;">
                                 <h2 class="bf_text">{{ b.b_name }}</h2>
                             </mat-panel-title>
 
@@ -84,25 +84,25 @@
                                 style="
                                     display: flex;
                                     justify-content: right;
-                                
                                 "
+                                
                             >
                                 @if (b.b_rating !== 0) { 
                                     @switch (b.b_rating !== 0) {
                                         @case (b.b_rating === 5) {
-                                            <p id="icons">⭐⭐⭐⭐⭐</p> 
+                                            <p id="icons" class="hidden_smallMedia">⭐⭐⭐⭐⭐</p> 
                                         }
                                         @case (b.b_rating === 4) {
-                                            <p id="icons">⭐⭐⭐⭐</p>
+                                            <p id="icons" class="hidden_smallMedia">⭐⭐⭐⭐</p>
                                         }
                                         @case (b.b_rating === 3) {
-                                            <p id="icons">⭐⭐⭐</p>
+                                            <p id="icons" class="hidden_smallMedia">⭐⭐⭐</p>
                                         }
                                         @case (b.b_rating === 2) {
-                                            <p id="icons">⭐⭐</p>
+                                            <p id="icons" class="hidden_smallMedia">⭐⭐</p>
                                         }
                                         @case (b.b_rating === 1) {
-                                            <p id="icons">⭐</p>
+                                            <p id="icons" class="hidden_smallMedia">⭐</p>
                                         }
                                         @default {
                                             <p></p>
@@ -115,20 +115,22 @@
                                  }       
                                 <div>
                                     @if (b.b_profImage) {
-                                    <img class='bus_find_profImg' src={{b.b_profImage}} alt="Profile Image">
+                                    <img class='bus_find_profImg hidden_smallMedia' src={{b.b_profImage}} alt="Profile Image">
                                     }
                                 </div>
                                 </mat-panel-description>
                         </mat-expansion-panel-header>
                         
                         <div>
-                            <div>
+                            <div class="centered">
                                 <div class="standard_container">
                                     <p>({{ b.b_phone[0] }}{{ b.b_phone[1] }}{{ b.b_phone[2] }}) {{ b.b_phone[3] }}{{ b.b_phone[4] }}{{ b.b_phone[5] }}-{{ b.b_phone[6] }}{{ b.b_phone[7] }}{{ b.b_phone[8] }}{{ b.b_phone[9] }}</p>
                                     <p>{{ b.b_email }}</p>
                                     <p>{{ b.b_website }}</p>
                                 </div>
-                                <div class="bus_service_container">
+                                <button mat-raised-button style="background-color: var(--accent); color: white;" routerLink="/business-profile/{{b.b_id}}">Go to Business Page</button>
+
+                                <div class="bus_service_container padding_margin_exclude">
                                     <h3>{{b.b_name}} Services</h3>
                                     <hr>
                                     @for (service of b.b_services; track $index)
@@ -146,7 +148,6 @@
                                     <p>{{ b.b_street }}    {{ b.b_city }}, {{ b.b_state }}</p>
                                     <!-- <p>{{ b.b_zip }}</p> -->
                                 </div>
-                                <button mat-raised-button  routerLink="/business-profile/{{b.b_id}}">Go to Business Page</button>
                             </div>
                         </div>
                     </mat-expansion-panel>

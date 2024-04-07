@@ -46,13 +46,6 @@ export class AppComponent implements OnInit{
 
   ngOnInit() {
     this.userGet();
-    this.observer.observe(['(max-width: 1000px)']).subscribe((screenSize) => {
-      if(screenSize.matches){
-        this.isMobile = true;
-      } else {
-        this.isMobile = false;
-      }
-    });
   }
 
   ngOnChanges() {
@@ -73,7 +66,7 @@ export class AppComponent implements OnInit{
     // console.log('Function Runs')
     // console.log("isMobile: " + this.isMobile)
     // console.log("isCollapsed: " + this.isCollapsed)
-
+    document.querySelector('#burger_container').classList.toggle('burgerOpen');
 
     if(this.isMobile){
       this.sidenav!.toggle();
@@ -87,10 +80,7 @@ export class AppComponent implements OnInit{
     console.log('a tag clicked')
   }
 
-  @HostListener('window:scroll', [])
-  onScroll() {
-    this.isBobbing = window.scrollY > 0;
-  }
+
 
   logout() {
     this.auth.logout();

@@ -12,7 +12,7 @@ import { UserService } from '../app-services';
 import { UserProfileService } from '../app-services/userProfile.service';
 import { User } from '../models/user.model';
 import { Subscription } from 'rxjs';
-
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-dashboard',
@@ -26,6 +26,7 @@ import { Subscription } from 'rxjs';
             DashBusComponent,
             DashAdminComponent,
             RouterOutlet,
+            NgClass
           ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
@@ -47,6 +48,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   prof: any;
   data: any;
   userInfo: any;
+  isMenuCollapsed: boolean = false;
 
 
   constructor( private r: ActivatedRoute,
@@ -74,6 +76,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
     if (this.userProfileSubscription) {
       this.userProfileSubscription.unsubscribe();
     }
+  }
+
+
+  toggleMenu() {
+    document.querySelector('.dash_side_menu').classList.toggle('collapsed');
+    document.querySelector('.arrow').classList.toggle('collapsed');
+
+    
   }
 
   async loadUserProfile() {

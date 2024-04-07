@@ -1,9 +1,9 @@
 @if (isLoading) {
     <app-loading></app-loading> 
 } @else {    
-    <mat-tab-group dynamicHeight>
-        <mat-tab label="{{bData.b_name}} Profile">
-            <div class="business_prof_container">
+    <mat-tab-group dynamicHeight class="white_text dark_back big_font">
+        <mat-tab label="{{bData.b_name}} Profile" class="container_flex_row_wrap centered text_center padding big_font">
+            <div class=" business_prof_container centered padding">
                 <h1>Welcome to {{bData.b_name}}
 
                 @if (auth.isLoggedIn$ | async) {
@@ -14,9 +14,9 @@
                     }
                 }</h1>
             </div>
-            <div class="business_prof_container">
+            <div class="business_prof_container container_flex_row_wrap centered text_center padding">
                 <img class="business_profile_image" src={{profileImages.b_profImage}} alt="business_profile">
-                <div class="business_prof_info">
+                <div class="business_prof_info container_flex_row_wrap centered text_center padding">
 
                     <div class="located_container">
                         <h2>Located in {{bData.b_city}}</h2>
@@ -50,7 +50,7 @@
             <div class="business_prof_container">
                 <h2>Our Services</h2>
             </div>
-            <div class="business_serv_container">
+            <div class="business_serv_container dark_text center_text">
                 <hr>
                 @for (service of servComplete; track $index) {
                     <mat-card style="margin: 0.5rem;" >
@@ -63,6 +63,7 @@
                 [bData] = bData
                 [profileImages] = profileImages
                 [b_name] = bData.b_name
+                class="container_flex_row_wrap centered text_center padding"
             ></app-business-profile-user>
             
         </mat-tab>
@@ -73,7 +74,7 @@
             ></app-business-profile-book> -->
         <mat-tab label="Book">
 
-            <div class="containerCont">
+            <div class="containerCont setWidth">
                 <div class="buttonCont business_serv_container">
                     <h3>Select service:</h3>
                     
@@ -91,15 +92,15 @@
                 <div class="calendarCont">
                     <!-- <app-calendar [(dateSelected)]="dateSelected" (click)="openDialog('200ms', '600ms')"></app-calendar> -->
                     <mat-card class="demo-inline-calendar-card">
-                        <mat-calendar [(selected)]="selected" (click)="setDate(selected)"></mat-calendar>
+                        <mat-calendar [(selected)]="selected" (click)="setDate(selected)" style="width: 100%"></mat-calendar>
                       </mat-card>
                 </div>
-                <div class="appointmentCont">
+                <div class="appointmentCont container_flex_row_wrap centered text_center">
                     <!-- <p>Selected date: {{selected}}</p> -->
-                    <form>
+                    <form class="centered text_center">
                         <mat-form-field>
                             <mat-label for="formService">Selected Service Code </mat-label>
-                            <input matInput id="formService" type="number" [formControl]="formService" required>
+                            <input matInput id="formService" type="number" [formControl]="formService" disabled required>
                         </mat-form-field>
 
                         <mat-form-field>

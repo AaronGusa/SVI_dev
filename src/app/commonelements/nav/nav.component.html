@@ -1,1 +1,139 @@
-<p>nav works!</p>
+@if (isMobile) {
+    <a mat-list-item routerLink="/home">
+    <span class="entry">
+        <mat-icon>house</mat-icon>
+        <span>Home</span>
+    </span>
+    </a>
+    <a mat-list-item  routerLink="/find-business">
+        <span class="entry">
+            <mat-icon>search</mat-icon>
+            <span>Find</span>
+        </span>
+    </a>
+
+    @if (auth.isLoggedOut$ | async) {
+        <a mat-list-item routerLink="/login">
+            <span class="entry">
+                <mat-icon>fingerprint</mat-icon>
+                <span>Login</span>
+            </span>
+        </a>
+    } @else if (auth.isLoggedIn$ | async) {
+        <a mat-list-item routerLink="/home" (click)="logout()">
+            <span class="entry">
+                <mat-icon>lock</mat-icon>
+                <span>Logout</span>
+            </span>
+        </a>
+        @if (auth.user$ | async; as user) {
+        <a mat-list-item routerLink="/dashboard/{{user.u_username}}">
+            <span class="entry">
+                <mat-icon>dashboard</mat-icon>
+                <span>DashBoard</span>
+            </span>
+        </a>
+    }
+    }
+    @if (auth.isLoggedOut$ | async) {  
+        <a mat-list-item routerLink="/signup">
+            <span class="entry">
+                <mat-icon>phonelink_setup</mat-icon>
+                <span>Sign Up</span>
+            </span>
+        </a>
+    }   
+    <a mat-list-item routerLink="/about">
+        <span class="entry">
+            <mat-icon>file_copy</mat-icon>
+            <span>About</span>
+        </span>
+    </a>
+    <hr>
+    <a mat-list-item routerLink="/style-guide">
+        <span class="entry">
+            <mat-icon>settings_system_daydream</mat-icon>
+            <span>Style Guide</span>
+        </span>
+    </a>
+} @else { 
+    <a mat-list-item routerLink="/home" (click)="testButton()">
+        <span class="entry">
+            <mat-icon>house</mat-icon>
+        @if (!isCollapsed) {
+            <span>Home</span>
+        }
+        </span>
+    </a>
+    <a mat-list-item routerLink="/find-business">
+        <span class="entry">
+            <mat-icon>search</mat-icon>
+        @if (!isCollapsed) {
+            <span>Find</span>
+        }
+        </span>
+    </a>
+    <!-- <a mat-list-item routerLink="/login">
+        <span class="entry">
+            <mat-icon>fingerprint</mat-icon>
+        @if (!isCollapsed) {
+            <span>Login</span>
+        }
+        </span>
+    </a> -->
+    
+    @if (auth.isLoggedOut$ | async) {
+        <a mat-list-item routerLink="/login">
+            <span class="entry">
+                <mat-icon>fingerprint</mat-icon>
+                @if (!isCollapsed) {
+                    <span>Login</span>
+                }
+            </span>
+        </a>
+    } @else if (auth.isLoggedIn$ | async) {
+        <a mat-list-item routerLink="/home" (click)="logout()">
+            <span class="entry">
+                <mat-icon>lock</mat-icon>
+                @if (!isCollapsed) {
+                    <span>Logout</span>
+                }
+            </span>
+        </a>
+        <a mat-list-item routerLink="/dashboard/{{user}}">
+            <span class="entry">
+                <mat-icon>dashboard</mat-icon>
+                @if (!isCollapsed) {
+                    <span>Dashboard</span>
+                }
+            </span>
+        </a>
+    }
+    @if (auth.isLoggedOut$ | async) {  
+        <a mat-list-item routerLink="/signup">
+            <span class="entry">
+                <mat-icon>phonelink_setup</mat-icon>
+            @if (!isCollapsed) {
+                <span>Sign Up</span>
+            }
+            </span>
+        </a>
+    }    
+    <a mat-list-item routerLink="/about">
+        <span class="entry">
+            <mat-icon>file_copy</mat-icon>
+        @if (!isCollapsed) {
+            <span>About</span>
+        }
+        </span>
+    </a>
+    <hr>
+    <a mat-list-item routerLink="/style-guide">
+        <span class="entry">
+            <mat-icon>settings_system_daydream</mat-icon>
+        @if (!isCollapsed) {
+            <span>Style Guide</span>
+        }
+        </span>
+    </a>
+}

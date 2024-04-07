@@ -15,7 +15,11 @@ import { AsyncPipe } from '@angular/common';
 })
 export class NavMobileComponent {
   mmobToggle = true;
-
+  isMobile = true;
+  isCollapsed = true;
+  isBobbing: boolean = false;
+  user;
+  
   constructor(public auth: AuthStore) {}
 
   toggler() {
@@ -25,6 +29,10 @@ export class NavMobileComponent {
 
   logout() {
     this.auth.logout;
+  }
+
+  testButton() {
+    console.log('a tag clicked')
   }
 
 }
