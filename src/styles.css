@@ -92,7 +92,6 @@ a:link {
   a:hover {
     background-color: #B98B4F;
     color: white;
-    padding: 0;
   }
   
   /* selected link */
@@ -491,6 +490,7 @@ footer {
         padding: 0.75rem;
         position: absolute;
         top: 20px; /* Adjust as needed */
+        bottom: auto;
         right: 20px; /* Adjust as needed */
         z-index: 1000000000;
     }
