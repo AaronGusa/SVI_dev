@@ -11,6 +11,7 @@ import { MatListModule } from '@angular/material/list';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { MatSidenav } from '@angular/material/sidenav';
 import { AuthStore } from './app-services/auth/auth.store';
+import { FeedbackComponent } from './commonelements/feedback/feedback.component';
 
 @Component({
   selector: 'app-root',
@@ -26,7 +27,8 @@ import { AuthStore } from './app-services/auth/auth.store';
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
-    MatSidenav
+    MatSidenav,
+    FeedbackComponent
     ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
