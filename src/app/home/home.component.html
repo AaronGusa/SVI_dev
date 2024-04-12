@@ -17,13 +17,13 @@
 <hr>
 <div class="bigPicture primary_container centered center_text background-trans">
     <h1 class="padding_margin_exclude">Featured Professional</h1>
-    <h3 class="bottom_exclude">Meet {{_Featured.b_name}}</h3>
+    <h2 class="bottom_exclude">Meet {{_Featured.b_name}}</h2>
     <hr>
     @if (_Featured) {
         <div class="FBC_featuredBusCard background-trans">
             <div class="  FBC_column1">
 
-                <img class="FBC_profile_pic image_standard" src={{_Featured.u_profImage}} alt="Profile Image">
+                <img class="FBC_profile_pic image_standard" src={{_Featured.u_profImage}} alt="{{_Featured.b_name}} Professional Profile Pic">
                 
                 @if (_Featured.b_rating !== 0) { 
                     @switch (_Featured.b_rating !== 0) {

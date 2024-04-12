@@ -76,6 +76,8 @@ hr {
 a {
     list-style: none;
     text-decoration: none;
+    transition: 1s border-radius;
+    border-radius: 50%;
 }
 
 /* unvisited link */
@@ -92,6 +94,7 @@ a:link {
   a:hover {
     background-color: #B98B4F;
     color: white;
+    border-radius: 25px;
   }
   
   /* selected link */
@@ -258,6 +261,10 @@ footer {
         margin: 0;
         padding: 0;
 
+    }
+
+    .logo_main:hover {
+        cursor:pointer;
     }
 
     .searchers_container {
