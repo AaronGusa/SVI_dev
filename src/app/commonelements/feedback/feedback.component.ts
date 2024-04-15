@@ -5,6 +5,8 @@ import {MatDialog, MatDialogModule, MatDialogRef, MatDialogActions, MatDialogClo
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { ActivatedRoute } from '@angular/router';
+import { AuthService } from '../../app-services/authenticate.service';
+import { AuthStore } from '../../app-services/auth/auth.store';
 
 
 
@@ -57,6 +59,7 @@ export class FeedbackComponent {
 })
 export class FeedbackD {
   currentRouteParam: string;
+  feedUsername ;
 
   constructor(
               public dialogRef: MatDialogRef<FeedbackD>,
@@ -65,11 +68,9 @@ export class FeedbackD {
   ) {}
 
   ngOnInit() {
-    this.ar.params.subscribe(params => {
-      // Access the route parameter (e.g., 'id')
-      this.currentRouteParam = params;
-      console.log(Object.entries( params));
-    });
+    this.currentRouteParam = this.ar.snapshot['_routerState'].url;
+    this.feedUsername = localStorage['auth_data'].u_username;
+    console.log(typeof localStorage["auth_data"])
   }
 
   onCloseClick() {

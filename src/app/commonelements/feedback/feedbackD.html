@@ -2,14 +2,14 @@
 <mat-dialog-content>
     <form >
         <label>Feedback for:</label>
-        @defer () {
-
-        }
         <p>{{currentRouteParam}}</p>
-        <input mat-input type="text" value="{{currentRouteParam}}" disabled>
+        <input mat-input type="text" value="{{currentRouteParam}}" disabled="true">
+        <label>Username:</label>
+        <input mat-input type="text" value="{{feedUsername}}">
+        <p>{{feedUsername}}</p>
     </form>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-raised-button mat-dialog-close>No</button>
-  <button mat-raised-button mat-dialog-close cdkFocusInitial>Ok</button>
+  <button mat-raised-button mat-dialog-close cdkFocusInitial>Submit Feedback</button>
+  <button mat-raised-button mat-dialog-close >Cancel</button>
 </mat-dialog-actions>
