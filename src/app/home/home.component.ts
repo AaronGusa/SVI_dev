@@ -10,7 +10,8 @@ import { BusinessFIND } from '../models/businessFind.model';
   standalone: true,
   imports: [RouterLink, NgOptimizedImage, LoadingComponent],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrl: './home.component.css',
+  
 })
 export class HomeComponent implements OnInit {
   businesses: any = [];
