@@ -4,6 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import {MatDialog, MatDialogModule, MatDialogRef, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent,} from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import { ActivatedRoute } from '@angular/router';
 
 
 
@@ -55,11 +56,25 @@ export class FeedbackComponent {
     templateUrl: './feedbackD.html'
 })
 export class FeedbackD {
+  currentRouteParam: string;
+
   constructor(
-              public dialogRef: MatDialogRef<FeedbackD>
+              public dialogRef: MatDialogRef<FeedbackD>,
+              public ar: ActivatedRoute,
+
   ) {}
+
+  ngOnInit() {
+    this.ar.params.subscribe(params => {
+      // Access the route parameter (e.g., 'id')
+      this.currentRouteParam = params;
+      console.log(Object.entries( params));
+    });
+  }
 
   onCloseClick() {
     this.dialogRef.close();
   }
+
+
 }

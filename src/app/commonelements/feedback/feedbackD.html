@@ -2,7 +2,11 @@
 <mat-dialog-content>
     <form >
         <label>Feedback for:</label>
-        <input mat-input type="text">
+        @defer () {
+
+        }
+        <p>{{currentRouteParam}}</p>
+        <input mat-input type="text" value="{{currentRouteParam}}" disabled>
     </form>
 </mat-dialog-content>
 <mat-dialog-actions>
