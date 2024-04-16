@@ -1,15 +1,14 @@
-<h2 mat-dialog-title>Delete file</h2>
+<h2 mat-dialog-title>Feedback by {{feedUsername}}</h2>
 <mat-dialog-content>
-    <form >
-        <label>Feedback for:</label>
-        <p>{{currentRouteParam}}</p>
-        <input mat-input type="text" value="{{currentRouteParam}}" disabled="true">
-        <label>Username:</label>
-        <input mat-input type="text" value="{{feedUsername}}">
-        <p>{{feedUsername}}</p>
+    <form class="feedback_form">
+        <label>{{currentRouteParam}}</label>
+        <mat-form-field>
+          <mat-label>Feedback:</mat-label>
+          <textarea matInput></textarea>
+        </mat-form-field>
     </form>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-raised-button mat-dialog-close cdkFocusInitial>Submit Feedback</button>
-  <button mat-raised-button mat-dialog-close >Cancel</button>
+  <button mat-raised-button mat-dialog-close cdkFocusInitial style="background-color: var(--confirm); color: white" >Submit Feedback</button>
+  <button mat-raised-button mat-dialog-close color="warn">Cancel</button>
 </mat-dialog-actions>

@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import {MatDialog, MatDialogModule, MatDialogRef, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent,} from '@angular/material/dialog';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
+import { MatDialog, MatDialogModule, MatDialogRef, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent,} from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { ActivatedRoute } from '@angular/router';
-import { AuthService } from '../../app-services/authenticate.service';
-import { AuthStore } from '../../app-services/auth/auth.store';
 
 
 
@@ -28,7 +27,7 @@ import { AuthStore } from '../../app-services/auth/auth.store';
 export class FeedbackComponent {
   EnterDuration: string = "400ms";
   ExitDuration: string = "300ms";
-  DWidth: string = '250px';
+  DWidth: string = 'vh';
 
   constructor(public dialog: MatDialog,
               ) {}
@@ -54,6 +53,7 @@ export class FeedbackComponent {
       MatDialogContent,
       MatDialogActions,
       MatDialogClose,
+      MatSelectModule
     ],
     templateUrl: './feedbackD.html'
 })
@@ -69,12 +69,18 @@ export class FeedbackD {
 
   ngOnInit() {
     this.currentRouteParam = this.ar.snapshot['_routerState'].url;
-    this.feedUsername = localStorage['auth_data'].u_username;
-    console.log(typeof localStorage["auth_data"])
+    this.getData();
+    console.log(self.innerHeight)
   }
 
   onCloseClick() {
     this.dialogRef.close();
+  }
+
+  getData() {
+    let data = JSON.parse(localStorage.getItem('auth_data'));
+    this.feedUsername = data.u_username;
+    console.log(this.feedUsername)
   }
 
 
