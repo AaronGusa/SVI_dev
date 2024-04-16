@@ -15,52 +15,57 @@
     <h4 class="papaBigRig4 quinary_container">Empowering communities daily to thrive through mutual support and accountability.</h4>
 </div>
 <hr>
-<div class="bigPicture primary_container centered center_text background-trans">
-    <h1 class="padding_margin_exclude">Featured Professional</h1>
-    <h2 class="bottom_exclude">Meet {{_Featured.b_name}}</h2>
-    <hr>
-    @if (_Featured) {
-        <div class="FBC_featuredBusCard background-trans">
-            <div class="  FBC_column1">
+@if (!Loading) {
 
-                <img class="FBC_profile_pic image_standard" src={{_Featured.u_profImage}} alt="{{_Featured.b_name}} Professional Profile Pic">
-                
-                @if (_Featured.b_rating !== 0) { 
-                    @switch (_Featured.b_rating !== 0) {
-                        @case (_Featured.b_rating === 5) {
-                            <p id="icons">⭐⭐⭐⭐⭐</p> 
-                        }
-                        @case (_Featured.b_rating === 4) {
-                            <p id="icons">⭐⭐⭐⭐</p>
-                        }
-                        @case (_Featured.b_rating === 3) {
-                            <p id="icons">⭐⭐⭐</p>
-                        }
-                        @case (_Featured.b_rating === 2) {
-                            <p id="icons">⭐⭐</p>
-                        }
-                        @case (_Featured.b_rating === 1) {
-                            <p id="icons">⭐</p>
-                        }
-                        @default {
-                            <p>This Business has not been Rated as of yet!</p>
-                        }
-                    }
-                } 
-                
-                
-            </div>
-            <div class=" bigPicture FBC_column2 background-trans">
-                <a routerLink="/business-profile/{{_Featured.b_id}}" ><h1>{{_Featured.b_name}}</h1></a>
-                <img class="FBC_profile_pic" src={{_Featured.b_profImage}} alt="{{_Featured.b_name}} Profile Image">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                   sed do eiusmod tempor incididunt ut labore et dolore magna 
-                   aliqua. Ut enim ad minim veniam, quis nostrud
-                </p>
-            </div>
-        </div>
-    }
-</div>
+    <div class="bigPicture primary_container centered center_text background-trans">
+        <h1 class="padding_margin_exclude">Featured Professional</h1>
+        <h2 class="bottom_exclude">Meet {{_Featured.b_name}}</h2>
+        <hr>
+        
+                <div class="FBC_featuredBusCard background-trans">
+                    <div class="  FBC_column1">
+
+                        <img class="FBC_profile_pic image_standard" src={{_Featured.u_profImage}} alt="{{_Featured.b_name}} Professional Profile Pic">
+                        
+                        @if (_Featured.b_rating !== 0) { 
+                            @switch (_Featured.b_rating !== 0) {
+                                @case (_Featured.b_rating === 5) {
+                                    <p id="icons">⭐⭐⭐⭐⭐</p> 
+                                }
+                                @case (_Featured.b_rating === 4) {
+                                    <p id="icons">⭐⭐⭐⭐</p>
+                                }
+                                @case (_Featured.b_rating === 3) {
+                                    <p id="icons">⭐⭐⭐</p>
+                                }
+                                @case (_Featured.b_rating === 2) {
+                                    <p id="icons">⭐⭐</p>
+                                }
+                                @case (_Featured.b_rating === 1) {
+                                    <p id="icons">⭐</p>
+                                }
+                                @default {
+                                    <p>This Business has not been Rated as of yet!</p>
+                                }
+                            }
+                        } 
+                        
+                        
+                    </div>
+                    <div class=" bigPicture FBC_column2 background-trans">
+                        <a routerLink="/business-profile/{{_Featured.b_id}}" ><h1>{{_Featured.b_name}}</h1></a>
+                        <img class="FBC_profile_pic" src={{_Featured.b_profImage}} alt="{{_Featured.b_name}} Profile Image">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                        sed do eiusmod tempor incididunt ut labore et dolore magna 
+                        aliqua. Ut enim ad minim veniam, quis nostrud
+                        </p>
+                    </div>
+                </div>
+       
+    </div> 
+} @else {
+        <app-loading></app-loading>
+}
 <!-- <div>
     <h1>What are people saying about Stella Vi?</h1>
     <p>This section will host testimonials from users about Stella Vi</p>

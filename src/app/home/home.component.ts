@@ -58,7 +58,6 @@ export class HomeComponent implements OnInit {
 
       this.rando = this.getRandoNumber(this.businesses.length - 1, 0)
       // console.log(this.rando)
-      this.Loading = false;
     }
 
     if (fetchedProfImgs !== undefined) {
@@ -84,6 +83,8 @@ export class HomeComponent implements OnInit {
   
       // console.log(this.businessListFiltered)
       this._Featured = this.businessListFiltered[this.rando]
+      this.Loading = false;
+
     }
   }
 
