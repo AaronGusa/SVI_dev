@@ -78,8 +78,10 @@
                                     <span>Style Guide</span>
                                 </span>
                             </a>
-                            <app-feedback></app-feedback>
+                            @if (auth.isLoggedIn$ | async) {
 
+                            <app-feedback></app-feedback>
+                            }
                         
                     </div>    
                 </mat-nav-list>

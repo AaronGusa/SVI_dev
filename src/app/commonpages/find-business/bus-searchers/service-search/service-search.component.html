@@ -15,7 +15,15 @@
         </mat-expansion-panel-header>
         <mat-button-toggle-group name="services" 
                                 aria-label="services" 
-                                multiple>
+                                multiple
+                                id="button_toggle_group"
+                                style="display: flex;
+                                  flex-direction: row;
+                                  flex-wrap: wrap;
+                                  justify-content: center;
+                                "
+                                
+                                >
             @for (service of category.services; track $index) {  
                 <mat-button-toggle
                     [value]="service.s_id"

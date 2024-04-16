@@ -261,6 +261,12 @@ footer {
     transform: rotate(-45deg) translate3d(0, 0, 0)
 }
 
+.button_toggle_group {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
 
 
 
