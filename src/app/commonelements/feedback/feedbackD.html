@@ -1,6 +1,14 @@
 <h2 mat-dialog-title>Feedback by {{feedUsername}}</h2>
 <mat-dialog-content>
     <form class="feedback_form">
+      <mat-form-field> 
+        <mat-label>Select Type</mat-label> 
+        <mat-select>
+          <mat-option value="compliment">Compliment</mat-option>
+          <mat-option value="featureRequest">Feature Request</mat-option>
+          <mat-option value="suggestion">Suggestion</mat-option>
+        </mat-select>
+      </mat-form-field>  
         <label>{{currentRouteParam}}</label>
         <mat-form-field>
           <mat-label>Feedback:</mat-label>
