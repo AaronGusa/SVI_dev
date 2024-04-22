@@ -1,9 +1,9 @@
 <h2 mat-dialog-title>Feedback by {{feedUsername}}</h2>
 <mat-dialog-content>
-    <form class="feedback_form">
+    <form [formGroup]="feedbackForm" class="feedback_form">
       <mat-form-field> 
         <mat-label>Select Type</mat-label> 
-        <mat-select>
+        <mat-select formControlName="feedbackType" #feedbackSelect required>
           <mat-option value="compliment">Compliment</mat-option>
           <mat-option value="featureRequest">Feature Request</mat-option>
           <mat-option value="suggestion">Suggestion</mat-option>
@@ -12,11 +12,19 @@
         <label>{{currentRouteParam}}</label>
         <mat-form-field>
           <mat-label>Feedback:</mat-label>
-          <textarea matInput></textarea>
+          <textarea formControlName="feedbackGiven" #feedbackText matInput placeholder="Ex. I would like..." required></textarea>
+          <mat-hint align="end">{{feedbackText.value.length}} / 200</mat-hint>
         </mat-form-field>
     </form>
 </mat-dialog-content>
+<p>{{feedbackForm.valid}}</p>
 <mat-dialog-actions>
-  <button mat-raised-button mat-dialog-close cdkFocusInitial style="background-color: var(--confirm); color: white" >Submit Feedback</button>
+  <button mat-raised-button
+          mat-dialog-close 
+          cdkFocusInitial 
+          [disabled] = "!feedbackForm.valid"
+          color="primary"
+          (click)="submitFeedback()"
+  >Submit Feedback</button>
   <button mat-raised-button mat-dialog-close color="warn">Cancel</button>
 </mat-dialog-actions>

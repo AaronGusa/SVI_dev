@@ -1,7 +1,14 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, Validators, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialog, MatDialogModule, MatDialogRef, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent,} from '@angular/material/dialog';
+import { MatDialog, 
+  MatDialogModule, 
+  MatDialogRef, 
+  MatDialogActions,
+  MatDialogClose, 
+  MatDialogTitle, 
+  MatDialogContent,
+} from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -53,7 +60,8 @@ export class FeedbackComponent {
       MatDialogContent,
       MatDialogActions,
       MatDialogClose,
-      MatSelectModule
+      MatSelectModule,
+      ReactiveFormsModule
     ],
     templateUrl: './feedbackD.html'
 })
@@ -61,11 +69,19 @@ export class FeedbackD {
   currentRouteParam: string;
   feedUsername ;
 
+  feedbackForm: FormGroup = this.fb.group({
+    feedbackType: new FormControl(null, Validators.required),
+    feedbackGiven: new FormControl(null, [Validators.required, Validators.maxLength(200)])
+  });
+
+
   constructor(
               public dialogRef: MatDialogRef<FeedbackD>,
               public ar: ActivatedRoute,
-
+              public fb: FormBuilder
   ) {}
+
+
 
   ngOnInit() {
     this.currentRouteParam = this.ar.snapshot['_routerState'].url;
@@ -81,6 +97,11 @@ export class FeedbackD {
     let data = JSON.parse(localStorage.getItem('auth_data'));
     this.feedUsername = data.u_username;
     console.log(this.feedUsername)
+  }
+
+  submitFeedback() {
+    console.log(this.feedbackForm);
+    
   }
 
 
