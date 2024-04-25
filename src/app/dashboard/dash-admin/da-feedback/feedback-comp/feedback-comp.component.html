@@ -1,0 +1,33 @@
+<mat-accordion>
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <h3>Positivity Feedback </h3>
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        
+            @if (loading) {
+                <app-loading></app-loading>
+            } @else if (!compliments.has_reviews) {
+                    <div>
+                        <p>{{compliments.message}}</p>
+                    </div>    
+            } @else if (compliments.has_reviews) {
+                @for (c of compliments.result; track $index) {
+                    <mat-card>
+                        <mat-card-header>
+                            <mat-card-title>{{c.u_uname}} says:</mat-card-title> 
+                            <mat-card-subtitle>{{c.u_id}}</mat-card-subtitle>
+                        </mat-card-header>
+                        <mat-card-content><p>
+                            "{{c.feedbackText}}""
+                        </p>
+                        <p>For route: {{c.route}}</p>
+                        </mat-card-content>
+                    </mat-card>
+                }
+                
+            } 
+        
+    </mat-expansion-panel>
+</mat-accordion>

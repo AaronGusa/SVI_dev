@@ -1,0 +1,14 @@
+<h3>Feature Requests</h3>
+<mat-card>
+    <div>
+        @if (loading) {
+            <app-loading></app-loading>
+        } @else if (!featureRequests.has_reviews) {
+                <div>
+                    <p>{{featureRequests.message}}</p>
+                </div>    
+        } @else if (featureRequests.has_reviews) {
+            
+        }
+    </div>
+</mat-card>

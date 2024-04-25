@@ -13,6 +13,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { ActivatedRoute } from '@angular/router';
+import { FeedbackService } from '../../app-services/feedback.service';
 
 
 
@@ -78,7 +79,8 @@ export class FeedbackD {
   constructor(
               public dialogRef: MatDialogRef<FeedbackD>,
               public ar: ActivatedRoute,
-              public fb: FormBuilder
+              public fb: FormBuilder,
+              private fServe: FeedbackService
   ) {}
 
 
@@ -86,7 +88,7 @@ export class FeedbackD {
   ngOnInit() {
     this.currentRouteParam = this.ar.snapshot['_routerState'].url;
     this.getData();
-    console.log(self.innerHeight)
+    //console.log(self.innerHeight)
   }
 
   onCloseClick() {
@@ -96,11 +98,27 @@ export class FeedbackD {
   getData() {
     let data = JSON.parse(localStorage.getItem('auth_data'));
     this.feedUsername = data.u_username;
-    console.log(this.feedUsername)
+    //console.log(this.feedUsername)
   }
 
   submitFeedback() {
-    console.log(this.feedbackForm);
+    //Create Payload
+      let data = JSON.parse(localStorage.getItem('auth_data'));
+      let u_id = data.u_id;
+      let u_username = data.u_username;
+      let payload = {
+        "u_id": u_id,
+        "u_uname": u_username,
+        "feedType": this.feedbackForm.value.feedbackType,
+        "fb_text": this.feedbackForm.value.feedbackGiven,
+        "routeSource": this.currentRouteParam
+      }
+
+      console.log(payload);
+    // Pass Payload
+      let result = this.fServe.postFeedback(payload);
+    // Confirm
+    console.log(result);
     
   }
 
