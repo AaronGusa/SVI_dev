@@ -1,16 +1,11 @@
-<mat-accordion>
-    <mat-expansion-panel>
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                <h3>Feature Feedback </h3>
-            </mat-panel-title>
-        </mat-expansion-panel-header>
-        
+
             @if (loading) {
                 <app-loading></app-loading>
             } @else if (!featureRequests.has_reviews) {
                     <div>
-                        <p>{{featureRequests.message}}</p>
+                        <mat-card>
+                            <p>{{featureRequests.message}}</p>
+                        </mat-card>
                     </div>    
             } @else if (featureRequests.has_reviews) {
                 @for (f of featureRequests.result; track $index) {
@@ -28,6 +23,3 @@
                 }
                 
             } 
-        
-    </mat-expansion-panel>
-</mat-accordion>
