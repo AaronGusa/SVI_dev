@@ -1,4 +1,4 @@
-<h3>Suggestions Feedback</h3>
+<!-- <h3>Suggestions Feedback</h3>
 <mat-card>
     <div>
         @if (loading) {
@@ -11,4 +11,38 @@
             <p>Has  reviews</p>
         }
     </div>
-</mat-card>
+</mat-card> -->
+
+<mat-accordion>
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <h3>Suggestions Feedback </h3>
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        
+            @if (loading) {
+                <app-loading></app-loading>
+            } @else if (!suggestions.has_reviews) {
+                    <div>
+                        <p>{{suggestions.message}}</p>
+                    </div>    
+            } @else if (suggestions.has_reviews) {
+                @for (s of suggestions.result; track $index) {
+                    <mat-card>
+                        <mat-card-header>
+                            <mat-card-title>{{s.u_uname}} says:</mat-card-title> 
+                            <mat-card-subtitle>{{s.u_id}}</mat-card-subtitle>
+                        </mat-card-header>
+                        <mat-card-content><p>
+                            "{{s.feedbackText}}""
+                        </p>
+                        <p>For route: {{s.route}}</p>
+                        </mat-card-content>
+                    </mat-card>
+                }
+                
+            } 
+        
+    </mat-expansion-panel>
+</mat-accordion>

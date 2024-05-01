@@ -1,14 +1,33 @@
-<h3>Feature Requests</h3>
-<mat-card>
-    <div>
-        @if (loading) {
-            <app-loading></app-loading>
-        } @else if (!featureRequests.has_reviews) {
-                <div>
-                    <p>{{featureRequests.message}}</p>
-                </div>    
-        } @else if (featureRequests.has_reviews) {
-            
-        }
-    </div>
-</mat-card>
+<mat-accordion>
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <h3>Feature Feedback </h3>
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        
+            @if (loading) {
+                <app-loading></app-loading>
+            } @else if (!featureRequests.has_reviews) {
+                    <div>
+                        <p>{{featureRequests.message}}</p>
+                    </div>    
+            } @else if (featureRequests.has_reviews) {
+                @for (f of featureRequests.result; track $index) {
+                    <mat-card>
+                        <mat-card-header>
+                            <mat-card-title>{{f.u_uname}} says:</mat-card-title> 
+                            <mat-card-subtitle>{{f.u_id}}</mat-card-subtitle>
+                        </mat-card-header>
+                        <mat-card-content><p>
+                            "{{f.feedbackText}}""
+                        </p>
+                        <p>For route: {{f.route}}</p>
+                        </mat-card-content>
+                    </mat-card>
+                }
+                
+            } 
+        
+    </mat-expansion-panel>
+</mat-accordion>

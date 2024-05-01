@@ -8,7 +8,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 @Component({
   selector: 'app-feedback-suggest',
   standalone: true,
-  imports: [LoadingComponent, MatCardModule],
+  imports: [LoadingComponent, MatCardModule, MatExpansionModule],
   templateUrl: './feedback-suggest.component.html',
   styleUrl: './feedback-suggest.component.css'
 })

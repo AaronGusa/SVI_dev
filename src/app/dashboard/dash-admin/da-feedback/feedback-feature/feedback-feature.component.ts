@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { LoadingComponent } from '../../../../features/loading/loading.component';
 import { MatCardModule } from '@angular/material/card';
 import { FeedbackService } from '../../../../app-services/feedback.service';
-import {MatExpansionModule} from '@angular/material/expansion';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 
 @Component({
   selector: 'app-feedback-feature',
   standalone: true,
-  imports: [MatCardModule, LoadingComponent],
+  imports: [MatCardModule, LoadingComponent, MatExpansionModule],
   templateUrl: './feedback-feature.component.html',
   styleUrl: './feedback-feature.component.css'
 })
