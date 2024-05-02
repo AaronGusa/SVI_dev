@@ -3,12 +3,13 @@ import { LoadingComponent } from '../../../../features/loading/loading.component
 import { MatCardModule } from '@angular/material/card';
 import { FeedbackService } from '../../../../app-services/feedback.service';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { DatePipe } from '@angular/common';
 
 
 @Component({
   selector: 'app-feedback-comp',
   standalone: true,
-  imports: [LoadingComponent, MatCardModule, MatExpansionModule],
+  imports: [LoadingComponent, MatCardModule, MatExpansionModule, DatePipe],
   templateUrl: './feedback-comp.component.html',
   styleUrl: './feedback-comp.component.css'
 })
