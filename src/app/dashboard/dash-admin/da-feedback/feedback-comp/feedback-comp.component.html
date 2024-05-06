@@ -26,6 +26,20 @@
                         </p>
                         <p>For route: {{c.route}}</p>
                         </mat-card-content>
+                        
+                            @if (c.feedbackRead) {
+                                <mat-card-actions align="start">
+                                    <button mat-raised-button color="secondary" (click)="updateReadStatus(c.f_id, c.feedbackRead)">Mark as Read</button>
+                                </mat-card-actions>
+                                    
+                            } @else {
+                                <mat-card-actions align="end">
+                                    <button mat-raised-button color="warn" 
+                                        (click)="updateReadStatus(c.f_id, c.feedbackRead)" 
+                                    >Mark as not Read</button>
+                                </mat-card-actions>    
+                            }    
+                            
                     </mat-card>
                     <br>
                 }

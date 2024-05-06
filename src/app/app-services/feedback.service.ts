@@ -12,6 +12,7 @@ import { firstValueFrom } from "rxjs";
     private complimentURL = 'likes';
     private suggestURL = 'suggest';
     private postURL = 'postFeed';
+    private readPutURL = 'putRead';
 
     constructor(private http: HttpClient) {}
 
@@ -66,6 +67,17 @@ import { firstValueFrom } from "rxjs";
 
       } catch (err) {
 
+      }
+     }
+
+     async updateFeedbackReadStatus(payload) {
+      try {
+        const response = firstValueFrom(this.http.put(`${this.feedBaseURL}${this.readPutURL}`, payload));
+        // console.log(response);
+        return response;
+
+      } catch (error) {
+        return error;
       }
      }
 
