@@ -15,7 +15,7 @@ export class BusinessProfileBookComponent implements OnInit, OnChanges{
   isLoading: Boolean = true;
 
   ngOnInit(): void {
-    
+    this.isLoading = true;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
