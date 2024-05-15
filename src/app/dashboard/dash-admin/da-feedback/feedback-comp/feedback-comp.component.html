@@ -29,13 +29,14 @@
                         
                             @if (c.feedbackRead) {
                                 <mat-card-actions align="start">
-                                    <button mat-raised-button color="secondary" (click)="updateReadStatus(c.f_id, c.feedbackRead)">Mark as Read</button>
+                                    <button mat-raised-button color="secondary" (click)="updateReadStatus(c.f_id, c.feedbackRead, u_name)">Mark as Read</button>
                                 </mat-card-actions>
                                     
                             } @else {
+                                <p>Read by: {{c.fb_readBy}} on {{c.fb_readDate | date: 'dd MMMM yyyy' }}</p>
                                 <mat-card-actions align="end">
                                     <button mat-raised-button color="warn" 
-                                        (click)="updateReadStatus(c.f_id, c.feedbackRead)" 
+                                        (click)="updateReadStatus(c.f_id, c.feedbackRead, c.readBy)" 
                                     >Mark as not Read</button>
                                 </mat-card-actions>    
                             }    

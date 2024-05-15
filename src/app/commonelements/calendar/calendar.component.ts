@@ -4,12 +4,13 @@ import { MatCardModule } from '@angular/material/card';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-calendar',
   standalone: true,
   providers: [provideNativeDateAdapter()],
-  imports: [MatDatepickerModule, MatCardModule, MatInputModule, MatFormFieldModule  ],
+  imports: [MatDatepickerModule, MatCardModule, MatInputModule, MatFormFieldModule, DatePipe],
   templateUrl: './calendar.component.html',
   styleUrl: './calendar.component.css'
 })

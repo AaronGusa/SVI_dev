@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { LoadingComponent } from '../../../../features/loading/loading.component';
 import { MatCardModule } from '@angular/material/card';
 import { FeedbackService } from '../../../../app-services/feedback.service';
@@ -13,6 +13,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
   styleUrl: './feedback-feature.component.css'
 })
 export class FeedbackFeatureComponent implements OnInit{
+@Input() u_name: string;
 featureRequests: any = {} ;
 loading: Boolean = true
 

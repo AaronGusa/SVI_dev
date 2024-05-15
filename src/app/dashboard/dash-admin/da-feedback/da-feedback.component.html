@@ -5,13 +5,13 @@
                animationDuration="1s"
                >
     <mat-tab label="Features">
-        <app-feedback-feature></app-feedback-feature>
+        <app-feedback-feature [u_name] = "u_name_out"></app-feedback-feature>
     </mat-tab>
     <mat-tab label="Positivity">
-        <app-feedback-comp></app-feedback-comp>
+        <app-feedback-comp [u_name] = "u_name_out"></app-feedback-comp>
     </mat-tab>
     <mat-tab label="Suggestions">
-        <app-feedback-suggest></app-feedback-suggest>
+        <app-feedback-suggest [u_name] = "u_name_out"></app-feedback-suggest>
     </mat-tab>
 </mat-tab-group>
 
