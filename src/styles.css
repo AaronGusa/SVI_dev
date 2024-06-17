@@ -79,6 +79,8 @@ a {
     text-decoration: none;
     transition: 400ms border-radius;
     border-radius: 50%;
+    font-family: 'Chapaza', serif;
+    padding: 0 1rem;
 }
 
 /* unvisited link */
@@ -94,7 +96,7 @@ a:link {
   /* mouse over link */
   a:hover {
     background-color: #B98B4F;
-    color: white;
+    color: white !important;
     border-radius: 25px;
   }
   
@@ -109,7 +111,28 @@ footer {
     color: #05001d;
 }
 
+/* -------- Angular Universal ---------- */
+
+.mat-drawer-content {
+    overflow: visible !important;
+}
+
+.mat-mdc-tab .mdc-tab__text-label {
+    color: #B98B4F !important;
+    font-size: 2rem;
+}
+
+.mat-mdc-tab.mdc-tab--active {
+    background-color: var(--confirm);
+}
+
+.mat-mdc-tab.mdc-tab--active .mdc-tab__text-label {
+    color: rgb(255, 255, 255) !important;
+    border-radius: 25px !important;
+}
+
 /* --------  Universal  ------------*/
+
 .content {
     display: flex;
     flex-direction: column;
@@ -164,6 +187,7 @@ footer {
     background-color: var(--primary);
     color: var(--textColor);
     box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+    color: white;
 }
 
 .secondary_container {
@@ -1052,12 +1076,32 @@ footer {
         color: white;
     }
 
-    body {
-        background-image: url("./assets/images/stocks/shrunk/raphael-lovaski-pxax5WuM7eY-unsplash.webp");
-        background-size: cover; 
+    body::after {
+        content: "";
+        /* background: url("./assets/images/stocks/shrunk/raphael-lovaski-pxax5WuM7eY-unsplash.webp"); */
+        background-image: url("./assets/images/DesignerBLUR.png");
+        
+        opacity: 0.25; /* Set the opacity as per your requirement */
         background-position: center; 
+        
+        /* top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0; */
+        position: absolute;
+        z-index: -1;   
+      }
+
+    body {
+        background-color: #05001d;
+        /* background-image: url("./assets/images/Designer.png"); */
+        background-image: url("./assets/images/bckgrndblur.png");
+
+        background-size: cover; 
         background-repeat: no-repeat; 
         background-attachment: fixed; 
+        filter: blur(8px);
+        -webkit-filter: blur(0);
     }
 
     .white_text {

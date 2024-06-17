@@ -74,6 +74,8 @@ export class HomeComponent implements OnInit {
         business.b_profImage = matchingImg.b_profImage;
         business.u_profImage = matchingImg.u_profImage;
       }}
+
+      
       )
       // //console.log(this.businesses);
     //  // console.log(this.businessesProfImgs);

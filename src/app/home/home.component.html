@@ -7,53 +7,83 @@
     
 </div> -->
 <div class="papaBigRig container_flex_row_wrap center_text background-trans">
-    <h1 class="papaBigRig1 tertiary_container" >Finding Aesthetician Entreprenuers <br> Near You</h1>
+    <h1 class="papaBigRig1" >Finding Aesthetician Entreprenuers <br> Near You</h1>
     <h2 class="papaBigRig2 secondary_container padding background-trans">Discover the perfect blend of beauty and professionalism with Stella Vi.</h2> 
     <br>
-    <h3 class="papaBigRig3 quaternary_container">Our platform seamlessly connects clients with talented cosmetology and aesthetic professionals</h3> 
+    <h2 class="papaBigRig3 ">Our platform seamlessly connects clients with talented cosmetology and aesthetic professionals</h2> 
     <br>   
-    <h4 class="papaBigRig4 quinary_container">Empowering communities daily to thrive through mutual support and accountability.</h4>
+    <h1 class="papaBigRig4 secondary_container">Empowering communities daily to thrive through mutual support and accountability.</h1>
 </div>
 <hr>
 @if (!Loading) {
 
     <div class="bigPicture primary_container centered center_text background-trans">
         <h1 class="padding_margin_exclude">Featured Professional</h1>
-        <h2 class="bottom_exclude">Meet {{_Featured.b_name}}</h2>
-        <hr>
+        
+        
         
                 <div class="FBC_featuredBusCard background-trans">
                     <div class="  FBC_column1">
-
-                        <img class="FBC_profile_pic image_standard" src={{_Featured.u_profImage}} alt="{{_Featured.b_name}} Professional Profile Pic">
-                        
-                        @if (_Featured.b_rating !== 0) { 
-                            @switch (_Featured.b_rating !== 0) {
-                                @case (_Featured.b_rating === 5) {
-                                    <p id="icons">⭐⭐⭐⭐⭐</p> 
-                                }
-                                @case (_Featured.b_rating === 4) {
-                                    <p id="icons">⭐⭐⭐⭐</p>
-                                }
-                                @case (_Featured.b_rating === 3) {
-                                    <p id="icons">⭐⭐⭐</p>
-                                }
-                                @case (_Featured.b_rating === 2) {
-                                    <p id="icons">⭐⭐</p>
-                                }
-                                @case (_Featured.b_rating === 1) {
-                                    <p id="icons">⭐</p>
-                                }
-                                @default {
-                                    <p>This Business has not been Rated as of yet!</p>
-                                }
-                            }
-                        } 
-                        
                         
                     </div>
                     <div class=" bigPicture FBC_column2 background-trans">
-                        <a routerLink="/business-profile/{{_Featured.b_id}}" ><h1>{{_Featured.b_name}}</h1></a>
+                        <div style="display: block;">
+                            @if (_Featured.b_rating !== 0) { 
+                                @switch (_Featured.b_rating !== 0) {
+                                    @case (_Featured.b_rating === 5) {
+                                        <p id="icons">A ⭐⭐⭐⭐⭐ Business</p> 
+                                    }
+                                    @case (_Featured.b_rating === 4) {
+                                        <p id="icons">A ⭐⭐⭐⭐ Business</p>
+                                    }
+                                    @case (_Featured.b_rating === 3) {
+                                        <p id="icons">A ⭐⭐⭐ Business</p>
+                                    }
+                                    @case (_Featured.b_rating === 2) {
+                                        <p id="icons">A ⭐⭐ Business</p>
+                                    }
+                                    @case (_Featured.b_rating === 1) {
+                                        <p id="icons">A ⭐ Business</p>
+                                    }
+                                    @default {
+                                        <p>This Business has not been Rated as of yet! Give them a shot!</p>
+                                    }
+                                }
+                            } 
+
+                            <h2 class="bottom_exclude"><a routerLink="/business-profile/{{_Featured.b_id}}" style="font-size: 150px; color: #6F9E7C;">{{_Featured.b_name}}</a></h2>
+                                                        
+                            
+                        </div>    
+                            <!-- @if (_Featured.b_rating !== 0) { 
+                                @switch (_Featured.b_rating !== 0) {
+                                    @case (_Featured.b_rating === 5) {
+                                        <p id="icons">⭐⭐⭐⭐⭐</p> 
+                                    }
+                                    @case (_Featured.b_rating === 4) {
+                                        <p id="icons">⭐⭐⭐⭐</p>
+                                    }
+                                    @case (_Featured.b_rating === 3) {
+                                        <p id="icons">⭐⭐⭐</p>
+                                    }
+                                    @case (_Featured.b_rating === 2) {
+                                        <p id="icons">⭐⭐</p>
+                                    }
+                                    @case (_Featured.b_rating === 1) {
+                                        <p id="icons">⭐</p>
+                                    }
+                                    @default {
+                                        <p>This Business has not been Rated as of yet! Give them a shot!</p>
+                                    }
+                                }
+                            }  -->
+                        
+                        <div>
+                            <img class="FBC_profile_pic image_standard" src={{_Featured.u_profImage}} alt="{{_Featured.b_name}} Professional Profile Pic">
+                            
+                            
+                            
+                        </div>
                         <img class="FBC_profile_pic" src={{_Featured.b_profImage}} alt="{{_Featured.b_name}} Profile Image">
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
                         sed do eiusmod tempor incididunt ut labore et dolore magna 
