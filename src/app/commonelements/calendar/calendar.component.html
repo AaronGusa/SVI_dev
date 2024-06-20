@@ -6,7 +6,268 @@
   <mat-datepicker #picker></mat-datepicker>
 </mat-form-field> -->
 
-<mat-card class="demo-inline-calendar-card">
+<!-- <mat-card class="demo-inline-calendar-card">
     <mat-calendar [(selected)]="selected"></mat-calendar>
   </mat-card>
-  <p>Selected date: {{selected}}</p>
+  <p>Selected date: {{selected}}</p> -->
+
+<!-- <div class="calendar">
+  <div class="day">Sun</div>
+  <div class="day">Mon</div>
+  <div class="day">Tue</div>
+  <div class="day">Wed</div>
+  <div class="day">Thu</div>
+  <div class="day">Fri</div>
+  <div class="day">Sat</div>
+  <div class="date"></div>
+</div> -->
+
+<!-- <div class="justify-self-center "><div class="grid grid-cols-7 gap-[10px] min-h-[340px] justify-items-center items-center relative undefined"><button disabled="" aria-label="Go back 1 month" data-testid="dp-goto-prev-month" type="button" class="button dp-button flex-shrink-0"><span class="icon-container text-inherit"><span class="fa-icon-box  ld-text-opacity"><svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="arrow-left" class="svg-inline--fa fa-arrow-left fa-icon-base " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M7.4 273.4C2.7 268.8 0 262.6 0 256s2.7-12.8 7.4-17.4l176-168c9.6-9.2 24.8-8.8 33.9 .8s8.8 24.8-.8 33.9L83.9 232 424 232c13.3 0 24 10.7 24 24s-10.7 24-24 24L83.9 280 216.6 406.6c9.6 9.2 9.9 24.3 .8 33.9s-24.3 9.9-33.9 .8l-176-168z"></path></svg></span></span></button><div class="col-span-5 w-full"><span data-testid="ui-dropdown-menu" class=" " data-headlessui-state=""><div class="flex items-center " id="headlessui-menu-button-:r0:" aria-haspopup="menu" aria-expanded="false" data-headlessui-state=""><button data-testid="dp-nav-monthyear-display" type="button" class="button dp-button !max-w-full !w-full !text-sm">June, 2024</button></div></span></div><button aria-label="Go forward 1 month" data-testid="dp-goto-next-month" type="button" class="button dp-button flex-shrink-0"><span class="icon-container text-inherit"><span class="fa-icon-box  ld-text-opacity"><svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="arrow-right" class="svg-inline--fa fa-arrow-right fa-icon-base " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M440.6 273.4c4.7-4.5 7.4-10.8 7.4-17.4s-2.7-12.8-7.4-17.4l-176-168c-9.6-9.2-24.8-8.8-33.9 .8s-8.8 24.8 .8 33.9L364.1 232 24 232c-13.3 0-24 10.7-24 24s10.7 24 24 24l340.1 0L231.4 406.6c-9.6 9.2-9.9 24.3-.8 33.9s24.3 9.9 33.9 .8l176-168z"></path></svg></span></span></button><div class="h-[12vmin] max-h-10 text-[10px] inline-flex items-center justify-items-center dark:text-white/70 justify-center align-center= font-inter  text-semibold leading-5 ">Sun</div><div class="h-[12vmin] max-h-10 text-[10px] inline-flex items-center justify-items-center dark:text-white/70 justify-center align-center= font-inter  text-semibold leading-5 ">Mon</div><div class="h-[12vmin] max-h-10 text-[10px] inline-flex items-center justify-items-center dark:text-white/70 justify-center align-center= font-inter  text-semibold leading-5 ">Tue</div><div class="h-[12vmin] max-h-10 text-[10px] inline-flex items-center justify-items-center dark:text-white/70 justify-center align-center= font-inter  text-semibold leading-5 ">Wed</div><div class="h-[12vmin] max-h-10 text-[10px] inline-flex items-center justify-items-center dark:text-white/70 justify-center align-center= font-inter  text-semibold leading-5 ">Thu</div><div class="h-[12vmin] max-h-10 text-[10px] inline-flex items-center justify-items-center dark:text-white/70 justify-center align-center= font-inter  text-semibold leading-5 ">Fri</div><div class="h-[12vmin] max-h-10 text-[10px] inline-flex items-center justify-items-center dark:text-white/70 justify-center align-center= font-inter  text-semibold leading-5 ">Sat</div><div></div><div></div><div></div><div></div><div></div><div></div><button disabled="" aria-label="Sat Jun 01 2024" aria-pressed="false" role="button" type="button" class="button dp-button 
+    text-sm cursor-pointer relative 
+    
+    !text-opacity-30 !cursor-default overflow-hidden 
+    
+    ">1<span class="date-button inline-block h-full w-full absolute flex-1  strikethrough"></span></button><button disabled="" aria-label="Sun Jun 02 2024" aria-pressed="false" role="button" type="button" class="button dp-button 
+    text-sm cursor-pointer relative 
+    
+    !text-opacity-30 !cursor-default overflow-hidden 
+    
+    ">2<span class="date-button inline-block h-full w-full absolute flex-1  strikethrough"></span></button><button disabled="" aria-label="Mon Jun 03 2024" aria-pressed="false" role="button" type="button" class="button dp-button 
+    text-sm cursor-pointer relative 
+    
+    !text-opacity-30 !cursor-default overflow-hidden 
+    
+    ">3<span class="date-button inline-block h-full w-full absolute flex-1  strikethrough"></span></button><button disabled="" aria-label="Tue Jun 04 2024" aria-pressed="false" role="button" type="button" class="button dp-button 
+    text-sm cursor-pointer relative 
+    
+    !text-opacity-30 !cursor-default overflow-hidden 
+    
+    ">4<span class="date-button inline-block h-full w-full absolute flex-1  strikethrough"></span></button><button disabled="" aria-label="Wed Jun 05 2024" aria-pressed="false" role="button" type="button" class="button dp-button 
+    text-sm cursor-pointer relative 
+    
+    !text-opacity-30 !cursor-default overflow-hidden 
+    
+    ">5<span class="date-button inline-block h-full w-full absolute flex-1  strikethrough"></span></button><button disabled="" aria-label="Thu Jun 06 2024" aria-pressed="false" role="button" type="button" class="button dp-button 
+    text-sm cursor-pointer relative 
+    
+    !text-opacity-30 !cursor-default overflow-hidden 
+    
+    ">6<span class="date-button inline-block h-full w-full absolute flex-1  strikethrough"></span></button><button disabled="" aria-label="Fri Jun 07 2024" aria-pressed="false" role="button" type="button" class="button dp-button 
+    text-sm cursor-pointer relative 
+    
+    !text-opacity-30 !cursor-default overflow-hidden 
+    
+    ">7<span class="date-button inline-block h-full w-full absolute flex-1  strikethrough"></span></button><button disabled="" aria-label="Sat Jun 08 2024" aria-pressed="false" role="button" type="button" class="button dp-button 
+    text-sm cursor-pointer relative 
+    
+    !text-opacity-30 !cursor-default overflow-hidden 
+    
+    ">8<span class="date-button inline-block h-full w-full absolute flex-1  strikethrough"></span></button><button disabled="" aria-label="Sun Jun 09 2024" aria-pressed="false" role="button" type="button" class="button dp-button 
+    text-sm cursor-pointer relative 
+    
+    !text-opacity-30 !cursor-default overflow-hidden 
+    
+    ">9<span class="date-button inline-block h-full w-full absolute flex-1  strikethrough"></span></button><button disabled="" aria-label="Mon Jun 10 2024" aria-pressed="false" role="button" type="button" class="button dp-button 
+    text-sm cursor-pointer relative 
+    
+    !text-opacity-30 !cursor-default overflow-hidden 
+    
+    ">10<span class="date-button inline-block h-full w-full absolute flex-1  strikethrough"></span></button><button disabled="" aria-label="Tue Jun 11 2024" aria-pressed="false" role="button" type="button" class="button dp-button 
+    text-sm cursor-pointer relative 
+    
+    !text-opacity-30 !cursor-default overflow-hidden 
+    
+    ">11<span class="date-button inline-block h-full w-full absolute flex-1  strikethrough"></span></button><button disabled="" aria-label="Wed Jun 12 2024" aria-pressed="false" role="button" type="button" class="button dp-button 
+    text-sm cursor-pointer relative 
+    
+    !text-opacity-30 !cursor-default overflow-hidden 
+    
+    ">12<span class="date-button inline-block h-full w-full absolute flex-1  strikethrough"></span></button><button disabled="" aria-label="Thu Jun 13 2024" aria-pressed="false" role="button" type="button" class="button dp-button 
+    text-sm cursor-pointer relative 
+    
+    !text-opacity-30 !cursor-default overflow-hidden 
+    
+    ">13<span class="date-button inline-block h-full w-full absolute flex-1  strikethrough"></span></button><button disabled="" aria-label="Fri Jun 14 2024" aria-pressed="false" role="button" type="button" class="button dp-button 
+    text-sm cursor-pointer relative 
+    
+    !text-opacity-30 !cursor-default overflow-hidden 
+    
+    ">14<span class="date-button inline-block h-full w-full absolute flex-1  strikethrough"></span></button><button disabled="" aria-label="Sat Jun 15 2024" aria-pressed="false" role="button" type="button" class="button dp-button 
+    text-sm cursor-pointer relative 
+    
+    !text-opacity-30 !cursor-default overflow-hidden 
+    
+    ">15<span class="date-button inline-block h-full w-full absolute flex-1  strikethrough"></span></button><button disabled="" aria-label="Sun Jun 16 2024" aria-pressed="false" role="button" type="button" class="button dp-button 
+    text-sm cursor-pointer relative 
+    
+    !text-opacity-30 !cursor-default overflow-hidden 
+    
+    ">16<span class="date-button inline-block h-full w-full absolute flex-1  strikethrough"></span></button><button disabled="" aria-label="Mon Jun 17 2024" aria-pressed="false" role="button" type="button" class="button dp-button 
+    text-sm cursor-pointer relative 
+    
+    !text-opacity-30 !cursor-default overflow-hidden 
+    
+    "><div class="flex flex-col items-center">17<span class=" h-1 w-1 rounded-full !block self-center bg-black dark:bg-white "></span></div></button><button aria-label="Tue Jun 18 2024" aria-pressed="true" role="button" type="button" class="button dp-button 
+    text-sm cursor-pointer relative 
+    bg-black text-white dark:bg-white dark:text-black shadow-[0px_4px_10px_rgba(0,0,0,0.1)]
+    
+    border border-black dark:border-white 
+    ">18<span class=" "></span></button><button disabled="" aria-label="Wed Jun 19 2024" aria-pressed="false" role="button" type="button" class="button dp-button 
+    text-sm cursor-pointer relative 
+    
+    !text-opacity-30 !cursor-default overflow-hidden 
+    
+    ">19<span class="date-button inline-block h-full w-full absolute flex-1  "></span></button><button disabled="" aria-label="Thu Jun 20 2024" aria-pressed="false" role="button" type="button" class="button dp-button 
+    text-sm cursor-pointer relative 
+    
+    !text-opacity-30 !cursor-default overflow-hidden 
+    
+    ">20<span class="date-button inline-block h-full w-full absolute flex-1  "></span></button><button disabled="" aria-label="Fri Jun 21 2024" aria-pressed="false" role="button" type="button" class="button dp-button 
+    text-sm cursor-pointer relative 
+    
+    !text-opacity-30 !cursor-default overflow-hidden 
+    
+    ">21<span class="date-button inline-block h-full w-full absolute flex-1  "></span></button><button disabled="" aria-label="Sat Jun 22 2024" aria-pressed="false" role="button" type="button" class="button dp-button 
+    text-sm cursor-pointer relative 
+    
+    !text-opacity-30 !cursor-default overflow-hidden 
+    
+    ">22<span class="date-button inline-block h-full w-full absolute flex-1  "></span></button><button disabled="" aria-label="Sun Jun 23 2024" aria-pressed="false" role="button" type="button" class="button dp-button 
+    text-sm cursor-pointer relative 
+    
+    !text-opacity-30 !cursor-default overflow-hidden 
+    
+    ">23<span class="date-button inline-block h-full w-full absolute flex-1  "></span></button><button aria-label="Mon Jun 24 2024" aria-pressed="false" role="button" type="button" class="button dp-button 
+    text-sm cursor-pointer relative 
+    
+    
+    border border-black dark:border-white 
+    ">24<span class=" "></span></button><button aria-label="Tue Jun 25 2024" aria-pressed="false" role="button" type="button" class="button dp-button 
+    text-sm cursor-pointer relative 
+    
+    
+    border border-black dark:border-white 
+    ">25<span class=" "></span></button><button disabled="" aria-label="Wed Jun 26 2024" aria-pressed="false" role="button" type="button" class="button dp-button 
+    text-sm cursor-pointer relative 
+    
+    !text-opacity-30 !cursor-default overflow-hidden 
+    
+    ">26<span class="date-button inline-block h-full w-full absolute flex-1  "></span></button><button aria-label="Thu Jun 27 2024" aria-pressed="false" role="button" type="button" class="button dp-button 
+    text-sm cursor-pointer relative 
+    
+    
+    border border-black dark:border-white 
+    ">27<span class=" "></span></button><button aria-label="Fri Jun 28 2024" aria-pressed="false" role="button" type="button" class="button dp-button 
+    text-sm cursor-pointer relative 
+    
+    
+    border border-black dark:border-white 
+    ">28<span class=" "></span></button><button disabled="" aria-label="Sat Jun 29 2024" aria-pressed="false" role="button" type="button" class="button dp-button 
+    text-sm cursor-pointer relative 
+    
+    !text-opacity-30 !cursor-default overflow-hidden 
+    
+    ">29<span class="date-button inline-block h-full w-full absolute flex-1  "></span></button><button disabled="" aria-label="Sun Jun 30 2024" aria-pressed="false" role="button" type="button" class="button dp-button 
+    text-sm cursor-pointer relative 
+    
+    !text-opacity-30 !cursor-default overflow-hidden 
+    
+    ">30<span class="date-button inline-block h-full w-full absolute flex-1  "></span></button><div></div><div></div><div></div><div></div><div></div><div></div></div><div class="min-h-[85px]"><div class="overflow-x-auto"><div data-testid="dp-timepicker" class="card-list-horizontal mt-[30px] h-10 gap-[10px] !space-x-0"><div class="flex-shrink-0 p-0 w-[90px] h-10" style="opacity: 1; transform: none;"><button aria-pressed="true" type="button" class="button flex-shrink-0 p-0 w-[90px] h-10 transition-all py-0 text-base font-semibold bg-black text-white dark:bg-white dark:text-black shadow-[0px_4px_10px_rgba(0,0,0,0.1)]">8:00am</button></div><div class="flex-shrink-0 p-0 w-[90px] h-10" style="opacity: 1; transform: none;"><button aria-pressed="false" type="button" class="button flex-shrink-0 p-0 w-[90px] h-10 transition-all py-0 text-base font-semibold border border-black dark:border-white">8:15am</button></div><div class="flex-shrink-0 p-0 w-[90px] h-10" style="opacity: 1; transform: none;"><button aria-pressed="false" type="button" class="button flex-shrink-0 p-0 w-[90px] h-10 transition-all py-0 text-base font-semibold border border-black dark:border-white">11:30am</button></div><div class="flex-shrink-0 p-0 w-[90px] h-10" style="opacity: 1; transform: none;"><button aria-pressed="false" type="button" class="button flex-shrink-0 p-0 w-[90px] h-10 transition-all py-0 text-base font-semibold border border-black dark:border-white">11:45am</button></div></div></div></div></div> -->
+
+
+    <!-- <div class="calendar divlines">
+      <h1>Select Date & Time</h1>
+      <div class="navigation dateSelectRow">
+          <button><</button>
+        
+          <button (click)="updateCalendar">{{months[month]}} {{year}}</button>
+          <button>></button>
+      </div>
+      <div class="weekdays gridIt">
+          <div>Sun</div>
+          <div>Mon</div>
+          <div>Tue</div>
+          <div>Wed</div>
+          <div>Thu</div>
+          <div>Fri</div>
+          <div>Sat</div>
+      </div>
+      
+       <div class="month">
+        @for (day of days; track day.$count) {
+          <div class="days">
+            <button>{{ day }}</button>
+          </div>
+        }
+       </div>
+      
+  </div> -->
+  
+  <!-- <div class="calendar divlines">
+    <h1>Select Date & Time</h1>
+    <div class="navigation dateSelectRow">
+        <button><</button>
+        
+        <button>{{year}}</button>
+        <button>></button>
+    </div>
+    <div class="weekdays">
+        <div class="dayColumn">
+            <div>Sun</div>
+        </div>
+        <div class="dayColumn">
+            <div>Mon</div>
+        </div>
+    </div>
+</div> -->
+
+<!-- <div class="calendar">
+  <h1>Select Date & Time</h1>
+      <div class="navigation dateSelectRow">
+          <button><</button>
+        
+          <button (click)="updateCalendar()">{{months[month]}} {{year}}</button>
+          <button>></button>
+      </div>
+  <div class="day">
+      <div class="weekday">Sun</div>
+
+        <div class="date" >
+
+          
+        </div>
+  </div>
+</div> -->
+
+<div class="calendar ">
+  <h1>Select Date & Time</h1>
+    <div class="calContent">
+      <div class="navigation">
+        <button (click)="setMonth(-1)" class="staticWidthSm calButtonLeft calButton">Previous</button>
+        <h2 class="padItSides staticWidthMid">{{ date | date:'MMMM yyyy' }}</h2>
+        <button (click)="setMonth(1)" class="staticWidthSm calButtonRight calButton">Next</button>
+      </div>
+      
+      <div class="days">
+        @for (day of days; track $index) {
+          <div class="centerText">
+            <h2 >{{ day }}</h2>
+          </div>
+        }  
+      
+        @for (dt of dates; track $index) {
+
+          <div [class.other-month]="!isSameMonth(dt)" class="liChange pointer" (click)="selected.emit(dt); selectDate(dt)">
+              <li  class="center_text pointer calButton liChange"
+                [ngClass]="{disabledButton: !isSameMonth(dt), 'selected-circle': isSelectedDate(dt) }"
+              >{{ dt.getDate() }}</li>
+            
+          </div>
+        }
+      </div>  
+  </div>
+  
+  <div >
+      <h1 class="staticWidthLg">Selected: {{selectedDate | date}}</h1>
+    </div>
+</div>

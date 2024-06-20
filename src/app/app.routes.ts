@@ -26,10 +26,11 @@ import { DashAdminComponent } from './dashboard/dash-admin/dash-admin.component'
 import { DashBusComponent } from './dashboard/dash-bus/dash-bus.component';
 import { DashLandingComponent } from './dashboard/dash-landing/dash-landing.component';
 import { authGuard, canActivateUserGuard, verifyUserGuard } from './app-services/auth/auth.guard';
+import { CalendarComponent } from './commonelements/calendar/calendar.component';
 
 
 export const routes: Routes = [
-    {path: '', component: HomeComponent},
+    {path: '', component: CalendarComponent},
     {path: 'home', title: "Home", component: HomeComponent},
     {path: 'style-guide', title: "Style", component: StyleguideComponent},
     {path: 'about', title: "About", component: AboutComponent},

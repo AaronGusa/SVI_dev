@@ -1,0 +1,179 @@
+/* ========================================== CALENDAR ATTEMPT 3 */
+
+.calendar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.calContent {
+    background-color: var(--accent2);
+    padding: 2rem;
+    border-radius: 25px;
+}
+
+.navigation {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;
+}
+
+.calButton {
+    border: none;
+    transition: all 0.5s ease-in-out;
+    background-color: none;
+    border-radius: 25px;
+    box-shadow: none;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.calButton:hover {
+    background-color: var(--accent);
+    border-radius: 25px;
+}
+
+.calButton:active {
+    box-shadow: -2px -2px -5px rgba(0, 0, 0, 0.75);
+}
+
+
+
+.calButtonLeft {
+    border-radius: 25px 0 0 25px ;
+}
+
+.calButtonRight {
+    border-radius: 0 25px 25px 0;
+}
+
+
+
+
+.dateSelectRow button{
+    width: 100%;
+}
+
+.month {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.weekdays {
+    width: 100%;
+
+    display: flex;
+    justify-content: space-around;
+}
+
+.days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-auto-rows: 1fr;
+    gap: 15px 15px;
+    aspect-ratio: 1;
+}
+/* 
+
+.days {
+    width: 55px;
+    height: 55px;
+
+}
+
+.days button {
+    width: 100%;
+    height: 100%;
+
+} */
+
+.divlines {
+    border: 5px solid black;
+}
+
+.divlines div {
+    border: 5px solid black;
+}
+
+.weekdays {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.dayColumn {
+    display: flex;
+    flex-direction: column;
+}
+
+.centerText {
+    text-align: center;
+}
+
+.gridIt {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* Adjust as needed */
+    text-align: center;
+}
+
+.padItSides {
+    padding: 0 2rem;
+}
+
+.staticWidthSm {
+    width: 75px;
+}
+
+.staticWidthMid {
+    width: 195px;
+}
+
+.staticWidthLg {
+    width: 100%;
+}
+
+.fullwide {
+    width: 100%;
+}
+
+.fullhigh {
+    height: 100%
+}
+
+.flexCol {
+    display: flex;
+    flex-direction: column;
+}
+
+.disabledButton {
+    visibility: hidden;
+}
+
+.liChange {
+    display: flex;
+    text-decoration: none;
+    list-style: none;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.pointer {
+cursor: pointer;
+} 
+
+.selected-circle {
+    border-radius: 50%; /* Make it circular */
+    justify-self: center;
+    border: 3px solid var(--primary);
+    width: 100%;
+    height: 100%;
+  }

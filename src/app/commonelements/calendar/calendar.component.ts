@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { NgClass } from '@angular/common';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatCardModule } from '@angular/material/card';
 import { provideNativeDateAdapter } from '@angular/material/core';
@@ -10,16 +11,62 @@ import { DatePipe } from '@angular/common';
   selector: 'app-calendar',
   standalone: true,
   providers: [provideNativeDateAdapter()],
-  imports: [MatDatepickerModule, MatCardModule, MatInputModule, MatFormFieldModule, DatePipe],
+  imports: [MatDatepickerModule, MatCardModule, MatInputModule, MatFormFieldModule, DatePipe, NgClass],
   templateUrl: './calendar.component.html',
   styleUrl: './calendar.component.css'
 })
 export class CalendarComponent {
-  selected: Date | null;
+  DAY_MS = 60 * 60 * 24 * 1000;
+  dates: Array<Date>;
+  days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  date = new Date();
+  @Output() selected = new EventEmitter();
+  selectedDate: any;
+  cssDateSelected: any;
 
-  myFilter = (d: Date | null): boolean => {
-    const day = (d || new Date()).getDay();
-    // Prevent Saturday and Sunday from being selected.
-    return day !== 0 && day !== 6;
-  };
+  constructor() {
+    this.dates = this.getCalendarDays(this.date);
+  }
+
+  setMonth(inc) {
+    const [year, month] = [this.date.getFullYear(), this.date.getMonth()];
+    this.date = new Date(year, month + inc, 1);
+    this.dates = this.getCalendarDays(this.date);
+  }
+  
+  isSameMonth(date) {
+    return date.getMonth() === this.date.getMonth();
+  }
+
+  private getCalendarDays(date = new Date) {
+    const calendarStartTime =  this.getCalendarStartDay(date).getTime()
+    + 60 * 60 * 2 * 1000;
+
+    return this.range(0, 41)
+      .map(num => new Date(calendarStartTime + this.DAY_MS * num));
+  }
+
+  private getCalendarStartDay(date = new Date) {
+    const [year, month] = [date.getFullYear(), date.getMonth()];
+    const firstDayOfMonth = new Date(year, month, 1).getTime();
+
+    return this.range(1,7)
+      .map(num => new Date(firstDayOfMonth - this.DAY_MS * num))
+      .find(dt => dt.getDay() === 0)
+  }
+
+  private range(start, end, length = end - start + 1) {
+    return Array.from({ length }, (_, i) => start + i)
+  }
+
+  selectDate(date: Date) {
+    this.selectedDate = date;
+  }
+  
+  isSelectedDate(date: Date): boolean {
+    return this.selectedDate === date;
+  }
+
+
+
 }
