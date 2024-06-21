@@ -21,7 +21,7 @@ export class CalendarComponent {
   days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   date = new Date();
   @Output() selected = new EventEmitter();
-  selectedDate: any;
+  @Output() selectedDate: any;
   cssDateSelected: any;
 
   constructor() {
@@ -61,6 +61,10 @@ export class CalendarComponent {
 
   selectDate(date: Date) {
     this.selectedDate = date;
+    console.log('SELECTED ' + this.selectedDate);
+    this.selected = this.selectedDate;
+    this.selected.emit(this.selectedDate);
+    console.log(this.selected)
   }
   
   isSelectedDate(date: Date): boolean {

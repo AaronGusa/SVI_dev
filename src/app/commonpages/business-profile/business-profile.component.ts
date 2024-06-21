@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { BusinessProfileImagesComponent } from './business-profile-images/business-profile-images.component';
@@ -43,6 +43,7 @@ import { AppComponent } from '../../app.component';
 })
 export class BusinessProfileComponent implements OnInit{
   @Output() b_id_: string;
+  @Input() selected: Date | null;
   b_id: string = '';
   bData: any;
   isLoading: Boolean = true;
@@ -60,7 +61,7 @@ export class BusinessProfileComponent implements OnInit{
   
   availableHours = [9,10,11,12,13,14,15,16,17];
   selectedHour: number;
-  selected: Date | null;
+  // selected: Date | null;
   selectedSID: number;
   username: string;
   userID: number;
@@ -211,8 +212,11 @@ export class BusinessProfileComponent implements OnInit{
   }
 
   setDate(date) {
-    //console.log(date)
-    //console.log(this.selected)
+    console.log('SETDATE ENTERED')
+    console.log(date);
+    this.selected = date;
+    console.log(this.selected);
+
     this.formDate.setValue(date);
     this.formHour.setValue('');
   }

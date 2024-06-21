@@ -91,9 +91,10 @@
                 </div>
                 <div class="calendarCont">
                     <!-- <app-calendar [(dateSelected)]="dateSelected" (click)="openDialog('200ms', '600ms')"></app-calendar> -->
-                    <mat-card class="demo-inline-calendar-card">
+                    <!-- <mat-card class="demo-inline-calendar-card">
                         <mat-calendar [(selected)]="selected" (click)="setDate(selected)" style="width: 100%"></mat-calendar>
-                      </mat-card>
+                    </mat-card> -->
+                    <app-calendar (selected)="setDate($event)"></app-calendar>
                 </div>
                 <div class="appointmentCont container_flex_row_wrap centered text_center">
                     <!-- <p>Selected date: {{selected}}</p> -->

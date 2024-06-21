@@ -1,4 +1,21 @@
 /* ========================================== CALENDAR ATTEMPT 3 */
+@fontface {
+    font-family: 'ChapazaItalic';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Chapaza Italic'), url('/assets/fonts/ChapazaItalic.ttf') format('truetype');
+}
+
+.disabledButton {
+    color: var(--accent2);
+    visibility: hidden;
+}
+  
+
+#calFont {
+    font-family: 'Chapaza Italic', Courier, monospace;
+    font-size: 2rem;
+}
 
 .calendar {
     display: flex;
@@ -22,39 +39,85 @@
     text-align: center;
 }
 
-.calButton {
+.calDate {
     border: none;
     transition: all 0.5s ease-in-out;
     background-color: none;
     border-radius: 25px;
     box-shadow: none;
-    width: 100%;
-    height: 100%;
+    
     padding: 0;
     margin: 0;
 }
 
-.calButton:hover {
+.calDate:hover {
     background-color: var(--accent);
-    border-radius: 25px;
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
 }
 
-.calButton:active {
+.calDate:active {
     box-shadow: -2px -2px -5px rgba(0, 0, 0, 0.75);
 }
 
+.calButtonRight {
+    border: none;
+    transition: all 0.25s ease;
+    color: white;
+    background-color: var(--accent);
+    border-radius: 25px;
+    box-shadow: none;
+    position: relative;
+    padding: 0;
+    margin: 0;
+}
+
+
+.calButtonRight:hover {
+    background-color: var(--accent);
+    border-radius: 45px;
+    border-left: 10px solid var(--accent2);
+}
+
+.calButtonLeft {
+    border: none;
+    transition: all 0.5s ease;
+    color: white;
+    background-color: var(--accent);
+    border-radius: 25px;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+}
+
+
+.calButtonLeft:hover {
+    background-color: var(--accent);
+    color: white;
+    border-radius: 45px;
+    border-right: 10px solid var(--accent2);
+}
 
 
 .calButtonLeft {
     border-radius: 25px 0 0 25px ;
+    
 }
 
 .calButtonRight {
     border-radius: 0 25px 25px 0;
 }
 
+.calButtonRight:active {
+    box-shadow: -2px -2px -5px rgba(0, 0, 0, 0.75);
+    background-color: var(--accent2);
+}
 
-
+.calButtonLeft:active {
+    box-shadow: -2px -2px -5px rgba(0, 0, 0, 0.75);
+    background-color: var(--accent2);
+}
 
 .dateSelectRow button{
     width: 100%;
@@ -153,9 +216,7 @@
     flex-direction: column;
 }
 
-.disabledButton {
-    visibility: hidden;
-}
+
 
 .liChange {
     display: flex;
@@ -167,13 +228,14 @@
 }
 
 .pointer {
-cursor: pointer;
-} 
+    cursor: pointer;
+}  
 
 .selected-circle {
     border-radius: 50%; /* Make it circular */
     justify-self: center;
-    border: 3px solid var(--primary);
+    border: 4px solid var(--primary);
     width: 100%;
     height: 100%;
   }
+
