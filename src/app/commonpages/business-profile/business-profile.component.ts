@@ -99,7 +99,6 @@ export class BusinessProfileComponent implements OnInit{
   async getBusinessProfileImages(b_id: string) {
     this.isLoading = true;
     this.profileImages = await this.iServe.getBusProfileImage(b_id);
-    this.isLoading = false;
   };
 
   async checkFavs() {
@@ -137,9 +136,19 @@ export class BusinessProfileComponent implements OnInit{
         } else {
           this.servComplete.push(null); // Push null if no matching service found
         }
+     }
+     this.servComplete.sort((a, b) => {
+      let nameA = a.s_name.toUpperCase(); // ignore upper and lowercase
+      let nameB = b.s_name.toUpperCase(); // ignore upper and lowercase
+      if (nameA < nameB) {
+        return -1;
       }
-      console.log(this.servComplete[0])
-      console.log(this.servComplete)
+      if (nameA > nameB) {
+        return 1;
+      }
+      return 0;
+    });
+    this.isLoading = false;
     }
 
     async favoriteBus() {
