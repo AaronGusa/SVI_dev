@@ -237,22 +237,22 @@ $cambridge-blue: (
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$SVI_dev-primary: mat.define-palette($ash-gray, A200, A100, A700);
-$SVI_dev-secondary: mat.define-palette($persian-orange, A200, A100, A400);
-$SVI_dev-tertiary: mat.define-palette($pale-dogwood, A200, A100, A700);
+$SVI_dev-primary: mat.m2-define-palette($ash-gray, A200, A100, A700);
+$SVI_dev-secondary: mat.m2-define-palette($persian-orange, A200, A100, A400);
+$SVI_dev-tertiary: mat.m2-define-palette($pale-dogwood, A200, A100, A700);
 
 
-$SVI_dev-accent: mat.define-palette($lion, A200, A100, A400, A700);
-$SVI_dev-accent-secondary: mat.define-palette($bone, A200, A100, A400, A700);
+$SVI_dev-accent: mat.m2-define-palette($lion, A200, A100, A400, A700);
+$SVI_dev-accent-secondary: mat.m2-define-palette($bone, A200, A100, A400, A700);
 
 
 // The warn palette is optional (defaults to red).
-$SVI_dev-warn: mat.define-palette($chestnut);
-$SVI_dev-confirm: mat.define-palette($cambridge-blue);
+$SVI_dev-warn: mat.m2-define-palette($chestnut);
+$SVI_dev-confirm: mat.m2-define-palette($cambridge-blue);
 
 
 // Create the theme object
-$SVI_dev-theme: mat.define-light-theme((
+$SVI_dev-theme: mat.m2-define-light-theme((
   color: (
     primary: $SVI_dev-primary, // replace with your primary color
     secondary: $SVI_dev-secondary,
