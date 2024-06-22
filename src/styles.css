@@ -41,7 +41,7 @@ MediaQueries
 html {
     scroll-behavior: smooth;
     height: 100vh;
-    
+
 }
 
 html, body  {
@@ -63,10 +63,10 @@ p, a, li, button {
 }
 
 img {
-    
+
         box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
         border-radius: 45px;
-    
+
 }
 
 hr {
@@ -87,19 +87,19 @@ a {
 a:link {
     color: var(--textColor);
   }
-  
+
   /* visited link */
   a:visited {
     color: var(--warn);
   }
-  
+
   /* mouse over link */
   a:hover {
     background-color: #B98B4F;
     color: white !important;
     border-radius: 25px;
   }
-  
+
   /* selected link */
   a:active {
     color: blue;
@@ -296,7 +296,7 @@ footer {
 
 
 
-@media (min-width: 20em) { /* smartphones, iPhone, portrait 480x320 phones (min-width: 320px) */ 
+@media (min-width: 20em) { /* smartphones, iPhone, portrait 480x320 phones (min-width: 320px) */
     .logo_main {
         width: 85%;
         margin: 0;
@@ -328,34 +328,50 @@ footer {
         justify-content: space-around;
         align-items: center;
     }
-    
-    
+
+    #serviceToggleButton {
+        border: 5px solid var(--confirm);
+        background-color: rgba(88, 99, 94, 0.75);
+        color: white;
+        border-radius: 25px;
+    }
+
+    .mat-button-toggle-standalone.mat-button-toggle-appearance-standard .mat-pseudo-checkbox, .mat-button-toggle-group-appearance-standard .mat-pseudo-checkbox {
+        --mat-minimal-pseudo-checkbox-selected-checkmark-color: rgb(0 231 11 / 87%)!important;
+        font-weight: 900;
+    }
+
     .containerCont {
         width: 100%;
         display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: 1fr 1fr 0.55fr;
-    
+
     }
-    
+
     .buttonCont {
         grid-column: 1;
-        grid-row: 1 ; 
+        grid-row: 1 ;
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
         justify-content: center;
         align-items: center;
-        background-color: rgba(157, 173, 166, 0.50);
+        /* background-color: rgba(157, 173, 166, 0.50); */
     }
-    
+
+    .mat-button-toggle-standalone.mat-button-toggle-appearance-standard, .mat-button-toggle-group-appearance-standard {
+        border: none!important;
+
+    }
+
     .calendarCont {
         width:100%;
         height: max-content;
         grid-column: 1 ;
         grid-row: 2;
     }
-    
+
     .appointmentCont {
         grid-column: 1;
         grid-row: 3;
@@ -384,12 +400,12 @@ footer {
         background-color: white;
         visibility: visible;
     }
-    
+
     .dash_side_menu.collapsed {
         max-width: 0; /* Reduce max-width to collapse */
         visibility: hidden;
     }
-    
+
     .toggle-button {
         position: fixed;
         bottom: 20px; /* Adjust as needed */
@@ -414,7 +430,7 @@ footer {
         transition: transform 0.3s ease;
         z-index: 1000000005;
     }
-    
+
     .arrow.collapsed  {
         transform: rotate(180deg);
     }
@@ -427,7 +443,7 @@ footer {
         margin: 0;
         padding: 0;
     }
-    
+
     .dash_side_menu {
         display: flex;
         flex-direction: row;
@@ -437,8 +453,8 @@ footer {
         width: fit-content;
         /* border: 2px solid black; */
     }
-    
-  
+
+
     .dash_content {
         grid-column: 1 / span 2;
         grid-row: 1;
@@ -450,14 +466,14 @@ footer {
     }
 
 }
-@media (min-width: 30.0625em) { /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide (min-width: 481px) */ 
-    
+@media (min-width: 30.0625em) { /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide (min-width: 481px) */
+
     .container_flex_row_wrap {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
     }
-    
+
     .centered {
         display: flex;
         flex-direction: column;
@@ -465,7 +481,7 @@ footer {
         justify-content: center;
         align-items: center;
     }
-    
+
     .center_text {
         text-align: center;
     }
@@ -495,7 +511,7 @@ footer {
         cursor: pointer;
         gap: 10px;
     }
-    
+
     .hambStack>* {
         width: 100%;
         height: 2px;
@@ -510,21 +526,21 @@ footer {
         opacity: 1;
         background-color: rgb(0, 0, 0);
     }
-    
+
     .hambStack>*:nth-child(3) {
         width: 67%
     }
-    
+
     .burgerOpen :nth-child(1) {
         -webkit-transform: rotate(45deg) translate3d(0, 0, 0);
         transform: rotate(45deg) translate3d(0, 0, 0)
     }
-    
+
     .burgerOpen :nth-child(2) {
         width: 0;
         opacity: 0
     }
-    
+
     .burgerOpen :nth-child(3) {
         width: 100%;
         -webkit-transform: rotate(-45deg) translate3d(0, 0, 0);
@@ -548,34 +564,34 @@ footer {
         justify-content: space-around;
         align-items: center;
     }
-    
-    
+
+
     .containerCont {
         width: 100%;
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 1fr 1fr;
-    
+
     }
-    
+
     .buttonCont {
         grid-column: 1 ;
-        grid-row: 1 /span 2; 
+        grid-row: 1 /span 2;
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
         justify-content: center;
         align-items: center;
-        background-color: rgba(157, 173, 166, 0.50);
+        /* background-color: rgba(157, 173, 166, 0.50); */
     }
-    
+
     .calendarCont {
         width:100%;
         height: max-content;
         grid-column: 2;
         grid-row: 1;
     }
-    
+
     .appointmentCont {
         grid-column: 2;
         grid-row: 2;
@@ -604,12 +620,12 @@ footer {
         background-color: white;
         visibility: visible;
     }
-    
+
     .dash_side_menu.collapsed {
         max-width: 0; /* Reduce max-width to collapse */
         visibility: hidden;
     }
-    
+
     .toggle-button {
         position: fixed;
         bottom: 20px; /* Adjust as needed */
@@ -634,7 +650,7 @@ footer {
         transition: transform 0.3s ease;
         z-index: 1000000005;
     }
-    
+
     .arrow.collapsed  {
         transform: rotate(180deg);
     }
@@ -647,7 +663,7 @@ footer {
         margin: 0;
         padding: 0;
     }
-    
+
     .dash_side_menu {
         display: flex;
         flex-direction: row;
@@ -655,11 +671,11 @@ footer {
         box-shadow: 1px 1px 20px rgba(0,0,0,0.50);
         padding: .5rem;
         width: fit-content;
-        
+
         /* border: 2px solid black; */
     }
-    
-  
+
+
     .dash_content {
         grid-column: 1 /span 2;
         grid-row: 1;
@@ -680,7 +696,7 @@ footer {
 
 
 }
-@media (min-width: 40.0625em) { /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones (min-width: 641px) */ 
+@media (min-width: 40.0625em) { /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones (min-width: 641px) */
     .logo_main {
         width: 85%;
         margin: 0;
@@ -688,17 +704,17 @@ footer {
 
     }
 
-    
+
 
 }
-@media (min-width: 60.0625em) { /* tablet, landscape iPad, lo-res laptops ands desktops (min-width: 961px) */ 
+@media (min-width: 60.0625em) { /* tablet, landscape iPad, lo-res laptops ands desktops (min-width: 961px) */
     .container_flex_row_wrap {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
     }
 
-   
+
 
     .primary_container {
         width: 100%;
@@ -719,7 +735,7 @@ footer {
         text-align: center;
         justify-content: center;
     }
-    
+
     .tertiary_container {
         background-color: var(--secondary);
         color: var(--textColor);
@@ -758,7 +774,7 @@ footer {
         background-color: transparent;
     }
 
-   
+
     .container_flex_row_wrap {
         display: flex;
         flex-direction: row;
@@ -766,7 +782,7 @@ footer {
     }
 
 
-    
+
     .papaBigRig {
         color: white;
         font-size: 1.25rem;
@@ -806,11 +822,11 @@ footer {
         justify-content: center;
         align-items: center;
     }
-    
+
     .center_text {
         text-align: center;
     }
-    
+
 
     .hide {
         display: inline;
@@ -825,7 +841,7 @@ footer {
         grid-template-columns: 1fr ;
         grid-template-rows: 1fr 1fr;
 
-        
+
     }
 
     .background_trans {
@@ -848,7 +864,7 @@ footer {
         z-index: 1;
     }
 
-    
+
 
     .logo_main {
         width: 350px;
@@ -874,7 +890,7 @@ footer {
         cursor: pointer;
         gap: 10px;
     }
-    
+
     .hambStack>* {
         width: 200%;
         height: 12px;
@@ -889,21 +905,21 @@ footer {
         opacity: 1;
         background-color: rgb(255, 255, 255);
     }
-    
+
     .hambStack>*:nth-child(3) {
         width: 67%
     }
-    
+
     .burgerOpen :nth-child(1) {
         -webkit-transform: rotate(45deg) translate3d(0, 0, 0);
         transform: rotate(45deg) translate3d(0, 0, 0)
     }
-    
+
     .burgerOpen :nth-child(2) {
         width: 0;
         opacity: 0
     }
-    
+
     .burgerOpen :nth-child(3) {
         width: 100%;
         -webkit-transform: rotate(-45deg) translate3d(0, 0, 0);
@@ -926,27 +942,27 @@ footer {
         justify-content: space-around;
         align-items: center;
     }
-    
-    
+
+
     .containerCont {
         width: 90%;
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 1fr 1fr;
-    
+
     }
-    
+
     .buttonCont {
         grid-column: 1 ;
-        grid-row: 1 ; 
+        grid-row: 1 ;
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
         justify-content: center;
         align-items: center;
-        background-color: rgba(157, 173, 166, 0.50);
+        /* background-color: rgba(157, 173, 166, 0.50); */
     }
-    
+
     .calendarCont {
         width: 100%;
         height: max-content;
@@ -954,7 +970,7 @@ footer {
         grid-row: 1;
 
     }
-    
+
     .appointmentCont {
         grid-column: 1;
         grid-row: 2;
@@ -983,12 +999,12 @@ footer {
         background-color: white;
         visibility: visible;
     }
-    
+
     .dash_side_menu.collapsed {
         max-width: 0; /* Reduce max-width to collapse */
         visibility: hidden;
     }
-    
+
     .toggle-button {
         position: fixed;
         bottom: 20px; /* Adjust as needed */
@@ -1013,7 +1029,7 @@ footer {
         transition: transform 0.3s ease;
         z-index: 1000000005;
     }
-    
+
     .arrow.collapsed  {
         transform: rotate(180deg);
     }
@@ -1026,7 +1042,7 @@ footer {
         margin: 0;
         padding: 0;
     }
-    
+
     .dash_side_menu {
         display: flex;
         flex-direction: row;
@@ -1034,11 +1050,11 @@ footer {
         box-shadow: 1px 1px 20px rgba(0,0,0,0.50);
         padding: .5rem;
         width: fit-content;
-        
+
         /* border: 2px solid black; */
     }
-    
-  
+
+
     .dash_content {
         grid-column: 1 /span 2;
         grid-row: 1;
@@ -1080,16 +1096,16 @@ footer {
         content: "";
         /* background: url("./assets/images/stocks/shrunk/raphael-lovaski-pxax5WuM7eY-unsplash.webp"); */
         background-image: url("./assets/images/DesignerBLUR.png");
-        
+
         opacity: 0.25; /* Set the opacity as per your requirement */
-        background-position: center; 
-        
+        background-position: center;
+
         /* top: 0;
         left: 0;
         bottom: 0;
         right: 0; */
         position: absolute;
-        z-index: -1;   
+        z-index: -1;
       }
 
     body {
@@ -1097,9 +1113,9 @@ footer {
         /* background-image: url("./assets/images/Designer.png"); */
         background-image: url("./assets/images/bckgrndblur.png");
 
-        background-size: cover; 
-        background-repeat: no-repeat; 
-        background-attachment: fixed; 
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
         filter: blur(8px);
         -webkit-filter: blur(0);
     }
@@ -1121,8 +1137,8 @@ footer {
     }
 
 }
-@media (min-width: 64.0625em) { /* big landscape tablets, laptops, and desktops (min-width: 1025px) */ 
-  
-    
+@media (min-width: 64.0625em) { /* big landscape tablets, laptops, and desktops (min-width: 1025px) */
+
+
 
 }

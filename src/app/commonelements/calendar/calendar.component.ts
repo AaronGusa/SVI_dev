@@ -61,10 +61,10 @@ export class CalendarComponent {
 
   selectDate(date: Date) {
     this.selectedDate = date;
-    console.log('SELECTED ' + this.selectedDate);
-    this.selected = this.selectedDate;
+    //console.log('SELECTED ' + this.selectedDate);
+    // this.selected = this.selectedDate;
     this.selected.emit(this.selectedDate);
-    console.log(this.selected)
+    //console.log(this.selected)
   }
   
   isSelectedDate(date: Date): boolean {

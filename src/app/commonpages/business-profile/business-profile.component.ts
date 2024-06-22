@@ -138,7 +138,8 @@ export class BusinessProfileComponent implements OnInit{
           this.servComplete.push(null); // Push null if no matching service found
         }
       }
-      //console.log(this.servComplete[0])
+      console.log(this.servComplete[0])
+      console.log(this.servComplete)
     }
 
     async favoriteBus() {
@@ -212,10 +213,10 @@ export class BusinessProfileComponent implements OnInit{
   }
 
   setDate(date) {
-    console.log('SETDATE ENTERED')
-    console.log(date);
+    //console.log('SETDATE ENTERED')
+    //console.log(date);
     this.selected = date;
-    console.log(this.selected);
+    //console.log(this.selected);
 
     this.formDate.setValue(date);
     this.formHour.setValue('');
