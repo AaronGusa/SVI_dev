@@ -1,0 +1,4 @@
+.servCont {
+    display: flex;
+    flex-direction: row;
+}

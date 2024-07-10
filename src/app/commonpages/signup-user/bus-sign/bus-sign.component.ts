@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, FormGroup, Validators } from '@angular/forms';
 import { ServiceService } from '../../../app-services';
 import { BusinessService } from '../../../app-services';
@@ -27,14 +27,20 @@ import { MatButtonModule } from '@angular/material/button';
             MatCardModule,
             MatExpansionModule,
             MatButtonToggleModule,
-            MatButtonModule],
+            MatButtonModule,
+            
+          ],
   templateUrl: './bus-sign.component.html',
   styleUrl: './bus-sign.component.css'
 })
 
-export class BusSignComponent implements OnInit {
+export class BusSignComponent implements OnInit, AfterViewInit {
   @Input() _foundUser: number;
   @Input() username: string;
+  DOW: string[] = ['Sunday','Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  DOWSelectedArray: number[] = [];
+  HOO: string[] = ['6:00A', '7:00A', '8:00A', '9:00A', '10:00A', '11:00A', '12:00P', '1:00P', '2:00P', '3:00P', '4:00P', '5:00P', '6:00P', '7:00P', '8:00P', '9:00P' ] 
+  HOOSelectedArray: string[] = [];
   services: any[] = [];
   categories: any[] = [];
   selectedCategories: number[] = [];
@@ -42,12 +48,20 @@ export class BusSignComponent implements OnInit {
   isLoading: boolean = false;
   duration: 1500;
   busServices: number[] = [];
+  sameHours: boolean = true;
+
 
   //form control
   bus_contact_form: FormGroup = this._formBuilder.group({busContactCtrl: ['']});
   bus_add_form: FormGroup = this._formBuilder.group({busAddCtrl: ['']});
   bus_signup_form: FormGroup
   busForm: FormGroup;
+
+  mouseDown = false;
+  lastButton: HTMLElement | null = null;
+
+
+  @ViewChild('toggleGroup') toggleGroup: ElementRef;
 
   constructor(private servService: ServiceService,
     private _formBuilder: FormBuilder,
@@ -75,6 +89,38 @@ ngOnInit() {
       u_id: [null],
       created:[null]
     });
+}
+
+ngAfterViewInit() {
+  this.toggleGroup.nativeElement.addEventListener('mousedown', () => {
+    this.mouseDown = true;
+  });
+
+  this.toggleGroup.nativeElement.addEventListener('mouseup', () => {
+    this.mouseDown = false;
+  });
+
+  Array.from(this.toggleGroup.nativeElement.children).forEach((button: HTMLElement) => {
+    button.addEventListener('mousemove', (event) => {
+      if (this.mouseDown && event.target !== this.lastButton) {
+        // Toggle the button
+        (event.target as HTMLElement).click();
+        this.lastButton = event.target as HTMLElement;
+        // Get the hour value from the button element
+      let hour = (event.target as HTMLElement).getAttribute('data-hour');
+
+      // Run the HOOSelected function with the hour value
+      if (hour) {
+        this.HOOSelected(hour);
+      }
+      }
+    });
+  });
+  
+  document.addEventListener('mouseup', () => {
+    this.mouseDown = false;
+    this.lastButton = null;  // Reset the last button on mouse up
+  });
 }
 
 // async fetchCategories() {
@@ -169,9 +215,41 @@ async processBusSignUp() {
   }
 }
 
-ConsoleLog() {
-  console.log('WORKS')
+DOWSelected(day) {
+  let index = this.DOWSelectedArray.indexOf(day);
+  if (index !== -1) {
+    // If day is in the array, remove it
+    this.DOWSelectedArray.splice(index, 1);
+    // console.log(day + " is removed from the array!");
+  } else {
+    // If day is not in the array, add it
+    this.DOWSelectedArray.push(day);
+    // console.log(day + " is added to the array!");
+  }
+  console.log(this.DOWSelectedArray);
 }
+
+HOOSelected(time) {
+  let index = this.HOOSelectedArray.indexOf(time);
+  if (index !== -1) {
+    // If hour is in the array, remove it
+    this.HOOSelectedArray.splice(index, 1);
+    // console.log(day + " is removed from the array!");
+  } else {
+    // If day is not in the array, add it
+    this.HOOSelectedArray.push(time);
+    // console.log(day + " is added to the array!");
+  }
+  console.log("HOO: " + this.HOOSelectedArray);
+}
+
+ConsoleLog(variable) {
+  // console.log('WORKS');
+  console.log(variable);
+}
+
+
+
 
 
 }

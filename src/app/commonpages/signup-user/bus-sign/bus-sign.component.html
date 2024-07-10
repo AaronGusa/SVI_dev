@@ -125,6 +125,35 @@
             </mat-card-footer>
             
         </mat-step>
+        <mat-step>
+            <mat-accordion>
+                <ng-template matStepLabel>Standard Days of Operation</ng-template>
+                <div>
+                    <mat-button-toggle-group multiple>
+                        @for (day of DOW; track $index) {
+                            <mat-button-toggle (click)="DOWSelected($index)">{{day}}</mat-button-toggle>
+                        }
+                    </mat-button-toggle-group>
+                </div>
+                <hr>
+                <div>
+                    <mat-checkbox [checked]="true">
+                        Are all the hours of operation the same every day?
+                    </mat-checkbox>
+                    <br>
+                    @if (!sameHours) {
 
+                    } @else {
+                        <mat-button-toggle-group #toggleGroup multiple class="hourList">
+                            @for (hour of HOO; track $index) {
+                                <mat-button-toggle data-hour="{{hour}}">
+                                    {{hour}}
+                                </mat-button-toggle>
+                            }
+                        </mat-button-toggle-group>
+                    }
+                </div>
+            </mat-accordion>
+        </mat-step>
     </mat-vertical-stepper>       
 </mat-card>
