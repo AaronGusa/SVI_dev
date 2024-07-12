@@ -100,27 +100,64 @@ ngAfterViewInit() {
     this.mouseDown = false;
   });
 
-  Array.from(this.toggleGroup.nativeElement.children).forEach((button: HTMLElement) => {
-    button.addEventListener('mousemove', (event) => {
-      if (this.mouseDown && event.target !== this.lastButton) {
-        // Toggle the button
-        (event.target as HTMLElement).click();
-        this.lastButton = event.target as HTMLElement;
-        // Get the hour value from the button element
-      let hour = (event.target as HTMLElement).getAttribute('data-hour');
+  // Array.from(this.toggleGroup.nativeElement.children).forEach((button: HTMLElement) => {
+  //   button.addEventListener('mousemove', (event) => {
+  //     if (this.mouseDown && event.target !== this.lastButton) {
+  //       // Toggle the button
+  //       (event.target as HTMLElement).click();
+  //       this.lastButton = event.target as HTMLElement;
+  //       // Get the hour value from the button element
+  //     let hour = (event.target as HTMLElement).getAttribute('data-hour');
 
-      // Run the HOOSelected function with the hour value
-      if (hour) {
-        this.HOOSelected(hour);
-      }
-      }
-    });
-  });
+  //     // Run the HOOSelected function with the hour value
+  //     if (hour) {
+  //       this.HOOSelected(hour);
+  //     }
+  //     }
+  //   });
+  // });
   
-  document.addEventListener('mouseup', () => {
-    this.mouseDown = false;
-    this.lastButton = null;  // Reset the last button on mouse up
-  });
+  // Array.from(this.toggleGroup.nativeElement.children).forEach((button: HTMLElement) => {
+  //   // Add a 'mousedown' event listener to run HOOSelected when the mouse button is pressed down
+  //   button.addEventListener('mousedown', (event) => {
+  //     let hour = (event.target as HTMLElement).getAttribute('data-hour');
+  //     if (hour) {
+  //       this.HOOSelected(hour);
+  //     }
+  //   });
+  
+  //   // Add a 'click' event listener to run HOOSelected when a click event occurs
+  //   button.addEventListener('click', (event) => {
+  //     let hour = (event.currentTarget as HTMLElement).getAttribute('data-hour');
+  //     if (hour) {
+  //       this.HOOSelected(hour);
+  //     }
+  //   });
+  
+  //   // Existing 'mousemove' event listener
+  //   button.addEventListener('mousemove', (event) => {
+  //     if (this.mouseDown && event.target !== this.lastButton) {
+  //       // Toggle the button
+  //       (event.target as HTMLElement).click();
+  //       this.lastButton = event.target as HTMLElement;
+  //     }
+  //   });
+  // });
+
+  // document.addEventListener('mouseup', () => {
+  //   this.mouseDown = false;
+  //   this.lastButton = null;  // Reset the last button on mouse up
+  // });
+
+
+  //HTML SNIPPET
+  // <mat-button-toggle-group #toggleGroup multiple class="hourList">
+  //                           @for (hour of HOO; track $index) {
+  //                               <mat-button-toggle [attr.data-hour]="hour">
+  //                                   {{hour}}
+  //                               </mat-button-toggle>
+  //                           }
+  //                       </mat-button-toggle-group>
 }
 
 // async fetchCategories() {

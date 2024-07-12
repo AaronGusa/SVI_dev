@@ -144,9 +144,9 @@
                     @if (!sameHours) {
 
                     } @else {
-                        <mat-button-toggle-group #toggleGroup multiple class="hourList">
+                        <mat-button-toggle-group multiple class="hourList">
                             @for (hour of HOO; track $index) {
-                                <mat-button-toggle data-hour="{{hour}}">
+                                <mat-button-toggle (click)="HOOSelected(hour)">
                                     {{hour}}
                                 </mat-button-toggle>
                             }
