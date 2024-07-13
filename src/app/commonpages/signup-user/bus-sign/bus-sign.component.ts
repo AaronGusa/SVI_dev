@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, OnChanges, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, Input, OnChanges, ViewChild, AfterViewInit, ElementRef, model } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule, FormGroup, Validators, FormsModule } from '@angular/forms';
 import { ServiceService } from '../../../app-services';
 import { BusinessService } from '../../../app-services';
 import { Router } from '@angular/router';
@@ -23,6 +23,7 @@ import { MatButtonModule } from '@angular/material/button';
             MatFormFieldModule, 
             MatStepperModule, 
             ReactiveFormsModule, 
+            FormsModule,
             MatInputModule,
             MatCardModule,
             MatExpansionModule,
@@ -48,8 +49,7 @@ export class BusSignComponent implements OnInit, AfterViewInit {
   isLoading: boolean = false;
   duration: 1500;
   busServices: number[] = [];
-  sameHours: boolean = true;
-
+  sameHours: Boolean = false;
 
   //form control
   bus_contact_form: FormGroup = this._formBuilder.group({busContactCtrl: ['']});
@@ -286,7 +286,10 @@ ConsoleLog(variable) {
 }
 
 
-
+sameHourChecker() {
+  this.sameHours = !this.sameHours;
+  // this.checked = !this.checked;
+}
 
 
 }

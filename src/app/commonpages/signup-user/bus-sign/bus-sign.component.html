@@ -137,12 +137,23 @@
                 </div>
                 <hr>
                 <div>
-                    <mat-checkbox [checked]="true">
+                    <mat-checkbox [checked]="sameHours" (click)="sameHourChecker()">
                         Are all the hours of operation the same every day?
                     </mat-checkbox>
                     <br>
                     @if (!sameHours) {
-
+                        @if (DOWSelectedArray.length === 0) {
+                            <h2>Please select your standard days of operation above.</h2>
+                        } @else {
+                           @for (day of DOWSelectedArray; track $index) {
+                            <h3>{{day}}</h3>
+                            @for (hour of HOO; track $index) {
+                                <mat-button-toggle (click)="HOOSelected(hour)">
+                                    {{hour}}
+                                </mat-button-toggle>
+                            }
+                           }
+                        }
                     } @else {
                         <mat-button-toggle-group multiple class="hourList">
                             @for (hour of HOO; track $index) {
