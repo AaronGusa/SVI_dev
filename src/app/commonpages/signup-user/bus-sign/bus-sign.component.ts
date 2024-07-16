@@ -257,10 +257,13 @@ DOWSelected(day) {
   if (index !== -1) {
     // If day is in the array, remove it
     this.DOWSelectedArray.splice(index, 1);
+    this.DOWSelectedArray.sort((a, b) => a - b);
     // console.log(day + " is removed from the array!");
   } else {
     // If day is not in the array, add it
     this.DOWSelectedArray.push(day);
+    this.DOWSelectedArray.sort((a, b) => a - b);
+
     // console.log(day + " is added to the array!");
   }
   console.log(this.DOWSelectedArray);

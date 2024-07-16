@@ -146,14 +146,41 @@
                             <h2>Please select your standard days of operation above.</h2>
                         } @else {
                            @for (day of DOWSelectedArray; track $index) {
-                            <h3>{{day}}</h3>
+                            @switch (day) {
+            
+                                @case (0) {
+                                    <h3>Sundays</h3>
+                                }
+                                @case (1) {
+                                    <h3>Mondays</h3>
+                                }
+                                @case (2) {
+                                    <h3>Tuesdays</h3>
+                                }
+                                @case (3) {
+                                    <h3>Wednesdays</h3>
+                                }
+                                @case (4) {
+                                    <h3>Thursdays</h3>
+                                }
+                                @case (5) {
+                                    <h3>Fridays</h3>
+                                }
+                                @case (6) {
+                                    <h3>Saturdays</h3>
+                                }
+
+
+
+                            }
                             @for (hour of HOO; track $index) {
                                 <mat-button-toggle (click)="HOOSelected(hour)">
                                     {{hour}}
                                 </mat-button-toggle>
                             }
                            }
-                        }
+                          }
+                        
                     } @else {
                         <mat-button-toggle-group multiple class="hourList">
                             @for (hour of HOO; track $index) {
