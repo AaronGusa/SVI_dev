@@ -49,7 +49,7 @@ export class BusSignComponent implements OnInit, AfterViewInit {
   isLoading: boolean = false;
   duration: 1500;
   busServices: number[] = [];
-  sameHours: Boolean = false;
+  sameHours: Boolean = true;
 
   //form control
   bus_contact_form: FormGroup = this._formBuilder.group({busContactCtrl: ['']});
@@ -291,8 +291,12 @@ ConsoleLog(variable) {
 
 sameHourChecker() {
   this.sameHours = !this.sameHours;
+
   // this.checked = !this.checked;
 }
+
+
+
 
 
 }
