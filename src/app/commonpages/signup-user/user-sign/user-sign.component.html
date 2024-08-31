@@ -1,151 +1,299 @@
 @if (!userSubmitting && !userSuccess) {
-<div > 
-    <h1>Sign Up</h1>
-    <mat-vertical-stepper [linear]="false" #stepper [animationDuration]="duration">
-      <mat-step-header>Username and Password</mat-step-header>
-      <mat-step [stepControl]="username_pass_form"> 
-        <form [formGroup]="username_pass_form">
-          <ng-template matStepLabel>Choose a Username & Password</ng-template>
+  <div > 
+      <h1>Sign Up</h1>
+      
+      <mat-vertical-stepper [linear]="false" #stepper [animationDuration]="duration">
+        <mat-step-header>Username and Password</mat-step-header>
+        <mat-step [stepControl]="username_pass_form"> 
+          <form [formGroup]="username_pass_form">
+            <ng-template matStepLabel>Choose a Username & Password</ng-template>
+            <mat-form-field>
+              <mat-label>Username</mat-label>
+              <input matInput formControlName="u_username" required name="username" value="userModel.u_username"
+                    (blur)="checkUsernameAvailability()" 
+              >
+              @if (usernameSearch) {
+                <div >
+                  <mat-progress-bar mode="buffer"></mat-progress-bar>
+                </div>  
+              } 
+              @if (hasText()) {
+                <button matSuffix mat-icon-button aria-label="Clear" (click)="clearUsernameAttempt()">
+                  <mat-icon>close</mat-icon>
+                </button>
+              }
+              <!---->
+            </mat-form-field>
+            
+            <mat-form-field>
+              <mat-label>Password</mat-label>
+              <input matInput formControlName="u_pass" type="password" required name="u_pass" value="userModel.u_pass">
+            </mat-form-field>
+            @if (usernameInvalid) {
+              <p>🚫Username taken!🚫</p>
+            }  
+            @if (usernameValid) {
+                ✅
+              } 
+          </form>
+          <div>
+            <button mat-raised-button matStepperNext>Next</button>
+          </div> 
+        </mat-step>
+        
+      <mat-step [stepControl]="person_info_form">
+        <form [formGroup]="person_info_form">
+          <hr>
+          <ng-template matStepLabel>Enter your details</ng-template>
+
+
           <mat-form-field>
-            <mat-label>Username</mat-label>
-            <input matInput formControlName="u_username" required name="username" value="userModel.u_username"
-                   (blur)="checkUsernameAvailability()" 
-            >
-            @if (usernameSearch) {
-              <div >
-                <mat-progress-bar mode="buffer"></mat-progress-bar>
-              </div>  
-            } 
-            @if (hasText()) {
-              <button matSuffix mat-icon-button aria-label="Clear" (click)="clearUsernameAttempt()">
-                <mat-icon>close</mat-icon>
-              </button>
-            }
-            <!---->
+            <mat-label>First Name</mat-label>
+            <input matInput formControlName="u_fname" required name="firstName" value="userModel.u_fname">
           </mat-form-field>
-          
           <mat-form-field>
-            <mat-label>Password</mat-label>
-            <input matInput formControlName="u_pass" type="password" required name="u_pass" value="userModel.u_pass">
+            <mat-label>Last Name</mat-label>
+            <input matInput formControlName="u_lname" required name="lastName" value="userModel.l_name">
           </mat-form-field>
-          @if (usernameInvalid) {
-            <p>🚫Username taken!🚫</p>
-          }  
-          @if (usernameValid) {
-              ✅
-            } 
+          <mat-form-field>
+            <mat-label>Phone</mat-label>
+            <input matInput formControlName="u_phone" required type='tel' name="phone" value="userModel.u_phone">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="u_email" type="email" required name="email" value="userModel.u_email">
+          </mat-form-field>
         </form>
+        
         <div>
+          <button mat-raised-button matStepperPrevious>Back</button>
           <button mat-raised-button matStepperNext>Next</button>
-        </div> 
+
+          <!-- <button mat-raised-button matStepperNext>Next</button> -->
+        </div>
+        <!-- <br>
+        <br>
+        <div>  
+          <mat-checkbox default=false (change)="showBusinessSignUp($event.checked)" >  
+            Do you own a business you would like to register?
+          </mat-checkbox>
+        </div>
+        <br>
+        <div>
+          @if (!business2Add) {
+          <button  mat-raised-button 
+                  color="primary" 
+                  (click)="CompleteUserSign()" 
+                  #registerButton 
+                  [disabled]="!username_pass_form.valid || !person_info_form.valid || !usernameValid"
+                  >Sign Up</button>
+
+        } @else {
+          <button  mat-raised-button 
+                  color="primary" 
+                  (click)="CompleteUserSignAndGoBus()" 
+                  #registerButton 
+                  [disabled]="!username_pass_form.valid && !person_info_form.valid && !usernameValid"
+                  >Go to Business Sign Up</button>
+        }
+        </div> -->
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Work in the Beauty and Grooming Industry?</ng-template>
+        
+        <div>  
+          <mat-checkbox default=false (change)="showBusinessSignUp($event.checked)" >  
+            I provide a service!
+          </mat-checkbox>
+        </div>
+        
+      
+        @if (business2Add) {
+          <mat-step >
+            <mat-accordion>
+            <form [formGroup]="address_form">
+              <hr>
+              <ng-template matStepLabel>Where is your business located?</ng-template>
+      
+              <mat-form-field>
+                <mat-label>Street Address</mat-label>
+                <input matInput formControlName="u_street" required name="streetAddress" value="userModel.u_street">
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>City</mat-label>
+                <input matInput formControlName="u_city" required name="city" value="userModel.u_city">
+              </mat-form-field>
+          
+              <mat-form-field>
+                <mat-label>State</mat-label>
+                <input matInput formControlName="u_state" required name="state" value="userModel.u_state">
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Country</mat-label>
+                <input matInput formControlName="u_country" required name="country" value="userModel.u_country">
+              </mat-form-field>      
+              <mat-form-field>
+                <mat-label>Zip Code</mat-label>
+                <input matInput formControlName="u_zip"  required name="zipCode" value="userModel.u_zip">
+              </mat-form-field>
+              <div>
+                <button mat-raised-button matStepperPrevious>Back</button>
+                <button mat-raised-button matStepperNext>Next</button>
+              </div>
+              <br>
+              
+        
+              <!-- <mat-checkbox default=false (change)="showBusinessSignUp($event.checked)" >  
+                Do you own a business you would like to register?
+              </mat-checkbox> -->
+              <br>    
+              <br>
+              <!-- <div>  
+                <button  mat-raised-button 
+                        color="primary" 
+                        (click)="CompleteUserSign()" 
+                        #registerButton 
+                        [disabled]="!username_pass_form.valid && !person_info_form && !address_form"
+                        >{{business2Add ? 'Go to Business Signup' : 'Signup' }}
+                </button>
+              </div> -->
+            </form>
+          </mat-accordion>
+          </mat-step>
+
+          
+            <app-bus-sign
+            (HOOSelectedEmit) = "handleHOOSelected($event)"
+            ></app-bus-sign>
+          
+        }
+        <br>
+        <div>
+          <button mat-raised-button matStepperPrevious>Back</button>
+          <button mat-raised-button matStepperNext>Next</button>
+
+          <!-- <button mat-raised-button matStepperNext>Next</button> -->
+        </div>
       </mat-step>
       
-    <mat-step [stepControl]="person_info_form">
-    <form [formGroup]="person_info_form">
-        <hr>
-        <ng-template matStepLabel>Enter your details</ng-template>
+      <mat-step>
+        <mat-accordion>
+            <ng-template matStepLabel>Sign Up Summary</ng-template>
+          <div>
+            <div class="container_flex_row_wrap">
+              <p></p>  
+              @if (usernameInvalid) {
+                <p>Username: {{approvedUser}} 🚫Change Username🚫</p>
+              }  
+              @if (usernameValid) {
+                Username: {{approvedUser}} ✅
+                } 
+            </div>
+            <div>
+              <!-- {{userModel.u_fname}} -->
+              Name: {{person_info_form.get('u_fname').value}} {{person_info_form.get('u_lname').value}}
+            </div>
+            <div>
+              Phone: {{person_info_form.get('u_phone').value}}
+            </div>
+            <div>
+              Email: {{person_info_form.get('u_email').value}}
+            </div>
+            <div>
+              
+              @if (HOOSelected) {
+                  Business Schedule:
+                @for (HOO of HOOSelected; track $index) {
+                  @if (HOO.times.length > 0) {  
+                    <H1>Entered IF</H1>
+                    @switch (HOO.day) {
+                      @case (0) {
+                          <h3>Sunday</h3>
+                          @for (time of HOO[0].times; track $index) {
+                            <h3>{{time}}</h3>
+                          }
+                      }
+                      @case (1) {
+                          <h3>Monday</h3>
+                          @for (time of HOO.times; track $index) {
+                            <h3>{{time}}</h3>
+                          }
+                      }
+                      @case (2) {
+                          <h3>Tuesday</h3>
+                          @for (time of HOO.times; track $index) {
+                            <h3>{{time}}</h3>
+                          }
+                      }
+                      @case (3) {
+                          <h3>Wednesday</h3>
+                          @for (time of HOO.times; track $index) {
+                            <h3>{{time}}</h3>
+                          }
+                      }
+                      @case (4) {
+                          <h3>Thursday</h3>
+                          @for (time of HOO.times; track $index) {
+                            <h3>{{time}}</h3>
+                          }
+                      }
+                      @case (5) {
+                          <h3>Friday</h3>
+                          @for (time of HOO.times; track $index) {
+                            <h3>{{time}}</h3>
+                          }
+                      }
+                      @case (6) {
+                          <h3>Saturday</h3> 
+                          @for (time of HOO.times; track $index) {
+                            <h3>{{time}}</h3>
+                          }
+                      }
+                      @case (99) {
+                        <h3></h3> 
+                        @for (time of HOO.times; track $index) {
+                          <h3>{{time}}</h3>
+                        }
+                    }
+                    }
+                  }                    
+                } 
+              }
+            </div>
+          </div>  
+        </mat-accordion>
+        <!-- <mat-card-footer>
+            <button mat-raised-button color="primary" (click)="CompleteBusSign()" #registerButton [disabled]="!busForm.valid">Register My Business</button>
 
-
-        <mat-form-field>
-          <mat-label>First Name</mat-label>
-          <input matInput formControlName="u_fname" required name="firstName" value="userModel.u_fname">
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Last Name</mat-label>
-          <input matInput formControlName="u_lname" required name="lastName" value="userModel.l_name">
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Phone</mat-label>
-          <input matInput formControlName="u_phone" required type='tel' name="phone" value="userModel.u_phone">
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Email</mat-label>
-          <input matInput formControlName="u_email" type="email" required name="email" value="userModel.u_email">
-        </mat-form-field>
-      </form>
-      
-      <div>
-        <button mat-raised-button matStepperPrevious>Back</button>
-        <!-- <button mat-raised-button matStepperNext>Next</button> -->
-      </div>
-      <br>
-      <br>
-      <div>  
-        <mat-checkbox default=false (change)="showBusinessSignUp($event.checked)" >  
-          Do you own a business you would like to register?
-        </mat-checkbox>
-      </div>
-      <br>
-      <div>
-        @if (!business2Add) {
-        <button  mat-raised-button 
-                color="primary" 
-                (click)="CompleteUserSign()" 
-                #registerButton 
-                [disabled]="!username_pass_form.valid || !person_info_form.valid || !usernameValid"
-                >Sign Up</button>
-
-      } @else {
-        <button  mat-raised-button 
-                color="primary" 
-                (click)="CompleteUserSignAndGoBus()" 
-                #registerButton 
-                [disabled]="!username_pass_form.valid && !person_info_form.valid && !usernameValid"
-                >Go to Business Sign Up</button>
-      }
-      </div>
-    </mat-step>
-    <!-- <mat-step [stepControl]="address_form">
-      <form [formGroup]="address_form">
-         [formGroup]="address_form"
-        <hr>
-        <ng-template matStepLabel>Share your address</ng-template>
-
-        <mat-form-field>
-          <mat-label>Street Address</mat-label>
-          <input matInput formControlName="u_street" required name="streetAddress" value="userModel.u_street">
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>City</mat-label>
-          <input matInput formControlName="u_city" required name="city" value="userModel.u_city">
-        </mat-form-field>
+        </mat-card-footer> -->
     
-        <mat-form-field>
-          <mat-label>State</mat-label>
-          <input matInput formControlName="u_state" required name="state" value="userModel.u_state">
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Country</mat-label>
-        <input matInput formControlName="u_country" required name="country" value="userModel.u_country">
-      </mat-form-field>      
-      <mat-form-field>
-        <mat-label>Zip Code</mat-label>
-        <input matInput formControlName="u_zip"  required name="zipCode" value="userModel.u_zip">
-      </mat-form-field>
-      <div>
-        <button mat-raised-button matStepperPrevious>Back</button>
-      </div>
-      <br>
-       Check box to reveal the business sign up 
-
-      <mat-checkbox default=false (change)="showBusinessSignUp($event.checked)" >  
-        Do you own a business you would like to register?
-      </mat-checkbox>
-      <br>    
-      <br>
-       <div>  
-        <button  mat-raised-button 
-                color="primary" 
-                (click)="CompleteUserSign()" 
+        <br>
+        <br>
+        
+        <br>
+        <!-- <div>
+          @if (!business2Add) {-->
+          <button  mat-raised-button 
+                  color="primary" 
                 #registerButton 
-                [disabled]="!username_pass_form.valid && !person_info_form && !address_form"
-                >{{business2Add ? 'Go to Business Signup' : 'Signup' }}
-        </button>
-      </div>
-      </form>
-    </mat-step> -->
-  </mat-vertical-stepper>
-</div>
+                  [disabled]="!username_pass_form.valid || !person_info_form.valid || !usernameValid"
+                  >Sign Up</button> 
+
+        <!--  } @else {
+          <button  mat-raised-button 
+                  (click)="CompleteUserSign()" 
+                  color="primary" 
+                  
+                  #registerButton 
+                  [disabled]="!username_pass_form.valid && !person_info_form.valid && !usernameValid"
+                  >Go to Business Sign Up</button>
+        }
+        </div> -->
+        <!-- (click)="CompleteUserSignAndGoBus()" -->
+      </mat-step>   
+      
+    </mat-vertical-stepper>
+  </div>
 }
 @if (userSubmitting) {
 <div>

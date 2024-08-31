@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, ViewChild, AfterViewInit, ElementRef, model } from '@angular/core';
+import { Component, OnInit, Input, Output, OnChanges, ViewChild, AfterViewInit, ElementRef, model, EventEmitter } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, FormGroup, Validators, FormsModule } from '@angular/forms';
 import { ServiceService } from '../../../app-services';
 import { BusinessService } from '../../../app-services';
@@ -38,10 +38,22 @@ import { MatButtonModule } from '@angular/material/button';
 export class BusSignComponent implements OnInit, AfterViewInit {
   @Input() _foundUser: number;
   @Input() username: string;
+  @Output() servicesList: {};
   DOW: string[] = ['Sunday','Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   DOWSelectedArray: number[] = [];
   HOO: string[] = ['6:00A', '7:00A', '8:00A', '9:00A', '10:00A', '11:00A', '12:00P', '1:00P', '2:00P', '3:00P', '4:00P', '5:00P', '6:00P', '7:00P', '8:00P', '9:00P' ] 
-  HOOSelectedArray: string[] = [];
+  @Output() HOOSelectedEmit = new EventEmitter<any>();
+  
+  HOOSelectedArray = [
+  { day: 0, times: [] }, // Sunday
+  { day: 1, times: [] }, // Monday
+  { day: 2, times: [] }, // Tuesday
+  { day: 3, times: [] }, // Wednesday
+  { day: 4, times: [] }, // Thursday
+  { day: 5, times: [] }, // Friday
+  { day: 6, times: [] },  // Saturday
+  { day: 99, times: []} // All days
+  ];
   services: any[] = [];
   categories: any[] = [];
   selectedCategories: number[] = [];
@@ -50,6 +62,7 @@ export class BusSignComponent implements OnInit, AfterViewInit {
   duration: 1500;
   busServices: number[] = [];
   sameHours: Boolean = true;
+  flexHours: Boolean = true;
 
   //form control
   bus_contact_form: FormGroup = this._formBuilder.group({busContactCtrl: ['']});
@@ -266,10 +279,58 @@ DOWSelected(day) {
 
     // console.log(day + " is added to the array!");
   }
-  console.log(this.DOWSelectedArray);
+  //console.log(this.DOWSelectedArray);
 }
 
-HOOSelected(time) {
+// HOOSelected(listnumber, time) {
+//   let index = this.HOOSelectedArray.indexOf(listnumber);
+  
+//   if (index !== -1) {
+//     if (index !== -1) {
+//       // If hour is in the array, remove it
+//       this.HOOSelectedArray.splice(index, 1);
+//       // console.log(day + " is removed from the array!");
+//     } else {
+//       // If day is not in the array, add it
+//       this.HOOSelectedArray.push(time);
+//       // console.log(day + " is added to the array!");
+//     }
+//   }
+//   console.log("HOO: " + this.HOOSelectedArray);
+// }
+
+HOOSelected(listnumber, time) {
+  //console.log(listnumber)
+  // Find the index of the day in the array
+  let index = this.HOOSelectedArray.findIndex(item => item.day === listnumber);
+
+  if (index === 99) {
+    const daysOweek = 6;
+    //Check if the time is in the arrays
+    
+  }
+
+  if (index !== -1) {
+    // Check if the time is in the array
+    let timeIndex = this.HOOSelectedArray[index].times.indexOf(time);
+    if (timeIndex !== -1) {
+      // If the time is in the array, remove it
+      this.HOOSelectedArray[index].times.splice(timeIndex, 1);
+    } else {
+      // If the time is not in the array, add it
+      this.HOOSelectedArray[index].times.push(time);
+
+    }
+  }
+  this.HOOSelectedEmit.emit(this.HOOSelectedArray);
+  //console.log(this.HOOSelectedArray)
+  // console.log(this.HOOSelectedArray)
+  // console.log("HOO Selected: " + JSON.stringify(this.HOOSelectedArray));
+}
+
+AllHOOSelected(time) {
+  //console.log(this.HOOSelectedArray)
+  
   let index = this.HOOSelectedArray.indexOf(time);
   if (index !== -1) {
     // If hour is in the array, remove it
@@ -278,9 +339,10 @@ HOOSelected(time) {
   } else {
     // If day is not in the array, add it
     this.HOOSelectedArray.push(time);
+
     // console.log(day + " is added to the array!");
   }
-  console.log("HOO: " + this.HOOSelectedArray);
+  //console.log("HOO Selected: " + this.HOOSelectedArray);
 }
 
 ConsoleLog(variable) {
@@ -290,12 +352,24 @@ ConsoleLog(variable) {
 
 
 sameHourChecker() {
+  this.HOOSelectedArray = [
+    { day: 0, times: [] }, // Sunday
+    { day: 1, times: [] }, // Monday
+    { day: 2, times: [] }, // Tuesday
+    { day: 3, times: [] }, // Wednesday
+    { day: 4, times: [] }, // Thursday
+    { day: 5, times: [] }, // Friday
+    { day: 6, times: [] },  // Saturday
+    { day: 99, times: []} // All days
+    ];
   this.sameHours = !this.sameHours;
 
   // this.checked = !this.checked;
 }
 
-
+flexHourChecker() {
+  this.flexHours = !this.flexHours;
+}
 
 
 

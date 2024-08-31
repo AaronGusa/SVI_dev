@@ -2,7 +2,7 @@
     
     <mat-vertical-stepper [linear]="false" #stepper [animationDuration]='duration'>
         <mat-step-header>Business Sign Up</mat-step-header>
-        <mat-step [stepControl]="busForm">
+        <!-- <mat-step [stepControl]="busForm">
             <form [formGroup]="busForm">    
                 <ng-template matStepLabel>Business Contact Information</ng-template>
                 <mat-form-field>
@@ -40,8 +40,8 @@
                         name="businessWebsite">
                 </mat-form-field>
             </form>
-        </mat-step>  
-        <mat-step [stepControl]="busForm">
+        </mat-step>   -->
+        <!-- <mat-step [stepControl]="busForm">
             <form [formGroup]="busForm"> 
                 <ng-template matStepLabel>Business Address Information</ng-template>
 
@@ -75,7 +75,7 @@
                             name="businessPostalCode">
                 </mat-form-field>
             </form>
-        </mat-step>
+        </mat-step> -->
         <mat-step>
             <ng-template matStepLabel>Business Categories and Services</ng-template>
             <div>
@@ -119,10 +119,7 @@
 
             <br>
         
-            <mat-card-footer>
-                <button mat-raised-button color="primary" (click)="CompleteBusSign()" #registerButton [disabled]="!busForm.valid">Register My Business</button>
-
-            </mat-card-footer>
+            
             
         </mat-step>
         <mat-step>
@@ -136,10 +133,17 @@
                     </mat-button-toggle-group>
                 </div>
                 <hr>
-                <div>
-                    <mat-checkbox [checked]="sameHours" (click)="sameHourChecker()">
-                        Are all the hours of operation the same every day?
+                <div><mat-checkbox [checked]="flexHours" (click)="flexHourChecker()">
+                        I have flexable hours
                     </mat-checkbox>
+                    
+                    <br>
+                    @if (flexHours === false) {
+                        <mat-checkbox [checked]="sameHours" (click)="sameHourChecker()">
+                        Hours of operation are the same every day
+                    </mat-checkbox>
+                    
+                    
                     <br>
                     @if (!sameHours) {
                         @if (DOWSelectedArray.length === 0) {
@@ -174,24 +178,29 @@
 
                             }
                             @for (hour of HOO; track $index) {
-                                <mat-button-toggle (click)="HOOSelected(hour)">
+                                <mat-button-toggle (click)="HOOSelected(day, hour)">
                                     {{hour}}
                                 </mat-button-toggle>
                             }
                            }
                           }
-                        
+                        <button>Set Hours</button>
+                          
                     } @else {
                         <mat-button-toggle-group multiple class="hourList">
+
                             @for (hour of HOO; track $index) {
-                                <mat-button-toggle (click)="HOOSelected(hour)">
-                                    {{hour}}
+                                {{day}}
+                                <mat-button-toggle (click)="HOOSelected(99, hour)">
+                                     {{hour}}
                                 </mat-button-toggle>
                             }
                         </mat-button-toggle-group>
                     }
+                }
                 </div>
             </mat-accordion>
         </mat-step>
-    </mat-vertical-stepper>       
+           
+    </mat-vertical-stepper>
 </mat-card>

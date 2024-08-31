@@ -8,11 +8,11 @@
             (clientId)="handleUserId($event)"
             (username)="handleUsername($event)"
         >
-    </app-user-sign>
+        </app-user-sign>
     </div>
 } 
 
-@if (goBusinessSignUp && userSubSuccess && showBusinessForm && userFound) {
+<!-- @if (goBusinessSignUp && userSubSuccess && showBusinessForm && userFound) {
     <div >
         
         <app-bus-sign
@@ -20,7 +20,7 @@
             [username] = username
         ></app-bus-sign>
     </div>
-}
+} -->
 
     <button mat-raised-button (click)="happeningMan()">Go Back</button>
     <hr>

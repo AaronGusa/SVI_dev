@@ -32,7 +32,7 @@ export class BusinessService {
 
   postBusiness(business) {
     console.log(`${this.busPost}`);
-    console.log('Line 21 of BusinessService: ', JSON.stringify(business));
+    console.log('Line 35 of BusinessService: ', JSON.stringify(business));
     return this.http.post(`${this.busPost}`, business).toPromise();
   };
 

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroupDirective, NgForm, ReactiveFormsModule, FormsModule, FormControl, FormGroup, Validators  } from '@angular/forms';
 import { ServiceService } from '../../../app-services';
 import { BusinessService } from '../../../app-services';
@@ -14,6 +14,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatIcon } from '@angular/material/icon';
 
+
+import { BusSignComponent } from '../bus-sign/bus-sign.component';
+
 @Component({
   selector: 'app-user-sign',
   standalone: true,
@@ -26,7 +29,8 @@ import { MatIcon } from '@angular/material/icon';
             MatInputModule,
             MatButtonModule,
             MatProgressBarModule,
-            MatIcon
+            MatIcon,
+            BusSignComponent
           ],
   templateUrl: './user-sign.component.html',
   styleUrl: './user-sign.component.css'
@@ -39,8 +43,11 @@ export class UserSignComponent implements OnInit {
   @Output() clientId: EventEmitter<string> = new EventEmitter<string>();
   @Output() usernameEmit: EventEmitter<string> = new EventEmitter<string>();
   
+  @Input() HOOSelected: any[];
+  
   private _userID: string;
   private userId: any;
+  approvedUser: string;
 
   business2Add: boolean = false;
   hideUserForm: boolean = false;
@@ -51,6 +58,9 @@ export class UserSignComponent implements OnInit {
   usernameInvalid: boolean = false;
   usernameValid: boolean = false;
   userHasText: boolean = false;
+
+
+  DOWSelectedArray: number[] = [];
 
   // username_pass_form: FormGroup = this._formBuilder.group({usePassCtrl: ['']});
   // person_info_form: FormGroup = this._formBuilder.group({personInfoCtrl: ['']});
@@ -106,6 +116,11 @@ export class UserSignComponent implements OnInit {
     this.userForm = this._formBuilder.group({});
     this.business2Add = false;
     console.log(this.username_pass_form)
+  }
+
+  handleHOOSelected(event: any[]) {
+    this.HOOSelected = event;
+    console.log('HOO Selected:', this.HOOSelected);
   }
   
   showBusinessSignUp(value) {
@@ -297,13 +312,14 @@ export class UserSignComponent implements OnInit {
         return;
       } else {
         this.usernameSearch = true;
+        this.approvedUser = username;
       }
 
     
       const response: any = await this.userService.verifySignUpUsername(username);
       if (response === true) {
-        console.log(response);
-        console.log('Response length equals zero entered');
+       // console.log(response);
+       // console.log('Response length equals zero entered');
         this.usernameSearch = false;
         this.usernameValid = true;
         this.usernameInvalid = false;
@@ -311,8 +327,8 @@ export class UserSignComponent implements OnInit {
           u_username: username
         });  
       } else {
-        console.log('Response length does not equal zero entered');
-        console.log(response);
+        //console.log('Response length does not equal zero entered');
+       // console.log(response);
 
         this.usernameSearch = false;
         this.usernameInvalid = true;

@@ -32,7 +32,7 @@ import { TestDevPageComponent } from './test-dev-page/test-dev-page.component';
 
 
 export const routes: Routes = [
-    {path: '', component: TestDevPageComponent},
+    {path: '', component: SignupUserComponent},
     {path: 'home', title: "Home", component: HomeComponent},
     {path: 'style-guide', title: "Style", component: StyleguideComponent},
     {path: 'about', title: "About", component: AboutComponent},
