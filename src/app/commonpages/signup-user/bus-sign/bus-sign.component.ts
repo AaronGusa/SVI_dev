@@ -302,15 +302,27 @@ DOWSelected(day) {
 HOOSelected(listnumber, time) {
   //console.log(listnumber)
   // Find the index of the day in the array
-  let index = this.HOOSelectedArray.findIndex(item => item.day === listnumber);
-
+  console.log(this.DOWSelectedArray);
+  let index = listnumber;
+  console.log("Index: " + index)
   if (index === 99) {
     const daysOweek = 6;
+    let i;
     //Check if the time is in the arrays
-    
+    for (i = 0; i < daysOweek; i++ ) {
+      let timeIndex = this.HOOSelectedArray[i].times.indexOf(time);
+      if (timeIndex !== -1) {
+        // If the time is in the array, remove it
+        this.HOOSelectedArray[i].times.splice(timeIndex, 1);
+      } else {
+        // If the time is not in the array, add it
+        this.HOOSelectedArray[i].times.push(time);
+
+      }
+    }
   }
 
-  if (index !== -1) {
+  if (index !== -1 && index !== 99) {
     // Check if the time is in the array
     let timeIndex = this.HOOSelectedArray[index].times.indexOf(time);
     if (timeIndex !== -1) {
