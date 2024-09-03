@@ -14,6 +14,10 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatButtonModule } from '@angular/material/button';
 
+type HOOSelected = 
+  | { day: number; times: any[] }
+  | { flexHours: boolean }
+  | { sameHours: boolean };
 
 @Component({
   selector: 'app-bus-sign',
@@ -43,16 +47,20 @@ export class BusSignComponent implements OnInit, AfterViewInit {
   DOWSelectedArray: number[] = [];
   HOO: string[] = ['6:00A', '7:00A', '8:00A', '9:00A', '10:00A', '11:00A', '12:00P', '1:00P', '2:00P', '3:00P', '4:00P', '5:00P', '6:00P', '7:00P', '8:00P', '9:00P' ] 
   @Output() HOOSelectedEmit = new EventEmitter<any>();
+
+  
   
   HOOSelectedArray = [
-  { day: 0, times: [] }, // Sunday
-  { day: 1, times: [] }, // Monday
-  { day: 2, times: [] }, // Tuesday
-  { day: 3, times: [] }, // Wednesday
-  { day: 4, times: [] }, // Thursday
-  { day: 5, times: [] }, // Friday
-  { day: 6, times: [] },  // Saturday
-  { day: 99, times: []} // All days
+    { day: 0, times: [] }, // Sunday
+    { day: 1, times: [] }, // Monday
+    { day: 2, times: [] }, // Tuesday
+    { day: 3, times: [] }, // Wednesday
+    { day: 4, times: [] }, // Thursday
+    { day: 5, times: [] }, // Friday
+    { day: 6, times: [] },  // Saturday
+    { day: 99, times: []}, // All days
+    { flexHours: true }, // Indicates hours are flexible
+    { sameHours: false } //  Indicates same hours for selected days 
   ];
   services: any[] = [];
   categories: any[] = [];
@@ -61,8 +69,8 @@ export class BusSignComponent implements OnInit, AfterViewInit {
   isLoading: boolean = false;
   duration: 1500;
   busServices: number[] = [];
-  sameHours: Boolean = true;
-  flexHours: Boolean = true;
+  sameHours: boolean = true;
+  flexHours: boolean = true;
 
   //form control
   bus_contact_form: FormGroup = this._formBuilder.group({busContactCtrl: ['']});
@@ -381,6 +389,12 @@ sameHourChecker() {
 
 flexHourChecker() {
   this.flexHours = !this.flexHours;
+  let flexHoursObj = this.HOOSelectedArray.find(item => 'flexHours' in item);
+  if (flexHoursObj) {
+    flexHoursObj.flexHours = this.flexHours;
+  } else {
+    this.HOOSelectedArray.push({ flexHours: this.flexHours });
+  }
 }
 
 
