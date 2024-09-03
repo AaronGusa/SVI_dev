@@ -133,12 +133,16 @@
                     </mat-button-toggle-group>
                 </div>
                 <hr>
-                <div><mat-checkbox [checked]="flexHours" (click)="flexHourChecker()">
+                <div>
+                    @if (DOWSelectedArray.length === 0) {
+                        <h2>Please select your standard days of operation above.</h2>
+                    } @else {        
+                    <mat-checkbox [checked]="flexHour" (click)="flexHourChecker()">
                         I have flexable hours
                     </mat-checkbox>
                     
                     <br>
-                    @if (flexHours === false) {
+                    @if (flexHour === false) {
                         <mat-checkbox [checked]="sameHours" (click)="sameHourChecker()">
                         Hours of operation are the same every day
                     </mat-checkbox>
@@ -173,7 +177,9 @@
                                 @case (6) {
                                     <h3>Saturdays</h3>
                                 }
-
+                                @default {
+                                    <H3>WHART</H3>
+                                }
 
 
                             }
@@ -184,20 +190,21 @@
                             }
                            }
                           }
-                        <button>Set Hours</button>
+                            <button>Set Hours</button>
                           
-                    } @else {
-                        <mat-button-toggle-group multiple class="hourList">
+                            } @else {
+                                <mat-button-toggle-group multiple class="hourList">
 
-                            @for (hour of HOO; track $index) {
-                                {{day}}
-                                <mat-button-toggle (click)="HOOSelected(99, hour)">
-                                     {{hour}}
-                                </mat-button-toggle>
+                                    @for (hour of HOO; track $index) {
+                                        {{day}}
+                                        <mat-button-toggle (click)="HOOSelected(99, hour)">
+                                            {{hour}}
+                                        </mat-button-toggle>
+                                    }
+                                </mat-button-toggle-group>
                             }
-                        </mat-button-toggle-group>
+                        }
                     }
-                }
                 </div>
             </mat-accordion>
         </mat-step>

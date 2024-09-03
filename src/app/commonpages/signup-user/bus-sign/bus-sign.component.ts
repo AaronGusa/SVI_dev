@@ -48,8 +48,6 @@ export class BusSignComponent implements OnInit, AfterViewInit {
   HOO: string[] = ['6:00A', '7:00A', '8:00A', '9:00A', '10:00A', '11:00A', '12:00P', '1:00P', '2:00P', '3:00P', '4:00P', '5:00P', '6:00P', '7:00P', '8:00P', '9:00P' ] 
   @Output() HOOSelectedEmit = new EventEmitter<any>();
 
-  
-  
   HOOSelectedArray = [
     { day: 0, times: [] }, // Sunday
     { day: 1, times: [] }, // Monday
@@ -62,6 +60,7 @@ export class BusSignComponent implements OnInit, AfterViewInit {
     { flexHours: true }, // Indicates hours are flexible
     { sameHours: false } //  Indicates same hours for selected days 
   ];
+
   services: any[] = [];
   categories: any[] = [];
   selectedCategories: number[] = [];
@@ -70,7 +69,7 @@ export class BusSignComponent implements OnInit, AfterViewInit {
   duration: 1500;
   busServices: number[] = [];
   sameHours: boolean = true;
-  flexHours: boolean = true;
+  flexHour: boolean = true;
 
   //form control
   bus_contact_form: FormGroup = this._formBuilder.group({busContactCtrl: ['']});
@@ -90,9 +89,11 @@ export class BusSignComponent implements OnInit, AfterViewInit {
     private r: Router) {}
 
 ngOnInit() {
+  console.log(this.HOOSelectedArray)
   console.log('BUS_NGONINT_username: ' + this.username);
   console.log('BUS_NGONINT_foundUser: ' + this._foundUser);
   this.fetchCategories();
+  this.flexHour = true;
 
   this.busForm = this._formBuilder.group({
       b_id: [null],
@@ -383,18 +384,13 @@ sameHourChecker() {
     { day: 99, times: []} // All days
     ];
   this.sameHours = !this.sameHours;
-
-  // this.checked = !this.checked;
+  this.HOOSelectedArray[9].sameHours = this.sameHours;
+  
 }
 
 flexHourChecker() {
-  this.flexHours = !this.flexHours;
-  let flexHoursObj = this.HOOSelectedArray.find(item => 'flexHours' in item);
-  if (flexHoursObj) {
-    flexHoursObj.flexHours = this.flexHours;
-  } else {
-    this.HOOSelectedArray.push({ flexHours: this.flexHours });
-  }
+  this.flexHour = !this.flexHour;
+  this.HOOSelectedArray[8].flexHours = this.flexHour;
 }
 
 

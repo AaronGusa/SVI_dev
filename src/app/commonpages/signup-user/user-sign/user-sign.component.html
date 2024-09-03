@@ -176,6 +176,7 @@
         </div>
       </mat-step>
       
+      <!-- SIGN UP SUMMARY -->
       <mat-step>
         <mat-accordion>
             <ng-template matStepLabel>Sign Up Summary</ng-template>
@@ -211,53 +212,55 @@
                           <h3>Sunday</h3>
                           @for (time of HOO[0].times; track $index) {
                             <h3>{{time}}</h3>
-                          }
+                          } @empty {}
                       }
                       @case (1) {
                           <h3>Monday</h3>
                           @for (time of HOO.times; track $index) {
                             <h3>{{time}}</h3>
-                          }
+                          } @empty {}
                       }
                       @case (2) {
                           <h3>Tuesday</h3>
                           @for (time of HOO.times; track $index) {
                             <h3>{{time}}</h3>
-                          }
+                          } @empty {}
                       }
                       @case (3) {
                           <h3>Wednesday</h3>
                           @for (time of HOO.times; track $index) {
                             <h3>{{time}}</h3>
-                          }
+                          } @empty {}
                       }
                       @case (4) {
                           <h3>Thursday</h3>
                           @for (time of HOO.times; track $index) {
                             <h3>{{time}}</h3>
-                          }
+                          } @empty {}
                       }
                       @case (5) {
                           <h3>Friday</h3>
                           @for (time of HOO.times; track $index) {
                             <h3>{{time}}</h3>
-                          }
+                          } @empty {}
                       }
                       @case (6) {
                           <h3>Saturday</h3> 
                           @for (time of HOO.times; track $index) {
                             <h3>{{time}}</h3>
-                          }
+                          } @empty {}
                       }
                       @case (99) {
                         <h3></h3> 
                         @for (time of HOO.times; track $index) {
                           <h3>{{time}}</h3>
-                        }
+                        } @empty {}
                     }
                     }
                   }                    
                 } 
+              } @else {
+
               }
             </div>
           </div>  
