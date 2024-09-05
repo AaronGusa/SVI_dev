@@ -14,10 +14,10 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatButtonModule } from '@angular/material/button';
 
-type HOOSelected = 
-  | { day: number; times: any[] }
-  | { flexHours: boolean }
-  | { sameHours: boolean };
+// type HOOSelected = 
+//   | { day: number; times: any[] }
+//   | { flexHours: boolean }
+//   | { sameHours: boolean };
 
 @Component({
   selector: 'app-bus-sign',
@@ -48,6 +48,16 @@ export class BusSignComponent implements OnInit, AfterViewInit {
   HOO: string[] = ['6:00A', '7:00A', '8:00A', '9:00A', '10:00A', '11:00A', '12:00P', '1:00P', '2:00P', '3:00P', '4:00P', '5:00P', '6:00P', '7:00P', '8:00P', '9:00P' ] 
   @Output() HOOSelectedEmit = new EventEmitter<any>();
 
+  services: any[] = [];
+  categories: any[] = [];
+  selectedCategories: number[] = [];
+  filteredServices: any[] = [];
+  isLoading: boolean = false;
+  duration: 1500;
+  busServices: number[] = [];
+  sameHours: boolean = false;
+  flexHour: boolean = true;
+
   HOOSelectedArray = [
     { day: 0, times: [] }, // Sunday
     { day: 1, times: [] }, // Monday
@@ -56,21 +66,9 @@ export class BusSignComponent implements OnInit, AfterViewInit {
     { day: 4, times: [] }, // Thursday
     { day: 5, times: [] }, // Friday
     { day: 6, times: [] },  // Saturday
-    { day: 99, times: []}, // All days
-    { flexHours: true }, // Indicates hours are flexible
-    { sameHours: false } //  Indicates same hours for selected days 
+    { flexHours: this.flexHour }, // Indicates hours are flexible
+    { sameHours: this.sameHours } //  Indicates same hours for selected days 
   ];
-
-  services: any[] = [];
-  categories: any[] = [];
-  selectedCategories: number[] = [];
-  filteredServices: any[] = [];
-  isLoading: boolean = false;
-  duration: 1500;
-  busServices: number[] = [];
-  sameHours: boolean = true;
-  flexHour: boolean = true;
-
   //form control
   bus_contact_form: FormGroup = this._formBuilder.group({busContactCtrl: ['']});
   bus_add_form: FormGroup = this._formBuilder.group({busAddCtrl: ['']});
@@ -88,310 +86,309 @@ export class BusSignComponent implements OnInit, AfterViewInit {
     private busService: BusinessService,
     private r: Router) {}
 
-ngOnInit() {
-  console.log(this.HOOSelectedArray)
-  console.log('BUS_NGONINT_username: ' + this.username);
-  console.log('BUS_NGONINT_foundUser: ' + this._foundUser);
-  this.fetchCategories();
-  this.flexHour = true;
+  ngOnInit() {
+    console.log(this.HOOSelectedArray)
+    console.log('BUS_NGONINT_username: ' + this.username);
+    console.log('BUS_NGONINT_foundUser: ' + this._foundUser);
+    this.fetchCategories();
+    this.flexHour = true;
 
-  this.busForm = this._formBuilder.group({
-      b_id: [null],
-      b_name: [null, Validators.required],
-      b_email: [null, [Validators.required, Validators.email]],
-      b_phone: [null],
-      b_website: [null],
-      b_street: [null],
-      b_city: [null],
-      b_state: [null],
-      b_zip: [null],
-      b_active: [null],
-      b_services: [null],
-      b_rating: [null],
-      u_id: [null],
-      created:[null]
-    });
-}
-
-ngAfterViewInit() {
-  this.toggleGroup.nativeElement.addEventListener('mousedown', () => {
-    this.mouseDown = true;
-  });
-
-  this.toggleGroup.nativeElement.addEventListener('mouseup', () => {
-    this.mouseDown = false;
-  });
-
-  // Array.from(this.toggleGroup.nativeElement.children).forEach((button: HTMLElement) => {
-  //   button.addEventListener('mousemove', (event) => {
-  //     if (this.mouseDown && event.target !== this.lastButton) {
-  //       // Toggle the button
-  //       (event.target as HTMLElement).click();
-  //       this.lastButton = event.target as HTMLElement;
-  //       // Get the hour value from the button element
-  //     let hour = (event.target as HTMLElement).getAttribute('data-hour');
-
-  //     // Run the HOOSelected function with the hour value
-  //     if (hour) {
-  //       this.HOOSelected(hour);
-  //     }
-  //     }
-  //   });
-  // });
-  
-  // Array.from(this.toggleGroup.nativeElement.children).forEach((button: HTMLElement) => {
-  //   // Add a 'mousedown' event listener to run HOOSelected when the mouse button is pressed down
-  //   button.addEventListener('mousedown', (event) => {
-  //     let hour = (event.target as HTMLElement).getAttribute('data-hour');
-  //     if (hour) {
-  //       this.HOOSelected(hour);
-  //     }
-  //   });
-  
-  //   // Add a 'click' event listener to run HOOSelected when a click event occurs
-  //   button.addEventListener('click', (event) => {
-  //     let hour = (event.currentTarget as HTMLElement).getAttribute('data-hour');
-  //     if (hour) {
-  //       this.HOOSelected(hour);
-  //     }
-  //   });
-  
-  //   // Existing 'mousemove' event listener
-  //   button.addEventListener('mousemove', (event) => {
-  //     if (this.mouseDown && event.target !== this.lastButton) {
-  //       // Toggle the button
-  //       (event.target as HTMLElement).click();
-  //       this.lastButton = event.target as HTMLElement;
-  //     }
-  //   });
-  // });
-
-  // document.addEventListener('mouseup', () => {
-  //   this.mouseDown = false;
-  //   this.lastButton = null;  // Reset the last button on mouse up
-  // });
-
-
-  //HTML SNIPPET
-  // <mat-button-toggle-group #toggleGroup multiple class="hourList">
-  //                           @for (hour of HOO; track $index) {
-  //                               <mat-button-toggle [attr.data-hour]="hour">
-  //                                   {{hour}}
-  //                               </mat-button-toggle>
-  //                           }
-  //                       </mat-button-toggle-group>
-}
-
-// async fetchCategories() {
-//   this.isLoading = true;
-//   this.categories = await this.servService.fetchCategories().toPromise();
-//   this.isLoading = false;
-// }
-
-async fetchCategories() {
-  this.isLoading = true;
-  try {
-    this.categories = await this.servService.fetchCategories().toPromise();
-  } catch (error) {
-    console.error('Error fetching categories:', error);
-  } finally {
-    this.isLoading = false;
+    this.busForm = this._formBuilder.group({
+        b_id: [null],
+        b_name: [null, Validators.required],
+        b_email: [null, [Validators.required, Validators.email]],
+        b_phone: [null],
+        b_website: [null],
+        b_street: [null],
+        b_city: [null],
+        b_state: [null],
+        b_zip: [null],
+        b_active: [null],
+        b_services: [null],
+        b_rating: [null],
+        u_id: [null],
+        created:[null]
+      });
   }
-}
 
-addService2Business(serviceId: number) {
-  if (this.busServices.includes(serviceId)) {
-    this.busServices.splice(this.busServices.indexOf(serviceId), 1);
-  } else {
-    this.busServices.push(serviceId);
-  };
-}
-
-async CompleteBusSign() {
-  try{
-    console.log('The services array: ' + this.busServices)
-
-    this.busForm.patchValue({
-      b_id:"tbd",
-      b_active: true,
-      b_rating: 0,
-      u_id: this._foundUser,
-      created: new Date(),
-      b_services: this.busServices
+  ngAfterViewInit() {
+    this.toggleGroup.nativeElement.addEventListener('mousedown', () => {
+      this.mouseDown = true;
     });
 
-    console.log('Business Services: ' + JSON.stringify(this.busServices));
+    this.toggleGroup.nativeElement.addEventListener('mouseup', () => {
+      this.mouseDown = false;
+    });
 
-    // this.busForm = this._formBuilder.group({
-    //   b_id: b_id_value,
-    //   b_name: this.busForm.get('b_name').value,
-    //   b_email: this.busForm.get('b_email').value,
-    //   b_phone: this.busForm.get('b_phone').value,
-    //   b_website: this.busForm.get('b_website').value,
-    //   b_street: this.busForm.get('b_street').value,
-    //   b_city: this.busForm.get('b_city').value,
-    //   b_state: this.busForm.get('b_state').value,
-    //   b_zip: this.busForm.get('b_zip').value,
-    //   b_active: b_active_v alue,
-    //   b_services: this.busServices,
-    //   b_rating: b_rating_value,
-    //   u_id: u_id_value,
-    //   created: created_value
+    // Array.from(this.toggleGroup.nativeElement.children).forEach((button: HTMLElement) => {
+    //   button.addEventListener('mousemove', (event) => {
+    //     if (this.mouseDown && event.target !== this.lastButton) {
+    //       // Toggle the button
+    //       (event.target as HTMLElement).click();
+    //       this.lastButton = event.target as HTMLElement;
+    //       // Get the hour value from the button element
+    //     let hour = (event.target as HTMLElement).getAttribute('data-hour');
+
+    //     // Run the HOOSelected function with the hour value
+    //     if (hour) {
+    //       this.HOOSelected(hour);
+    //     }
+    //     }
+    //   });
+    // });
+    
+    // Array.from(this.toggleGroup.nativeElement.children).forEach((button: HTMLElement) => {
+    //   // Add a 'mousedown' event listener to run HOOSelected when the mouse button is pressed down
+    //   button.addEventListener('mousedown', (event) => {
+    //     let hour = (event.target as HTMLElement).getAttribute('data-hour');
+    //     if (hour) {
+    //       this.HOOSelected(hour);
+    //     }
+    //   });
+    
+    //   // Add a 'click' event listener to run HOOSelected when a click event occurs
+    //   button.addEventListener('click', (event) => {
+    //     let hour = (event.currentTarget as HTMLElement).getAttribute('data-hour');
+    //     if (hour) {
+    //       this.HOOSelected(hour);
+    //     }
+    //   });
+    
+    //   // Existing 'mousemove' event listener
+    //   button.addEventListener('mousemove', (event) => {
+    //     if (this.mouseDown && event.target !== this.lastButton) {
+    //       // Toggle the button
+    //       (event.target as HTMLElement).click();
+    //       this.lastButton = event.target as HTMLElement;
+    //     }
+    //   });
     // });
 
-    //console.log('Business Form: ', this.busForm.value);
+    // document.addEventListener('mouseup', () => {
+    //   this.mouseDown = false;
+    //   this.lastButton = null;  // Reset the last button on mouse up
+    // });
 
-    this.processBusSignUp();
 
-  } catch (error) {
-    console.error('Error Creating Business: ', error);
+    //HTML SNIPPET
+    // <mat-button-toggle-group #toggleGroup multiple class="hourList">
+    //                           @for (hour of HOO; track $index) {
+    //                               <mat-button-toggle [attr.data-hour]="hour">
+    //                                   {{hour}}
+    //                               </mat-button-toggle>
+    //                           }
+    //                       </mat-button-toggle-group>
   }
 
-  //this.processBusSignUp();
-} 
+  // async fetchCategories() {
+  //   this.isLoading = true;
+  //   this.categories = await this.servService.fetchCategories().toPromise();
+  //   this.isLoading = false;
+  // }
 
-async processBusSignUp() {
-  try{
-    const busFormValue = this.busForm.value
-    //console.log('this.busForm.value: ', this.busForm.value);
+  async fetchCategories() {
     this.isLoading = true;
-    console.log('BUS_BusForm: ' + JSON.stringify(busFormValue)) 
-    const posted: any = await this.busService.postBusiness(busFormValue);
-    console.log('Business Posted: ', JSON.stringify(posted));
-    
-    if (posted.acknowledged === true) {
-      console.log('Business Successfully POSTed!')
+    try {
+      this.categories = await this.servService.fetchCategories().toPromise();
+    } catch (error) {
+      console.error('Error fetching categories:', error);
+    } finally {
       this.isLoading = false;
-      this.r.navigate([`/dashboard/${this.username}`]);
+    }
+  }
+
+  addService2Business(serviceId: number) {
+    if (this.busServices.includes(serviceId)) {
+      this.busServices.splice(this.busServices.indexOf(serviceId), 1);
     } else {
-
-      console.log('OH NOOOOOOOOOOOOOOOOOOOOO, something is still wrong!' + JSON.stringify(posted))
+      this.busServices.push(serviceId);
     };
-
-  } catch (error) {
-    console.error('Error Posting Business: ', error);
-    return error;
   }
-}
 
-DOWSelected(day) {
-  let index = this.DOWSelectedArray.indexOf(day);
-  if (index !== -1) {
-    // If day is in the array, remove it
-    this.DOWSelectedArray.splice(index, 1);
-    this.DOWSelectedArray.sort((a, b) => a - b);
-    // console.log(day + " is removed from the array!");
-  } else {
-    // If day is not in the array, add it
-    this.DOWSelectedArray.push(day);
-    this.DOWSelectedArray.sort((a, b) => a - b);
+  async CompleteBusSign() {
+    try{
+      console.log('The services array: ' + this.busServices)
 
-    // console.log(day + " is added to the array!");
+      this.busForm.patchValue({
+        b_id:"tbd",
+        b_active: true,
+        b_rating: 0,
+        u_id: this._foundUser,
+        created: new Date(),
+        b_services: this.busServices
+      });
+
+      console.log('Business Services: ' + JSON.stringify(this.busServices));
+
+      // this.busForm = this._formBuilder.group({
+      //   b_id: b_id_value,
+      //   b_name: this.busForm.get('b_name').value,
+      //   b_email: this.busForm.get('b_email').value,
+      //   b_phone: this.busForm.get('b_phone').value,
+      //   b_website: this.busForm.get('b_website').value,
+      //   b_street: this.busForm.get('b_street').value,
+      //   b_city: this.busForm.get('b_city').value,
+      //   b_state: this.busForm.get('b_state').value,
+      //   b_zip: this.busForm.get('b_zip').value,
+      //   b_active: b_active_v alue,
+      //   b_services: this.busServices,
+      //   b_rating: b_rating_value,
+      //   u_id: u_id_value,
+      //   created: created_value
+      // });
+
+      //console.log('Business Form: ', this.busForm.value);
+
+      this.processBusSignUp();
+
+    } catch (error) {
+      console.error('Error Creating Business: ', error);
+    }
+
+    //this.processBusSignUp();
+  } 
+
+  async processBusSignUp() {
+    try{
+      const busFormValue = this.busForm.value
+      //console.log('this.busForm.value: ', this.busForm.value);
+      this.isLoading = true;
+      console.log('BUS_BusForm: ' + JSON.stringify(busFormValue)) 
+      const posted: any = await this.busService.postBusiness(busFormValue);
+      console.log('Business Posted: ', JSON.stringify(posted));
+      
+      if (posted.acknowledged === true) {
+        console.log('Business Successfully POSTed!')
+        this.isLoading = false;
+        this.r.navigate([`/dashboard/${this.username}`]);
+      } else {
+
+        console.log('OH NOOOOOOOOOOOOOOOOOOOOO, something is still wrong!' + JSON.stringify(posted))
+      };
+
+    } catch (error) {
+      console.error('Error Posting Business: ', error);
+      return error;
+    }
   }
-  //console.log(this.DOWSelectedArray);
-}
 
-// HOOSelected(listnumber, time) {
-//   let index = this.HOOSelectedArray.indexOf(listnumber);
+  DOWSelected(day) {
+    let index = this.DOWSelectedArray.indexOf(day);
+    if (index !== -1) {
+      // If day is in the array, remove it
+      this.DOWSelectedArray.splice(index, 1);
+      this.DOWSelectedArray.sort((a, b) => a - b);
+      // console.log(day + " is removed from the array!");
+    } else {
+      // If day is not in the array, add it
+      this.DOWSelectedArray.push(day);
+      this.DOWSelectedArray.sort((a, b) => a - b);
+
+      // console.log(day + " is added to the array!");
+    }
+    console.log(this.DOWSelectedArray);
+  }
+
+  // HOOSelected(listnumber, time) {
+  //   let index = this.HOOSelectedArray.indexOf(listnumber);
+    
+  //   if (index !== -1) {
+  //     if (index !== -1) {
+  //       // If hour is in the array, remove it
+  //       this.HOOSelectedArray.splice(index, 1);
+  //       // console.log(day + " is removed from the array!");
+  //     } else {
+  //       // If day is not in the array, add it
+  //       this.HOOSelectedArray.push(time);
+  //       // console.log(day + " is added to the array!");
+  //     }
+  //   }
+  //   console.log("HOO: " + this.HOOSelectedArray);
+  // }
+
+  HOOSelected(listnumber, time) {
+    //console.log(listnumber)
+    // Find the index of the day in the array
+    console.log(listnumber);
+    let index = listnumber;
+    console.log("Index: " + index)
+    if (index === 99) {
+      for (let i in this.DOWSelectedArray ) {
+        console.log(this.DOWSelectedArray[i])
+          let timeIndex = this.HOOSelectedArray[this.DOWSelectedArray[i]].times.indexOf(time);
+          if (timeIndex !== -1) {
+            // If the time is in the array, remove it
+            this.HOOSelectedArray[this.DOWSelectedArray[i]].times.splice(timeIndex, 1);
+          } else {
+            // If the time is not in the array, add it
+            this.HOOSelectedArray[this.DOWSelectedArray[i]].times.push(time);
   
-//   if (index !== -1) {
-//     if (index !== -1) {
-//       // If hour is in the array, remove it
-//       this.HOOSelectedArray.splice(index, 1);
-//       // console.log(day + " is removed from the array!");
-//     } else {
-//       // If day is not in the array, add it
-//       this.HOOSelectedArray.push(time);
-//       // console.log(day + " is added to the array!");
-//     }
-//   }
-//   console.log("HOO: " + this.HOOSelectedArray);
-// }
+          }
+      }
+    }
 
-HOOSelected(listnumber, time) {
-  //console.log(listnumber)
-  // Find the index of the day in the array
-  console.log(this.DOWSelectedArray);
-  let index = listnumber;
-  console.log("Index: " + index)
-  if (index === 99) {
-    const daysOweek = 6;
-    let i;
-    //Check if the time is in the arrays
-    for (i = 0; i < daysOweek; i++ ) {
-      let timeIndex = this.HOOSelectedArray[i].times.indexOf(time);
+    if (index !== -1 && index !== 99) {
+      // Check if the time is in the array
+      let timeIndex = this.HOOSelectedArray[index].times.indexOf(time);
       if (timeIndex !== -1) {
         // If the time is in the array, remove it
-        this.HOOSelectedArray[i].times.splice(timeIndex, 1);
+        this.HOOSelectedArray[index].times.splice(timeIndex, 1);
       } else {
         // If the time is not in the array, add it
-        this.HOOSelectedArray[i].times.push(time);
+        this.HOOSelectedArray[index].times.push(time);
 
       }
     }
+    this.HOOSelectedEmit.emit(this.HOOSelectedArray);
+    //console.log(this.HOOSelectedArray)
+    // console.log(this.HOOSelectedArray)
+    // console.log("HOO Selected: " + JSON.stringify(this.HOOSelectedArray));
   }
 
-  if (index !== -1 && index !== 99) {
-    // Check if the time is in the array
-    let timeIndex = this.HOOSelectedArray[index].times.indexOf(time);
-    if (timeIndex !== -1) {
-      // If the time is in the array, remove it
-      this.HOOSelectedArray[index].times.splice(timeIndex, 1);
+  AllHOOSelected(time) {
+    //console.log(this.HOOSelectedArray)
+    
+    let index = this.HOOSelectedArray.indexOf(time);
+    if (index !== -1) {
+      // If hour is in the array, remove it
+      this.HOOSelectedArray.splice(index, 1);
+      // console.log(day + " is removed from the array!");
     } else {
-      // If the time is not in the array, add it
-      this.HOOSelectedArray[index].times.push(time);
+      // If day is not in the array, add it
+      this.HOOSelectedArray.push(time);
 
+      // console.log(day + " is added to the array!");
     }
+    //console.log("HOO Selected: " + this.HOOSelectedArray);
   }
-  this.HOOSelectedEmit.emit(this.HOOSelectedArray);
-  //console.log(this.HOOSelectedArray)
-  // console.log(this.HOOSelectedArray)
-  // console.log("HOO Selected: " + JSON.stringify(this.HOOSelectedArray));
-}
 
-AllHOOSelected(time) {
-  //console.log(this.HOOSelectedArray)
-  
-  let index = this.HOOSelectedArray.indexOf(time);
-  if (index !== -1) {
-    // If hour is in the array, remove it
-    this.HOOSelectedArray.splice(index, 1);
-    // console.log(day + " is removed from the array!");
-  } else {
-    // If day is not in the array, add it
-    this.HOOSelectedArray.push(time);
-
-    // console.log(day + " is added to the array!");
+  ConsoleLog(variable) {
+    // console.log('WORKS');
+    console.log(variable);
   }
-  //console.log("HOO Selected: " + this.HOOSelectedArray);
-}
-
-ConsoleLog(variable) {
-  // console.log('WORKS');
-  console.log(variable);
-}
 
 
-sameHourChecker() {
-  this.HOOSelectedArray = [
-    { day: 0, times: [] }, // Sunday
-    { day: 1, times: [] }, // Monday
-    { day: 2, times: [] }, // Tuesday
-    { day: 3, times: [] }, // Wednesday
-    { day: 4, times: [] }, // Thursday
-    { day: 5, times: [] }, // Friday
-    { day: 6, times: [] },  // Saturday
-    { day: 99, times: []} // All days
-    ];
-  this.sameHours = !this.sameHours;
-  this.HOOSelectedArray[9].sameHours = this.sameHours;
-  
-}
+  sameHourChecker() {
+    this.HOOSelectedArray = [
+      { day: 0, times: [] }, // Sunday
+      { day: 1, times: [] }, // Monday
+      { day: 2, times: [] }, // Tuesday
+      { day: 3, times: [] }, // Wednesday
+      { day: 4, times: [] }, // Thursday
+      { day: 5, times: [] }, // Friday
+      { day: 6, times: [] },  // Saturday
+      { flexHours: this.flexHour }, // Indicates hours are flexible
+      { sameHours: this.sameHours } 
+      ];
+    this.sameHours = !this.sameHours;
+    this.HOOSelectedArray[8].sameHours = this.sameHours;
+    
+  }
 
-flexHourChecker() {
-  this.flexHour = !this.flexHour;
-  this.HOOSelectedArray[8].flexHours = this.flexHour;
-}
+  flexHourChecker() {
+    this.flexHour = !this.flexHour;
+    this.HOOSelectedArray[7].flexHours = this.flexHour;
+  }
 
 
 

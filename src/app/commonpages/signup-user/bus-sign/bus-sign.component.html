@@ -125,7 +125,7 @@
         <mat-step>
             <mat-accordion>
                 <ng-template matStepLabel>Standard Days of Operation</ng-template>
-                <div>
+                <div #toggleGroup>
                     <mat-button-toggle-group multiple>
                         @for (day of DOW; track $index) {
                             <mat-button-toggle (click)="DOWSelected($index)">{{day}}</mat-button-toggle>

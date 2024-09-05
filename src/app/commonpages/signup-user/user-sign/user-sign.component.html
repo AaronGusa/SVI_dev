@@ -201,66 +201,145 @@
               Email: {{person_info_form.get('u_email').value}}
             </div>
             <div>
-              
               @if (HOOSelected) {
-                  Business Schedule:
-                @for (HOO of HOOSelected; track $index) {
-                  @if (HOO.times.length > 0) {  
-                    <H1>Entered IF</H1>
-                    @switch (HOO.day) {
-                      @case (0) {
-                          <h3>Sunday</h3>
-                          @for (time of HOO[0].times; track $index) {
-                            <h3>{{time}}</h3>
-                          } @empty {}
+                  <h1>Business Schedule:</h1>
+                  @if (HOOSelected[8].sameHours === true ) {
+                    <div class="container_flex_row_wrap">
+                      <h4>Hours for </h4>
+                      @for (HOO of HOOSelected; track $index) {
+                        @if (HOO.times && HOO.times.length > 0) {
+                          @let timers = HOO.times;
+                          @switch (HOO.day) {
+                            @case (0) {
+                              <h3>Sunday, </h3>
+                            }
+                            @case (1) {
+                              <h3>Monday, </h3>
+                            } 
+                            @case (2) {
+                              <h3>Tuesday, </h3>
+                            }
+                            @case (3) {
+                              <h3>Wednesday, </h3>
+                            }
+                            @case (4) {
+                              <h3>Thursday, </h3>
+                            }
+                            @case (5) {
+                              <h3>Friday, </h3>
+                            }
+                            @case (6) {
+                              <h3>Saturday </h3>
+                            }
+                            @default {
+                              <h3></h3>
+                            }
+                          }
+                        }
                       }
-                      @case (1) {
-                          <h3>Monday</h3>
-                          @for (time of HOO.times; track $index) {
-                            <h3>{{time}}</h3>
-                          } @empty {}
+                      {{timers}}
+                      @for (t of timers; track $index) {
+                        <p>{{t}}</p> 
                       }
-                      @case (2) {
-                          <h3>Tuesday</h3>
-                          @for (time of HOO.times; track $index) {
-                            <h3>{{time}}</h3>
-                          } @empty {}
-                      }
-                      @case (3) {
-                          <h3>Wednesday</h3>
-                          @for (time of HOO.times; track $index) {
-                            <h3>{{time}}</h3>
-                          } @empty {}
-                      }
-                      @case (4) {
-                          <h3>Thursday</h3>
-                          @for (time of HOO.times; track $index) {
-                            <h3>{{time}}</h3>
-                          } @empty {}
-                      }
-                      @case (5) {
-                          <h3>Friday</h3>
-                          @for (time of HOO.times; track $index) {
-                            <h3>{{time}}</h3>
-                          } @empty {}
-                      }
-                      @case (6) {
-                          <h3>Saturday</h3> 
-                          @for (time of HOO.times; track $index) {
-                            <h3>{{time}}</h3>
-                          } @empty {}
-                      }
-                      @case (99) {
-                        <h3></h3> 
-                        @for (time of HOO.times; track $index) {
-                          <h3>{{time}}</h3>
-                        } @empty {}
-                    }
-                    }
-                  }                    
-                } 
-              } @else {
+                    </div>
+                    <div>
+                      
+                    </div>
+                    
+                  } @else {
+                    @for (HOO of HOOSelected; track $index) {
+                      @if (HOO.times) {  
+                        
+                        @switch (HOO.day) {
+                          @case (0) {
+                              <h3>Sunday</h3>
+                              <div class="container_flex_row_wrap">
+                                @for (time of HOO.times; track $index) {
+                                  
+                                    <p>{{time}}</p>
+                                  
+                                } @empty {}
+                              </div>
+                          }
+                          @case (1) {
+                              <h3>Monday</h3>
+                              <div class="container_flex_row_wrap">
+                                @for (time of HOO.times; track $index) {
+                                  
+                                    <p>{{time}}</p>
+                                  
+                                } @empty {}
+                              </div>
+                          }
+                          @case (2) {
+                              <h3>Tuesday</h3>
+                              <div class="container_flex_row_wrap">
+                                @for (time of HOO.times; track $index) {
+                                  
+                                    <p>{{time}}</p>
+                                  
+                                } @empty {}
+                              </div>
+                          }
+                          @case (3) {
+                              <h3>Wednesday</h3>
+                              <div class="container_flex_row_wrap">
+                                @for (time of HOO.times; track $index) {
+                                  
+                                    <p>{{time}}</p>
+                                  
+                                } @empty {}
+                              </div>
+                          }
+                          @case (4) {
+                              <h3>Thursday</h3>
+                              <div class="container_flex_row_wrap">
+                                @for (time of HOO.times; track $index) {
+                                  
+                                    <p>{{time}}</p>
+                                  
+                                } @empty {}
+                              </div>
+                          }
+                          @case (5) {
+                              <h3>Friday</h3>
+                              <div class="container_flex_row_wrap">
+                                @for (time of HOO.times; track $index) {
+                                  
+                                    <p>{{time}}</p>
+                                  
+                                } @empty {}
+                              </div>
+                          }
+                          @case (6) {
+                              <h3>Saturday</h3> 
+                              <div class="container_flex_row_wrap">
+                                @for (time of HOO.times; track $index) {
+                                  
+                                    <p>{{time}}</p>
+                                  
+                                } @empty {}
+                              </div>
+                          }
+                          @case (99) {
+                            <h3></h3> 
+                              <div class="container_flex_row_wrap">
+                                @for (time of HOO.times; track $index) {
+                                  
+                                    <p>{{time}}</p>
+                                  
+                                } @empty {}
+                              </div>
+                          }
+                          @default {
 
+                          }
+                        }
+                      }                    
+                    } 
+                  }  
+              } @else {
+                <h1>I'M IN THE ELSE!</h1>
               }
             </div>
           </div>  
