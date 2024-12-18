@@ -47,6 +47,8 @@ export class BusSignComponent implements OnInit, AfterViewInit {
   DOWSelectedArray: number[] = [];
   HOO: string[] = ['6:00A', '7:00A', '8:00A', '9:00A', '10:00A', '11:00A', '12:00P', '1:00P', '2:00P', '3:00P', '4:00P', '5:00P', '6:00P', '7:00P', '8:00P', '9:00P' ] 
   @Output() HOOSelectedEmit = new EventEmitter<any>();
+  @Output() DOWSelectedEmit = new EventEmitter<any>();
+  @Output() BusFormEmit = new EventEmitter<any>();
 
   services: any[] = [];
   categories: any[] = [];
@@ -55,7 +57,7 @@ export class BusSignComponent implements OnInit, AfterViewInit {
   isLoading: boolean = false;
   duration: 1500;
   busServices: number[] = [];
-  sameHours: boolean = false;
+  sameHours: boolean = true;
   flexHour: boolean = true;
 
   HOOSelectedArray = [
@@ -120,64 +122,7 @@ export class BusSignComponent implements OnInit, AfterViewInit {
       this.mouseDown = false;
     });
 
-    // Array.from(this.toggleGroup.nativeElement.children).forEach((button: HTMLElement) => {
-    //   button.addEventListener('mousemove', (event) => {
-    //     if (this.mouseDown && event.target !== this.lastButton) {
-    //       // Toggle the button
-    //       (event.target as HTMLElement).click();
-    //       this.lastButton = event.target as HTMLElement;
-    //       // Get the hour value from the button element
-    //     let hour = (event.target as HTMLElement).getAttribute('data-hour');
-
-    //     // Run the HOOSelected function with the hour value
-    //     if (hour) {
-    //       this.HOOSelected(hour);
-    //     }
-    //     }
-    //   });
-    // });
     
-    // Array.from(this.toggleGroup.nativeElement.children).forEach((button: HTMLElement) => {
-    //   // Add a 'mousedown' event listener to run HOOSelected when the mouse button is pressed down
-    //   button.addEventListener('mousedown', (event) => {
-    //     let hour = (event.target as HTMLElement).getAttribute('data-hour');
-    //     if (hour) {
-    //       this.HOOSelected(hour);
-    //     }
-    //   });
-    
-    //   // Add a 'click' event listener to run HOOSelected when a click event occurs
-    //   button.addEventListener('click', (event) => {
-    //     let hour = (event.currentTarget as HTMLElement).getAttribute('data-hour');
-    //     if (hour) {
-    //       this.HOOSelected(hour);
-    //     }
-    //   });
-    
-    //   // Existing 'mousemove' event listener
-    //   button.addEventListener('mousemove', (event) => {
-    //     if (this.mouseDown && event.target !== this.lastButton) {
-    //       // Toggle the button
-    //       (event.target as HTMLElement).click();
-    //       this.lastButton = event.target as HTMLElement;
-    //     }
-    //   });
-    // });
-
-    // document.addEventListener('mouseup', () => {
-    //   this.mouseDown = false;
-    //   this.lastButton = null;  // Reset the last button on mouse up
-    // });
-
-
-    //HTML SNIPPET
-    // <mat-button-toggle-group #toggleGroup multiple class="hourList">
-    //                           @for (hour of HOO; track $index) {
-    //                               <mat-button-toggle [attr.data-hour]="hour">
-    //                                   {{hour}}
-    //                               </mat-button-toggle>
-    //                           }
-    //                       </mat-button-toggle-group>
   }
 
   // async fetchCategories() {
@@ -200,8 +145,15 @@ export class BusSignComponent implements OnInit, AfterViewInit {
   addService2Business(serviceId: number) {
     if (this.busServices.includes(serviceId)) {
       this.busServices.splice(this.busServices.indexOf(serviceId), 1);
+      this.busServices.sort(function(a, b){return a - b});
+      this.CompleteBusSign();
     } else {
+      console.log(this.busServices)
       this.busServices.push(serviceId);
+      this.CompleteBusSign();
+      this.busServices.sort(function(a, b){return a - b});
+      console.log(this.busServices)
+
     };
   }
 
@@ -213,7 +165,7 @@ export class BusSignComponent implements OnInit, AfterViewInit {
         b_id:"tbd",
         b_active: true,
         b_rating: 0,
-        u_id: this._foundUser,
+        // u_id: this._foundUser,
         created: new Date(),
         b_services: this.busServices
       });
@@ -239,10 +191,12 @@ export class BusSignComponent implements OnInit, AfterViewInit {
 
       //console.log('Business Form: ', this.busForm.value);
 
-      this.processBusSignUp();
+      //this.processBusSignUp();
+      this.BusFormEmit.emit(this.busForm);
 
     } catch (error) {
       console.error('Error Creating Business: ', error);
+
     }
 
     //this.processBusSignUp();
@@ -272,7 +226,7 @@ export class BusSignComponent implements OnInit, AfterViewInit {
     }
   }
 
-  DOWSelected(day) {
+  DOWSelected(day: number) {
     let index = this.DOWSelectedArray.indexOf(day);
     if (index !== -1) {
       // If day is in the array, remove it
@@ -287,6 +241,7 @@ export class BusSignComponent implements OnInit, AfterViewInit {
       // console.log(day + " is added to the array!");
     }
     console.log(this.DOWSelectedArray);
+    this.DOWSelectedEmit.emit(this.DOWSelectedArray);
   }
 
   // HOOSelected(listnumber, time) {
@@ -309,12 +264,12 @@ export class BusSignComponent implements OnInit, AfterViewInit {
   HOOSelected(listnumber, time) {
     //console.log(listnumber)
     // Find the index of the day in the array
-    console.log(listnumber);
+    //console.log(listnumber);
     let index = listnumber;
-    console.log("Index: " + index)
+    //console.log("Index: " + index)
     if (index === 99) {
       for (let i in this.DOWSelectedArray ) {
-        console.log(this.DOWSelectedArray[i])
+        //console.log(this.DOWSelectedArray[i])
           let timeIndex = this.HOOSelectedArray[this.DOWSelectedArray[i]].times.indexOf(time);
           if (timeIndex !== -1) {
             // If the time is in the array, remove it

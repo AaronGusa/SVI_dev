@@ -20,11 +20,11 @@ import { BusSignComponent } from '../bus-sign/bus-sign.component';
 @Component({
   selector: 'app-user-sign',
   standalone: true,
-  imports: [MatCheckboxModule, 
-            LoadingComponent, 
-            MatFormFieldModule, 
-            MatStepperModule, 
-            ReactiveFormsModule, 
+  imports: [MatCheckboxModule,
+            LoadingComponent,
+            MatFormFieldModule,
+            MatStepperModule,
+            ReactiveFormsModule,
             FormsModule,
             MatInputModule,
             MatButtonModule,
@@ -42,9 +42,13 @@ export class UserSignComponent implements OnInit {
   @Output() showBusinessForm: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() clientId: EventEmitter<string> = new EventEmitter<string>();
   @Output() usernameEmit: EventEmitter<string> = new EventEmitter<string>();
-  
+
   @Input() HOOSelected: any[];
-  
+  @Input() DOWSelected: number[];
+  @Input() BusFormSelected: any[];
+
+  HOOSameTimesIndex: number;
+
   private _userID: string;
   private userId: any;
   approvedUser: string;
@@ -62,6 +66,7 @@ export class UserSignComponent implements OnInit {
 
   DOWSelectedArray: number[] = [];
 
+
   // username_pass_form: FormGroup = this._formBuilder.group({usePassCtrl: ['']});
   // person_info_form: FormGroup = this._formBuilder.group({personInfoCtrl: ['']});
   // address_form: FormGroup = this._formBuilder.group({addressCtrl: ['']});
@@ -70,15 +75,15 @@ export class UserSignComponent implements OnInit {
     u_pass: [null]
   });
 
-  
-  
+
+
   person_info_form: FormGroup = this._formBuilder.group({
     u_fname: new FormControl(null, Validators.required),
     u_lname: new FormControl(null, Validators.required),
     u_phone: new FormControl(null, Validators.required),
     u_email: new FormControl(null, [Validators.required, Validators.email]),
   });
-  
+
   address_form: FormGroup = this._formBuilder.group({
     u_street: new FormControl(null, Validators.required),
     u_city: new FormControl(null, Validators.required),
@@ -104,27 +109,93 @@ export class UserSignComponent implements OnInit {
       has_bus: true
   };
 
-  
+
 
   constructor(private userService: UserService,
               private imageService: ImageService,
               private _formBuilder: FormBuilder,
-              private r: Router) 
+              private r: Router)
   { }
 
   ngOnInit() {
     this.userForm = this._formBuilder.group({});
     this.business2Add = false;
-    console.log(this.username_pass_form)
+    //console.log(this.username_pass_form)
   }
 
   handleHOOSelected(event: any[]) {
+    //console.log(event);
+
     this.HOOSelected = event;
-    console.log('HOO Selected:', this.HOOSelected);
+
+    //console.log(this.HOOSelected)
   }
-  
+
+  handleBUSForm(event: any) {
+    console.log(typeof event.value)
+    this.BusFormSelected = event.value;
+    console.log(this.BusFormSelected)
+  }
+
+  handleDOWSelected(event: number[]) {
+    console.log(event);
+    try {
+      if (event[0]) { 
+        console.log('Entered if event[0]: ' + event[0])
+        let DOWSelected = event[0];
+
+        this.HOOSameTimesIndex = DOWSelected;
+
+        console.log(this.HOOSelected[this.HOOSameTimesIndex].times);
+      } else {
+        console.log('Event Else line 151:')
+        console.log(event)
+      }
+
+      if (event) {
+        console.log('Line156'+event)
+      }
+      console.log('Line158')
+      
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  // console.log(this.HOOSameTimesIndex);
+    // console.log(this.DOWSelectedArray);
+    // console.log('Step 1');
+    // let count = [];
+
+    // console.log('Step 2 Count = ' + count);
+
+    // if (this.HOOSelected[8]) {
+    //   console.log('Step 3 HOOSelected Same Hours Selected ' + this.HOOSelected);
+
+    //   for (let i = 0; i < this.HOOSelected.length; i++) {
+    //     console.log('Step 4 Length of HOOSelected: ' + Object(this.HOOSelected[i].times))
+
+    //     if (this.HOOSelected[i].times) {
+    //       count.push(i)
+
+    //       console.log('Length Number: ' + this.HOOSelected[i].times.length)
+    //       console.log('Times: ' + this.HOOSelected[i].times)
+    //       console.log('Count pushed: ' + count)
+    //     }
+    //   }
+    // }
+
+    // if (count.length > -1) {
+    //   this.HOOSameTimesIndex = count.length - 1;
+    // console.log('STEP 5 SameTimesIndex: ' + Object(this.HOOSameTimesIndex ));
+    // }
+    // console.log('HOO Index:', this.HOOSameTimesIndex);
+    // console.log('HOO Selected:', this.HOOSelected[this.HOOSameTimesIndex]);
+
+    // console.log('HOO Selected:', this.HOOSelected);
+
   showBusinessSignUp(value) {
-    console.log('showBusiness: ' + value)
+    //console.log('showBusiness: ' + value)
     this.business2Add = value;
     this.goBusinessSignUp.emit(this.business2Add);
   };
@@ -133,28 +204,28 @@ export class UserSignComponent implements OnInit {
     // When called, this function will navigate the user to the routerLink="/sign-up/business" page
     this.business2Add = !this.business2Add;
     this.goBusinessSignUp.emit(this.business2Add);
-}
+  };
 // User Only
   // async CompleteUserSign() {
   //   // If business2Add is true, this function will call the processUserSignUp() function
   //   // If successful, then will call the goToBusinessSignUp() function
-    
+
   //     let u_username = this.username_pass_form.get('u_username').value;
   //     let u_pass = this.username_pass_form.get('u_pass').value;
-    
-    
+
+
   //     let u_fname = this.person_info_form.get('u_fname').value;
   //     let u_lname = this.person_info_form.get('u_lname').value;
-  //     let u_phone = this.person_info_form.get('u_phone').value; 
-  //     let u_email = this.person_info_form.get('u_email').value; 
-    
+  //     let u_phone = this.person_info_form.get('u_phone').value;
+  //     let u_email = this.person_info_form.get('u_email').value;
+
   //     let u_street = null;
   //     let u_city = null;
   //     let u_state = null;
   //     let u_country = null;
   //     let u_zip = null;
-    
-     
+
+
   //     this.userForm = this._formBuilder.group({
   //       u_username: u_username,
   //       u_pass: u_pass,
@@ -164,7 +235,7 @@ export class UserSignComponent implements OnInit {
   //       u_email: u_email,
   //       u_street: u_street,
   //       u_city: u_city,
-  //       u_state: u_state,    
+  //       u_state: u_state,
   //       u_country: u_country,
   //       u_zip: u_zip
   //     });
@@ -173,31 +244,31 @@ export class UserSignComponent implements OnInit {
   //   this.processUserSignUp();
 
   //   const username = this.username_pass_form.get('u_username').value.toLowerCase();
-      
-      
+
+
   //       const profCompleted = await this.createProfileImagesEntry(this.userId);
   //       console.log('profCompleted' + Object.values(profCompleted));
-        
+
   //       if (profCompleted.acknowledged === true ) {
   //         this.r.navigate([`/dashboard/${username}`]);
   //       } else {
   //         console.log('Wuh HOOO')
   //       }
-    
+
   // }
 
   async CompleteUserSign() {
     // If business2Add is true, this function will call the processUserSignUp() function
     // If successful, then will call the goToBusinessSignUp() function
-    
+
     let u_username = this.username_pass_form.get('u_username').value;
     let u_pass = this.username_pass_form.get('u_pass').value;
 
 
     let u_fname = this.person_info_form.get('u_fname').value;
     let u_lname = this.person_info_form.get('u_lname').value;
-    let u_phone = this.person_info_form.get('u_phone').value; 
-    let u_email = this.person_info_form.get('u_email').value; 
+    let u_phone = this.person_info_form.get('u_phone').value;
+    let u_email = this.person_info_form.get('u_email').value;
 
     let u_street = null;
     let u_city = null;
@@ -207,7 +278,7 @@ export class UserSignComponent implements OnInit {
     let has_bus = false;
     let fav_bus = [];
 
-    
+
 
 
     this.userForm = this._formBuilder.group({
@@ -219,25 +290,25 @@ export class UserSignComponent implements OnInit {
         u_email: u_email,
         u_street: u_street,
         u_city: u_city,
-        u_state: u_state,    
+        u_state: u_state,
         u_country: u_country,
         u_zip: u_zip,
         has_bus: has_bus,
         fav_bus: fav_bus
     });
 
-    
+
     // Call the processUserSignUp function
     await this.processUserSignUp();
     console.log('Got past processUserSignUp in user only sign up')
     // Get the username from the form
     const username = this.username_pass_form.get('u_username').value.toLowerCase();
     this.usernameEmit.emit(username);
-    
+
     // Call createProfileImagesEntry and await its response
     const profCompleted = await this.createProfileImagesEntry(this.userId);
     console.log('profCompleted', JSON.stringify(profCompleted));
-  
+
     // Check if profile creation was successful
     if (profCompleted && profCompleted.acknowledged === true ) {
         // Navigate to the dashboard
@@ -251,27 +322,27 @@ export class UserSignComponent implements OnInit {
   async processUserSignUp() {
     // // When called, this function will process the user's sign up information and POST it to the backend
     this.userSubmitting = true;
-    
+
     // Get the user data from this.userForm
     try {
       // Get the user data from this.userForm
       const userData = this.userForm.value;
       console.log('UserDATA line 238: ' + Object(userData));
-  
+
       // Call the postUsers function to send the user data to the backend
       const response: any = await this.userService.postUser(userData);
       // Handle successful user creation response here
       if (response && response.hasOwnProperty('acknowledged')) {
         // Handle successful user creation response here
-        
-        
+
+
         if (response.acknowledged === true) {
           //Conditions
           this.userSuccess = true;
           this.userSubmitting = false;
           this.goToBusiness = this.goToBusiness;
           this._userID = response.insertedId;
-          
+
           //Emitters
           this.userSubSuccess.emit(this.userSuccess);
           //this.showBusinessForm.emit(this.goToBusiness);
@@ -283,9 +354,9 @@ export class UserSignComponent implements OnInit {
          )
 
         this.userId = response.userId;
-          
-          
-          
+
+
+
         } else {
           console.log('User Failed:', response);
         }
@@ -315,7 +386,7 @@ export class UserSignComponent implements OnInit {
         this.approvedUser = username;
       }
 
-    
+
       const response: any = await this.userService.verifySignUpUsername(username);
       if (response === true) {
        // console.log(response);
@@ -325,7 +396,7 @@ export class UserSignComponent implements OnInit {
         this.usernameInvalid = false;
         this.username_pass_form.patchValue({
           u_username: username
-        });  
+        });
       } else {
         //console.log('Response length does not equal zero entered');
        // console.log(response);
@@ -344,7 +415,7 @@ export class UserSignComponent implements OnInit {
     this.username_pass_form.patchValue({
       u_username: '' // Set the value of u_username to an empty string
     });
-  
+
     // Manually blur the input field
     const inputElement = document.getElementById('u_username');
     if (inputElement) {
@@ -364,15 +435,15 @@ export class UserSignComponent implements OnInit {
   async CompleteUserSignAndGoBus() {
     // If business2Add is true, this function will call the processUserSignUp() function
     // If successful, then will call the goToBusinessSignUp() function
-    
+
     let u_username = this.username_pass_form.get('u_username').value;
     let u_pass = this.username_pass_form.get('u_pass').value;
 
 
     let u_fname = this.person_info_form.get('u_fname').value;
     let u_lname = this.person_info_form.get('u_lname').value;
-    let u_phone = this.person_info_form.get('u_phone').value; 
-    let u_email = this.person_info_form.get('u_email').value; 
+    let u_phone = this.person_info_form.get('u_phone').value;
+    let u_email = this.person_info_form.get('u_email').value;
 
     let u_street = null;
     let u_city = null;
@@ -392,7 +463,7 @@ export class UserSignComponent implements OnInit {
         u_email: u_email,
         u_street: u_street,
         u_city: u_city,
-        u_state: u_state,    
+        u_state: u_state,
         u_country: u_country,
         u_zip: u_zip,
         has_bus: has_bus,
@@ -408,7 +479,7 @@ export class UserSignComponent implements OnInit {
     // Call createProfileImagesEntry and await its response
     const profCompleted = await this.createProfileImagesEntry(this.userId);
     //console.log('profCompleted', JSON.stringify(profCompleted));
-  
+
     // Check if profile creation was successful
     if (profCompleted && profCompleted.acknowledged === true ) {
         // Navigate to the business form
